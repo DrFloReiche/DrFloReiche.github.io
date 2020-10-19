@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Statistical Inference and Association | Analysing Quantitative Data with R</title>
+  <meta name="description" content="8 Statistical Inference and Association | Analysing Quantitative Data with R" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Statistical Inference and Association | Analysing Quantitative Data with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Statistical Inference and Association | Analysing Quantitative Data with R" />
+  
+  
+  
+
+<meta name="author" content="Piotr Bogdanski &amp; Florian Reiche" />
+<meta name="author" content="Department of Politics and International Studies, University of Warwick" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visualization.html"/>
+<link rel="next" href="ols.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/font-awesome-5.13.0/js/script.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.15/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I THE BASICS</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#content"><i class="fa fa-check"></i><b>1.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-r-and-why-should-i-learn-it"><i class="fa fa-check"></i>What is R and why should I learn it?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#the-course-structure"><i class="fa fa-check"></i>The course structure</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#layout"><i class="fa fa-check"></i>Layout</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics of R Programming</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#content-1"><i class="fa fa-check"></i><b>2.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#arithmetic-operations-and-assignment"><i class="fa fa-check"></i>Arithmetic operations and assignment</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#vectors"><i class="fa fa-check"></i>Vectors</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#coercion"><i class="fa fa-check"></i>Coercion</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#logical-values-and-operators"><i class="fa fa-check"></i>Logical Values and Operators</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#indexing"><i class="fa fa-check"></i>Indexing</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#sorting"><i class="fa fa-check"></i>Sorting</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>2.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#functions-list"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="datastructures.html"><a href="datastructures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="datastructures.html"><a href="datastructures.html#content-2"><i class="fa fa-check"></i><b>3.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#data-frames"><i class="fa fa-check"></i>Data Frames</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#factors"><i class="fa fa-check"></i>Factors</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#reading-and-writing-the-data"><i class="fa fa-check"></i>Reading and writing the data</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#lists"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="datastructures.html"><a href="datastructures.html#summary-1"><i class="fa fa-check"></i><b>3.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#functions-list-1"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="datastructures.html"><a href="datastructures.html#exercises-1"><i class="fa fa-check"></i><b>3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory.html"><a href="exploratory.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="exploratory.html"><a href="exploratory.html#content-3"><i class="fa fa-check"></i><b>4.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#what-is-exploratory-data-analysis"><i class="fa fa-check"></i>What is exploratory data analysis?</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#first-look-at-the-data"><i class="fa fa-check"></i>First look at the data</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#numeric-vs-categorical-variables"><i class="fa fa-check"></i>Numeric vs categorical variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#numeric-variables"><i class="fa fa-check"></i>Numeric variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#categorical-variables"><i class="fa fa-check"></i>Categorical variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#customizing-visualizations"><i class="fa fa-check"></i>Customizing visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory.html"><a href="exploratory.html#summary-2"><i class="fa fa-check"></i><b>4.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#functions-list-2"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="exploratory.html"><a href="exploratory.html#exercises-2"><i class="fa fa-check"></i><b>4.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>II ADVANCED DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="5" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>5</b> Key Programming Concepts</a><ul>
+<li class="chapter" data-level="5.1" data-path="programming.html"><a href="programming.html#content-4"><i class="fa fa-check"></i><b>5.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#control-flow-statements"><i class="fa fa-check"></i>Control flow statements</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#for-loops"><i class="fa fa-check"></i>For loops</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#if-statements"><i class="fa fa-check"></i>If statements</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#sapply"><i class="fa fa-check"></i>Sapply</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="programming.html"><a href="programming.html#summary-3"><i class="fa fa-check"></i><b>5.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#functions-list-3"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="programming.html"><a href="programming.html#exercises-3"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> Data Manipulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#content-5"><i class="fa fa-check"></i><b>6.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#reading-the-data"><i class="fa fa-check"></i>Reading the data</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#the-pipe-operator"><i class="fa fa-check"></i>The pipe operator</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#dataset-manipulation"><i class="fa fa-check"></i>Dataset manipulation</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#reshaping-data"><i class="fa fa-check"></i>Reshaping data</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#joining"><i class="fa fa-check"></i>Joining</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#aggregating-data"><i class="fa fa-check"></i>Aggregating data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#summary-4"><i class="fa fa-check"></i><b>6.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#functions-list-4"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#exercises-4"><i class="fa fa-check"></i><b>6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Data Visualization</a><ul>
+<li class="chapter" data-level="7.1" data-path="visualization.html"><a href="visualization.html#content-6"><i class="fa fa-check"></i><b>7.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#the-plotting-syntax"><i class="fa fa-check"></i>The plotting syntax</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#all-about-geoms---plot-types-in-ggplot2"><i class="fa fa-check"></i>All about geoms - plot types in ggplot2</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#multiple-plots"><i class="fa fa-check"></i>Multiple plots</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#customizing-plots"><i class="fa fa-check"></i>Customizing plots</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#saving-plots"><i class="fa fa-check"></i>Saving plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="visualization.html"><a href="visualization.html#summary-5"><i class="fa fa-check"></i><b>7.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#functions-list-5"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="visualization.html"><a href="visualization.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>III DATA ANALYSIS</b></span></li>
+<li class="chapter" data-level="8" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>8</b> Statistical Inference and Association</a><ul>
+<li class="chapter" data-level="8.1" data-path="association.html"><a href="association.html#content-7"><i class="fa fa-check"></i><b>8.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#comparing-means"><i class="fa fa-check"></i>Comparing means</a></li>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#relationship-between-two-continuous-variables"><i class="fa fa-check"></i>Relationship between two continuous variables</a></li>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#further-details"><i class="fa fa-check"></i>Further details</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="association.html"><a href="association.html#summary-6"><i class="fa fa-check"></i><b>8.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#functions-list-6"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="association.html"><a href="association.html#exercises-6"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ols.html"><a href="ols.html"><i class="fa fa-check"></i><b>9</b> Linear Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="ols.html"><a href="ols.html#content-8"><i class="fa fa-check"></i><b>9.1</b> Content</a></li>
+<li class="chapter" data-level="9.2" data-path="ols.html"><a href="ols.html#summary-7"><i class="fa fa-check"></i><b>9.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="ols.html"><a href="ols.html#functions-list-7"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ols.html"><a href="ols.html#exercises-7"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10.1" data-path="logit.html"><a href="logit.html#content-9"><i class="fa fa-check"></i><b>10.1</b> Content</a></li>
+<li class="chapter" data-level="10.2" data-path="logit.html"><a href="logit.html#summary-8"><i class="fa fa-check"></i><b>10.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#functions-list-8"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="logit.html"><a href="logit.html#exercises-8"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>IV ADVANCED TOPICS</b></span></li>
+<li class="chapter" data-level="11" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>11</b> R Markdown</a><ul>
+<li class="chapter" data-level="11.1" data-path="rmarkdown.html"><a href="rmarkdown.html#content-10"><i class="fa fa-check"></i><b>11.1</b> Content</a></li>
+<li class="chapter" data-level="11.2" data-path="rmarkdown.html"><a href="rmarkdown.html#summary-9"><i class="fa fa-check"></i><b>11.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html#functions-list-9"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="rmarkdown.html"><a href="rmarkdown.html#exercises-9"><i class="fa fa-check"></i><b>11.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="course-summary.html"><a href="course-summary.html"><i class="fa fa-check"></i><b>12</b> Course summary</a><ul>
+<li class="chapter" data-level="" data-path="course-summary.html"><a href="course-summary.html#index-of-functions-used-throughout-the-course"><i class="fa fa-check"></i>Index of functions used throughout the course</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Quantitative Data with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="association" class="section level1">
+<h1><span class="header-section-number">8</span> Statistical Inference and Association</h1>
+<p><a href="data:text/plain;base64,IycgIyAoUEFSVCkgREFUQSBBTkFMWVNJUyAKCiMnIAojJyAjIFN0YXRpc3RpY2FsIEluZmVyZW5jZSBhbmQgQXNzb2NpYXRpb24gCgojJyAKIycgCiMnIAojJyAKIycgIyMgQ29udGVudAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmxpYnJhcnkodGlkeXZlcnNlKQoKIycgCiMnIAojJyBTbyBmYXIsIHdlIGhhdmUgZGVzY3JpYmVkIHZhcmlldHkgb2YgbWV0aG9kcyB0byB3cmFuZ2xlIGFuZCBleHBsb3JlIGRhdGEgaW4gUi4gQWZ0ZXIgcGVyZm9ybWluZyBjbGVhbmluZyBhbmQgZXhwbG9yYXRvcnkgYW5hbHlzaXMsIGl0IGlzIGNvbW1vbiB0byBwZXJmb3JtIG1vcmUgZm9ybWFsIHRlc3RzIG9uIHRoZSBkYXRhIHRvIHZlcmlmeSB3aGV0aGVyIHRoZSByZWxhdGlvbnNoaXBzIHdlIGh5cG90aGVzaXplZCBob2xkIHVuZGVyIHRoZSBzY3J1dGlueSBvZiB0ZXN0cyBzdXBwb3J0ZWQgYnkgc3RhdGlzdGljYWwgdGhlb3J5LiBJbiB0aGlzIGNoYXB0ZXIgd2Ugd2lsbCBwcmVzZW50IGNvdXBsZSBvZiB0ZXN0aW5nIHN1Y2ggcmVsYXRpb25zaGlwcy4gV2hpbGUgc29tZSBmb3JtYWwga25vd2xlZGdlIG9mIHN0YXRpc3RpY2FsIGluZmVyZW5jZSB3aWxsIGJlIHVzZWZ1bCwgdGhlIGNoYXB0ZXIgZG9lcyBub3QgcmVseSBvbiB5b3VyIGJhY2tncm91bmQga25vd2xlZGdlIHRvIGhlYXZpbHkuCiMnIAojJyAjIyMgQ29tcGFyaW5nIG1lYW5zIAoKIycgCiMnIFdoaWxlIGEgbWVhbiBpcyBhIGdvb2QgbWVhc3VyZSBvZiBvdXIgZGF0YSBhbmQgY29tcGFyaW5nIG1lYW5zIGFjcm9zcyBncm91cHMgY2FuIGhlbHAgdXMgZGV0ZXJtaW5lIHRoZSB3YXkgYSBnaXZlbiB2YXJpYWJsZSB2YXJpZXMgZGVwZW5kaW5nIG9uIHNvbWUgY29uZGl0aW9ucyAtIGZvciBleGFtcGxlLCB3aGV0aGVyIHRoZSBhdmVyYWdlIEdEUCBncm93dGggb3ZlciBhIGNlcnRhaW4gcGVyaW9kIGRpZmZlcnMgYmV0d2VlbiB0d28gY291bnRyaWVzIG9yIHdoZXRoZXIgYXZlcmFnZSBlYXJuaW5ncyBhcmUgZGlmZmVyZW50IGRlcGVuZGluZyBvbiBwZW9wbGUncyBnZW5kZXIgYW5kIHJhY2UuIEhvd2V2ZXIsIGl0IG1heSBzZWVtIGRpZmZpY3VsdCB0byBkZXRlcm1pbmUgd2hldGhlciBzdWNoIGRpZmZlcmVuY2UgaXMgcmVhbGx5IG1lYW5pbmdmdWwsIGVzcGVjaWFsbHkgdGhhdCB3ZSB1c3VhbGx5IGRvbid0IGhhdmUgdGhlIGVudGlyZSBwb3B1bGF0aW9uIHdlIGFyZSBleGFtaW5pbmcgYXQgaGFuZCwgYnV0IG9ubHkgYSAocHJlc3N1bWFibHkgcmFuZG9tKSBzYW1wbGUgb2YgdGhlIHBvcHVsYXRpb24uIEZvciBleGFtcGxlLCBzdXBwb3NlIHdlIHJhbmRvbWx5IGNob29zZSA1IG1lbiBhbmQgNSB3b21lbiBhbmQgY29tcHV0ZSB0aGVpciBhdmVyYWdlIGVhcm5pbmdzLiBXZSBvYnRhaW4gMzUwMDAgcG91bmRzIGZvciBtZW4gYW5kIDQwMDAwIHBvdW5kcyBmb3Igd29tZW4uIFNob3VsZCB3ZSBjbGFpbSB0aGF0IG1lbiBfb24gYXZlcmFnZV8gZWFybiBsZXNzIHRoYW4gd29tZW4sIGJhc2VkIG9uIHRoaXMgZGF0YT8gV2hhdCBkaWZmZXJlbmNlIGlzIHN1ZmZpY2llbnQgdG8gY2xhaW0gdGhhdCBzdWNoIGRpZmZlcmVuY2UgZXhpc3RzIGluIHRoZSBvdmVyYWxsIHBvcHVsYXRpb24/IFN1Y2ggcXVlc3Rpb25zIGFyZSBhbnN3ZXJlZCBieSBzdGF0aXN0aWNhbCBpbmZlcmVuY2UuCiMnIAojJyAKIycgCiMnIAojJyAjIyMjIElzIG1lYW4gZGlmZmVyZW50IGZyb20gMD8gLSBvbmUgc2FtcGxlIHQtdGVzdCAKCiMnIAojJyBXZSdsbCBzdGFydCB3aXRoIGEgc2ltcGxlIGNhc2UuIFRoZSBkYXRhIGluIHRoZSBmaWxlIGB3YWdlcy5jc3ZgIGNvbnRhaW5zIHRoZSBpbmZvcm1hdGlvbiBvbiB0aGUgYXZlcmFnZSBzYWxhcnkgb2YgYSBzYW1wbGUgb2YgMTAwIGluZGl2aWR1YWxzIGluIDIwMDUgYW5kMiAyMDEwLiBXZSBhcmUgaW50ZXJlc3RlZCBpbiB3aGV0aGVyIHRoZXJlIHdhcyBhbnkgZ3Jvd3RoIGluIHRoZWlyIHNhbGFyeS4gRmlyc3QsIHdlIHJlYWQgdGhlIGRhdGEgYW5kIG9idGFpbiB0aGUgcGVyY2VudGVnZSBncm93dGg6CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kd2FnZXMgPC0gcmVhZF9jc3YoJ2RhdGEvd2FnZXMuY3N2JykKd2FnZXMgPC0gd2FnZXMgJT4lIG11dGF0ZShjaGFuZ2UgPSAoc2FsYXJ5MjAxMCAtIHNhbGFyeTIwMDUpL3NhbGFyeTIwMDUpCgojJyAKIycgV2UgY2FuIHRoZW4gZXhhbWluZSB0aGUgYXZlcmFnZToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQptZWFuKHdhZ2VzJGNoYW5nZSkKCiMnIAojJyBXZSBzZWUgdGhhdCB0aGUgbWVhbiBpcyBhcm91bmQgYHIgcm91bmQobWVhbih3YWdlcyRjaGFuZ2UpLCAzKWAuIElzIHRoYXQgc3VmZmljaWVudCB0byBjbGFpbSB0aGF0IHRoZSBhdmVyYWdlIHNhbGFyeSBvZiBlbXBsb3llZXMgaW4gb3VyIHRhcmdldCBwb3B1bGF0aW9uIGhhcyBncm93biBiZXR3ZWVuIDIwMDUgYW5kIDIwMTA/IFRvIGNoZWNrIHRoYXQsIHdlIGNhbiBwZXJmb3JtIHRoZSBzby1jYWxsZWQgdC10ZXN0LCB3aGljaCB0YWtlcyBpbnRvIGFjY291bnQgdGhlIHZhcmlhYmlsaXR5IG9mIG91ciBzYW1wbGUgYW5kIGl0cyBzaXplLCBhbmQgZGV0ZXJtaW5lcyB0aGUgX3Byb2JhYmlsaXR5IHRoYXQgd2UgZmFsc2VseSByZWplY3QgdGhlIGh5cG90aGVzaXMgdGhhdCB0aGUgbWVhbiBpcyBlcXVhbCB0byAwXyAtIHRoaXMgcHJvYmFiaWxpdHkgaXMgdGhlIHAtdmFsdWUuICoqTm90ZSB0aGF0IHAtdmFsdWUgaXMgbm90IHRoZSBwcm9iYWJpbGl0eSBvZiB0aGUgbWVhbiBiZWluZyBlcXVhbCB0byAwKiouIEZvciB0aG9zZSBmYW1pbGlhciB3aXRoIGZyZXF1ZW50aXN0IHN0YXRpc3RpY2FsIGluZmVyZW5jZSwgcmVjYWxsIHRoYXQgdGhlIF9wLXZhbHVlIGlzIHRoZSBwcm9iYWJpbGl0eSBvZiBvYnRhaW5pbmcgYSBzdGF0aXN0aWMgbW9yZSBleHRyZW1lIHRoYW4gdGhlIHNhbXBsZSBzdGF0aXN0aWMgaW4gdW5kZXIgdGhlIGFzc3VtcHRpb24gdGhhdCB0aGUgbnVsbCBoeXBvdGhlc2lzIGlzIHRydWUgaW4gcmVwZWF0ZWQgc2FtcGxpbmdfLiAKIycgCiMnIFRvIGNvbmR1Y3QgdGhlIHQtdGVzdCwgd2UgY2FuIHNpbXBseSB1c2UgdGhlIGB0LnRlc3RgIGZ1bmN0aW9uOgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnQudGVzdCh3YWdlcyRjaGFuZ2UpCgojJyAKIycgVGhlIHAtdmFsdWUgaXMgdXN1YWxseSB0aGUgbW9zdCBpbXBvcnRhbnQgcGFydCBvZiB0aGUgb3V0cHV0IHByb2R1Y2VkIGJ5IHRoZSBmdW5jdGlvbi4gSW4gdGhpcyBjYXNlLCBpdCBpcyBgciByb3VuZCh0LnRlc3Qod2FnZXMkY2hhbmdlKSRwLnZhbHVlLCA0KWAuIFRoaXMgbWVhbnMsIHRoYXQgdGhlIG1lYW4gaXMgX3NpZ25pZmljYW50bHkgZGlmZmVyZW50IGZyb20gMCBhdCB0aGUgOTUlIGNvbmZpZGVuY2UgbGV2ZWxfLiBDb25maWRlbmNlIGxldmVsIGlzIGEgd2F5IGluIHdoaWNoIHdlIGNhbiBxdWFudGlmeSBvdXIgY2VydGFpbnR5IGluIHRoZSBkaWZmZXJlbmNlIG9mIHRoZSBwYXJhbWV0ZXIgZnJvbSBzb21lIGh5cG90aGVzaXplZCB2YWx1ZSAoaW4gdGhpcyBjYXNlIDApLiBUaGUgOTUlIGNvbmZpZGVuY2UgbGV2ZWwgaXMgb25lIG9mIHRoZSBtb3N0IGNvbW1vbmx5IHVzZWQgdGhyZXNob2xkcyBpbiB0aGUgc29jaWFsIHNjaWVuY2VzLiBHZW5lcmFsbHksIHRoZSByZWNpcGUgZm9yIGNoZWNraW5nIGlmIGEgcC12YWx1ZSBzYXRpc2ZpZXMgYSBjZXJhaW4gY29uZmlkZW5jZSBsZXZlbCBpcyB0byBzdWJ0cmFjdCBvdXIgY29uZmlkZW5jZSBsZXZlbCBmcm9tIDEgYW5kIGNvbXBhcmUgaXQgd2l0aCB0aGUgcC12YWx1ZS4gSWYgdGhlIHAtdmFsdWUgaXMgc21hbGxlciB0aGFuIHRoZSB2YWx1ZSBvYnRhaW5lZCBpbiB0aGUgc3VidHJhY3Rpb24sIHRoZSBzaWduaWZpY2FuY2Ugb2YgdGhlIHRlc3Qgc3RhdGlzdGljIHNhdGlzZmllcyBpdC4gU28sIGluIG91ciBleGFtcGxlLCBmb3IgOTUlIGNvbmZpZGVuY2UgJDEgLSAwLjk1ID0gMC4wNSQgYW5kIGByIHJvdW5kKHQudGVzdCh3YWdlcyRjaGFuZ2UpJHAudmFsdWUsIDQpYCAkIDwgMC4wNSQsIHRodXMgd2UgY2FuIHNheSB0aGUgdGhlIG1lYW4gaXMgc2lnbmlmaWNhbnRseSBkaWZmZXJlbnQgZnJvbSAwIGF0IHRoZSA5NSUgY29uZmlkZW5jZSBsZXZlbC4KIycgCiMnIEFub3RoZXIgaW1wb3J0YW50IGluZm9ybWF0aW9uIHJlcG9ydGVkIGJ5IHRoZSBvdXRwdXQgb2YgdGhlIHQtdGVzdCBpcyB0aGUgY29uZmlkZW5jZSBpbnRlcnZhbC4gVGhlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgcHJvdmlkZXMgdXMgd2l0aCBhIHdheSBvZiBxdWFudGlmeWluZyBvdXIgdW5jZXJ0YWludHkgYWJvdXQgdGhlIHVuZGVybHlpbmcgdmFsdWUgb2YgYSBzdGF0aXN0aWMgKGluIG91ciBjYXNlIHRoZSBtZWFuKSwgZ2l2ZW4gdGhlIHZhcmlhYmlsaXR5IG9mIG91ciBzYW1wbGUgKG1lYXN1cmVkIGJ5IHRoZSBzdGFuZGFyZCBkZXZpYXRpb24sIGFzIGRlc2NyaWJlZCBpbiBbY2hhcHRlciA0XSgjdmFyaWFuY2UtYW5kLXN0YW5kYXJkLWRldmlhdGlvbikuIFN1cHBvc2Ugd2UgdGFrZSAxMDAgcmFuZG9tIHNhbXBsZXMgZnJvbSBvdXIgb3JpZ2luYWwgcG9wdWxhdGlvbi4gVGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGRlc2NyaWJlcyB0aGUgX3JhbmdlIGludG8gd2hpY2ggd2UgZXhlcGN0IHRoZSBtZWFuIG9mIDk1IG91dCBvZiAxMDAgc2FtcGxlc18gdG8gZmFsbC4gSW4gY2FzZSBvZiB0aGUgbWVhbiwgaXQgaXMgZ2l2ZW4gYnkgJFxiYXJ7XG11fVxwbSAxLjk2U0UoXGJhcntcbXV9KSQsIHdoZXJlICRcYmFyXG11JCBpcyB0aGUgc2FtcGxlIG1lYW4gd2Ugb2J0YWluZWQgYW5kICRTRShcYmFye1xtdX0pJCBpcyB0aGUgX3N0YW5kYXJkIGVycm9yIG9mIHRoZSBtZWFuXyBnaXZlbiBieSAkXHNpZ21hL1xzcXJ0e259JCwgd2hpY2ggaXMgdGhlIHNhbXBsZSBzdGFuZGFyZCBkZXZpYXRpb24gZGl2aWRlZCBieSB0aGUgc3F1YXJlIHJvb3Qgb2YgdGhlIG51bWJlciBvZiB0aGUgb2JzZXJ2YXRpb25zIGluIG91ciBzYW1wbGUuIE5vdGUgdGhhdCA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBub3QgaW5jbHVkaW5nIDAgaXMgZXF1aXZhbGVudCB3aXRoIHRoZSBzdGF0aXN0aWMgYmVpbmcgc2lnbmlmaWNhbnRseSBkaWZmZXJlbnQgZnJvbSAwIGF0IHRoZSA5NSUgbGV2ZWwuIAojJyAKIycgCiMnICMjIyMgRXJyb3IgYmFycyAKCiMnIAojJyBUaGUgY29uZmlkZW5jZSBpbnRlcnZhbCBhcm91bmQgdGhlIG1lYW4gY2FuIGJlIGRpc3BsYXllZCBpbiBgZ2dwbG90YCB1c2luZyB0aGUgYGdlb21fZXJyb3JiYXJgIGZ1bmN0aW9uLiBUaGUgc28tY2FsbGVkIGVycm9yYmFyIGlzIGEgZ29vZCB3YXkgdG8gZGlzcGxheSB0aGUgcmFuZ2Ugb2YgdGhlIGxpa2VseSB2YWx1ZXMgYXJvdW5kIHRoZSBtZWFuLgojJyAKIycgSW4gY2FzZSBvZiBvdXIgZGF0YSwgdG8gcGxvdCB0aGUgZXJyb3JiYXJzLCB3ZSBmaXJzdCBjb21wdXRlIHRoZSBzdGFuZGFyZCBlcnJvciBvZiB0aGUgbWVhbiB1c2luZyB0aGUgZm9ybXVsYSBkaXNjdXNzZWQgYWJvdmUuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kd2FnZXNfc3VtbWFyeSA8LSB3YWdlcyAlPiUKICBzdW1tYXJpc2UoY2hhbmdlX21lYW4gPSBtZWFuKGNoYW5nZSksIAogICAgICAgICAgICBjaGFuZ2VfZXJyID0gc2QoY2hhbmdlKS9zcXJ0KG4oKSkpCgojJyAKIycgV2UgdGhhbiBjcmVhdGUgYSBiYXIgcGxvdCBhbmQgYWRkIHRoZSBgZ2VvbV9lcnJvcmJhcmAgb24gdG9wIG9mIGl0LiBOb3RlIHRoYXQgaW4gdGhpcyBjYXNlIHdlIHNwZWNpZnkgdGhlIHggYWVzdGhldGljIGFzIGEgY2hyYXJhY3RlciBgJ1dhZ2UgY2hhbmdlJ2AuIFRoaXMgaXMgYmVjYXVzZSBpdCBpcyB1bnVzdWFsIHRvIHBsb3QganVzdCBvbmUgYmFyIGluIHRoZSBwbG90LCBhbmQgYGdlb21fY29sYCBhbmQgYGdlb21fZXJyb3JiYXJgIHJlcXVpcmUgc29tZSB4IGFlc3RoZXRpYyB0byBiZSBwYXNzZWQuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KZ2dwbG90KHdhZ2VzX3N1bW1hcnksIGFlcyh4ID0gJ1dhZ2UgY2hhbmdlJywgeSA9IGNoYW5nZV9tZWFuKSkgKwogIGdlb21fY29sKHdpZHRoID0gMC4yKSArIAogIGdlb21fZXJyb3JiYXIoYWVzKHltaW4gPSBjaGFuZ2VfbWVhbiAtIDEuOTYgKiBjaGFuZ2VfZXJyLCAKICAgICAgICAgICAgICAgIHltYXggPSBjaGFuZ2VfbWVhbiArIDEuOTYgKiBjaGFuZ2VfZXJyKSwgd2lkdGggPSAwLjEpICsgCiAgbGFicyh4ID0gJycsIHkgPSAnTWVhbiBjaGFuZ2UgaW4gd2FnZScpCgojJyAKIycgCiMnIAojJyAjIyMjIEFyZSB0d28gbWVhbnMgZGlmZmVyZW50PyAtIHR3byBzYW1wbGUgdC10ZXN0IAoKIycgCiMnIEJ5IHNpbXBsZSBleHRlbnNpb24sIHdlIGNhbiBhcHBseSB0aGUgbG9naWMgb2YgdGhlIHQtdGVzdCB0byB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHR3byBtZWFucyB3aXRoaW4gb25lIHNhbXBsZSAtIHRoaXMgaXMgc28gY2FsbGVkIGEgX3R3byBzYW1wbGUgdC10ZXN0XyBhbmQgaXMgaW1wbGVtZW50ZWQgaW4gUiBieSB0aGUgc2FtZSBmdW5jdGlvbi4gVGhlIGdyb3VwaW5nIHZhcmlhYmxlIGlzIHNwZWNpZmllZCB1c2luZyB0aGUgX2Zvcm11bGEgbm90YXRpb25fLCB3aGljaCB3ZSB3aWxsIGVuY291bnRlciBpbiB0aGUgbmV4dCBjaGFwdGVyIHdoZW4gZGVhbGluZyB3aXRoIGxpbmVhciByZWdyZXNzaW9uLiBUbyB0ZXN0IHRoZSBkaWZmZXJlbmNlIGluIG1lYW4gb2YgdmFyaWFibGUgeCBiZXR3ZWVuIGdyb3VwcyBkZWZpbmVkIGJ5IHksIHdlIHNwZWNpZnkgYHQudGVzdCh4IH4geSlgLiBTbywgY29taW5nIGJhY2sgdG8gb3VyIGV4YW1wbGUsIHdlIGNhbiBleGFtaW5lIHdoZXRoZXIgdGhlIGF2ZXJhZ2Ugc2FsYXJ5IGluIDIwMDUgaXMgZGlmZmVyZW50IGZvciBtYWxlIGFuZCBmZW1hbGUgZW1wbG95ZWVzLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnQudGVzdChzYWxhcnkyMDA1IH4gZ2VuZGVyLCBkYXRhID0gd2FnZXMpCgojJyAKIycgVGhlIHJlc3VsdCBzZWVtIHRvIGJlIHNpZ25pZmljYW50LCBtZWFuaW5nIHRoYXQgd2UgaGF2ZSBzdGF0aXN0aWNhbCBldmlkZW5jZSB0aGF0IHRoZXJlIGlzIGEgcmVhbCBkaWZmZXJlbmNlIGJldHdlZW4gbWFsZSBhbmQgZmVtYWxlIGVhcm5pbmdzIGluIHRoZSB1bmRlcmx5aW5nIHBvcHVsYXRpb25zIChvciBtb3JlIHByZWNpc2VseSwgdGhhdCBpZiB3ZSB0b29rIDEwMCBzYW1wbGVzIGZyb20gdGhlIHVuZGVybHlpbmcgcG9wdWxhdGlvbiwgbW9yZSB0aGFuIDk1IG9mIHRoZW0gd291bGQgc2hvdyBhIG5vbi16ZXJvIGRpZmZlcmVuY2UpLiBCYXNlZCBvbiBvdXIgc2FtcGxlLCBob3dldmVyLCB0aGUgbWFnbml0dWRlIG9mIHRoYXQgZGlmZmVyZW5jZSBpcyBxdWl0ZSBkaWZmaWN1bHQgdG8gZGV0ZXJtaW5lLCBhcyB3ZSBleHBlY3QgaXQgdG8gcmFuZ2UgYmV0d2VlbiAxOTAwMCBhbmQgMjAwMCBkb2xsYXJzLiBXZSBjYW4gdmlzdWFsaXplIHRoaXMgYWdhaW4gdXNpbmcgYGdlb21fZXJyb3JiYXJgOgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCndhZ2VzICU+JQogIGdyb3VwX2J5KGdlbmRlcikgJT4lCiAgc3VtbWFyaXNlKHdhZ2VfbWVhbiA9IG1lYW4oc2FsYXJ5MjAwNSksIAogICAgICAgICAgICB3YWdlX2VyciA9IHNkKHNhbGFyeTIwMDUpL3NxcnQobigpKSkgJT4lCiAgZ2dwbG90KGFlcyh4ID0gZ2VuZGVyLCB5ID0gd2FnZV9tZWFuKSkgKyAKICBnZW9tX2NvbCh3aWR0aCA9IDAuMykgKyAKICBnZW9tX2Vycm9yYmFyKGFlcyh5bWluID0gd2FnZV9tZWFuIC0gd2FnZV9lcnIsIAogICAgICAgICAgICAgICAgICAgIHltYXggPSB3YWdlX21lYW4gKyB3YWdlX2VyciksIHdpZHRoID0gMC4yKSArCiAgeWxhYignQXZlcmFnZSBzYWxhcnkgaW4gMjAwNScpCgojJyAKIycgCiMnICMjIyBSZWxhdGlvbnNoaXAgYmV0d2VlbiB0d28gY29udGludW91cyB2YXJpYWJsZXMgCgojJyAKIycgIyMjIyBDb3ZhcmlhbmNlIAoKIycgCiMnIFNvIGZhciB3ZSBoYXZlIGRpc2N1c3NlZCBzb21lIHRlY2huaXF1ZXMgZm9yIGxvb2tpbmcgYXQgc3RhdGlzdGljYWwgcmVsYXRpb25zaGlwcyBiZXR3ZWVuIG9uZSBjb250aW51b3VzIHZhcmlhYmxlIChzdWNoIGFzIHdhZ2UpIGFuZCBvbmUgY2F0ZWdvcmljIHZhcmlhYmxlIChzdWNoIGFzIHNhbGFyeSkuIFVuZGVyIG1hbnkgY2lyY3Vtc3RhbmNlcywgaG93ZXZlciwgd2Ugd291bGQgYmUgaW50ZXJlc3RlZCBpbiBtZWFzdXJpbmcgdGhlIGFzc29jaWF0aW9uIGJldHdlZW4gdHdvIGNvbnRpbnVvdXMgdmFyaWFibGVzLiBJbiB0aGlzIHBhcnQgd2Ugd2lsbCBjb25zaWRlciBkYXRhIG9uIGEgc2FtcGxlIG9mIHN0dWRlbnRzIHdpdGggZnJlZSB2YXJpYWJsZXM6IGF2ZXJhZ2Ugd2Vla2x5IHRpbWUgc3BlbnQgc3R1ZHlpbmcsIGRheXMgYSBzdHVkZW50IGhhcyBiZWVuIGhvbWUgaWxsIGFuZCBhY2hpZXZlZCBHUEEuCiMnIAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNjb3JlcyA8LSByZWFkX2NzdignZGF0YS9zY29yZXMuY3N2JykKCiMnIAojJyBXZSBjYW4gZXhhbWluZSBwYWlyd2lzZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdGhlIHZhcmlhYmxlcyB1c2luZyB0aGUgYHBhaXJzKClgIGZ1bmN0aW9uLCB3aGljaCBpcyBhIHVzZWZ1bCB0b29sIHdoZW4gYW5hbHl6aW5nIGRhdGFzZXRzIHdpdGggbXVsdGlwbGUgY29udGludW91cyB2YXJpYWJsZXMuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KcGFpcnMoc2NvcmVzLHVwcGVyLnBhbmVsID0gTlVMTCkKCiMnIAojJyAKIycgTGV0J3Mgc3RhcnQgYnkgaW50ZXJwcmV0aW5nIHRoaXMgcGxvdC4gVGhlIHJlY3RhbmdsZXMgd2l0aCB2YXJpYWJsZSB0ZWxsIGFzIHRoZSBuYW1lIG9mIHRoZSBheGlzLiBGb3IgZXhhbXBsZSwgdGhlIHBsb3QgaW4gdGhlIGxvd2VyIGxlZnQgY29ybmVyIHNob3dzIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiB0aGUgR1BBICh4IGF4aXMpIGFuZCBzdHVkeSB0aW1lICh5IGF4aXMpLiBXZSBjYW4gc2VlIHRoYXQgc3R1ZGVudHMgaW4gb3VyIHNhbXBsZSB3aG8gc3BlbnQgbW9yZSB0aW1lIHN0dWR5aW5nIHNlZW0gdG8gaGF2ZSBoYWQgaGlnaGVyIGdyYWRlcyAtIHBvaW50cyBoaWdoZXIgb24gb25lIGF4aXMgdGVuZCB0byBhbHNvIGJlIGhpZ2hlciBvbiB0aGUgb3RoZXIuIE9uIHRoZSBvdGhlciBoYW5kLCBzdHVkZW50cyB3aG8gd2VyZSBpbGwgbW9yZSBoYWQsIG9uIGF2ZXJhZ2UsIGFjaGlldmVkIGxvd2VyIGdyYWRlcy4gVGhlcmUgc2VlbXMgdG8gYmUgbm8gcmVsYXRpb25zaGlwIGJldHdlZW4gYmVpbmcgaWxsIGFuZCB0aW1lIHNwZW50IHN0dWR5aW5nLiAKIycgCiMnIEluIHN0YXRpc3RpY2FsIHRlcm1zLCB0aGlzIHJlbGF0aW9uc2hpcCBjYW4gYmUgbWVhc3VyZWQgd2l0aCBfY292YXJpYW5jZV8gYmV0d2VlbiB0aGVzZSB0d28gdmFyaWFibGVzLiBSZWNhbGwgb3VyIGRpc2N1c3Npb24gb2YgX3ZhcmlhbmNlXyBpbiB0aGUgW2V4cGxvcmF0b3J5IGFuYWx5c2lzIGNoYXB0ZXJdKCNleHBsb3JhdG9yeSkuIFdlIGNhbGN1bGF0ZWQgaXQgZm9yIHZlY3RvciB4IHVzaW5nIGBzdW0oKHggLSBtZWFuKHgpKV4yKS8obGVuZ3RoKHgpIC0gMSlgLCBvciB0aGUgYHZhcih4KWAgZnVuY3Rpb24gZm9yIHNob3J0LiBDb3ZhcmlhbmNlIGlzIGVzc2VudGlhbGx5IHRoZSBzYW1lLCBidXQgY2FsY3VsYXRlZCBmb3IgdHdvIHZhcmlhYmxlcyBpbnN0ZWFkIG9mIG9uZSwgdXNpbmcgYHN1bSgoeCAtIG1lYW4oeCkpICogbWVhbigoeSAtIG1lYW4oeSkpKSkvKGxlbmd0aCh4KSAtIDEpYCBvciB0aGUgYGNvdmAgZnVuY3Rpb24gZm9yIHNob3J0LiBZb3UgY2FuIHNlZSB0aGF0IGRlbW9uc3RyYXRlZCBiZWxvdzoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb3ZfZnVuIDwtIGZ1bmN0aW9uKHgsIHkpIHN1bSgoeCAtIG1lYW4oeCkpICogKHkgLSBtZWFuKHkpKSkvKGxlbmd0aCh4KSAtIDEpCmNvdl9mdW4oc2NvcmVzJGdwYSwgc2NvcmVzJHN0dWR5X3RpbWUpCmNvdihzY29yZXMkZ3BhLCBzY29yZXMkc3R1ZHlfdGltZSkKCiMnIAojJyBUaGUgX3ZhcmlhbmNlXyBpcyBhY3R1YWxseSBub3RoaW5nIGVsc2UgYnV0IGNvdmFyaWFuY2Ugb2YgYSB2YXJpYWJsZSB3aXRoIGl0c2VsZiEKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb3Yoc2NvcmVzJGdwYSwgc2NvcmVzJGdwYSkgPT0gdmFyKHNjb3JlcyRncGEpCgojJyAKIycgCiMnIEVzc2VudGlhbGx5IGNvdmFyaWFuY2UgbWVhc3VyZXMgdGhlIGF2ZXJhZ2Ugb2YgZWxlbWVudC13aXNlIHByb2R1Y3Qgb2YgZWFjaCBvYnNlcnZhdGlvbnMgZGV2aWF0aW9uIGZyb20gaXRzIG1lYW4gZm9yIHR3byB2YXJpYWJsZXMuIFRoaXMgbWF5IHNvdW5kIGNvbXBsaWNhdGVkLCBidXQgYnJlYWtpbmcgaXQgZG93biBtYWtlcyBpdCBzaW1wbGUuIEluIG91ciB0d28gdmFyaWFibGVzLCBgZ3BhYCBhbmQgYGRheXNfaWxsYCwgcGVvcGxlIHdobyBoYXZlIGdyYWRlcyBoaWdoZXIgdGhhbiB0aGUgYXZlcmFnZSBncmFkZSBhbHNvIHRlbmQgdG8gc3R1ZHkgbG9uZ2VyIHRoYW4gdGhlIGF2ZXJhZ2Ugc3R1ZHkgdGltZS4gU28sIGlmIGZvciBhbGwgc3R1ZGVudHMgd2Ugc3VidHJhY3QgdGhlIG1lYW4gZ3JhZGUgYW5kIG1lYW4gc3R1ZHkgdGltZSBmcm9tIHRoZWlyIHJlc3BlY3RpdmUgZ3JhZGVzIGFuZCBzdHVkeSB0aW1lcywgdGhlIGF2ZXJhZ2Ugb2YgdGhhdCB3aWxsIGJlIHBvc2l0aXZlLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvdihzY29yZXMkZ3BhLCBzY29yZXMkc3R1ZHlfdGltZSkKCiMnIAojJyAKIycgSWYsIG9uIHRoZSBvdGhlciBoYW5kIHBlb3BsZSB3aG8gaGF2ZSBoaWdoZXIgZ3JhZGVzIHRoYW4gYXZlcmFnZSB0ZW5kIHRvIGhhdmUgbG93ZXIgdGltZSBzcGVudCBpbGwgYXQgaG9tZSB0aGFuIGF2ZXJhZ2UsIHRoZSBhdmVyYWdlIG9mIHRoZSBwcm9kdWN0cyBvZiB0aGVzZSBkZW1lYW5lZCAoaS5lLiB3aXRoIHRoZSBtZWFuIHN1YnRyYWN0ZWQgZnJvbSBlYWNoKSB2YXJpYWJsZXMgd2lsbCBiZSBuZWdhdGl2ZSwgc2luY2UgdGhlIG1ham9yaXR5IG9mIHRoZSBwcm9kdWN0cyB3aWxsIGJlIG5lZ2F0aXZlLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvdihzY29yZXMkZ3BhLCBzY29yZXMkZGF5c19pbGwpCgojJyAKIycgCiMnIEZpbmFsbHksIGlmIHRoZXJlJ3Mgbm8gcmVsYXRpb25zaGlwIGJldHdlZW4gdHdvIHZhcmlhYmxlcyAtIGZvciBleGFtcGxlIGJldHdlZW4gYGRheXNfaWxsYCBhbmQgYHN0dWR5X3RpbWVgLCB3ZSBleHBlY3QgdGhlIGF2ZXJhZ2Ugb2YgdGhlIHByb2R1Y3RzIG9mIHRoZSBkZW1lYW5lZCB2YXJpYWJsZXMgdG8gYmUgY2xvc2UgdG8gMCwgc2luY2UgYXJvdW5kIHRoZSBzYW1lIG51bWJlciB3aWxsIGJlIHBvc2l0aXZlIGFuZCBuZWdhdGl2ZS4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb3Yoc2NvcmVzJHN0dWR5X3RpbWUsIHNjb3JlcyRkYXlzX2lsbCkKCiMnIAojJyAKIycgVGhlIGxhc3QgZXhhbXBsZSBzZWVtcyB0byBiZSBpbmNvcnJlY3Q/IEhvdyBpcyB0aGF0IHBvc3NpYmxlIHRoYXQgdGhlIGNvdmFyaWFuY2UgYmV0d2VlbiBgc3R1ZHlfdGltZWAgYW5kIGBkYXlzX2lsbGAgaXMgbGFyZ2VyIHRoYW4gdGhlIGNvdmFyaWFuY2UgYmV0d2VlbiBgc3R1ZHlfdGltZWAgYW5kIGBncGFgLCBldmVuIHRob3VnaCB0aGUgcGxvdCBzdWdnZXN0cyBhIG11Y2ggc3Ryb25nZXIgcmVsYXRpb25zaGlwIGJldHdlZW4gdGhlIGxhdHRlcj8gV2Ugd2lsbCBleHBsb3JlIHRoaXMgaW4gdGhlIG5leHQgc2VjdGlvbiBvbiBjb3JyZWxhdGlvbi4KIycgCiMnIAojJyAjIyMjIENvcnJlbGF0aW9uIAoKIycgCiMnIFRoZSBkb3duc2lkZSBvZiBjb3ZhcmlhbmNlIGFzIGEgbWVhc3VyZSBvZiByZWxhdGlvbnNoaXAgaXMgdGhhdCBpdCBpcyBjb21wbGV0ZWx5IGRlcGVuZGVudCBvbiB0aGUgdW5pdHMgb2YgdGhlIHR3byB2YXJpYWJsZXMgbWVhc3VyZXMsIG9yLCBtb3JlIHBlcmNpc2VseSwgdGhlIHJhbmdlIG9mIHZhbHVlcyB0aGV5IHRha2UuIElmIHdlIHRha2UgY292YXJpYW5jZSBhdmVyYWdlIHRpbWUgc3BlbnQgc3R1ZHlpbmcgYW5kIEdQQSBhbmQgY29tcGFyZSBpdCB3aXRoIHRoZSBjb3ZhcmlhbmNlIGJldHdlZW4gYXZlcmFnZSB0aW1lIHNwZW50IHN0dWR5aW5nIGFuZCB0aW1lIGlsbCwgdGhlIGxhdHRlciB3aWxsIGJlIGdyZWF0ZXIsIHNpbXBseSBiZWNhdXNlIHRpbWUgaXMgZXhwcmVzc2VkIGluIGhvdXJzIGFuZCBkYXlzLCB3aXRoIHZhbHVlcyByYW5naW5nIGJldHdlZW4gMC44IGFuZCAxNS4xIGFuZCAxIGFuZCAxMTAgcmVzcGVjdGl2ZWx5LCB3aGlsZSBHUEEgcmFuZ2VzIGJldHdlZW4gMSBhbmQgNToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp2YXBwbHkoc2NvcmVzLCByYW5nZSwgbnVtZXJpYygyKSkKCiMnIAojJyBTbywgdGhlIHZhbHVlcyB3ZSBnZXQgYnkgbXVsdGlwbHlpbmcgYHN0dWR5X3RpbWVgIGFuZCBgZGF5c19pbGxgIHdpbGwgdGVuZCB0byBiZSBoaWdoZXIgaW4gZ2VuZXJhbC4gVGhpcyBtYWtlcyB0aGUgdXNlIG9mIGNvdmFyaWFuY2UgcHJvYmxlbWF0aWMgaW4gZXN0aW1hdGluZyB0aGUgb2JqZWN0aXZlIHN0cmVuZ3RoIG9mIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiB0d28gdmFyaWFibGVzLiAKIycgCiMnIEluIG9yZGVyIHRvIGF2b2lkIGl0LCB3ZSB1c2UgX2NvcnJlbGF0aW9uXyBpbnN0ZWFkLiBDb3JyZWxhdGlvbiBpcyBzaW1wbHkgY292YXJpYW5jZSwgYnV0IGRpdmlkZWQgYnkgdGhlIHByb2R1Y3Qgb2YgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiBvZiBlYWNoIG9mIHRoZSB2YXJpYWJsZXMuIFdpdGhvdXQgZ29pbmcgaW50byB0aGUgbWF0aGVtYXRpY2FsIGRldGFpbHMsIHN1ZmZpY2UgdG8gc2F5IHRoYXQgaXQgX3N0YW5kYXJkaXplc18gdGhlIGNvdmFyaWFuY2UsIHNvIHRoYXQgaXQgcmFuZ2VzIGJldHdlZW4gLTEgYW5kIDEsIC0xIG1lYW5pbmcgcGVyZmVjdCBuZWdhdGl2ZSByZWxhdGlvbnNoaXAgKGkuZS4gd2hlbiBvbmUgdmFyaWFibGUgaW5jcmVhc2VzLCB0aGUgb3RoZXIgYWx3YXlzIGRlY3JlYXNlcykgYW5kIDEgbWVhbmluZyBwZXJmZWN0IHBvc2l0aXZlIHJlbGF0aW9uc2hpcCAod2hlbiBvbmUgdmFyaWFibGUgaW5jcmVhc2VzLCB0aGUgb3RoZXIgZGVjcmVhc2VzKS4gMCBtZWFucyB0aGF0IHRoZXJlJ3Mgbm8gcmVsYXRpb25zaGlwIGJldHdlZW4gdGhlc2UgdmFyaWFibGVzLgojJyAKIycgV2UgY2FuIHNlZSB0aGF0IGFnYWluIHVzaW5nIFIgY29kZS4gYGNvcl9mdW5gIGlzIGNyZWF0ZWQgZm9yIGRlbW9uc3RyYXRpb24gcHVycG9zZXMsIGJ1dCB0aGUgdXN1YWwgZnVuY3Rpb24gdXNlZCBpbiBSIHRvIG9idGFpbiBjb3JyZWxhdGlvbiBpcyBzaW1wbHkgYGNvcmAuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29yX2Z1biA8LSBmdW5jdGlvbih4LCB5KSBjb3ZfZnVuKHgsIHkpLyhzZCh4KSAqIHNkKHkpKQpjb3JfZnVuKHNjb3JlcyRncGEsIHNjb3JlcyRzdHVkeV90aW1lKQpjb3Ioc2NvcmVzJGdwYSwgc2NvcmVzJHN0dWR5X3RpbWUpCgojJyAKIycgTm93IHdlIGNhbiBzZWUsIHRoYXQgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGBzdHVkeV90aW1lYCBhbmQgYGRheXNfaWxsYCBpcyBpbmRlZWQgY2xvc2UgdG8gMDoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb3Ioc2NvcmVzJHN0dWR5X3RpbWUsIHNjb3JlcyRkYXlzX2lsbCkKCiMnIAojJyBXZSBjYW4gYWxzbyB1c2UgYGNvcmAgb24gZW50aXJlIGRhdGEgZnJhbWUgdG8gb2J0YWluIHRoZSBzby1jYWxsZWQgY29ycmVsYXRpb24gbWF0cml4LCB3aGljaCBzaG93cyBwYWlyd2lzZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdHdvIHZhcmlhYmxlcwojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvcihzY29yZXMpCgojJyAKIycgTm90ZSB0aGF0IHRoZSBkaWFnb25hbCBpcyBhbHdheXMgMSwgaS5lLiB0aGUgY29ycmVsYXRpb24gb2YgYSB2YXJpYWJsZSB3aXRoIGl0c2VsZiBpcyBhbHdheXMgMS4KIycgCiMnIEZvciBvYnZpb3VzIHJlYXNvbnMsIHRoZSBmdW5jdGlvbiBhbHNvIHdvbid0IHdvcmsgaWYgYXBwbGllZCB0byBhIGRhdGEgZnJhbWUgY29udGFpbmluZyBhbnkgdGV4dCBkYXRhOgojJyAKIycgCiMnIAojJyAKIycgVG8gdmlzdWFsaXplIHBhcmlzd2lzZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdHdvIHZhcmlhYmxlcyB1c2luZyBhIHBsb3QgdGhhdCBpcyBhIGJpdCBtb3JlIHNvcGhpc3RpY2F0ZWQgdGhhdCB0aGUgb25lIHByb2R1Y2VkIGJ5IGBwYWlycygpYCB3ZSBjYW4gdXNlIHRoZSBgZ2dwYWlyc2AgZnVuY3Rpb24gZnJvbSB0aGUgYEdHYWxseWAgcGFja2FnZSwgd2hpY2ggcHJvZHVjZWQgYSBgZ2dwbG90YCBzdHlsZSBwbG90LCBwcmVzZW50aW5nIGNvcnJlbGF0aW9ucywgZGVuc2l0eSBwbG90cyBhbmQgc2NhdHRlciBwbG90cyBvZiBhbGwgdGhlIG51bWVyaWMgdmFyaWFibGVzIGluIG91ciBkYXRhc2V0OgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmxpYnJhcnkoR0dhbGx5KQpnZ3BhaXJzKHNjb3JlcykKCiMnIAojJyAKIycgIyMjIEZ1cnRoZXIgZGV0YWlscyAKCiMnIAojJyBIZXJlIHNvbWUgbW9yZSBkZXRhaWxzIG9uIGhvdyB0aGUgcC12YWx1ZSBpcyBjb21wdXRlZDoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQplcnIgPC0gc2Qod2FnZXMkY2hhbmdlKS9zcXJ0KG5yb3cod2FnZXMpKQp0c2NvcmUgPC0gbWVhbih3YWdlcyRjaGFuZ2UpL2VycgpkZiA8LSBsZW5ndGgod2FnZXMkY2hhbmdlKSAtIDEKcHQodHNjb3JlLCBkZiwgbG93ZXIudGFpbCA9IEZBTFNFKSAqIDIKdC50ZXN0KHdhZ2VzJGNoYW5nZSkKCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyAKAA==" download="08-statistical_association.R">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter script</button>
+</a><a href="data:text/x-markdown;base64,LS0tCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KIyAoUEFSVCkgREFUQSBBTkFMWVNJUyB7LX0KCiMgU3RhdGlzdGljYWwgSW5mZXJlbmNlIGFuZCBBc3NvY2lhdGlvbiB7I2Fzc29jaWF0aW9ufQoKCgoKIyMgQ29udGVudAoKYGBge3IgbWVzc2FnZSA9IEZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgoKU28gZmFyLCB3ZSBoYXZlIGRlc2NyaWJlZCB2YXJpZXR5IG9mIG1ldGhvZHMgdG8gd3JhbmdsZSBhbmQgZXhwbG9yZSBkYXRhIGluIFIuIEFmdGVyIHBlcmZvcm1pbmcgY2xlYW5pbmcgYW5kIGV4cGxvcmF0b3J5IGFuYWx5c2lzLCBpdCBpcyBjb21tb24gdG8gcGVyZm9ybSBtb3JlIGZvcm1hbCB0ZXN0cyBvbiB0aGUgZGF0YSB0byB2ZXJpZnkgd2hldGhlciB0aGUgcmVsYXRpb25zaGlwcyB3ZSBoeXBvdGhlc2l6ZWQgaG9sZCB1bmRlciB0aGUgc2NydXRpbnkgb2YgdGVzdHMgc3VwcG9ydGVkIGJ5IHN0YXRpc3RpY2FsIHRoZW9yeS4gSW4gdGhpcyBjaGFwdGVyIHdlIHdpbGwgcHJlc2VudCBjb3VwbGUgb2YgdGVzdGluZyBzdWNoIHJlbGF0aW9uc2hpcHMuIFdoaWxlIHNvbWUgZm9ybWFsIGtub3dsZWRnZSBvZiBzdGF0aXN0aWNhbCBpbmZlcmVuY2Ugd2lsbCBiZSB1c2VmdWwsIHRoZSBjaGFwdGVyIGRvZXMgbm90IHJlbHkgb24geW91ciBiYWNrZ3JvdW5kIGtub3dsZWRnZSB0byBoZWF2aWx5LgoKIyMjIENvbXBhcmluZyBtZWFucyB7LX0KCldoaWxlIGEgbWVhbiBpcyBhIGdvb2QgbWVhc3VyZSBvZiBvdXIgZGF0YSBhbmQgY29tcGFyaW5nIG1lYW5zIGFjcm9zcyBncm91cHMgY2FuIGhlbHAgdXMgZGV0ZXJtaW5lIHRoZSB3YXkgYSBnaXZlbiB2YXJpYWJsZSB2YXJpZXMgZGVwZW5kaW5nIG9uIHNvbWUgY29uZGl0aW9ucyAtIGZvciBleGFtcGxlLCB3aGV0aGVyIHRoZSBhdmVyYWdlIEdEUCBncm93dGggb3ZlciBhIGNlcnRhaW4gcGVyaW9kIGRpZmZlcnMgYmV0d2VlbiB0d28gY291bnRyaWVzIG9yIHdoZXRoZXIgYXZlcmFnZSBlYXJuaW5ncyBhcmUgZGlmZmVyZW50IGRlcGVuZGluZyBvbiBwZW9wbGUncyBnZW5kZXIgYW5kIHJhY2UuIEhvd2V2ZXIsIGl0IG1heSBzZWVtIGRpZmZpY3VsdCB0byBkZXRlcm1pbmUgd2hldGhlciBzdWNoIGRpZmZlcmVuY2UgaXMgcmVhbGx5IG1lYW5pbmdmdWwsIGVzcGVjaWFsbHkgdGhhdCB3ZSB1c3VhbGx5IGRvbid0IGhhdmUgdGhlIGVudGlyZSBwb3B1bGF0aW9uIHdlIGFyZSBleGFtaW5pbmcgYXQgaGFuZCwgYnV0IG9ubHkgYSAocHJlc3N1bWFibHkgcmFuZG9tKSBzYW1wbGUgb2YgdGhlIHBvcHVsYXRpb24uIEZvciBleGFtcGxlLCBzdXBwb3NlIHdlIHJhbmRvbWx5IGNob29zZSA1IG1lbiBhbmQgNSB3b21lbiBhbmQgY29tcHV0ZSB0aGVpciBhdmVyYWdlIGVhcm5pbmdzLiBXZSBvYnRhaW4gMzUwMDAgcG91bmRzIGZvciBtZW4gYW5kIDQwMDAwIHBvdW5kcyBmb3Igd29tZW4uIFNob3VsZCB3ZSBjbGFpbSB0aGF0IG1lbiBfb24gYXZlcmFnZV8gZWFybiBsZXNzIHRoYW4gd29tZW4sIGJhc2VkIG9uIHRoaXMgZGF0YT8gV2hhdCBkaWZmZXJlbmNlIGlzIHN1ZmZpY2llbnQgdG8gY2xhaW0gdGhhdCBzdWNoIGRpZmZlcmVuY2UgZXhpc3RzIGluIHRoZSBvdmVyYWxsIHBvcHVsYXRpb24/IFN1Y2ggcXVlc3Rpb25zIGFyZSBhbnN3ZXJlZCBieSBzdGF0aXN0aWNhbCBpbmZlcmVuY2UuCgoKCgojIyMjIElzIG1lYW4gZGlmZmVyZW50IGZyb20gMD8gLSBvbmUgc2FtcGxlIHQtdGVzdCB7LX0KCldlJ2xsIHN0YXJ0IHdpdGggYSBzaW1wbGUgY2FzZS4gVGhlIGRhdGEgaW4gdGhlIGZpbGUgYHdhZ2VzLmNzdmAgY29udGFpbnMgdGhlIGluZm9ybWF0aW9uIG9uIHRoZSBhdmVyYWdlIHNhbGFyeSBvZiBhIHNhbXBsZSBvZiAxMDAgaW5kaXZpZHVhbHMgaW4gMjAwNSBhbmQyIDIwMTAuIFdlIGFyZSBpbnRlcmVzdGVkIGluIHdoZXRoZXIgdGhlcmUgd2FzIGFueSBncm93dGggaW4gdGhlaXIgc2FsYXJ5LiBGaXJzdCwgd2UgcmVhZCB0aGUgZGF0YSBhbmQgb2J0YWluIHRoZSBwZXJjZW50ZWdlIGdyb3d0aDoKCmBgYHtyfQp3YWdlcyA8LSByZWFkX2NzdignZGF0YS93YWdlcy5jc3YnKQp3YWdlcyA8LSB3YWdlcyAlPiUgbXV0YXRlKGNoYW5nZSA9IChzYWxhcnkyMDEwIC0gc2FsYXJ5MjAwNSkvc2FsYXJ5MjAwNSkKYGBgCgpXZSBjYW4gdGhlbiBleGFtaW5lIHRoZSBhdmVyYWdlOgoKYGBge3J9Cm1lYW4od2FnZXMkY2hhbmdlKQpgYGAKCldlIHNlZSB0aGF0IHRoZSBtZWFuIGlzIGFyb3VuZCBgciByb3VuZChtZWFuKHdhZ2VzJGNoYW5nZSksIDMpYC4gSXMgdGhhdCBzdWZmaWNpZW50IHRvIGNsYWltIHRoYXQgdGhlIGF2ZXJhZ2Ugc2FsYXJ5IG9mIGVtcGxveWVlcyBpbiBvdXIgdGFyZ2V0IHBvcHVsYXRpb24gaGFzIGdyb3duIGJldHdlZW4gMjAwNSBhbmQgMjAxMD8gVG8gY2hlY2sgdGhhdCwgd2UgY2FuIHBlcmZvcm0gdGhlIHNvLWNhbGxlZCB0LXRlc3QsIHdoaWNoIHRha2VzIGludG8gYWNjb3VudCB0aGUgdmFyaWFiaWxpdHkgb2Ygb3VyIHNhbXBsZSBhbmQgaXRzIHNpemUsIGFuZCBkZXRlcm1pbmVzIHRoZSBfcHJvYmFiaWxpdHkgdGhhdCB3ZSBmYWxzZWx5IHJlamVjdCB0aGUgaHlwb3RoZXNpcyB0aGF0IHRoZSBtZWFuIGlzIGVxdWFsIHRvIDBfIC0gdGhpcyBwcm9iYWJpbGl0eSBpcyB0aGUgcC12YWx1ZS4gKipOb3RlIHRoYXQgcC12YWx1ZSBpcyBub3QgdGhlIHByb2JhYmlsaXR5IG9mIHRoZSBtZWFuIGJlaW5nIGVxdWFsIHRvIDAqKi4gRm9yIHRob3NlIGZhbWlsaWFyIHdpdGggZnJlcXVlbnRpc3Qgc3RhdGlzdGljYWwgaW5mZXJlbmNlLCByZWNhbGwgdGhhdCB0aGUgX3AtdmFsdWUgaXMgdGhlIHByb2JhYmlsaXR5IG9mIG9idGFpbmluZyBhIHN0YXRpc3RpYyBtb3JlIGV4dHJlbWUgdGhhbiB0aGUgc2FtcGxlIHN0YXRpc3RpYyBpbiB1bmRlciB0aGUgYXNzdW1wdGlvbiB0aGF0IHRoZSBudWxsIGh5cG90aGVzaXMgaXMgdHJ1ZSBpbiByZXBlYXRlZCBzYW1wbGluZ18uIAoKVG8gY29uZHVjdCB0aGUgdC10ZXN0LCB3ZSBjYW4gc2ltcGx5IHVzZSB0aGUgYHQudGVzdGAgZnVuY3Rpb246CgpgYGB7cn0KdC50ZXN0KHdhZ2VzJGNoYW5nZSkKYGBgCgpUaGUgcC12YWx1ZSBpcyB1c3VhbGx5IHRoZSBtb3N0IGltcG9ydGFudCBwYXJ0IG9mIHRoZSBvdXRwdXQgcHJvZHVjZWQgYnkgdGhlIGZ1bmN0aW9uLiBJbiB0aGlzIGNhc2UsIGl0IGlzIGByIHJvdW5kKHQudGVzdCh3YWdlcyRjaGFuZ2UpJHAudmFsdWUsIDQpYC4gVGhpcyBtZWFucywgdGhhdCB0aGUgbWVhbiBpcyBfc2lnbmlmaWNhbnRseSBkaWZmZXJlbnQgZnJvbSAwIGF0IHRoZSA5NSUgY29uZmlkZW5jZSBsZXZlbF8uIENvbmZpZGVuY2UgbGV2ZWwgaXMgYSB3YXkgaW4gd2hpY2ggd2UgY2FuIHF1YW50aWZ5IG91ciBjZXJ0YWludHkgaW4gdGhlIGRpZmZlcmVuY2Ugb2YgdGhlIHBhcmFtZXRlciBmcm9tIHNvbWUgaHlwb3RoZXNpemVkIHZhbHVlIChpbiB0aGlzIGNhc2UgMCkuIFRoZSA5NSUgY29uZmlkZW5jZSBsZXZlbCBpcyBvbmUgb2YgdGhlIG1vc3QgY29tbW9ubHkgdXNlZCB0aHJlc2hvbGRzIGluIHRoZSBzb2NpYWwgc2NpZW5jZXMuIEdlbmVyYWxseSwgdGhlIHJlY2lwZSBmb3IgY2hlY2tpbmcgaWYgYSBwLXZhbHVlIHNhdGlzZmllcyBhIGNlcmFpbiBjb25maWRlbmNlIGxldmVsIGlzIHRvIHN1YnRyYWN0IG91ciBjb25maWRlbmNlIGxldmVsIGZyb20gMSBhbmQgY29tcGFyZSBpdCB3aXRoIHRoZSBwLXZhbHVlLiBJZiB0aGUgcC12YWx1ZSBpcyBzbWFsbGVyIHRoYW4gdGhlIHZhbHVlIG9idGFpbmVkIGluIHRoZSBzdWJ0cmFjdGlvbiwgdGhlIHNpZ25pZmljYW5jZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMgc2F0aXNmaWVzIGl0LiBTbywgaW4gb3VyIGV4YW1wbGUsIGZvciA5NSUgY29uZmlkZW5jZSAkMSAtIDAuOTUgPSAwLjA1JCBhbmQgYHIgcm91bmQodC50ZXN0KHdhZ2VzJGNoYW5nZSkkcC52YWx1ZSwgNClgICQgPCAwLjA1JCwgdGh1cyB3ZSBjYW4gc2F5IHRoZSB0aGUgbWVhbiBpcyBzaWduaWZpY2FudGx5IGRpZmZlcmVudCBmcm9tIDAgYXQgdGhlIDk1JSBjb25maWRlbmNlIGxldmVsLgoKQW5vdGhlciBpbXBvcnRhbnQgaW5mb3JtYXRpb24gcmVwb3J0ZWQgYnkgdGhlIG91dHB1dCBvZiB0aGUgdC10ZXN0IGlzIHRoZSBjb25maWRlbmNlIGludGVydmFsLiBUaGUgY29uZmlkZW5jZSBpbnRlcnZhbCBwcm92aWRlcyB1cyB3aXRoIGEgd2F5IG9mIHF1YW50aWZ5aW5nIG91ciB1bmNlcnRhaW50eSBhYm91dCB0aGUgdW5kZXJseWluZyB2YWx1ZSBvZiBhIHN0YXRpc3RpYyAoaW4gb3VyIGNhc2UgdGhlIG1lYW4pLCBnaXZlbiB0aGUgdmFyaWFiaWxpdHkgb2Ygb3VyIHNhbXBsZSAobWVhc3VyZWQgYnkgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiwgYXMgZGVzY3JpYmVkIGluIFtjaGFwdGVyIDRdKCN2YXJpYW5jZS1hbmQtc3RhbmRhcmQtZGV2aWF0aW9uKS4gU3VwcG9zZSB3ZSB0YWtlIDEwMCByYW5kb20gc2FtcGxlcyBmcm9tIG91ciBvcmlnaW5hbCBwb3B1bGF0aW9uLiBUaGUgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZGVzY3JpYmVzIHRoZSBfcmFuZ2UgaW50byB3aGljaCB3ZSBleGVwY3QgdGhlIG1lYW4gb2YgOTUgb3V0IG9mIDEwMCBzYW1wbGVzXyB0byBmYWxsLiBJbiBjYXNlIG9mIHRoZSBtZWFuLCBpdCBpcyBnaXZlbiBieSAkXGJhcntcbXV9XHBtIDEuOTZTRShcYmFye1xtdX0pJCwgd2hlcmUgJFxiYXJcbXUkIGlzIHRoZSBzYW1wbGUgbWVhbiB3ZSBvYnRhaW5lZCBhbmQgJFNFKFxiYXJ7XG11fSkkIGlzIHRoZSBfc3RhbmRhcmQgZXJyb3Igb2YgdGhlIG1lYW5fIGdpdmVuIGJ5ICRcc2lnbWEvXHNxcnR7bn0kLCB3aGljaCBpcyB0aGUgc2FtcGxlIHN0YW5kYXJkIGRldmlhdGlvbiBkaXZpZGVkIGJ5IHRoZSBzcXVhcmUgcm9vdCBvZiB0aGUgbnVtYmVyIG9mIHRoZSBvYnNlcnZhdGlvbnMgaW4gb3VyIHNhbXBsZS4gTm90ZSB0aGF0IDk1JSBjb25maWRlbmNlIGludGVydmFsIG5vdCBpbmNsdWRpbmcgMCBpcyBlcXVpdmFsZW50IHdpdGggdGhlIHN0YXRpc3RpYyBiZWluZyBzaWduaWZpY2FudGx5IGRpZmZlcmVudCBmcm9tIDAgYXQgdGhlIDk1JSBsZXZlbC4gCgoKIyMjIyBFcnJvciBiYXJzIHstfQoKVGhlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgYXJvdW5kIHRoZSBtZWFuIGNhbiBiZSBkaXNwbGF5ZWQgaW4gYGdncGxvdGAgdXNpbmcgdGhlIGBnZW9tX2Vycm9yYmFyYCBmdW5jdGlvbi4gVGhlIHNvLWNhbGxlZCBlcnJvcmJhciBpcyBhIGdvb2Qgd2F5IHRvIGRpc3BsYXkgdGhlIHJhbmdlIG9mIHRoZSBsaWtlbHkgdmFsdWVzIGFyb3VuZCB0aGUgbWVhbi4KCkluIGNhc2Ugb2Ygb3VyIGRhdGEsIHRvIHBsb3QgdGhlIGVycm9yYmFycywgd2UgZmlyc3QgY29tcHV0ZSB0aGUgc3RhbmRhcmQgZXJyb3Igb2YgdGhlIG1lYW4gdXNpbmcgdGhlIGZvcm11bGEgZGlzY3Vzc2VkIGFib3ZlLgoKYGBge3J9CndhZ2VzX3N1bW1hcnkgPC0gd2FnZXMgJT4lCiAgc3VtbWFyaXNlKGNoYW5nZV9tZWFuID0gbWVhbihjaGFuZ2UpLCAKICAgICAgICAgICAgY2hhbmdlX2VyciA9IHNkKGNoYW5nZSkvc3FydChuKCkpKQpgYGAKCldlIHRoYW4gY3JlYXRlIGEgYmFyIHBsb3QgYW5kIGFkZCB0aGUgYGdlb21fZXJyb3JiYXJgIG9uIHRvcCBvZiBpdC4gTm90ZSB0aGF0IGluIHRoaXMgY2FzZSB3ZSBzcGVjaWZ5IHRoZSB4IGFlc3RoZXRpYyBhcyBhIGNocmFyYWN0ZXIgYCdXYWdlIGNoYW5nZSdgLiBUaGlzIGlzIGJlY2F1c2UgaXQgaXMgdW51c3VhbCB0byBwbG90IGp1c3Qgb25lIGJhciBpbiB0aGUgcGxvdCwgYW5kIGBnZW9tX2NvbGAgYW5kIGBnZW9tX2Vycm9yYmFyYCByZXF1aXJlIHNvbWUgeCBhZXN0aGV0aWMgdG8gYmUgcGFzc2VkLgoKYGBge3J9CmdncGxvdCh3YWdlc19zdW1tYXJ5LCBhZXMoeCA9ICdXYWdlIGNoYW5nZScsIHkgPSBjaGFuZ2VfbWVhbikpICsKICBnZW9tX2NvbCh3aWR0aCA9IDAuMikgKyAKICBnZW9tX2Vycm9yYmFyKGFlcyh5bWluID0gY2hhbmdlX21lYW4gLSAxLjk2ICogY2hhbmdlX2VyciwgCiAgICAgICAgICAgICAgICB5bWF4ID0gY2hhbmdlX21lYW4gKyAxLjk2ICogY2hhbmdlX2VyciksIHdpZHRoID0gMC4xKSArIAogIGxhYnMoeCA9ICcnLCB5ID0gJ01lYW4gY2hhbmdlIGluIHdhZ2UnKQpgYGAKCgoKIyMjIyBBcmUgdHdvIG1lYW5zIGRpZmZlcmVudD8gLSB0d28gc2FtcGxlIHQtdGVzdCB7LX0KCkJ5IHNpbXBsZSBleHRlbnNpb24sIHdlIGNhbiBhcHBseSB0aGUgbG9naWMgb2YgdGhlIHQtdGVzdCB0byB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHR3byBtZWFucyB3aXRoaW4gb25lIHNhbXBsZSAtIHRoaXMgaXMgc28gY2FsbGVkIGEgX3R3byBzYW1wbGUgdC10ZXN0XyBhbmQgaXMgaW1wbGVtZW50ZWQgaW4gUiBieSB0aGUgc2FtZSBmdW5jdGlvbi4gVGhlIGdyb3VwaW5nIHZhcmlhYmxlIGlzIHNwZWNpZmllZCB1c2luZyB0aGUgX2Zvcm11bGEgbm90YXRpb25fLCB3aGljaCB3ZSB3aWxsIGVuY291bnRlciBpbiB0aGUgbmV4dCBjaGFwdGVyIHdoZW4gZGVhbGluZyB3aXRoIGxpbmVhciByZWdyZXNzaW9uLiBUbyB0ZXN0IHRoZSBkaWZmZXJlbmNlIGluIG1lYW4gb2YgdmFyaWFibGUgeCBiZXR3ZWVuIGdyb3VwcyBkZWZpbmVkIGJ5IHksIHdlIHNwZWNpZnkgYHQudGVzdCh4IH4geSlgLiBTbywgY29taW5nIGJhY2sgdG8gb3VyIGV4YW1wbGUsIHdlIGNhbiBleGFtaW5lIHdoZXRoZXIgdGhlIGF2ZXJhZ2Ugc2FsYXJ5IGluIDIwMDUgaXMgZGlmZmVyZW50IGZvciBtYWxlIGFuZCBmZW1hbGUgZW1wbG95ZWVzLgoKYGBge3J9CnQudGVzdChzYWxhcnkyMDA1IH4gZ2VuZGVyLCBkYXRhID0gd2FnZXMpCmBgYAoKVGhlIHJlc3VsdCBzZWVtIHRvIGJlIHNpZ25pZmljYW50LCBtZWFuaW5nIHRoYXQgd2UgaGF2ZSBzdGF0aXN0aWNhbCBldmlkZW5jZSB0aGF0IHRoZXJlIGlzIGEgcmVhbCBkaWZmZXJlbmNlIGJldHdlZW4gbWFsZSBhbmQgZmVtYWxlIGVhcm5pbmdzIGluIHRoZSB1bmRlcmx5aW5nIHBvcHVsYXRpb25zIChvciBtb3JlIHByZWNpc2VseSwgdGhhdCBpZiB3ZSB0b29rIDEwMCBzYW1wbGVzIGZyb20gdGhlIHVuZGVybHlpbmcgcG9wdWxhdGlvbiwgbW9yZSB0aGFuIDk1IG9mIHRoZW0gd291bGQgc2hvdyBhIG5vbi16ZXJvIGRpZmZlcmVuY2UpLiBCYXNlZCBvbiBvdXIgc2FtcGxlLCBob3dldmVyLCB0aGUgbWFnbml0dWRlIG9mIHRoYXQgZGlmZmVyZW5jZSBpcyBxdWl0ZSBkaWZmaWN1bHQgdG8gZGV0ZXJtaW5lLCBhcyB3ZSBleHBlY3QgaXQgdG8gcmFuZ2UgYmV0d2VlbiAxOTAwMCBhbmQgMjAwMCBkb2xsYXJzLiBXZSBjYW4gdmlzdWFsaXplIHRoaXMgYWdhaW4gdXNpbmcgYGdlb21fZXJyb3JiYXJgOgoKYGBge3J9CndhZ2VzICU+JQogIGdyb3VwX2J5KGdlbmRlcikgJT4lCiAgc3VtbWFyaXNlKHdhZ2VfbWVhbiA9IG1lYW4oc2FsYXJ5MjAwNSksIAogICAgICAgICAgICB3YWdlX2VyciA9IHNkKHNhbGFyeTIwMDUpL3NxcnQobigpKSkgJT4lCiAgZ2dwbG90KGFlcyh4ID0gZ2VuZGVyLCB5ID0gd2FnZV9tZWFuKSkgKyAKICBnZW9tX2NvbCh3aWR0aCA9IDAuMykgKyAKICBnZW9tX2Vycm9yYmFyKGFlcyh5bWluID0gd2FnZV9tZWFuIC0gd2FnZV9lcnIsIAogICAgICAgICAgICAgICAgICAgIHltYXggPSB3YWdlX21lYW4gKyB3YWdlX2VyciksIHdpZHRoID0gMC4yKSArCiAgeWxhYignQXZlcmFnZSBzYWxhcnkgaW4gMjAwNScpCmBgYAoKCiMjIyBSZWxhdGlvbnNoaXAgYmV0d2VlbiB0d28gY29udGludW91cyB2YXJpYWJsZXMgey19CgojIyMjIENvdmFyaWFuY2Ugey19CgpTbyBmYXIgd2UgaGF2ZSBkaXNjdXNzZWQgc29tZSB0ZWNobmlxdWVzIGZvciBsb29raW5nIGF0IHN0YXRpc3RpY2FsIHJlbGF0aW9uc2hpcHMgYmV0d2VlbiBvbmUgY29udGludW91cyB2YXJpYWJsZSAoc3VjaCBhcyB3YWdlKSBhbmQgb25lIGNhdGVnb3JpYyB2YXJpYWJsZSAoc3VjaCBhcyBzYWxhcnkpLiBVbmRlciBtYW55IGNpcmN1bXN0YW5jZXMsIGhvd2V2ZXIsIHdlIHdvdWxkIGJlIGludGVyZXN0ZWQgaW4gbWVhc3VyaW5nIHRoZSBhc3NvY2lhdGlvbiBiZXR3ZWVuIHR3byBjb250aW51b3VzIHZhcmlhYmxlcy4gSW4gdGhpcyBwYXJ0IHdlIHdpbGwgY29uc2lkZXIgZGF0YSBvbiBhIHNhbXBsZSBvZiBzdHVkZW50cyB3aXRoIGZyZWUgdmFyaWFibGVzOiBhdmVyYWdlIHdlZWtseSB0aW1lIHNwZW50IHN0dWR5aW5nLCBkYXlzIGEgc3R1ZGVudCBoYXMgYmVlbiBob21lIGlsbCBhbmQgYWNoaWV2ZWQgR1BBLgoKCmBgYHtyfQpzY29yZXMgPC0gcmVhZF9jc3YoJ2RhdGEvc2NvcmVzLmNzdicpCmBgYAoKV2UgY2FuIGV4YW1pbmUgcGFpcndpc2UgcmVsYXRpb25zaGlwcyBiZXR3ZWVuIHRoZSB2YXJpYWJsZXMgdXNpbmcgdGhlIGBwYWlycygpYCBmdW5jdGlvbiwgd2hpY2ggaXMgYSB1c2VmdWwgdG9vbCB3aGVuIGFuYWx5emluZyBkYXRhc2V0cyB3aXRoIG11bHRpcGxlIGNvbnRpbnVvdXMgdmFyaWFibGVzLgoKYGBge3J9CnBhaXJzKHNjb3Jlcyx1cHBlci5wYW5lbCA9IE5VTEwpCmBgYAoKCkxldCdzIHN0YXJ0IGJ5IGludGVycHJldGluZyB0aGlzIHBsb3QuIFRoZSByZWN0YW5nbGVzIHdpdGggdmFyaWFibGUgdGVsbCBhcyB0aGUgbmFtZSBvZiB0aGUgYXhpcy4gRm9yIGV4YW1wbGUsIHRoZSBwbG90IGluIHRoZSBsb3dlciBsZWZ0IGNvcm5lciBzaG93cyB0aGUgcmVsYXRpb25zaGlwIGJldHdlZW4gdGhlIEdQQSAoeCBheGlzKSBhbmQgc3R1ZHkgdGltZSAoeSBheGlzKS4gV2UgY2FuIHNlZSB0aGF0IHN0dWRlbnRzIGluIG91ciBzYW1wbGUgd2hvIHNwZW50IG1vcmUgdGltZSBzdHVkeWluZyBzZWVtIHRvIGhhdmUgaGFkIGhpZ2hlciBncmFkZXMgLSBwb2ludHMgaGlnaGVyIG9uIG9uZSBheGlzIHRlbmQgdG8gYWxzbyBiZSBoaWdoZXIgb24gdGhlIG90aGVyLiBPbiB0aGUgb3RoZXIgaGFuZCwgc3R1ZGVudHMgd2hvIHdlcmUgaWxsIG1vcmUgaGFkLCBvbiBhdmVyYWdlLCBhY2hpZXZlZCBsb3dlciBncmFkZXMuIFRoZXJlIHNlZW1zIHRvIGJlIG5vIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGJlaW5nIGlsbCBhbmQgdGltZSBzcGVudCBzdHVkeWluZy4gCgpJbiBzdGF0aXN0aWNhbCB0ZXJtcywgdGhpcyByZWxhdGlvbnNoaXAgY2FuIGJlIG1lYXN1cmVkIHdpdGggX2NvdmFyaWFuY2VfIGJldHdlZW4gdGhlc2UgdHdvIHZhcmlhYmxlcy4gUmVjYWxsIG91ciBkaXNjdXNzaW9uIG9mIF92YXJpYW5jZV8gaW4gdGhlIFtleHBsb3JhdG9yeSBhbmFseXNpcyBjaGFwdGVyXSgjZXhwbG9yYXRvcnkpLiBXZSBjYWxjdWxhdGVkIGl0IGZvciB2ZWN0b3IgeCB1c2luZyBgc3VtKCh4IC0gbWVhbih4KSleMikvKGxlbmd0aCh4KSAtIDEpYCwgb3IgdGhlIGB2YXIoeClgIGZ1bmN0aW9uIGZvciBzaG9ydC4gQ292YXJpYW5jZSBpcyBlc3NlbnRpYWxseSB0aGUgc2FtZSwgYnV0IGNhbGN1bGF0ZWQgZm9yIHR3byB2YXJpYWJsZXMgaW5zdGVhZCBvZiBvbmUsIHVzaW5nIGBzdW0oKHggLSBtZWFuKHgpKSAqIG1lYW4oKHkgLSBtZWFuKHkpKSkpLyhsZW5ndGgoeCkgLSAxKWAgb3IgdGhlIGBjb3ZgIGZ1bmN0aW9uIGZvciBzaG9ydC4gWW91IGNhbiBzZWUgdGhhdCBkZW1vbnN0cmF0ZWQgYmVsb3c6CgpgYGB7cn0KY292X2Z1biA8LSBmdW5jdGlvbih4LCB5KSBzdW0oKHggLSBtZWFuKHgpKSAqICh5IC0gbWVhbih5KSkpLyhsZW5ndGgoeCkgLSAxKQpjb3ZfZnVuKHNjb3JlcyRncGEsIHNjb3JlcyRzdHVkeV90aW1lKQpjb3Yoc2NvcmVzJGdwYSwgc2NvcmVzJHN0dWR5X3RpbWUpCmBgYAoKVGhlIF92YXJpYW5jZV8gaXMgYWN0dWFsbHkgbm90aGluZyBlbHNlIGJ1dCBjb3ZhcmlhbmNlIG9mIGEgdmFyaWFibGUgd2l0aCBpdHNlbGYhCgpgYGB7cn0KY292KHNjb3JlcyRncGEsIHNjb3JlcyRncGEpID09IHZhcihzY29yZXMkZ3BhKQpgYGAKCgpFc3NlbnRpYWxseSBjb3ZhcmlhbmNlIG1lYXN1cmVzIHRoZSBhdmVyYWdlIG9mIGVsZW1lbnQtd2lzZSBwcm9kdWN0IG9mIGVhY2ggb2JzZXJ2YXRpb25zIGRldmlhdGlvbiBmcm9tIGl0cyBtZWFuIGZvciB0d28gdmFyaWFibGVzLiBUaGlzIG1heSBzb3VuZCBjb21wbGljYXRlZCwgYnV0IGJyZWFraW5nIGl0IGRvd24gbWFrZXMgaXQgc2ltcGxlLiBJbiBvdXIgdHdvIHZhcmlhYmxlcywgYGdwYWAgYW5kIGBkYXlzX2lsbGAsIHBlb3BsZSB3aG8gaGF2ZSBncmFkZXMgaGlnaGVyIHRoYW4gdGhlIGF2ZXJhZ2UgZ3JhZGUgYWxzbyB0ZW5kIHRvIHN0dWR5IGxvbmdlciB0aGFuIHRoZSBhdmVyYWdlIHN0dWR5IHRpbWUuIFNvLCBpZiBmb3IgYWxsIHN0dWRlbnRzIHdlIHN1YnRyYWN0IHRoZSBtZWFuIGdyYWRlIGFuZCBtZWFuIHN0dWR5IHRpbWUgZnJvbSB0aGVpciByZXNwZWN0aXZlIGdyYWRlcyBhbmQgc3R1ZHkgdGltZXMsIHRoZSBhdmVyYWdlIG9mIHRoYXQgd2lsbCBiZSBwb3NpdGl2ZS4KCmBgYHtyfQpjb3Yoc2NvcmVzJGdwYSwgc2NvcmVzJHN0dWR5X3RpbWUpCmBgYAoKCklmLCBvbiB0aGUgb3RoZXIgaGFuZCBwZW9wbGUgd2hvIGhhdmUgaGlnaGVyIGdyYWRlcyB0aGFuIGF2ZXJhZ2UgdGVuZCB0byBoYXZlIGxvd2VyIHRpbWUgc3BlbnQgaWxsIGF0IGhvbWUgdGhhbiBhdmVyYWdlLCB0aGUgYXZlcmFnZSBvZiB0aGUgcHJvZHVjdHMgb2YgdGhlc2UgZGVtZWFuZWQgKGkuZS4gd2l0aCB0aGUgbWVhbiBzdWJ0cmFjdGVkIGZyb20gZWFjaCkgdmFyaWFibGVzIHdpbGwgYmUgbmVnYXRpdmUsIHNpbmNlIHRoZSBtYWpvcml0eSBvZiB0aGUgcHJvZHVjdHMgd2lsbCBiZSBuZWdhdGl2ZS4KCmBgYHtyfQpjb3Yoc2NvcmVzJGdwYSwgc2NvcmVzJGRheXNfaWxsKQpgYGAKCgpGaW5hbGx5LCBpZiB0aGVyZSdzIG5vIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHR3byB2YXJpYWJsZXMgLSBmb3IgZXhhbXBsZSBiZXR3ZWVuIGBkYXlzX2lsbGAgYW5kIGBzdHVkeV90aW1lYCwgd2UgZXhwZWN0IHRoZSBhdmVyYWdlIG9mIHRoZSBwcm9kdWN0cyBvZiB0aGUgZGVtZWFuZWQgdmFyaWFibGVzIHRvIGJlIGNsb3NlIHRvIDAsIHNpbmNlIGFyb3VuZCB0aGUgc2FtZSBudW1iZXIgd2lsbCBiZSBwb3NpdGl2ZSBhbmQgbmVnYXRpdmUuCgpgYGB7cn0KY292KHNjb3JlcyRzdHVkeV90aW1lLCBzY29yZXMkZGF5c19pbGwpCmBgYAoKClRoZSBsYXN0IGV4YW1wbGUgc2VlbXMgdG8gYmUgaW5jb3JyZWN0PyBIb3cgaXMgdGhhdCBwb3NzaWJsZSB0aGF0IHRoZSBjb3ZhcmlhbmNlIGJldHdlZW4gYHN0dWR5X3RpbWVgIGFuZCBgZGF5c19pbGxgIGlzIGxhcmdlciB0aGFuIHRoZSBjb3ZhcmlhbmNlIGJldHdlZW4gYHN0dWR5X3RpbWVgIGFuZCBgZ3BhYCwgZXZlbiB0aG91Z2ggdGhlIHBsb3Qgc3VnZ2VzdHMgYSBtdWNoIHN0cm9uZ2VyIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHRoZSBsYXR0ZXI/IFdlIHdpbGwgZXhwbG9yZSB0aGlzIGluIHRoZSBuZXh0IHNlY3Rpb24gb24gY29ycmVsYXRpb24uCgoKIyMjIyBDb3JyZWxhdGlvbiB7LX0KClRoZSBkb3duc2lkZSBvZiBjb3ZhcmlhbmNlIGFzIGEgbWVhc3VyZSBvZiByZWxhdGlvbnNoaXAgaXMgdGhhdCBpdCBpcyBjb21wbGV0ZWx5IGRlcGVuZGVudCBvbiB0aGUgdW5pdHMgb2YgdGhlIHR3byB2YXJpYWJsZXMgbWVhc3VyZXMsIG9yLCBtb3JlIHBlcmNpc2VseSwgdGhlIHJhbmdlIG9mIHZhbHVlcyB0aGV5IHRha2UuIElmIHdlIHRha2UgY292YXJpYW5jZSBhdmVyYWdlIHRpbWUgc3BlbnQgc3R1ZHlpbmcgYW5kIEdQQSBhbmQgY29tcGFyZSBpdCB3aXRoIHRoZSBjb3ZhcmlhbmNlIGJldHdlZW4gYXZlcmFnZSB0aW1lIHNwZW50IHN0dWR5aW5nIGFuZCB0aW1lIGlsbCwgdGhlIGxhdHRlciB3aWxsIGJlIGdyZWF0ZXIsIHNpbXBseSBiZWNhdXNlIHRpbWUgaXMgZXhwcmVzc2VkIGluIGhvdXJzIGFuZCBkYXlzLCB3aXRoIHZhbHVlcyByYW5naW5nIGJldHdlZW4gMC44IGFuZCAxNS4xIGFuZCAxIGFuZCAxMTAgcmVzcGVjdGl2ZWx5LCB3aGlsZSBHUEEgcmFuZ2VzIGJldHdlZW4gMSBhbmQgNToKCmBgYHtyfQp2YXBwbHkoc2NvcmVzLCByYW5nZSwgbnVtZXJpYygyKSkKYGBgCgpTbywgdGhlIHZhbHVlcyB3ZSBnZXQgYnkgbXVsdGlwbHlpbmcgYHN0dWR5X3RpbWVgIGFuZCBgZGF5c19pbGxgIHdpbGwgdGVuZCB0byBiZSBoaWdoZXIgaW4gZ2VuZXJhbC4gVGhpcyBtYWtlcyB0aGUgdXNlIG9mIGNvdmFyaWFuY2UgcHJvYmxlbWF0aWMgaW4gZXN0aW1hdGluZyB0aGUgb2JqZWN0aXZlIHN0cmVuZ3RoIG9mIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiB0d28gdmFyaWFibGVzLiAKCkluIG9yZGVyIHRvIGF2b2lkIGl0LCB3ZSB1c2UgX2NvcnJlbGF0aW9uXyBpbnN0ZWFkLiBDb3JyZWxhdGlvbiBpcyBzaW1wbHkgY292YXJpYW5jZSwgYnV0IGRpdmlkZWQgYnkgdGhlIHByb2R1Y3Qgb2YgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiBvZiBlYWNoIG9mIHRoZSB2YXJpYWJsZXMuIFdpdGhvdXQgZ29pbmcgaW50byB0aGUgbWF0aGVtYXRpY2FsIGRldGFpbHMsIHN1ZmZpY2UgdG8gc2F5IHRoYXQgaXQgX3N0YW5kYXJkaXplc18gdGhlIGNvdmFyaWFuY2UsIHNvIHRoYXQgaXQgcmFuZ2VzIGJldHdlZW4gLTEgYW5kIDEsIC0xIG1lYW5pbmcgcGVyZmVjdCBuZWdhdGl2ZSByZWxhdGlvbnNoaXAgKGkuZS4gd2hlbiBvbmUgdmFyaWFibGUgaW5jcmVhc2VzLCB0aGUgb3RoZXIgYWx3YXlzIGRlY3JlYXNlcykgYW5kIDEgbWVhbmluZyBwZXJmZWN0IHBvc2l0aXZlIHJlbGF0aW9uc2hpcCAod2hlbiBvbmUgdmFyaWFibGUgaW5jcmVhc2VzLCB0aGUgb3RoZXIgZGVjcmVhc2VzKS4gMCBtZWFucyB0aGF0IHRoZXJlJ3Mgbm8gcmVsYXRpb25zaGlwIGJldHdlZW4gdGhlc2UgdmFyaWFibGVzLgoKV2UgY2FuIHNlZSB0aGF0IGFnYWluIHVzaW5nIFIgY29kZS4gYGNvcl9mdW5gIGlzIGNyZWF0ZWQgZm9yIGRlbW9uc3RyYXRpb24gcHVycG9zZXMsIGJ1dCB0aGUgdXN1YWwgZnVuY3Rpb24gdXNlZCBpbiBSIHRvIG9idGFpbiBjb3JyZWxhdGlvbiBpcyBzaW1wbHkgYGNvcmAuCgpgYGB7cn0KY29yX2Z1biA8LSBmdW5jdGlvbih4LCB5KSBjb3ZfZnVuKHgsIHkpLyhzZCh4KSAqIHNkKHkpKQpjb3JfZnVuKHNjb3JlcyRncGEsIHNjb3JlcyRzdHVkeV90aW1lKQpjb3Ioc2NvcmVzJGdwYSwgc2NvcmVzJHN0dWR5X3RpbWUpCmBgYAoKTm93IHdlIGNhbiBzZWUsIHRoYXQgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGBzdHVkeV90aW1lYCBhbmQgYGRheXNfaWxsYCBpcyBpbmRlZWQgY2xvc2UgdG8gMDoKCmBgYHtyfQpjb3Ioc2NvcmVzJHN0dWR5X3RpbWUsIHNjb3JlcyRkYXlzX2lsbCkKYGBgCgpXZSBjYW4gYWxzbyB1c2UgYGNvcmAgb24gZW50aXJlIGRhdGEgZnJhbWUgdG8gb2J0YWluIHRoZSBzby1jYWxsZWQgY29ycmVsYXRpb24gbWF0cml4LCB3aGljaCBzaG93cyBwYWlyd2lzZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdHdvIHZhcmlhYmxlcwoKYGBge3J9CmNvcihzY29yZXMpCmBgYAoKTm90ZSB0aGF0IHRoZSBkaWFnb25hbCBpcyBhbHdheXMgMSwgaS5lLiB0aGUgY29ycmVsYXRpb24gb2YgYSB2YXJpYWJsZSB3aXRoIGl0c2VsZiBpcyBhbHdheXMgMS4KCkZvciBvYnZpb3VzIHJlYXNvbnMsIHRoZSBmdW5jdGlvbiBhbHNvIHdvbid0IHdvcmsgaWYgYXBwbGllZCB0byBhIGRhdGEgZnJhbWUgY29udGFpbmluZyBhbnkgdGV4dCBkYXRhOgoKCgoKVG8gdmlzdWFsaXplIHBhcmlzd2lzZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdHdvIHZhcmlhYmxlcyB1c2luZyBhIHBsb3QgdGhhdCBpcyBhIGJpdCBtb3JlIHNvcGhpc3RpY2F0ZWQgdGhhdCB0aGUgb25lIHByb2R1Y2VkIGJ5IGBwYWlycygpYCB3ZSBjYW4gdXNlIHRoZSBgZ2dwYWlyc2AgZnVuY3Rpb24gZnJvbSB0aGUgYEdHYWxseWAgcGFja2FnZSwgd2hpY2ggcHJvZHVjZWQgYSBgZ2dwbG90YCBzdHlsZSBwbG90LCBwcmVzZW50aW5nIGNvcnJlbGF0aW9ucywgZGVuc2l0eSBwbG90cyBhbmQgc2NhdHRlciBwbG90cyBvZiBhbGwgdGhlIG51bWVyaWMgdmFyaWFibGVzIGluIG91ciBkYXRhc2V0OgoKYGBge3J9CmxpYnJhcnkoR0dhbGx5KQpnZ3BhaXJzKHNjb3JlcykKYGBgCgoKIyMjIEZ1cnRoZXIgZGV0YWlscyB7LX0KCkhlcmUgc29tZSBtb3JlIGRldGFpbHMgb24gaG93IHRoZSBwLXZhbHVlIGlzIGNvbXB1dGVkOgoKYGBge3J9CmVyciA8LSBzZCh3YWdlcyRjaGFuZ2UpL3NxcnQobnJvdyh3YWdlcykpCnRzY29yZSA8LSBtZWFuKHdhZ2VzJGNoYW5nZSkvZXJyCmRmIDwtIGxlbmd0aCh3YWdlcyRjaGFuZ2UpIC0gMQpwdCh0c2NvcmUsIGRmLCBsb3dlci50YWlsID0gRkFMU0UpICogMgp0LnRlc3Qod2FnZXMkY2hhbmdlKQpgYGAKCgoKIyMgU3VtbWFyeQoKCiMjIyBGdW5jdGlvbnMgbGlzdCB7LX0KCgoKCgojIyBFeGVyY2lzZXMKCjEuIFdyaXRlIGEgZnVuY3Rpb24gdG8gY29tcHV0ZSBjb3JyZWxhdGlvbiBmb3IganVzdCB0aGUgbnVtZXJpYyB2YXJpYWJsZXMgaW4gYW55IGRhdGEgZnJhbWUuIFRlc3QgaXQgb24gdGhlIGB3YWdlc2AgZGF0YS4KCgoKCgoyLiBXaHkgaXMgdGhlIGNvcnJlbGF0aW9uIG9mIGEgdmFyaWFibGUgd2l0aCBpdHNlbGYgYWx3YXlzIGVxdWFsIHRvIDE/IFdyaXRlIFIgY29kZSB0byBkZW1vbnN0cmF0ZSB0aGlzLgoKCgoKCkZvciB0aGUgcmVtYWluZGVyIG9mIHRoZSBleGVyY2lzZXMsIGNvbWUgYmFjayB0byB0aGUgYFNhbGFyaWVzYCBkYXRhIHdlIHVzZWQgaW4gdGhlIHByZXZpb3VzIGNoYXB0ZXI6CgoKCgozLiBVc2luZyBjb3JyZWxhdGlvbiwgZXhhbWluZSB3aGljaCByZWxhdGlvbnNoaXAgaXMgc3Ryb25nZXIgLSB0aGUgb25lIGJldHdlZW4geWVhcnMgc2luY2UgUGhEIGFuZCBzYWxhcnkgb3IgdGhlIG9uZSBiZXR3ZWVuIHllYXJzIGluIHNlcnZpY2UgYW5kIHNhbGFyeS4KCmBgYHtyfQojQU5TV0VSCmNvcihTYWxhcmllcyRzYWxhcnksIFNhbGFyaWVzJHlycy5zaW5jZS5waGQpCmNvcihTYWxhcmllcyRzYWxhcnksIFNhbGFyaWVzJHlycy5zZXJ2aWNlKQojdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHllYXJzIHNpbmNlIFBoRCBhbmQgc2FsYXJ5IGFwcGVhcnMgdG8gYmUgc3Ryb25nZXIKYGBgCgoKNC4gVXNlIHQtdGVzdHMgdG8gY2hlY2sgd2hldGhlciB3ZSBjYW4gY29uZmlybSBvciByZWplY3QgdGhlIGZvbGxvd2luZyBoeXBvdGhlc2lzLCBiYXNlZCBvbiB0aGUgc2FtcGxlIGluIHRoZSBgU2FsYXJpZXNgIGRhdGFzZXQuCgogIGEuIFRoZXJlJ3Mgbm8gZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBzYWxhcnkgb2YgTWFsZSBhbmQgRmVtYWxlIHByb2Zlc3NvcnMuCiAgCgoKICAKICAKICBiLiBUaGVyZSdzIG5vIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgc2FsYXJ5IG9mIHByb2Zlc3NvcnMgZnJvbSB0aGUgYXBwbGllZCBhbmQgdGhlb3JldGljYWwgZGVwYXJ0bWVudC4KICAKCgogIAogIGMuIFRoZSBhdmVyYWdlIHNhbGFyeSBpcyBub3QgZGlmZmVyZW50IGZyb20gMTAwIDAwMCBVU0QuCiAgCgoKCjUuIFJlY2FsbCB0aGUgcGxvdCBwcm9kdWNlZCB0b3dhcmRzIHRoZSBlbmQgb2YgdGhlIHByZXZpb3VzIGNoYXB0ZXIgZGVwaWN0aW5nIHRoZSBhdmVyYWdlIHNhbGFyeSBieSBhZ2UgZ3JvdXAgYW5kIGFjYWRlbWljIGRpc2NpcGxpbmUuIFByb2R1Y2UgdGhlIHNhbWUgcGxvdCwgYnV0IHRoaXMgdGltZSBpbmNsdWRlIGVycm9yIGJhcnMgZGVwaWN0aW5nIHRoZSBjb25maWRlbmNlIGludGVydmFscyBhcm91bmQgZWFjaCBvZiB0aGUgbWVhbnMuIFRoZSBjb2RlIHRvIHByb2R1Y2UgdGhlIHRhYmxlIHVzZWQgaW4gdGhlIGxhc3QgZXhlcmNpc2VzIGlzIGJlbG93LiBOb3RlIHRoYXQgeW91IG5lZWQgdG8gbW9kaWZ5IGl0IChieSBjb21wdXRpbmcgdGhlIHN0YW5kYXJkIGVycm9ycykgYmVmb3JlIHBsb3R0aW5nIHRoZSBkYXRhLiBSZW1lYmVyIGFib3V0IGFkZGluZyBhcHByb3ByaWF0ZSBsYWJlbHMgdG8gdGhlIHBsb3QuCgpgYGB7cn0KYnlhZ2UgPC0gU2FsYXJpZXMgJT4lCiAgbXV0YXRlKHlyc19yYW5nZSA9IGN1dF93aWR0aCh5cnMuc2luY2UucGhkLCA1LCBib3VuZGFyeSA9IDUpKSAlPiUKICBncm91cF9ieSh5cnNfcmFuZ2UsIGRpc2NpcGxpbmUpICU+JQogIHN1bW1hcmlzZShhdmcgPSBtZWFuKHNhbGFyeSwgbmEucm0gPSBUUlVFKSkgJT4lCiAgdW5ncm91cCgpCmBgYAoKCgoKCjYuIEV4YW1pbmUgdGhlIGNvcnJlbGF0aW9uIGJldHdlZW4geWVhcnMgc2luY2UgcGhkIGFuZCBhdmVyYWdlIHNhbGFyeSBpbiBlYWNoIG9mIHRoZSBncm91cHMgZGVmaW5lZCBpbiB0aGUgZGF0YS4KCgoKCgoqVGhlIHNvbHV0aW9ucyBmb3IgdGhlIGV4ZXJjaXNlcyB3aWxsIGJlIGF2YWlsYWJsZSBoZXJlIG9uIGByIGNvbmZpZyRzdGF0aXN0aWNhbF9hc3NvY2lhdGlvbmAuKgoKCgoA" download="08-statistical_association.Rmd">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter markdown</button>
+</a><a href="data:text/plain;base64,IycgIyMgRXhlcmNpc2VzCiMnIAojJyAxLiBXcml0ZSBhIGZ1bmN0aW9uIHRvIGNvbXB1dGUgY29ycmVsYXRpb24gZm9yIGp1c3QgdGhlIG51bWVyaWMgdmFyaWFibGVzIGluIGFueSBkYXRhIGZyYW1lLiBUZXN0IGl0IG9uIHRoZSBgd2FnZXNgIGRhdGEuCiMnIAojJyAKIycgCiMnIAojJyAKIycgMi4gV2h5IGlzIHRoZSBjb3JyZWxhdGlvbiBvZiBhIHZhcmlhYmxlIHdpdGggaXRzZWxmIGFsd2F5cyBlcXVhbCB0byAxPyBXcml0ZSBSIGNvZGUgdG8gZGVtb25zdHJhdGUgdGhpcy4KIycgCiMnIAojJyAKIycgCiMnIAojJyBGb3IgdGhlIHJlbWFpbmRlciBvZiB0aGUgZXhlcmNpc2VzLCBjb21lIGJhY2sgdG8gdGhlIGBTYWxhcmllc2AgZGF0YSB3ZSB1c2VkIGluIHRoZSBwcmV2aW91cyBjaGFwdGVyOgojJyAKIycgCiMnIAojJyAKIycgMy4gVXNpbmcgY29ycmVsYXRpb24sIGV4YW1pbmUgd2hpY2ggcmVsYXRpb25zaGlwIGlzIHN0cm9uZ2VyIC0gdGhlIG9uZSBiZXR3ZWVuIHllYXJzIHNpbmNlIFBoRCBhbmQgc2FsYXJ5IG9yIHRoZSBvbmUgYmV0d2VlbiB5ZWFycyBpbiBzZXJ2aWNlIGFuZCBzYWxhcnkuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KI0FOU1dFUgpjb3IoU2FsYXJpZXMkc2FsYXJ5LCBTYWxhcmllcyR5cnMuc2luY2UucGhkKQpjb3IoU2FsYXJpZXMkc2FsYXJ5LCBTYWxhcmllcyR5cnMuc2VydmljZSkKI3RoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiB5ZWFycyBzaW5jZSBQaEQgYW5kIHNhbGFyeSBhcHBlYXJzIHRvIGJlIHN0cm9uZ2VyCgojJyAKIycgCiMnIDQuIFVzZSB0LXRlc3RzIHRvIGNoZWNrIHdoZXRoZXIgd2UgY2FuIGNvbmZpcm0gb3IgcmVqZWN0IHRoZSBmb2xsb3dpbmcgaHlwb3RoZXNpcywgYmFzZWQgb24gdGhlIHNhbXBsZSBpbiB0aGUgYFNhbGFyaWVzYCBkYXRhc2V0LgojJyAKIycgICBhLiBUaGVyZSdzIG5vIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgc2FsYXJ5IG9mIE1hbGUgYW5kIEZlbWFsZSBwcm9mZXNzb3JzLgojJyAgIAojJyAKIycgCiMnICAgCiMnICAgCiMnICAgYi4gVGhlcmUncyBubyBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIHNhbGFyeSBvZiBwcm9mZXNzb3JzIGZyb20gdGhlIGFwcGxpZWQgYW5kIHRoZW9yZXRpY2FsIGRlcGFydG1lbnQuCiMnICAgCiMnIAojJyAKIycgICAKIycgICBjLiBUaGUgYXZlcmFnZSBzYWxhcnkgaXMgbm90IGRpZmZlcmVudCBmcm9tIDEwMCAwMDAgVVNELgojJyAgIAojJyAKIycgCiMnIAojJyA1LiBSZWNhbGwgdGhlIHBsb3QgcHJvZHVjZWQgdG93YXJkcyB0aGUgZW5kIG9mIHRoZSBwcmV2aW91cyBjaGFwdGVyIGRlcGljdGluZyB0aGUgYXZlcmFnZSBzYWxhcnkgYnkgYWdlIGdyb3VwIGFuZCBhY2FkZW1pYyBkaXNjaXBsaW5lLiBQcm9kdWNlIHRoZSBzYW1lIHBsb3QsIGJ1dCB0aGlzIHRpbWUgaW5jbHVkZSBlcnJvciBiYXJzIGRlcGljdGluZyB0aGUgY29uZmlkZW5jZSBpbnRlcnZhbHMgYXJvdW5kIGVhY2ggb2YgdGhlIG1lYW5zLiBUaGUgY29kZSB0byBwcm9kdWNlIHRoZSB0YWJsZSB1c2VkIGluIHRoZSBsYXN0IGV4ZXJjaXNlcyBpcyBiZWxvdy4gTm90ZSB0aGF0IHlvdSBuZWVkIHRvIG1vZGlmeSBpdCAoYnkgY29tcHV0aW5nIHRoZSBzdGFuZGFyZCBlcnJvcnMpIGJlZm9yZSBwbG90dGluZyB0aGUgZGF0YS4gUmVtZWJlciBhYm91dCBhZGRpbmcgYXBwcm9wcmlhdGUgbGFiZWxzIHRvIHRoZSBwbG90LgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmJ5YWdlIDwtIFNhbGFyaWVzICU+JQogIG11dGF0ZSh5cnNfcmFuZ2UgPSBjdXRfd2lkdGgoeXJzLnNpbmNlLnBoZCwgNSwgYm91bmRhcnkgPSA1KSkgJT4lCiAgZ3JvdXBfYnkoeXJzX3JhbmdlLCBkaXNjaXBsaW5lKSAlPiUKICBzdW1tYXJpc2UoYXZnID0gbWVhbihzYWxhcnksIG5hLnJtID0gVFJVRSkpICU+JQogIHVuZ3JvdXAoKQoKIycgCiMnIAojJyAKIycgCiMnIAojJyA2LiBFeGFtaW5lIHRoZSBjb3JyZWxhdGlvbiBiZXR3ZWVuIHllYXJzIHNpbmNlIHBoZCBhbmQgYXZlcmFnZSBzYWxhcnkgaW4gZWFjaCBvZiB0aGUgZ3JvdXBzIGRlZmluZWQgaW4gdGhlIGRhdGEuCiMnIAojJyAKIycgCiMnIAojJyAKIycgKlRoZSBzb2x1dGlvbnMgZm9yIHRoZSBleGVyY2lzZXMgd2lsbCBiZSBhdmFpbGFibGUgaGVyZSBvbiBgciBjb25maWckc3RhdGlzdGljYWxfYXNzb2NpYXRpb25gLioKIycgCiMnIAoA" download="08-statistical_association-exercises.R">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter exercises</button>
+</a></p>
+<div id="content-7" class="section level2">
+<h2><span class="header-section-number">8.1</span> Content</h2>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="association.html#cb618-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>So far, we have described variety of methods to wrangle and explore data in R. After performing cleaning and exploratory analysis, it is common to perform more formal tests on the data to verify whether the relationships we hypothesized hold under the scrutiny of tests supported by statistical theory. In this chapter we will present couple of testing such relationships. While some formal knowledge of statistical inference will be useful, the chapter does not rely on your background knowledge to heavily.</p>
+<div id="comparing-means" class="section level3 unnumbered">
+<h3>Comparing means</h3>
+<p>While a mean is a good measure of our data and comparing means across groups can help us determine the way a given variable varies depending on some conditions - for example, whether the average GDP growth over a certain period differs between two countries or whether average earnings are different depending on people’s gender and race. However, it may seem difficult to determine whether such difference is really meaningful, especially that we usually don’t have the entire population we are examining at hand, but only a (pressumably random) sample of the population. For example, suppose we randomly choose 5 men and 5 women and compute their average earnings. We obtain 35000 pounds for men and 40000 pounds for women. Should we claim that men <em>on average</em> earn less than women, based on this data? What difference is sufficient to claim that such difference exists in the overall population? Such questions are answered by statistical inference.</p>
+<div id="is-mean-different-from-0---one-sample-t-test" class="section level4 unnumbered">
+<h4>Is mean different from 0? - one sample t-test</h4>
+<p>We’ll start with a simple case. The data in the file <code>wages.csv</code> contains the information on the average salary of a sample of 100 individuals in 2005 and2 2010. We are interested in whether there was any growth in their salary. First, we read the data and obtain the percentege growth:</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="association.html#cb619-1"></a>wages &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/wages.csv&#39;</span>)</span></code></pre></div>
+<pre><code>Parsed with column specification:
+cols(
+  gender = col_character(),
+  salary2005 = col_double(),
+  salary2010 = col_double()
+)</code></pre>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="association.html#cb621-1"></a>wages &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">change =</span> (salary2010 <span class="op">-</span><span class="st"> </span>salary2005)<span class="op">/</span>salary2005)</span></code></pre></div>
+<p>We can then examine the average:</p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="association.html#cb622-1"></a><span class="kw">mean</span>(wages<span class="op">$</span>change)</span></code></pre></div>
+<pre><code>[1] 0.01489452</code></pre>
+<p>We see that the mean is around 0.015. Is that sufficient to claim that the average salary of employees in our target population has grown between 2005 and 2010? To check that, we can perform the so-called t-test, which takes into account the variability of our sample and its size, and determines the <em>probability that we falsely reject the hypothesis that the mean is equal to 0</em> - this probability is the p-value. <strong>Note that p-value is not the probability of the mean being equal to 0</strong>. For those familiar with frequentist statistical inference, recall that the <em>p-value is the probability of obtaining a statistic more extreme than the sample statistic in under the assumption that the null hypothesis is true in repeated sampling</em>.</p>
+<p>To conduct the t-test, we can simply use the <code>t.test</code> function:</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="association.html#cb624-1"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span></code></pre></div>
+<pre><code>
+    One Sample t-test
+
+data:  wages$change
+t = 2.7211, df = 99, p-value = 0.007688
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.004033511 0.025755527
+sample estimates:
+ mean of x 
+0.01489452 </code></pre>
+<p>The p-value is usually the most important part of the output produced by the function. In this case, it is 0.0077. This means, that the mean is <em>significantly different from 0 at the 95% confidence level</em>. Confidence level is a way in which we can quantify our certainty in the difference of the parameter from some hypothesized value (in this case 0). The 95% confidence level is one of the most commonly used thresholds in the social sciences. Generally, the recipe for checking if a p-value satisfies a cerain confidence level is to subtract our confidence level from 1 and compare it with the p-value. If the p-value is smaller than the value obtained in the subtraction, the significance of the test statistic satisfies it. So, in our example, for 95% confidence <span class="math inline">\(1 - 0.95 = 0.05\)</span> and 0.0077 $ &lt; 0.05$, thus we can say the the mean is significantly different from 0 at the 95% confidence level.</p>
+<p>Another important information reported by the output of the t-test is the confidence interval. The confidence interval provides us with a way of quantifying our uncertainty about the underlying value of a statistic (in our case the mean), given the variability of our sample (measured by the standard deviation, as described in <a href="exploratory.html#variance-and-standard-deviation">chapter 4</a>. Suppose we take 100 random samples from our original population. The 95% confidence interval describes the <em>range into which we exepct the mean of 95 out of 100 samples</em> to fall. In case of the mean, it is given by <span class="math inline">\(\bar{\mu}\pm 1.96SE(\bar{\mu})\)</span>, where <span class="math inline">\(\bar\mu\)</span> is the sample mean we obtained and <span class="math inline">\(SE(\bar{\mu})\)</span> is the <em>standard error of the mean</em> given by <span class="math inline">\(\sigma/\sqrt{n}\)</span>, which is the sample standard deviation divided by the square root of the number of the observations in our sample. Note that 95% confidence interval not including 0 is equivalent with the statistic being significantly different from 0 at the 95% level.</p>
+</div>
+<div id="error-bars" class="section level4 unnumbered">
+<h4>Error bars</h4>
+<p>The confidence interval around the mean can be displayed in <code>ggplot</code> using the <code>geom_errorbar</code> function. The so-called errorbar is a good way to display the range of the likely values around the mean.</p>
+<p>In case of our data, to plot the errorbars, we first compute the standard error of the mean using the formula discussed above.</p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="association.html#cb626-1"></a>wages_summary &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span></span>
+<span id="cb626-2"><a href="association.html#cb626-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">change_mean =</span> <span class="kw">mean</span>(change), </span>
+<span id="cb626-3"><a href="association.html#cb626-3"></a>            <span class="dt">change_err =</span> <span class="kw">sd</span>(change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</span></code></pre></div>
+<p>We than create a bar plot and add the <code>geom_errorbar</code> on top of it. Note that in this case we specify the x aesthetic as a chraracter <code>'Wage change'</code>. This is because it is unusual to plot just one bar in the plot, and <code>geom_col</code> and <code>geom_errorbar</code> require some x aesthetic to be passed.</p>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="association.html#cb627-1"></a><span class="kw">ggplot</span>(wages_summary, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&#39;Wage change&#39;</span>, <span class="dt">y =</span> change_mean)) <span class="op">+</span></span>
+<span id="cb627-2"><a href="association.html#cb627-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb627-3"><a href="association.html#cb627-3"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> change_mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err, </span>
+<span id="cb627-4"><a href="association.html#cb627-4"></a>                <span class="dt">ymax =</span> change_mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err), <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb627-5"><a href="association.html#cb627-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&#39;&#39;</span>, <span class="dt">y =</span> <span class="st">&#39;Mean change in wage&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
+</div>
+<div id="are-two-means-different---two-sample-t-test" class="section level4 unnumbered">
+<h4>Are two means different? - two sample t-test</h4>
+<p>By simple extension, we can apply the logic of the t-test to the difference between two means within one sample - this is so called a <em>two sample t-test</em> and is implemented in R by the same function. The grouping variable is specified using the <em>formula notation</em>, which we will encounter in the next chapter when dealing with linear regression. To test the difference in mean of variable x between groups defined by y, we specify <code>t.test(x ~ y)</code>. So, coming back to our example, we can examine whether the average salary in 2005 is different for male and female employees.</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="association.html#cb628-1"></a><span class="kw">t.test</span>(salary2005 <span class="op">~</span><span class="st"> </span>gender, <span class="dt">data =</span> wages)</span></code></pre></div>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  salary2005 by gender
+t = -2.4595, df = 97.494, p-value = 0.01568
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -19486.287  -2082.285
+sample estimates:
+mean in group F mean in group M 
+       31020.72        41805.01 </code></pre>
+<p>The result seem to be significant, meaning that we have statistical evidence that there is a real difference between male and female earnings in the underlying populations (or more precisely, that if we took 100 samples from the underlying population, more than 95 of them would show a non-zero difference). Based on our sample, however, the magnitude of that difference is quite difficult to determine, as we expect it to range between 19000 and 2000 dollars. We can visualize this again using <code>geom_errorbar</code>:</p>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="association.html#cb630-1"></a>wages <span class="op">%&gt;%</span></span>
+<span id="cb630-2"><a href="association.html#cb630-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
+<span id="cb630-3"><a href="association.html#cb630-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wage_mean =</span> <span class="kw">mean</span>(salary2005), </span>
+<span id="cb630-4"><a href="association.html#cb630-4"></a>            <span class="dt">wage_err =</span> <span class="kw">sd</span>(salary2005)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span></span>
+<span id="cb630-5"><a href="association.html#cb630-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gender, <span class="dt">y =</span> wage_mean)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb630-6"><a href="association.html#cb630-6"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb630-7"><a href="association.html#cb630-7"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> wage_mean <span class="op">-</span><span class="st"> </span>wage_err, </span>
+<span id="cb630-8"><a href="association.html#cb630-8"></a>                    <span class="dt">ymax =</span> wage_mean <span class="op">+</span><span class="st"> </span>wage_err), <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
+<span id="cb630-9"><a href="association.html#cb630-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Average salary in 2005&#39;</span>)</span></code></pre></div>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-369-1.png" width="672" /></p>
+</div>
+</div>
+<div id="relationship-between-two-continuous-variables" class="section level3 unnumbered">
+<h3>Relationship between two continuous variables</h3>
+<div id="covariance" class="section level4 unnumbered">
+<h4>Covariance</h4>
+<p>So far we have discussed some techniques for looking at statistical relationships between one continuous variable (such as wage) and one categoric variable (such as salary). Under many circumstances, however, we would be interested in measuring the association between two continuous variables. In this part we will consider data on a sample of students with free variables: average weekly time spent studying, days a student has been home ill and achieved GPA.</p>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="association.html#cb632-1"></a>scores &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/scores.csv&#39;</span>)</span></code></pre></div>
+<pre><code>Parsed with column specification:
+cols(
+  study_time = col_double(),
+  days_ill = col_double(),
+  gpa = col_double()
+)</code></pre>
+<p>We can examine pairwise relationships between the variables using the <code>pairs()</code> function, which is a useful tool when analyzing datasets with multiple continuous variables.</p>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="association.html#cb634-1"></a><span class="kw">pairs</span>(scores,<span class="dt">upper.panel =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-371-1.png" width="672" /></p>
+<p>Let’s start by interpreting this plot. The rectangles with variable tell as the name of the axis. For example, the plot in the lower left corner shows the relationship between the GPA (x axis) and study time (y axis). We can see that students in our sample who spent more time studying seem to have had higher grades - points higher on one axis tend to also be higher on the other. On the other hand, students who were ill more had, on average, achieved lower grades. There seems to be no relationship between being ill and time spent studying.</p>
+<p>In statistical terms, this relationship can be measured with <em>covariance</em> between these two variables. Recall our discussion of <em>variance</em> in the <a href="exploratory.html#exploratory">exploratory analysis chapter</a>. We calculated it for vector x using <code>sum((x - mean(x))^2)/(length(x) - 1)</code>, or the <code>var(x)</code> function for short. Covariance is essentially the same, but calculated for two variables instead of one, using <code>sum((x - mean(x)) * mean((y - mean(y))))/(length(x) - 1)</code> or the <code>cov</code> function for short. You can see that demonstrated below:</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="association.html#cb635-1"></a>cov_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">*</span><span class="st"> </span>(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)))<span class="op">/</span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb635-2"><a href="association.html#cb635-2"></a><span class="kw">cov_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
+<pre><code>[1] 1.337834</code></pre>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="association.html#cb637-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
+<pre><code>[1] 1.337834</code></pre>
+<p>The <em>variance</em> is actually nothing else but covariance of a variable with itself!</p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="association.html#cb639-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>gpa) <span class="op">==</span><span class="st"> </span><span class="kw">var</span>(scores<span class="op">$</span>gpa)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Essentially covariance measures the average of element-wise product of each observations deviation from its mean for two variables. This may sound complicated, but breaking it down makes it simple. In our two variables, <code>gpa</code> and <code>days_ill</code>, people who have grades higher than the average grade also tend to study longer than the average study time. So, if for all students we subtract the mean grade and mean study time from their respective grades and study times, the average of that will be positive.</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="association.html#cb641-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
+<pre><code>[1] 1.337834</code></pre>
+<p>If, on the other hand people who have higher grades than average tend to have lower time spent ill at home than average, the average of the products of these demeaned (i.e. with the mean subtracted from each) variables will be negative, since the majority of the products will be negative.</p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="association.html#cb643-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>days_ill)</span></code></pre></div>
+<pre><code>[1] -11.16068</code></pre>
+<p>Finally, if there’s no relationship between two variables - for example between <code>days_ill</code> and <code>study_time</code>, we expect the average of the products of the demeaned variables to be close to 0, since around the same number will be positive and negative.</p>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="association.html#cb645-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span></code></pre></div>
+<pre><code>[1] 2.419399</code></pre>
+<p>The last example seems to be incorrect? How is that possible that the covariance between <code>study_time</code> and <code>days_ill</code> is larger than the covariance between <code>study_time</code> and <code>gpa</code>, even though the plot suggests a much stronger relationship between the latter? We will explore this in the next section on correlation.</p>
+</div>
+<div id="correlation" class="section level4 unnumbered">
+<h4>Correlation</h4>
+<p>The downside of covariance as a measure of relationship is that it is completely dependent on the units of the two variables measures, or, more percisely, the range of values they take. If we take covariance average time spent studying and GPA and compare it with the covariance between average time spent studying and time ill, the latter will be greater, simply because time is expressed in hours and days, with values ranging between 0.8 and 15.1 and 1 and 110 respectively, while GPA ranges between 1 and 5:</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="association.html#cb647-1"></a><span class="kw">vapply</span>(scores, range, <span class="kw">numeric</span>(<span class="dv">2</span>))</span></code></pre></div>
+<pre><code>     study_time days_ill  gpa
+[1,]       1.42        4 1.33
+[2,]      15.28      100 4.70</code></pre>
+<p>So, the values we get by multiplying <code>study_time</code> and <code>days_ill</code> will tend to be higher in general. This makes the use of covariance problematic in estimating the objective strength of the relationship between two variables.</p>
+<p>In order to avoid it, we use <em>correlation</em> instead. Correlation is simply covariance, but divided by the product of the standard deviation of each of the variables. Without going into the mathematical details, suffice to say that it <em>standardizes</em> the covariance, so that it ranges between -1 and 1, -1 meaning perfect negative relationship (i.e. when one variable increases, the other always decreases) and 1 meaning perfect positive relationship (when one variable increases, the other decreases). 0 means that there’s no relationship between these variables.</p>
+<p>We can see that again using R code. <code>cor_fun</code> is created for demonstration purposes, but the usual function used in R to obtain correlation is simply <code>cor</code>.</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="association.html#cb649-1"></a>cor_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">cov_fun</span>(x, y)<span class="op">/</span>(<span class="kw">sd</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(y))</span>
+<span id="cb649-2"><a href="association.html#cb649-2"></a><span class="kw">cor_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
+<pre><code>[1] 0.5538811</code></pre>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="association.html#cb651-1"></a><span class="kw">cor</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
+<pre><code>[1] 0.5538811</code></pre>
+<p>Now we can see, that the relationship between <code>study_time</code> and <code>days_ill</code> is indeed close to 0:</p>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="association.html#cb653-1"></a><span class="kw">cor</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span></code></pre></div>
+<pre><code>[1] 0.03523657</code></pre>
+<p>We can also use <code>cor</code> on entire data frame to obtain the so-called correlation matrix, which shows pairwise relationships between two variables</p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="association.html#cb655-1"></a><span class="kw">cor</span>(scores)</span></code></pre></div>
+<pre><code>           study_time    days_ill        gpa
+study_time 1.00000000  0.03523657  0.5538811
+days_ill   0.03523657  1.00000000 -0.7001128
+gpa        0.55388114 -0.70011285  1.0000000</code></pre>
+<p>Note that the diagonal is always 1, i.e. the correlation of a variable with itself is always 1.</p>
+<p>For obvious reasons, the function also won’t work if applied to a data frame containing any text data:</p>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="association.html#cb657-1"></a><span class="kw">cor</span>(wages)</span></code></pre></div>
+<p>To visualize pariswise relationships between two variables using a plot that is a bit more sophisticated that the one produced by <code>pairs()</code> we can use the <code>ggpairs</code> function from the <code>GGally</code> package, which produced a <code>ggplot</code> style plot, presenting correlations, density plots and scatter plots of all the numeric variables in our dataset:</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="association.html#cb658-1"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb658-2"><a href="association.html#cb658-2"></a><span class="kw">ggpairs</span>(scores)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-382-1.png" width="672" /></p>
+</div>
+</div>
+<div id="further-details" class="section level3 unnumbered">
+<h3>Further details</h3>
+<p>Here some more details on how the p-value is computed:</p>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="association.html#cb659-1"></a>err &lt;-<span class="st"> </span><span class="kw">sd</span>(wages<span class="op">$</span>change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">nrow</span>(wages))</span>
+<span id="cb659-2"><a href="association.html#cb659-2"></a>tscore &lt;-<span class="st"> </span><span class="kw">mean</span>(wages<span class="op">$</span>change)<span class="op">/</span>err</span>
+<span id="cb659-3"><a href="association.html#cb659-3"></a>df &lt;-<span class="st"> </span><span class="kw">length</span>(wages<span class="op">$</span>change) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb659-4"><a href="association.html#cb659-4"></a><span class="kw">pt</span>(tscore, df, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<pre><code>[1] 0.007687596</code></pre>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="association.html#cb661-1"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span></code></pre></div>
+<pre><code>
+    One Sample t-test
+
+data:  wages$change
+t = 2.7211, df = 99, p-value = 0.007688
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.004033511 0.025755527
+sample estimates:
+ mean of x 
+0.01489452 </code></pre>
+</div>
+</div>
+<div id="summary-6" class="section level2">
+<h2><span class="header-section-number">8.2</span> Summary</h2>
+<div id="functions-list-6" class="section level3 unnumbered">
+<h3>Functions list</h3>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="6%" />
+<col width="80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">function</th>
+<th align="left">package</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">length()</td>
+<td align="left">base</td>
+<td align="left">get number of elements in a vector or list</td>
+</tr>
+<tr class="even">
+<td align="left">library()</td>
+<td align="left">base</td>
+<td align="left">load an R package</td>
+</tr>
+<tr class="odd">
+<td align="left">mean()</td>
+<td align="left">base</td>
+<td align="left">get mean of a vector</td>
+</tr>
+<tr class="even">
+<td align="left">nrow()</td>
+<td align="left">base</td>
+<td align="left">get number of rows of a data frame</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric()</td>
+<td align="left">base</td>
+<td align="left">initialize a numeric vector</td>
+</tr>
+<tr class="even">
+<td align="left">sqrt()</td>
+<td align="left">base</td>
+<td align="left">square root</td>
+</tr>
+<tr class="odd">
+<td align="left">sum()</td>
+<td align="left">base</td>
+<td align="left">get sum of numeric values or a vector</td>
+</tr>
+<tr class="even">
+<td align="left">vapply()</td>
+<td align="left">base</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">group_by()</td>
+<td align="left">dplyr</td>
+<td align="left">group tibble/data.frame by a factor variable. All further tidyverse operations are performed group-wise</td>
+</tr>
+<tr class="even">
+<td align="left">mutate()</td>
+<td align="left">dplyr</td>
+<td align="left">modify/create a column in a data frame</td>
+</tr>
+<tr class="odd">
+<td align="left">n()</td>
+<td align="left">dplyr</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">summarise()</td>
+<td align="left">dplyr</td>
+<td align="left">collapse the dataset to a summary statistic. Usually used with group_by()</td>
+</tr>
+<tr class="odd">
+<td align="left">ggpairs()</td>
+<td align="left">GGally</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">aes()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">geom_col()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">geom_errorbar()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">ggplot()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">labs()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">ylab()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">pairs()</td>
+<td align="left">graphics</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">read_csv()</td>
+<td align="left">readr</td>
+<td align="left">read tibble from a csv file</td>
+</tr>
+<tr class="even">
+<td align="left">cor()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">cov()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">pt()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sd()</td>
+<td align="left">stats</td>
+<td align="left">Get standard deviation of a vector</td>
+</tr>
+<tr class="even">
+<td align="left">t.test()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">var()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="exercises-6" class="section level2">
+<h2><span class="header-section-number">8.3</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><p>Write a function to compute correlation for just the numeric variables in any data frame. Test it on the <code>wages</code> data.</p></li>
+<li><p>Why is the correlation of a variable with itself always equal to 1? Write R code to demonstrate this.</p></li>
+</ol>
+<p>For the remainder of the exercises, come back to the <code>Salaries</code> data we used in the previous chapter:</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Using correlation, examine which relationship is stronger - the one between years since PhD and salary or the one between years in service and salary.</li>
+</ol>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="association.html#cb663-1"></a><span class="co">#ANSWER</span></span>
+<span id="cb663-2"><a href="association.html#cb663-2"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.since.phd)</span></code></pre></div>
+<pre><code>[1] 0.4192311</code></pre>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="association.html#cb665-1"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.service)</span></code></pre></div>
+<pre><code>[1] 0.3347447</code></pre>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="association.html#cb667-1"></a><span class="co">#the relationship between years since PhD and salary appears to be stronger</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Use t-tests to check whether we can confirm or reject the following hypothesis, based on the sample in the <code>Salaries</code> dataset.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>There’s no difference between the salary of Male and Female professors.</p></li>
+<li><p>There’s no difference between the salary of professors from the applied and theoretical department.</p></li>
+<li><p>The average salary is not different from 100 000 USD.</p></li>
+</ol>
+<ol start="5" style="list-style-type: decimal">
+<li>Recall the plot produced towards the end of the previous chapter depicting the average salary by age group and academic discipline. Produce the same plot, but this time include error bars depicting the confidence intervals around each of the means. The code to produce the table used in the last exercises is below. Note that you need to modify it (by computing the standard errors) before plotting the data. Remeber about adding appropriate labels to the plot.</li>
+</ol>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="association.html#cb668-1"></a>byage &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span></span>
+<span id="cb668-2"><a href="association.html#cb668-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yrs_range =</span> <span class="kw">cut_width</span>(yrs.since.phd, <span class="dv">5</span>, <span class="dt">boundary =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb668-3"><a href="association.html#cb668-3"></a><span class="st">  </span><span class="kw">group_by</span>(yrs_range, discipline) <span class="op">%&gt;%</span></span>
+<span id="cb668-4"><a href="association.html#cb668-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(salary, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb668-5"><a href="association.html#cb668-5"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<pre><code>`summarise()` regrouping output by &#39;yrs_range&#39; (override with `.groups` argument)</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Examine the correlation between years since phd and average salary in each of the groups defined in the data.</li>
+</ol>
+<p><em>The solutions for the exercises will be available here on 2021-02-18.</em></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ols.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_depth": 2
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Basics of R Programming | Analysing Quantitative Data with R</title>
+  <meta name="description" content="2 Basics of R Programming | Analysing Quantitative Data with R" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Basics of R Programming | Analysing Quantitative Data with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Basics of R Programming | Analysing Quantitative Data with R" />
+  
+  
+  
+
+<meta name="author" content="Piotr Bogdanski &amp; Florian Reiche" />
+<meta name="author" content="Department of Politics and International Studies, University of Warwick" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="datastructures.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/font-awesome-5.13.0/js/script.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.15/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I THE BASICS</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#content"><i class="fa fa-check"></i><b>1.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-r-and-why-should-i-learn-it"><i class="fa fa-check"></i>What is R and why should I learn it?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#the-course-structure"><i class="fa fa-check"></i>The course structure</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#layout"><i class="fa fa-check"></i>Layout</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics of R Programming</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#content-1"><i class="fa fa-check"></i><b>2.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#arithmetic-operations-and-assignment"><i class="fa fa-check"></i>Arithmetic operations and assignment</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#vectors"><i class="fa fa-check"></i>Vectors</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#coercion"><i class="fa fa-check"></i>Coercion</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#logical-values-and-operators"><i class="fa fa-check"></i>Logical Values and Operators</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#indexing"><i class="fa fa-check"></i>Indexing</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#sorting"><i class="fa fa-check"></i>Sorting</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#summary"><i class="fa fa-check"></i><b>2.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#functions-list"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="datastructures.html"><a href="datastructures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="datastructures.html"><a href="datastructures.html#content-2"><i class="fa fa-check"></i><b>3.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#data-frames"><i class="fa fa-check"></i>Data Frames</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#factors"><i class="fa fa-check"></i>Factors</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#reading-and-writing-the-data"><i class="fa fa-check"></i>Reading and writing the data</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#lists"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="datastructures.html"><a href="datastructures.html#summary-1"><i class="fa fa-check"></i><b>3.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="datastructures.html"><a href="datastructures.html#functions-list-1"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="datastructures.html"><a href="datastructures.html#exercises-1"><i class="fa fa-check"></i><b>3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory.html"><a href="exploratory.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="exploratory.html"><a href="exploratory.html#content-3"><i class="fa fa-check"></i><b>4.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#what-is-exploratory-data-analysis"><i class="fa fa-check"></i>What is exploratory data analysis?</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#first-look-at-the-data"><i class="fa fa-check"></i>First look at the data</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#numeric-vs-categorical-variables"><i class="fa fa-check"></i>Numeric vs categorical variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#numeric-variables"><i class="fa fa-check"></i>Numeric variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#categorical-variables"><i class="fa fa-check"></i>Categorical variables</a></li>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#customizing-visualizations"><i class="fa fa-check"></i>Customizing visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory.html"><a href="exploratory.html#summary-2"><i class="fa fa-check"></i><b>4.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="exploratory.html"><a href="exploratory.html#functions-list-2"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="exploratory.html"><a href="exploratory.html#exercises-2"><i class="fa fa-check"></i><b>4.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>II ADVANCED DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="5" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>5</b> Key Programming Concepts</a><ul>
+<li class="chapter" data-level="5.1" data-path="programming.html"><a href="programming.html#content-4"><i class="fa fa-check"></i><b>5.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#control-flow-statements"><i class="fa fa-check"></i>Control flow statements</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#for-loops"><i class="fa fa-check"></i>For loops</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#if-statements"><i class="fa fa-check"></i>If statements</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#sapply"><i class="fa fa-check"></i>Sapply</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="programming.html"><a href="programming.html#summary-3"><i class="fa fa-check"></i><b>5.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#functions-list-3"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="programming.html"><a href="programming.html#exercises-3"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> Data Manipulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#content-5"><i class="fa fa-check"></i><b>6.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#reading-the-data"><i class="fa fa-check"></i>Reading the data</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#the-pipe-operator"><i class="fa fa-check"></i>The pipe operator</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#dataset-manipulation"><i class="fa fa-check"></i>Dataset manipulation</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#reshaping-data"><i class="fa fa-check"></i>Reshaping data</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#joining"><i class="fa fa-check"></i>Joining</a></li>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#aggregating-data"><i class="fa fa-check"></i>Aggregating data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#summary-4"><i class="fa fa-check"></i><b>6.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="dplyr.html"><a href="dplyr.html#functions-list-4"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#exercises-4"><i class="fa fa-check"></i><b>6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Data Visualization</a><ul>
+<li class="chapter" data-level="7.1" data-path="visualization.html"><a href="visualization.html#content-6"><i class="fa fa-check"></i><b>7.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#the-plotting-syntax"><i class="fa fa-check"></i>The plotting syntax</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#all-about-geoms---plot-types-in-ggplot2"><i class="fa fa-check"></i>All about geoms - plot types in ggplot2</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#multiple-plots"><i class="fa fa-check"></i>Multiple plots</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#customizing-plots"><i class="fa fa-check"></i>Customizing plots</a></li>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#saving-plots"><i class="fa fa-check"></i>Saving plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="visualization.html"><a href="visualization.html#summary-5"><i class="fa fa-check"></i><b>7.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="visualization.html"><a href="visualization.html#functions-list-5"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="visualization.html"><a href="visualization.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>III DATA ANALYSIS</b></span></li>
+<li class="chapter" data-level="8" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>8</b> Statistical Inference and Association</a><ul>
+<li class="chapter" data-level="8.1" data-path="association.html"><a href="association.html#content-7"><i class="fa fa-check"></i><b>8.1</b> Content</a><ul>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#comparing-means"><i class="fa fa-check"></i>Comparing means</a></li>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#relationship-between-two-continuous-variables"><i class="fa fa-check"></i>Relationship between two continuous variables</a></li>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#further-details"><i class="fa fa-check"></i>Further details</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="association.html"><a href="association.html#summary-6"><i class="fa fa-check"></i><b>8.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="association.html"><a href="association.html#functions-list-6"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="association.html"><a href="association.html#exercises-6"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ols.html"><a href="ols.html"><i class="fa fa-check"></i><b>9</b> Linear Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="ols.html"><a href="ols.html#content-8"><i class="fa fa-check"></i><b>9.1</b> Content</a></li>
+<li class="chapter" data-level="9.2" data-path="ols.html"><a href="ols.html#summary-7"><i class="fa fa-check"></i><b>9.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="ols.html"><a href="ols.html#functions-list-7"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ols.html"><a href="ols.html#exercises-7"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10.1" data-path="logit.html"><a href="logit.html#content-9"><i class="fa fa-check"></i><b>10.1</b> Content</a></li>
+<li class="chapter" data-level="10.2" data-path="logit.html"><a href="logit.html#summary-8"><i class="fa fa-check"></i><b>10.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#functions-list-8"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="logit.html"><a href="logit.html#exercises-8"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>IV ADVANCED TOPICS</b></span></li>
+<li class="chapter" data-level="11" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>11</b> R Markdown</a><ul>
+<li class="chapter" data-level="11.1" data-path="rmarkdown.html"><a href="rmarkdown.html#content-10"><i class="fa fa-check"></i><b>11.1</b> Content</a></li>
+<li class="chapter" data-level="11.2" data-path="rmarkdown.html"><a href="rmarkdown.html#summary-9"><i class="fa fa-check"></i><b>11.2</b> Summary</a><ul>
+<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html#functions-list-9"><i class="fa fa-check"></i>Functions list</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="rmarkdown.html"><a href="rmarkdown.html#exercises-9"><i class="fa fa-check"></i><b>11.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="course-summary.html"><a href="course-summary.html"><i class="fa fa-check"></i><b>12</b> Course summary</a><ul>
+<li class="chapter" data-level="" data-path="course-summary.html"><a href="course-summary.html#index-of-functions-used-throughout-the-course"><i class="fa fa-check"></i>Index of functions used throughout the course</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Quantitative Data with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basics" class="section level1">
+<h1><span class="header-section-number">2</span> Basics of R Programming</h1>
+<p><a href="data:text/plain;base64,IycgIyBCYXNpY3Mgb2YgUiBQcm9ncmFtbWluZyAKCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnICMjIENvbnRlbnQKIycgCiMnICMjIyBBcml0aG1ldGljIG9wZXJhdGlvbnMgYW5kIGFzc2lnbm1lbnQgCgojJyAKIycgUiBhbGxvd3MgeW91IHRvIHBlcmZvcm0gZXZlcnkgYmFzaWMgbWF0aGVtYXRpY2FsIG9wZXJhdGlvbiwgc28gaXQgY2FuIHNpbXBseSBiZSB1c2VkIGFzIGEgY2FsY3VsYXRvci4gQmVsb3csIHlvdSBjYW4gc2VlIHNldmVyYWwgZXhhbXBsZXMuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KNSArIDMgI2FkZGl0aW9uCjUgLSAzICNzdWJ0cmFjdGlvbgo1IC8gMyAjZGl2aXNpb24KNSAvIDAKNSAqIDMgI211bHRpcGxpY2F0aW9uCjUgXiAzICNleHBvbmVudGlhdGlvbgpzcXJ0KDQpICNzcXVhcmUgcm9vdAooNSArIDUpIC8gKDMgKyAxKSAjcGFyZW50aGVzaXMKOSAlJSAyICNtb2R1bG8KOSAlLyUgMiAjaW50ZWdlciBkaXZpc2lvbgpsb2coMikgI25hdHVyYWwgbG9nYXJpdGhpbQpleHAoMikgI2V4cG9uZW50CgojJyAKIycgQWxsIHRoZSBvcGVyYXRpb25zIHBlcmZvcm1lZCBhYm92ZSBnZW5lcmF0ZSBzb21lIG91dHB1dCwgd2hpY2ggaXMgcHJpbnRlZCB0byB0aGUgUiBjb25zb2xlLiBNb3N0IG9mIHRoZSB0aW1lLCBob3dldmVyLCBpdCBpcyB1c2VmdWwgdG8gc3RvcmUgdGhlIG91dHB1dHMgb2YgdGhlIG9wZXJhdGlvbnMgd2UgcGVyZm9ybSwgc28gdGhhdCB0aGV5IGNhbiBiZSBhY2Nlc3NlZCByZXBlYXRlZGx5LiBUbyBkbyB0aGF0LCB3ZSBjYW4gc3RvcmUgdmFsdWVzIGluIHZhcmlhYmxlcywgd2hpY2ggY2FuIGJlIHZpZXdlZCBhbmQgbWFuaXB1bGF0ZWQgYnkgcmVmZXJlbmNpbmcgdGhlaXIgbmFtZXMuIFZhbHVlcyBhcmUgYXNzaWduZWQgdG8gdmFyaWFibGVzIHVzaW5nIHRoZSBgPC1gb3BlcmF0b3IuIFdoaWxlIGA9YCBtYXkgc2VlbSBlcXVpdmFsZW50LCBmb3IgbW9yZSBhZHZhbmNlZCByZWFzb25zIGA8LWAgaXMgdXNlZCB3aGVuZXZlciBhc3NpZ25pbmcgYSB2YWx1ZS4gSWYgeW91J3JlIGludGVyZXN0ZWQgaW4gdGhlIHRlY2huaWNhbCBkZXRhaWxzIGJlaGluZCBpdCwgeW91IGNhbiBjaGVjayBvdXQgdGhpcyBbU3RhY2sgT3ZlcmZsb3cgcG9zdF0oaHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTc0MTgyMC93aGF0LWFyZS10aGUtZGlmZmVyZW5jZXMtYmV0d2Vlbi1hbmQtYXNzaWdubWVudC1vcGVyYXRvcnMtaW4tcikuCiMnIAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnggPC0gNQpteV9udW1iZXIgPC0gNC4yCnJlc3VsdCA8LSA1ICsgNiAqIDcgLSA4CgojJyAKIycgWW91IGNhbiBuYW1lIGEgdmFyaWFibGUgYW55dGhpbmcgeW91IGxpa2UsIGhvd2V2ZXIgaXQgY2Fubm90OgojJyAKIycgLSBzdGFydCB3aXRoIGEgbnVtYmVyCiMnIAojJyAtIGhhdmUgYW55IHdoaXRlc3BhY2VzXltUZWNobmljYWxseSwgeW91IGNhbiBjcmVhdGUgYSB2YXJpYWJsZSB3aXRoIHdoaXRlc3BhY2VzIG9yIG51bWJlcnMgaW4gaXRzIG5hbWUgdXNpbmcgdGhlIHJldmVyc2UgcXVvdGF0aW9uIG1hcmtzIFxgLCBmb3IgZXhhbXBsZSBgNSBteSB2YXJpYWJsZWAuIEhvd2V2ZXIgdGhpcyBpcyBub3QgYSBjb21tb24gcHJhY3RpY2UgYW5kIG1ha2VzIHlvdXIgY29kZSBkaWZmaWN1bHQgdG8gcmVhZCwgc28gdGhpcyBzaG91bGQgYmUgYXZvaWRlZC5dCiMnIAojJyAtIGluY2x1ZGUgbWF0aGVtdGljYWwgb3BlcmF0b3JzIGluIGl0J3MgbmFtZSwgc3VjaCBhcyBcKiwgLywgXiwgJSwgZXRjLiAtIGl0J3MgYmVzdCB0byBhdm9pZCBhbnkgc3BlY2lhbCBjaGFyYWN0ZXJzIGV4Y2VwdCBmb3IgIl8iIGFuZCAiLiIgdG8gc2VwYXJhdGUgd29yZHMgaWYgbmVjZXNzYXJ5LCBmb3IgZXhhbXBsZSBgbXlfdmFyaWFibGVgIG9yIGBteS52YXJpYWJsZWAuIFdoaWxlIHlvdSBjYW4gc2VlIHRoZSBkb3QgYmVpbmcgdXNlZCBpbiB2YXJpYWJsZSBuYW1lcyBieSBtYW55IHVzZXJzLCB0ZWNobmljYWxseSB1c2luZyBfIGlzIGEgYmV0dGVyIHByYWN0aWNlLCBhcyB0aGUgZG90IGhhcyBhbiBhZGRpdGlvbmFsIHNwZWNpYWwgbWVhbmluZyBhdHRhY2hlZCB0byBpdC4KIycgCiMnIEl0IGlzIGFsc28gdXNlZnVsIHRvIGF2b2lkIG5hbWluZyB2YXJpYWJsZXMgdXNpbmcgbmFtZXMgdGhhdCBhcmUgYWxyZWFkeSBkZWZpbmVkIGluIFIgdG8gYmUgc29tZXRoaW5nIGVsc2UgLSBob3dldmVyLCB5b3Ugd2lsbCBsZWFybiB0aGUgYXZvaWQgdGhpcyBhcyB5b3UgcHJvZ3Jlc3MgaW4gdGhlIGNvdXJzZS4KIycgCiMnIEtlZXAgaW4gbWluZCwgdGhhdCB3aGlsZSB2YXJpYWJsZSBuYW1lcyBhcmUgYXJiaXRyYXJ5LCBpdCdzIGdvb2QgdG8ga2VlcCB0aGVtIGNvbmNpc2UgYW5kIGluZm9ybWF0aXZlLCBlc3BlY2lhbGx5IGlmIHlvdSBoYXZlIHRvIHByZXNlbnQgeW91ciBjb2RlIHRvIHNvbWVvbmUgb3IgdG8gY29tZSBiYWNrIHRvIHlvdXIgb3duIHdvcmsgYWZ0ZXIgYSBsb25nIHBlcmlvZCBvZiB0aW1lLgojJyAKIycgQXNzaWduaW5nIHRoZSB2YWx1ZXMgZG9lcyBub3QgcHJvZHVjZSBhbnkgb3V0cHV0LiBUbyBhY2Nlc3MgdGhlIHZhbHVlcyBhc3NpZ25lZCB0byBhIHZhcmlhYmxlLCB5b3UgaGF2ZSB0byBjYWxsIGl0cyBuYW1lIGRpcmVjdGx5IGluIHRoZSBzY3JpcHQgb3IgdGhlIGNvbnNvbGUuIFlvdSBjYW4gdXNlIHRoaXMgdG8gcGVyZm9ybSBtYXRoZW1hdGljYWwgb3BlcmF0aW9ucyBvbiB0aGUgb2JqZWN0cyBhcyB3ZWxsLiAKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp4IDwtIDUKeSA8LSA3CngKeQp4ICsgeQp6IDwtIHggKiB5CnoKCiMnIAojJyBGaW5hbGx5LCB5b3UgY2FuIGFsd2F5cyBhc3NpZ24gYSBuZXcgdmFsdWUgdG8gdGhlIHNhbWUgbmFtZS4gSG93ZXZlciB0aGlzIGltcGxpZXMgdGhhdCB0aGUgb2xkIHZhbHVlIHdpbGwgYmUgZGlzY2FyZGVkLiBJdCBjYW4gYmUgdXNlZnVsIHdoZW4geW91IGtub3cgdGhhdCB5b3Ugd29uJ3QgbmVlZCB0byBhY2Nlc3MgdGhlIHZhbHVlIGFnYWluLiBGb3IgZXhhbXBsZSwgaXQncyBhIGNvbW1vbiBwcmFjdGljZSB0byBtb2RpZnkgYSB2YXJpYWJsZSBhbHJlYWR5IGRlZmluZWQgc3VjaCB0aGF0IGB4IDwtIHggKyA1YC4gVGhpcyBzaW1wbHkgbWVhbnMgImFkZCA1IHRvIHggYW5kIHN0b3JlIGl0IGluIHgiLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnggPC0gNQp4CnggPC0gNwp4CnggPC0geCArIDIKCiMnIAojJyAjIyMgVmVjdG9ycyAKCiMnIAojJyBXaGlsZSB0aGUgYWJvdmUgb3BlcmF0aW9ucyBhcmUgdXNlZnVsLCB0aGUgdHJ1ZSBwb3dlciBvZiBSIGNvbWVzIGZyb20gdGhlIHNvLWNhbGxlZCAqKnZlY3Rvcml6YXRpb24qKiBvZiBtYXRoZW1hdGljYWwgKGFuZCBvdGhlcikgb3BlcmF0aW9ucy4gQSAqKnZlY3RvcioqIGluIFIgdGVybWlub2xvZ3kgaXMganVzdCBhIGZhbmN5IHdvcmQgZm9yIGFuIG9yZGVyZWQgc2VxdWVuY2Ugb2YgbnVtYmVycyBvciBhICJjb2x1bW4iIGluIGFuIEV4Y2VsIHNoZWV0LiBWZWN0b3JzIGFyZSBhbHNvIGNvbW1vbmx5IHJlZmVycmVkIHRvIGFzICoqdmFyaWFibGVzKiogLSBpbiB0aGUgY29udGV4dCBvZiB0aGlzIGNvdXJzZSwgdGhlc2UgdGVybXMgd2lsbCBiZSB1c2VkIGludGVyY2hhbmdhYmx5LiBWZWN0b3JzIGFyZSBjcmVhdGVkIGJ5IHRoZSBjb21iaW5lIGZ1bmN0aW9uIGBjKClgLiBBICoqZnVuY3Rpb24qKiBpcyBzaW1wbHkgYW4gZXhwcmVzc2lvbiBmb2xsb3dlZCBieSBwYXJlbnRoZXNlcyB3aGljaCB0YWtlcyBzb21lIHZhbHVlcyBhcyBpbnB1dCBhbmQgZ2VuZXJhdGVzIG90aGVyIHZhbHVlcyBhcyBvdXRwdXQuIFZlY3RvcnMgYXJlIGFzc2lnbmVkIHRvIG5hbWVzIHRoZSBzYW1lIHdheSBhcyBudW1iZXJzLiBJbiBmYWN0LCBfYSBudW1iZXIgaW4gUiBpcyBlcXVpdmFsZW50IHRvIGEgdmVjdG9yIG9mIGxlbmd0aCAxXy4gQmVsb3cgeW91IGNhbiBzZWUgc29tZSBleGFtcGxlcyBvZiB2ZWN0b3JzIGJlaW5nIGNyZWF0ZWQuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KeCA8LSBjKDEsIDQsIDUsIDYpCngKeiA8LSBjKDUgLyAyLCA3ICogOCwgMiArIDEpCnoKdiA8LSBjKHgsIHopCnYKCiMnIAojJyBSIGFsc28gb2ZmZXJzIGEgc2hvcnRoYW5kIGZvciBjcmVhdGluZyBzZXF1ZW5jZXMgb2YgaW50ZWdlcnMgYmV0d2VlbiB0d28gdmFsdWVzLCBmb3IgZXhhbXBsZToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoxOjEwCnggPC0gMTU6NQp4CgojJyAKIycgSXQgaXMgYWxzbyBwb3NzaWJsZSB0byBjcmVhdGUgbXVsdGlwbGUgcmVwZXRpdGlvbnMgb2YgYSBnaXZlbiB2ZWN0b3IgYnkgdXNpbmcgdGhlIGByZXAoKWAgZnVuY3Rpb24sIHdoaWNoIHRha2VzIGEgdmVjdG9yIGFzIGl0cyBmaXJzdCBhcmd1bWVudCBhbmQgdGhlIG51bWJlciBvZiByZXF1aXJlZCByZXBldGl0aW9ucyBhcyB0aGUgc2Vjb25kIGFyZ3VtZW50LgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnJlcCg1LCAzKSAjcmVwcmVhdCB0aGUgbnVtYmVyIDUgMyB0aW1lcwphIDwtIGMoNSwgNiwgNykKYiA8LSByZXAoYSwgNCkgI3JlcGVhdCB2ZWN0b3IgYSAxMCB0aW1lcyBhbmQgYXNzaW5nIGl0IHRvIGIKYgoKIycgCiMnIAojJyBUaGUgbGVuZ3RoIG9mIGEgdmVjdG9yIHJlZmVycyB0byB0aGUgbnVtYmVyIG9mIGVsZW1lbnRzIGl0IGNvbnRhaW5zLiBJdCBjYW4gYmUgZXhhbWluZWQgdXNpbmcgdGhlIGBsZW5ndGgoKWAgZnVuY3Rpb246CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KYSA8LSAxOjUKbGVuZ3RoKGEpCgojJyAKIycgCiMnICoqVmVjdG9yaXphdGlvbioqIG9mIGFuIG9wZXJhdGlvbiByZWZlcnMgdG8gdGhlIGZhY3QgdGhhdCBhbiBvcGVyYXRpb24gYXJlIHBlcmZvcm1lZCBvbiB2ZWN0b3JzIGVsZW1lbnQtd2lzZS4gVGhpcyBpcyB0cnVlIGZvciBtYWpvcml0eSBvZiBSIG9wZXJhdGlvbnMuIEZvciBleGFtcGxlLCBhZGRpbmcgdGhlIHZlY3RvcnMgWzEgMiAzXSBhbmQgWzUgNiA3XSB3aWxsIHByb2R1Y2UgdGhlIHZlY3RvciBbNiA4IDEwXS4gSWYgYW4gb3BlcmF0aW9uIGlzIHBlcmZvcm1lZCBiZXR3ZWVuIGEgdmVjdG9yIGFuZCBhIHNpbmdsZSBudW1iZXIgKG9yIGEgKnNjYWxhciosIHVzaW5nIG1vcmUgc3BlY2lmaWMgdGVybWlub2xvZ3kpLCBpdCBpcyBhcHBsaWVkIHRvIGVhY2ggcGFpciBvZiB0aGUgZWxlbWVudHMsIHN1Y2ggdGhhdCBbMSAxIDFdIG11bHRpcGxpZWQgYnkgMiB3b3VsZCB5aWVsZCBbMiAyIDJdLiBCZWxvdyB5b3UgY2FuIHNlZSBzb21lIGV4YW1wbGVzIG9mIHZlY3RvcnMgaW4gYWN0aW9uLgojJyAKIycgCiMnIAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnggPC0gYygxLCAyLCAzLCAyKQp5IDwtIGMoNSwgNiwgNywgNCkKeCArIHkKCiMnIAojJyAKIycgCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KeCAtIHkKeCBeIHkKeiA8LSA1ICogeCAtIDIgKiB5CnoKCiMnIAojJyAKIycgCiMnIEluIGNhc2Ugb2YgcGVyZm9ybWluZyBvcGVyYXRpb25zIG9uIGEgdmVjdG9yIGFuZCBhIHNjYWxhciAob25lIG51bWJlciksIHRoZSBvcGVyYXRpb24gaXMgYXBwbGllZCB0byBlYWNoIGVsZW1lbnQgb2YgdGhlIHZlY3Rvci4gRm9yIGV4YW1wbGU6CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KeCA8LSBjKDEsIDIsIDMsIDIpCnggKiAzCgojJyAKIycgCiMnIAojJyAKIycgV2hpbGUgaXQgd2FzIG1lbnRpb25lZCBlYXJsaWVyIHRoYXQgdmVjdG9ycyBjYW4gYmUgdGhvdWdodCBvZiBhcyBvcmRlcmVkIHNlcXVlbmNlcyBvZiBudW1iZXJzLCB0aGV5IGNhbiBhbHNvIGNvbnRhaW4gdGV4dC4gU3VjaCB2ZWN0b3JzIGFyZSBjYWxsbGVkICJjaGFyYWN0ZXIgdmVjdG9ycyIgYW5kIGFyZSBjb25zdHJ1Y3RlZCBzaW1pbGFyaWx5IHRvIG51bWVyaWMgdmVjdG9ycy4gRWFjaCB0ZXh0IGhhcyB0byBiZSBlbnF1b3RlZCBpbiAiIiB0byBkZW5vdGUgdGhhdCBpdCBzaG91bGQgbm90IGJlIGludGVycHJldGVkIGFzIGEgdmFyaWFibGUgbmFtZSBvciBhIGZ1bmN0aW9uLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmEgPC0gIkhlbGxvIHdvcmxkIgphCndvcmRzIDwtIGMoIlRoaXMiLCAiSXMiLCAiQSIsICJTZXF1ZW5jZSIsICJPZiIsICJXb3JkcyIpCndvcmRzCgojJyAKIycgTWF0aGVtYXRpY2FsIG9wZXJhdGlvbnMgc3VjaCBhcyBhZGRpdGlvbiBvciBkaXZpc2lvbiBjYW5ub3QgYmUgcGVyZm9ybWVkIG9uIGNoYXJhY3RlciB2ZWN0b3JzIGZvciBvYnZpb3VzIHJlYXNvbnMgYW5kIHdpbGwgcHJvZHVjZSBhbiBlcnJvciBpZiB5b3UgYXR0ZW1wdCB0aGVtLiBIb3dldmVyLCB5b3UgY2FuIGNvbWJpbmUgd29yZHMgYW5kIG51bWJlcnMgaW50byBvbmUgdmVjdG9yIC0gaG93ZXZlciwgdGhleSB3aWxsIGFsbCBiZSB0cmVhdGVkIGFzIGlmIHRoZXkgd2VyZSB0ZXh0LCBzbyB0aGUgbnVtYmVyIDUgaW4gdGhlIGV4YW1wbGUgYmVsb3cgZ2V0cyBjb252ZXJ0ZWQgdG8gY2hhcmFjdGVyICI1Ii4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQptaXhlZCA8LSBjKDUsICJzb21ldGhpbmciLCAic29tZXRoaW5nIGVsc2UiKQptaXhlZAoKIycgCiMnIFRoZSBgcGFzdGVgIGZ1bmN0aW9uIGlzIGEgdXNlZnVsIGZvciBkZWFsaW5nIHdpdGggY2hhcmFjdGVyIHZlY3RvcnMgLSBpdCBjYW4gYmUgdGhvdWdodCBvZiBhcyBhbiBlcXVpdmFsZW50IG9mIGFkZGl0aW9uIG9wZXJhdGlvbiBmb3IgdGV4dC4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpuYW1lIDwtICJKb2huIgpzdXJuYW1lIDwtICJEb2UiCnBhc3RlKG5hbWUsIHN1cm5hbWUpCm5hbWVzIDwtIGMoIkpvaG4iLCJKYW5lIiwiVGhvbWFzIikKc3VybmFtZXMgPC0gYygiRG9lIiwiU21pdGgiLCJLb3dhbHNreSIpCnBhc3RlKG5hbWVzLCBzdXJuYW1lcykKCiMnIAojJyAjIyMgQ29lcmNpb24gCgojJyAKIycgQW5vdGhlciBpbXBvcnRhbnQgdG9waWMgd2hlbiBkZWFsaW5nIHdpdGggdmVjdG9ycyBpcyBfY29lcmVjaW9uXy4gVGhpcyByZWZlcnMgdG8gZm9yY2luZyBvbmUgdmVjdG9yIHR5cGUgdG8gYmVjb21lIGFub3RoZXIgdXNpbmcgdGhlIGBhc2AgZnVuY3Rpb25zLiBGb3IgZXhhbXBsZSwgd2UgdXNlIGBhcy5jaGFyYWN0ZXJgIHRvIGZvcmNlIGFuIGBSYCBvYmplY3QgaW50byBhIGNoYXJhY3RlciB2ZWN0b3IsIG9yIGBhcy5udW1lcmljYCB0byBmb3JjZSBpdCBpbnRvIGEgbnVtZXJpYyB2ZWN0b3I6CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KbnVtYmVyc19jaGFyIDwtIGMoIjUiLCI2IiwiNyIpCm51bWJlcnNfY2hhcgpudW1iZXJzIDwtIGFzLm51bWVyaWMobnVtYmVyc19jaGFyKQpudW1iZXJzCgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm51bWJlcnMgPC0gYygxMCwgMTIzLCAxMikKYXMuY2hhcmFjdGVyKG51bWJlcnMpCgojJyAKIycgTm90ZSB0aGF0IHRoaXMgd2lsbCBub3QgYWx3YXlzIHdvcmssIGFzIGluIG1hbnkgY2FzZXMgZWxlbWVudHMgb2Ygb25lIHZlY3RvciB0eXBlIGNhbm5vdCBiZSBpbnRlcnByZXRlZCBhcyBhbm90aGVyLiBGb3IgZXhhbXBsZToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpudW1zIDwtIGMoIjEiLCIyIiwidGhyZWUiKQphcy5udW1lcmljKG51bXMpCgojJyAKIycgSW4gdGhpcyBjYXNlLCBSIHN0aWxsIHJldHVybnMgdGhlIG91dHB1dCwgaG93ZXZlciB0aGUgdGhpcmQgZWxlbWVudCBvZiB0aGUgYG51bXNgIHZlY3RvciBpcyB0dXJuZWQgaW50byBhbiBgTkFgIHZhbHVlLiBgTkFgIGlzIHNob3J0aGFuZCBmb3IgX05vdCBBdmFpbGFibGVfIC0gaXQncyBhIGNvbnN0YW50IHRoYXQgUiB1c2VzIHRvIGRlYWwgd2l0aCBtaXNzaW5nIHZhbHVlcy4gVGhpcyBpcyBpbmRpY2F0ZWQgYnkgdGhlIHdhcm5pbmcgcHJpbnRlZCBieSBSIHRvIHRoZSBjb25zb2xlLiBNaXNzaW5nIHZhbHVlcyB3aWxsIGJlIGNvdmVyZWQgaW4gbW9yZSBkZXRhaWwgaW4gdGhlIFtuZXh0IGNoYXB0ZXJdKCNtaXNzaW5ndmFsdWVzKS4gCiMnIAojJyAjIyMgTG9naWNhbCBWYWx1ZXMgYW5kIE9wZXJhdG9ycyAKCiMnIAojJyBBbm90aGVyIGNydWNpYWwgdHlwZSBvZiBvcGVyYXRpb25zIGluIFIgYXJlIGxvZ2ljYWwgb3BlcmF0aW9ucywgYWxzbyBrbm93biBhcyBib29sZWFuLiBUaGV5IGFyZSB1c2VkIHRvIGV2YWx1YXRlIHRoZSB0cnV0aCB2YWx1ZSBvZiBsb2dpY2FsIHN0YXRlbWVudHMgc3VjaCBhcyB2YXJpYWJsZSAiYEFgIGlzIGVxdWFsIHRvIHZhcmlhYmxlIGBCYCIgb3IgdmFyaWFibGUgYEFgIGlzIGEgbnVtZXJpYyB2ZWN0b3IuIFdoZW5ldmVyIHRoZSBxdWVyaWVkIHN0YXRlbWVudCBpcyBUcnVlLCB0aGV5IHJldHVybiBUUlVFIGFuZCBGQUxTRSBvdGhlcndpc2UuIEJlbG93IHlvdSBjYW4gc2VlIHNvbWUgc2ltcGxlIGV4YW1wbGVzIHVzaW5nIHRoZSBlcXVhbGl0eSBvcGVyYXRvciBgPT1gIC0gdGhlIGRvdWJsZSBlcXVhbGl0eSBtZWFucyB0aGF0IHdlIGFyZSBjaGVja2luZyB3aGV0aGVyIHR3byB2YWx1ZXMgYXJlIGVxdWFsLCByYXRoZXIgdGhhbiBhc3NpZ25pbmcgb25lIHRvIGFub3RoZXIuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KYSA8LSA1CmEgPT0gNQphID09IDMKYSAtIDIgPT0gMwoiSm9obiIgPT0gIkphbWVzIgoKIycgCiMnIFRoZSBgIWAgb3BlcmF0b3IgaXMgdXNlZCBmb3IgbmVnYXRpb24sIHNvIGAhVFJVRWAgcmVzdWx0cyBpbiBgRkFMU0VgIGFuZCB2aWNlIHZlcnNhLiBBY2NvcmRpbmdseSwgYCE9YCBpcyB1c2VkIHRvIGRlbm90ZSAnbm90IGVxdWFscyB0bycuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIVRSVUUKIUZBTFNFCjUgIT0gNgoiSm9obiIgIT0gIkphbWVzIgoKIycgCiMnIExvZ2ljYWwgb3BlcmF0aW9ucyBjYW4gYWxzbyBiZSB1c2VkIHRvIGNvbXBhcmUgdmFsdWVzLCBieSB1c2luZyBgYSA8IGJgIGZvciAiYSBpcyBsZXNzIHRoYW4gYiIsIGBhIDw9IGJgIGZvciAiYSBpcyBsZXNzIG9yIGVxdWFsIHRvIGIiIGFuZCB2aWNlIHZlcnNhLiAKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp4IDwtIDUKeSA8LSAzCgp4ID4geQp4IC0gMiA8IHkKeCAtIDIgPD0geQoKIycgCiMnIAojJyAKIycgCiMnIAojJyBGaW5hbGx5LCB0aGUgYCZgIChsb2dpY2FsICJhbmQiKSBhbmQgYHxgIChsb2dpY2FsICJvciIpIG9wZXJhdG9ycyBhcmUgZGVzaWduZWQgdG8gY29tYmluZSBgVFJVRWAvYEZBTFNFYCB2YWx1ZXMuIFNvLCBpZiB5b3UgcHV0IGAmYCBiZXR3ZWVuIHR3byBsb2dpY2FsIHZhbHVlcywgaXQgd2lsbCB5aWVsZCBgVFJVRWAgaWYgYW5kIG9ubHkgaWYgX2JvdGhfIHZhbHVlcyBhcmUgVFJVRS4gYHxgIG9uIHRoZSBvdGhlciBoYW5kIHdpbGwgcmV0dXJuIGBUUlVFYCAgaWYgX2FueV8gb2YgdGhlIHZhbHVlcyBpcyBgVFJVRWAKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpUUlVFICYgVFJVRQpUUlVFICYgRkFMU0UKVFJVRSB8IEZBTFNFCkZBTFNFIHwgRkFMU0UKKDUgKyAxID09IDYpIHwgKDIgKyAyID09IDUpCig1ICsgMSA9PSA2KSAmICgyICogMiA9PSAxMCkKCiMnIAojJyBUaGUgbG9naWNhbCB2YWx1ZXMgYXJlIGFsc28gb2Z0ZW4gdXNlZCB0byB2ZXJpZnkgd2hldGhlciB3ZSBhcmUgZGVhbGluZyB3aXRoIGEgY2VydGFpbiBSIHR5cGUgLSBmb3IgZXhhbXBsZSB0byBjaGVjayB3aGV0aGVyIGEgdmFsdWUgaXMgYSBjaGFyYWN0ZXIgb3IgbnVtZXJpYy4gVGhpcyBpcyBhY2hpZXZlZCBieSB1c2luZyB0aGUgYGlzYCBmdW5jdGlvbnMsIHN1Y2ggYXMgYGlzLm51bWVyaWNgIG9yIGBpcy5jaGFyYWN0ZXJgLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm51bWJlcnMgPC0gYyg1LCA2LCA3KQppcy52ZWN0b3IobnVtYmVycykKaXMubnVtZXJpYyhudW1iZXJzKQppcy5jaGFyYWN0ZXIobnVtYmVycykKCndvcmRzIDwtIGMoIldvcmQiLCJXb3JkIikKaXMubnVtZXJpYyh3b3JkcykKaXMuY2hhcmFjdGVyKHdvcmRzKQoKIycgCiMnIEFzIHdpdGggbnVtYmVycyBhbmQgY2hhcmFjdGVycywgdGhlIGxvZ2ljYWwgdmFsdWVzIGFsc28gZm9ybSB0aGVpciBzcGVjaWFsIHR5cGVzIG9mIHZlY3RvcnMgYW5kIGNhbiBiZSB1c2VkIHRvIHBlcmZvcm0gZWxlbWVudC13aXNlIG9wZXJhdGlvbnMuIAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmEgPC0gYyhUUlVFLCBGQUxTRSwgRkFMU0UpCmIgPC0gYyhUUlVFLCBUUlVFLCBUUlVFKQphICYgYgoKIycgCiMnIFRoZXkgY2FuIGFsc28gYmUgdXNlZCB0byBmaW5kIHdoZXRoZXIgZWFjaCB2YWx1ZSBpbiBhIG51bWVyaWMgb3IgY2hhcmFjdGVyIHZlY3RvciBpcyBlcXVhbCB0byBhbm90aGVyLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnggPC0gYyg1LCA2LCA3LCA4KQp4ID09IDUKCnkgPC0gYygiSm9obiIsICJKYW1lcyIsICJUaG9tYXMiKQp6IDwtIGMoIkpvaG4iLCJKYW1lcyIsIlJvYmVydCIpCnogPT0geQoKIycgCiMnIFRoZSBib29sZWFuIHZlY3RvcnMgY2FuIGJlIGFsc28gdGhvdWdodCBvZiBhcyBhIHNwZWNpYWwgY2FzZSBvZiBudW1lcmljIHZlY3RvcnMgY29uc2lzdGluZyBvbmx5IG9mIDBzIGFuZCAxcywgd2hlcmUgMCBjb3JyZXNwb25kcyB3aXRoIGBGQUxTRWAgYW5kIDEgd2l0aCBgVFJVRWAgdmFsdWUuIFRoaXMgY2FuIGJlIGVhc2lseSBzZWVuIGluIHRoZSBleGFtcGxlIGJlbG93OgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClRSVUUgKyBUUlVFICsgVFJVRQoKIycgCiMnIAojJyAjIyMgSW5kZXhpbmcgCgojJyAKIycgV2hpbGUgYSB2ZXJ5IGxhcmdlIHZvbHVtZSBvZiBkYXRhIGNhbiBiZSBzdG9yZWQgaW4gb25lIHZlY3Rvciwgd2Ugb2Z0ZW4gbWF5IHdhbnQgdG8gYWNjZXNzIG9ubHkgYSBzcGVjaWZpYyBlbGVtZW50IG9mIGl0LCBvciBhIGZyYWN0aW9uIG9mIHRoZSBlbGVtZW50cy4gQW4gX2luZGV4XyBvZiBhIHZlY3RvciwgaXMgc2ltcGx5IGFuIGludGVnZXIgY29ycmVzcG9uZGluZyB0byB0aGUgcG9zaXRpb24gb2YgYSB2YWx1ZSBpbiBhIHRoZSB2ZWN0b3IuIFNvLCBhIHZlY3RvciB3aXRoIE4gdmFsdWVzIGhhcyBpbnRlZ2VycyByYW5naW5nIGZyb20gMSB0byBOLiBGb3IgZXhhbXBsZSwgaW4gdmVjdG9yIGBjKDUsIDEwLCAzLCAyKWAsIHRoZSBpbmRleCBvZiA1IGlzIDEsIHRoZSBpbmRleCBvZiAxMCBpcyAyLCB0aGUgaW5kZXggb2YgMyBpcyAzLCBldGMuICpJbmRleGluZyogaXMgYW4gb3BlcmF0aW9uIG9mIGFjY2Vzc2luZyBhIHZlY3RvcidzIGVsZW1ldCBhdCBhIGdpdmVuIGluZGV4LCB1c2luZyB0aGUgc3F1YXJlIGJyYWNrZXRzIGBbXWAuIEZvciBleGFtcGxlLCBgYVs1XWAgbWVhbnMgImdldCB0aGUgZmlmdGggZWxlbWVudCBmcm9tIHZlY3RvciBhIi4gCiMnIAojJyAKIycgCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KYSA8LSBjKDUuMiwgNC41LCA2LjIsIDguOSwgMTAuMiwgNC44LCAwLjEpCmFbNV0KCiMnIAojJyAKIycgCiMnIAojJyAKIycgSW5kZXhpbmcgY2FuIGFsc28gYmUgdXNlZCB0byBfcmVwbGFjZSB2YWx1ZXNfIGF0IGEgZ2l2ZW4gcG9zaXRpb24gaW4gYSB2ZWN0b3IuIEluIHRoZSBleGFtcGxlIGJlbG93LCB3ZSByZXBsYWNlIHRoZSBmaXJzdCBlbGVtZW50IG9mIGBhYCB3aXRoIHRoZSBudW1iZXIgMTAwMC4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQphWzFdIDwtIDEwMDAKYSAKCiMnIAojJyAKIycgCiMnIAojJyBJbmRleGluZyBjYW4gYWxzbyBiZSBkb25lIHVzaW5nIGFub3RoZXIgdmVjdG9yIG9mIG51bWVyaWMgdmFsdWVzLiBGb3IgZXhhbXBsZSB3ZSBtYXkgd2FudCB0byBnZXQgdGhlIGZpcnN0LCBzZWNvbmQgYW5kIGZpZnRoIGVsZW1lbnRzIG9mIGEgZ2l2ZW4gdmVjdG9yLCBvciBhIHNlcXVlbmNlIG9mIGVsZW1lbnRzIGJldHdlZW4gMSBhbmQgNC4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQphIDwtIGMoNS4yLCA0LjUsIDYuMiwgOC45LCAxMC4yLCA0LjgsIDAuMSkKYVtjKDEsIDMsIDUpXQojZXF1aXZhbGVudCB0bzoKYiA8LSBjKDEsIDMsIDUpCmFbYl0KCiNjYW4gYWxzbyBiZSBkb25lIGZvciBhIHNlcXVlbmNlCmFbMTo1XQoKIycgCiMnIAojJyAKIycgCiMnIEluZGV4aW5nIGlzIGV2ZW4gbW9yZSBwb3dlcmZ1bCBpbiBjb25qdW5jdGlvbiB3aXRoIGxvZ2ljYWwgb3BlcmF0aW9ucy4gVGhpcyBpcyBiZWNhdXNlLCBhIGxvZ2ljYWwgdmVjdG9yIGNhbiBiZSB1c2VkIHRvIGluZGV4IGFueSB2ZWN0b3IgLSBzdWNoIGluZGV4aW5nIG9wZXJhdGlvbnMgcmV0dXJucyBhbGwgdGhlIHZhbHVlcyBvZiB0aGUgaW5kZXhlZCB2ZWN0b3Igd2hlcmUgdGhlIGNvcnJlc3BvbmRpbmcgaW5kZXhpbmcgbG9naWNhbCB2ZWN0b3IgaXMgYFRSVUVgLiBUaGlzIG1heSBzb3VuZCBjb25mdXNpbmcgYXQgZmlyc3QsIGJ1dCBpcyBhY3R1YWxseSBxdWl0ZSBzdHJhaWdodGZvcndhcmQsIGFzIHNlZW4gYmVsb3c6CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KeCA8LSBjKDQuMiwgNS42LCA3LjIsIDEuMSkKaW5kZXggPC0gYyhGQUxTRSwgVFJVRSwgVFJVRSwgRkFMU0UpICNvbmx5IHNlY29uZCBhbmQgdGhpcmQgZWxlbWVudHMgYXJlIFRSVUUKeFtpbmRleF0gI3JldHVybnMgb25seSBzZWNvbmQgYW5kIHRoaXJkIGVsZW1lbnRzIG9mIHRoZSB4IHZlY3RvcgoKIycgCiMnIAojJyAKIycgCiMnIEZvciBleGFtcGxlLCBpbWFnaW5lIHZlY3RvciBgZ2RwYCB2ZWN0b3IgdGhhdCBob2xkcyB0aGUgR0RQIHBlciBjYXBpdGEgdmFsdWVzIGZvciBhIGxpc3Qgb2YgY291bnRyaWVzIGFuZCBgY291bnRyeWAgdmVjdG9yIHRoYXQgaG9sZHMgdGhlIGNvcnJlc3BvbmRpbmcgY291bnRyeSBuYW1lcy4gTG9naWNhbCBpbmRleGluZyBtYXkgYmUgdmVyeSB1c2VmdWwsIGlmIHdlIHdhbnQgdG8gZ2V0IG5hbWVzIG9mIGNvdW50cmllcyB3aXRoIEdEUCBwZXIgY2FwaXRhIGFib3ZlIG9yIGJlbG93IGEgY2VydGFpbiB2YWx1ZToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpnZHAgPC0gYyg2OTY4NywgNjcwMzcsIDY1MTExLCA1MjM2NywgNDEwMzAsIDMyOTQ2LCAyOTk2MSkKY291bnRyaWVzIDwtIGMoIlFhdGFyIiwgIkljZWxhbmQiLCAiVVNBIiwKICAgICAgICAgICAgICAgIkdlcm1hbnkiLCAiVW5pdGVkIEtpbmdkb20iLCAiSXRhbHkiLCAiU3BhaW4iKQpjb3VudHJpZXNbZ2RwID4gNDAwMDBdCgojJyAKIycgV2UgY2FuIGFsc28gdXNlIHRoaXMgd2l0aCBtdWx0aXBsZSBjcml0ZXJ0aWEsIGZvciBleGFtcGxlIGluZGV4IGNvdW50cmllcyB3aXRoIEdEUCBoaWdoZXIgdGhhbiA0MDAwMCBVU0QgYW5kIHRoZSBVTiBIdW1hbiBEZXZlbG9wbWVudCBJbmRleCBoaWdoZXIgdGhhbiAwLjkuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KaGRpIDwtIGMoMC44NDgsIDAuOTM4LCAwLjkyMCwgMC45MzksIDAuOTIwLCAwLjg4MywgMC44OTMpCmNvdW50cmllc1tnZHAgPiA0MDAwMCAmIGhkaSA+IDAuOV0KCiMnIAojJyAKIycgCiMnIAojJyAKIycgIyMjIFNvcnRpbmcgCgojJyAKIycgT24gbWFueSBvY2Nhc2lvbnMsIGl0J3MgdXNlZnVsIHRvIHNvcnQgYSB2ZWN0b3IgdG8gc2VlIGl0J3MgaGlnaGVzdCBvciBsb3dlc3QgdmFsdWVzLiBUaGlzIGNhbiBiZSBhY2hpZXZlZCBieSB1c2luZyB0aGUgYHNvcnRgIGZ1bmN0aW9uLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm51bWJlcnMgPC0gYyg4LCA0LCA1LCAxMCwgMiwgMTIzKQpzb3J0KG51bWJlcnMpCgojJyAKIycgQnkgZGVmYXVsdCwgUiBzb3J0cyB2ZWN0b3JzIGluIGFuIGluY3JlYXNpbmcgb3JkZXIgKGluIGNhc2Ugb2YgY2hhcmFjdGVyIHZlY3RvcnMsIHRoaXMgdHJhbnNsYXRlcyB0byBBLVogc29ydGluZykuIEhvd2V2ZXIsIHRoZSBzb3J0IGZ1bmN0aW9uIGhhcyBhbiBhZGRpdGlvbmFsIGFyZ3VtZW50LCBgZGVjcmVhc2luZ2AsIHRoYXQgY2FuIGJlIHVzZWQgdG8gc3BlY2lmeSB3aGV0aGVyIHRoZSBzb3J0aW5nIHNob3VsZCBiZSBkb25lIGluIHRoZSBkZWNyZWFzaW5nIG9yZGVyLiBUaGUgYXJndW1lbnQgaXMgYSBfZGVmYXVsdF8gYXJndW1lbnQsIGkuZS4gdGFrZXMgYSBjZXJ0YWluIHZhbHVlIHVubGVzcyBzcGVjaWZpZWQgb3RoZXJ3aXNlIGJ5IHRoZSB1c2VyLiBUaGlzIGlzIGNvbW1vbiBpbiBSIGFuZCBhIGxvdCBvZiBmdW5jdGlvbnMgYWxsb3cgY3VzdG9taXppbmcgdGhlIHdheSB0aGV5IHdvcmsgYnkgc3BlY2lmeWluZyBhZGRpdGlvbmFsIGFyZ3VtZW50cywgd2hpY2ggaGF2ZSBhIGRlZmF1bHQgdmFsdWUgdG8gYXZvaWQgdGhlIGVmZm9ydCBvZiBzcGVjaWZ5aW5nIHRoZW0gZXZlcnkgdGltZSBhIGNlcnRhaW4gZnVuY3Rpb24gaXMgdXNlZC4gU3VjaCBkZWZhdWx0IGFyZ3VtZW50cyBjYW4gZWFzaWx5IGJlIHJlY29nbml6ZWQgaW4gUiBkb2N1bWVudGF0aW9uLiBJbiBjYXNlIG9mIHNvcnQsIHRoZSAqVXNhZ2UqIHNlY3Rpb24gcmVhZHMgYHNvcnQoeCwgZGVjcmVhc2luZyA9IEZBTFNFLCAuLi4pYC4gVGhpcyBtZWFucywgdGhhdCB0aGUgZnVuY3Rpb24gdGFrZXMgYHhgICh0aGUgdmVjdG9yIHRvIGJlIHNvcnRlZCkgYXMgaXRzIG1haW4gYXJndW1lbnQsIGFuZCBgZGVjcmVhc2luZ2AsIHdoaWNoIGRlZmF1bHRzIHRvIGBGQUxTRWAuIFRoZSBhcmd1bWVudCBgZGVjcmVhc2luZ2AgaXMgYWxzbyBfbG9naWNhbF8gLSBjYW4gb25seSB0YWtlIGBUUlVFYCBvciBgRkFMU0VgIHZhbHVlcyAtIHRoaXMgaXMgYSBjb21tb24gYXJndW1lbnQgdHlwZSBpZiBhIGNlcnRhaW4gb3BlcmF0aW9uIGNhbiBiZSBwZXJmb3JtZWQgaW4gdHdvIGRpZmZlcmVudCB3YXlzIG9mIHdpdGggYW4gYWRkaXRpb25hbCBlbGVtZW50IHRoYXQgbWF5IG5vdCBhbHdheXMgYmUgZGVzaXJlZC4gCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc29ydChudW1iZXJzLCBkZWNyZWFzaW5nID0gVFJVRSkKCiMnIAojJyBXaGlsZSBzb3J0aW5nIGEgdmVjdG9yIG1heSBiZSB1c2VmdWwgaW4gY2VydGFpbiBjaXJjdW1zdGFuY2VzLCBhIGxvdCBvZiB0aGUgdGltZSB3ZSBtYXkgYWN0dWFsbHkgbmVlZCB0byBzb3J0IHRoZSB2YWx1ZXMgYnkgYW5vdGhlciB2ZWN0b3IuIEZvciBleGFtcGxlLCBsZXQncyBhc3N1bWUgdGhhdCB3ZSBoYXZlIGEgdmVjdG9yIG9mIG5hbWVzIGFuZCBjb3JyZXNwb25kaW5nIGFnZXMsIGFuZCB3ZSB3YW50IHRvIHNlZSB0aGUgbmFtZXMgb3JkZXJlZCBieSB0aGUgYWdlLiAKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpuYW1lcyA8LSBjKCJUaG9tYXMiLCJQZXRlciIsIkFobWVkIiwiRW1pbHkiLCJIZWxlbmEiKQphZ2UgPC0gYyg1MCwgMTAsIDIwLCAxNSwgNDApCgojJyAKIycgCiMnIFRoaXMgY2FuIGJlIGFjaGlldmVkIHVzaW5nIHRoZSBgb3JkZXJgIGZ1bmN0aW9uLCB3aGljaCByZXR1cm5zIGluZGljZXMgb2YgdGhlIHZlY3RvciBuZWVkZWQgdG8gcmUtYXJyYW5nZSBpdCBpbnRvIHNvcnRlZCBvcmRlci4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpvcmRlcihhZ2UpCgojJyBJbiB0aGlzIGNhc2UsIHRoZSBhZ2Ugb2YgMTAgKGluZGV4IDIpIHNob3VsZCBnbyB0byB0aGUgZmlyc3QgcGxhY2UsIDE1IChpbmRleCA0KSB0byB0aGUgc2Vjb25kIHBvc2l0aW9uLCAyMCAoaW5kZXggMykgdG8gdGhlIHRoaXJkLCBldGMuIE5vdGUgdGhhdCB0aGUgdHdvIGZvbGxvd2luZyBvcGVyYXRpb25zIGFyZSBlcXVpdmFsZW50OgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNvcnQoYWdlKQphZ2Vbb3JkZXIoYWdlKV0KCiMnIAojJyBUaGUgZmlyc3Qgb25lIHRlbGxzIFIgdG8gc2ltcGx5IF9zb3J0IHRoZSB2YWx1ZXMgb2YgYWdlXywgd2hlcmVhcyB0aGUgc2Vjb25kIHRvIF9pbmRleF8gYWdlIGJ5IHRoZSBpbmRpY2VzIG9mIGFnZSBpbiBhIHNvcnRlZCBvcmRlci4gVG8gZ2V0IHRoZSBuYW1lcyBzb3J0ZWQgYnkgYWdlLCB3ZSBjYW4gdXNlOgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm5hbWVzW29yZGVyKGFnZSldCm5hbWVzW29yZGVyKGFnZSwgZGVjcmVhc2luZyA9IFRSVUUpXSAjZGVjcmVhc2luZyBvcmRlcgoKIycgCiMnIAojJyBGaW5hbGx5LCB0aGUgYHJhbmtgIGZ1bmN0aW9uIHJldHVybnMgdGhlIHNhbXBsZSByYW5rcyBvZiBhIGdpdmVuIHZlY3RvciwgaS5lLiB0aGVpciByZWxhdGl2ZSBwb3NpdGlvbiBpbiBhIHNvcnRlZCBsaXN0LiBOb3RlIHRoYXQgdGhpcyBpcyBkaWZmZXJlbnQgZnJvbSBgb3JkZXJgLiBgcmFua2AgcmV0dXJucyB0aGUgcG9zaXRpb24gY29ycmVzcG9uZGluZyB0byBlYWNoIHZhbHVlIGluIGEgc29ydGVkIG9yZGVyLCB3aGVyZWFzIGBvcmRlcmAgcmV0dXJucyBpbmRpY2VzIG9mIHRoZSBvcmlnaW5hbCB2ZWN0b3IgbmVlZGVkIHRvIHB1dCBpdCBpbiBhIHNvcnRlZCBvcmRlci4gCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KYWdlCnJhbmsoYWdlKQpvcmRlcihhZ2UpCgojJyAKIycgU28gaW4gb3VyIGV4YW1wbGUsIHRoZSBmaXJzdCB2YWx1ZSBvZiB0aGUgdmVjdG9yIHJldHVybmVkIGJ5IGByYW5rKGFnZSlgIGlzIDUsIHNpbmNlIHRoZSBmaXJzdCB2YWx1ZSBvZiB0aGUgYGFnZWAgdmVjdG9yIGlzIDUwLCB3aGljaCB3b3VsZCBiZSBsYXN0IGluIHRoZSBudW1lcmljIG9yZGVyLiBUaGUgZmlyc3QgdmFsdWUgb2YgdGhlIHZlY3RvciByZXR1cm5lZCBieSBgb3JkZXIoYWdlKWAgaXMgMiAtIHRoaXMgaXMgYmVjYXVzZSwgdGhlIDJuZCBlbGVtZW50IG9mIGBhZ2VgIChpLmUuIHRoZSB2YWx1ZSBvZiAxMCkgc2hvdWxkIGdvIHRvIHRoZSBmaXJzdCBwb3NpdGlvbiBmb3IgdGhlIHZlY3RvciB0byBtZSBjb3JyZWN0bHkgb3JkZXJlZC4KIycgCiMnIEZpbmFsbHksIGxvZ2ljYWwgaW5kaWNlcyBjYW4gYmUgY29udmVydGVkIGludG8gbnVtZXJpY2FsIHZhbHVlcyB1c2luZyB0aGUgYHdoaWNoYCBmdW5jdGlvbi4gSXQgdGFrZXMgYSBsb2dpY2FsIHZlY3RvciBhcyBpbnB1dCBhbmQgcmV0dXJucyB0aGUgaW5kaWNlcyBhdCB3aGljaCB0aGUgdmFsdWUgb2YgdGhlIHZlY3RvciBpcyBgVFJVRWAuIFlvdSBjYW4gc2VlIGFuIGV4YW1wbGUgYmVsb3c6CiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KbnVtYmVycyA8LSAxOjEwCm51bWJlcnMgPiA1CndoaWNoKG51bWJlcnMgPiA1KQoKIycgCiMnIFRoaXMgZnVuY3Rpb24gaXMgaGVscGZ1bCBpbiBzb21lIGNlcnRhaW4gc2l0dWF0aW9ucywgaG93ZXZlciBpdCdzIGEgYmFkIHByYWN0aWNlIHRvIGFwcGx5IGl0IGluIGNhc2VzIHdoZW4gbG9naWNhbCBpbmRleGluZyBpcyBzdWZmaWNpZW50LCBmb3IgZXhhbXBsZToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpudW1iZXJzW251bWJlcnMgPiA1XQoKIycgCiMnIGlzIHN1ZmZpY2llbnQsIGFuZCB0aGVyZSdzIG5vIG5lZWQgdG8gdXNlOgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm51bWJlcnNbd2hpY2gobnVtYmVycyA+IDUpXQoKIycgCiMnIE9uZSBvZiB0aGUgc2l0dWF0aW9ucyBpbiB3aGljaCB0aGUgdXNlIG9mIGB3aGljaGAgZnVuY3Rpb24gY2FuIGJlIHByZWZlcnJlZCB0byBzaW1wbGUgbG9naWNhbCBpbmRleGluZyBpcyB3aGVuIG91ciB2ZWN0b3IgY29udGFpbnMgbWlzc2luZyB2YWx1ZXMgKGRpc2N1c3NlZCBpbiB0aGUgW25leHQgY2hhcHRlcl0oI21pc3Npbmd2YWx1ZXMpLiBGb3IgZXhhbXBsZSwgdGhlIGZpcnN0IGV4cHJlc3Npb24gd2lsbCByZXR1cm4gYE5BYC4gCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KbnVtYmVycyA8LSBjKDIsIDQsIDEsIDEwLCAyMCwgTkEpCm51bWJlcnNbbnVtYmVycyA+IDVdCgojJyAKIycgVGhpcyBpcyBiZWNhdXNlLCBydW5uaW5nIGxvZ2ljYWwgY29tcGFyaXNvbnMgc3VjaCBhcyBgbnVtYmVycyA+IDVgIGFsd2F5cyByZXR1cm5zIG1pc3NpbmcgdmFsdWVzLCBhbG9uZyB0aGUgYFRSVUVgIGFuZCBgRkFMU0VgIGxvZ2ljYWwgdmFsdWVzLiBUaGlzIHNob3VsZCBtYWtlIHNlbnNlLCBzaW5jZSBgTkFgIGlzIG5vdCBjb21wYXJhYmxlIHRvIGFueSBudW1iZXIuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KbnVtYmVycyA+IDUKCiMnIAojJyBgd2hpY2hgIHNraXBzIHRoZSBgTkFgIHZhbHVlcywgb25seSByZXR1cm5pbmcgdGhlIGluZGljZXMgb2YgdmFsdWVzIHRoYXQgYXJlIGBUUlVFYC4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp3aGljaChudW1iZXJzID4gNSkKCiMnIAojJyBBcyBhIHJlc3VsdCwgd2UgY2FuIHBlcmZvcm0gaW5kZXhpbmcgb24gdmFyaWFibGUgd2l0aCBtaXNzaW5nIHZhbHVlcyB1c2luZyBgd2hpY2hgOiAKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpudW1iZXJzW3doaWNoKG51bWJlcnMgPiA1KV0KCiMnIAojJyAKIycgVHdvIGNvdXNpbnMgb2YgdGhlIGB3aGljaGAgZnVuY3Rpb24gYXJlIGB3aGljaC5tYXhgIGFuZCBgd2hpY2gubWluYCwgd2hpY2ggcmV0dXJuIHRoZSBpbmRleCBvZiB0aGUgaGlnaGVzdCBhbmQgbG93ZXN0IHZhbHVlIGluIGEgdmVjdG9yLiBTbywgY29taW5nIGJhY2sgdG8gdGhlIGFnZXMgZXhhbXBsZSwgd2UgY2FuIHJldHJpZXZlIHRoZSBuYW1lIG9mIHRoZSBwZXJzb24gd2l0aCBoaWdoZXN0IGFuZCBsb3dlc3QgYWdlIHVzaW5nIHJlc3BlY3RpdmVseToKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpuYW1lc1t3aGljaC5tYXgoYWdlKV0KbmFtZXNbd2hpY2gubWluKGFnZSldCgojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyAKAA==" download="02-basics.R">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter script</button>
+</a><a href="data:text/x-markdown;base64,LS0tCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KIyBCYXNpY3Mgb2YgUiBQcm9ncmFtbWluZyB7I2Jhc2ljc30KCgoKCgoKIyMgQ29udGVudAoKIyMjIEFyaXRobWV0aWMgb3BlcmF0aW9ucyBhbmQgYXNzaWdubWVudCB7LX0KClIgYWxsb3dzIHlvdSB0byBwZXJmb3JtIGV2ZXJ5IGJhc2ljIG1hdGhlbWF0aWNhbCBvcGVyYXRpb24sIHNvIGl0IGNhbiBzaW1wbHkgYmUgdXNlZCBhcyBhIGNhbGN1bGF0b3IuIEJlbG93LCB5b3UgY2FuIHNlZSBzZXZlcmFsIGV4YW1wbGVzLgoKYGBge3J9CjUgKyAzICNhZGRpdGlvbgo1IC0gMyAjc3VidHJhY3Rpb24KNSAvIDMgI2RpdmlzaW9uCjUgLyAwCjUgKiAzICNtdWx0aXBsaWNhdGlvbgo1IF4gMyAjZXhwb25lbnRpYXRpb24Kc3FydCg0KSAjc3F1YXJlIHJvb3QKKDUgKyA1KSAvICgzICsgMSkgI3BhcmVudGhlc2lzCjkgJSUgMiAjbW9kdWxvCjkgJS8lIDIgI2ludGVnZXIgZGl2aXNpb24KbG9nKDIpICNuYXR1cmFsIGxvZ2FyaXRoaW0KZXhwKDIpICNleHBvbmVudApgYGAKCkFsbCB0aGUgb3BlcmF0aW9ucyBwZXJmb3JtZWQgYWJvdmUgZ2VuZXJhdGUgc29tZSBvdXRwdXQsIHdoaWNoIGlzIHByaW50ZWQgdG8gdGhlIFIgY29uc29sZS4gTW9zdCBvZiB0aGUgdGltZSwgaG93ZXZlciwgaXQgaXMgdXNlZnVsIHRvIHN0b3JlIHRoZSBvdXRwdXRzIG9mIHRoZSBvcGVyYXRpb25zIHdlIHBlcmZvcm0sIHNvIHRoYXQgdGhleSBjYW4gYmUgYWNjZXNzZWQgcmVwZWF0ZWRseS4gVG8gZG8gdGhhdCwgd2UgY2FuIHN0b3JlIHZhbHVlcyBpbiB2YXJpYWJsZXMsIHdoaWNoIGNhbiBiZSB2aWV3ZWQgYW5kIG1hbmlwdWxhdGVkIGJ5IHJlZmVyZW5jaW5nIHRoZWlyIG5hbWVzLiBWYWx1ZXMgYXJlIGFzc2lnbmVkIHRvIHZhcmlhYmxlcyB1c2luZyB0aGUgYDwtYG9wZXJhdG9yLiBXaGlsZSBgPWAgbWF5IHNlZW0gZXF1aXZhbGVudCwgZm9yIG1vcmUgYWR2YW5jZWQgcmVhc29ucyBgPC1gIGlzIHVzZWQgd2hlbmV2ZXIgYXNzaWduaW5nIGEgdmFsdWUuIElmIHlvdSdyZSBpbnRlcmVzdGVkIGluIHRoZSB0ZWNobmljYWwgZGV0YWlscyBiZWhpbmQgaXQsIHlvdSBjYW4gY2hlY2sgb3V0IHRoaXMgW1N0YWNrIE92ZXJmbG93IHBvc3RdKGh0dHBzOi8vc3RhY2tvdmVyZmxvdy5jb20vcXVlc3Rpb25zLzE3NDE4MjAvd2hhdC1hcmUtdGhlLWRpZmZlcmVuY2VzLWJldHdlZW4tYW5kLWFzc2lnbm1lbnQtb3BlcmF0b3JzLWluLXIpLgoKCmBgYHtyfQp4IDwtIDUKbXlfbnVtYmVyIDwtIDQuMgpyZXN1bHQgPC0gNSArIDYgKiA3IC0gOApgYGAKCllvdSBjYW4gbmFtZSBhIHZhcmlhYmxlIGFueXRoaW5nIHlvdSBsaWtlLCBob3dldmVyIGl0IGNhbm5vdDoKCi0gc3RhcnQgd2l0aCBhIG51bWJlcgoKLSBoYXZlIGFueSB3aGl0ZXNwYWNlc15bVGVjaG5pY2FsbHksIHlvdSBjYW4gY3JlYXRlIGEgdmFyaWFibGUgd2l0aCB3aGl0ZXNwYWNlcyBvciBudW1iZXJzIGluIGl0cyBuYW1lIHVzaW5nIHRoZSByZXZlcnNlIHF1b3RhdGlvbiBtYXJrcyBcYCwgZm9yIGV4YW1wbGUgYDUgbXkgdmFyaWFibGVgLiBIb3dldmVyIHRoaXMgaXMgbm90IGEgY29tbW9uIHByYWN0aWNlIGFuZCBtYWtlcyB5b3VyIGNvZGUgZGlmZmljdWx0IHRvIHJlYWQsIHNvIHRoaXMgc2hvdWxkIGJlIGF2b2lkZWQuXQoKLSBpbmNsdWRlIG1hdGhlbXRpY2FsIG9wZXJhdG9ycyBpbiBpdCdzIG5hbWUsIHN1Y2ggYXMgXCosIC8sIF4sICUsIGV0Yy4gLSBpdCdzIGJlc3QgdG8gYXZvaWQgYW55IHNwZWNpYWwgY2hhcmFjdGVycyBleGNlcHQgZm9yICJfIiBhbmQgIi4iIHRvIHNlcGFyYXRlIHdvcmRzIGlmIG5lY2Vzc2FyeSwgZm9yIGV4YW1wbGUgYG15X3ZhcmlhYmxlYCBvciBgbXkudmFyaWFibGVgLiBXaGlsZSB5b3UgY2FuIHNlZSB0aGUgZG90IGJlaW5nIHVzZWQgaW4gdmFyaWFibGUgbmFtZXMgYnkgbWFueSB1c2VycywgdGVjaG5pY2FsbHkgdXNpbmcgXyBpcyBhIGJldHRlciBwcmFjdGljZSwgYXMgdGhlIGRvdCBoYXMgYW4gYWRkaXRpb25hbCBzcGVjaWFsIG1lYW5pbmcgYXR0YWNoZWQgdG8gaXQuCgpJdCBpcyBhbHNvIHVzZWZ1bCB0byBhdm9pZCBuYW1pbmcgdmFyaWFibGVzIHVzaW5nIG5hbWVzIHRoYXQgYXJlIGFscmVhZHkgZGVmaW5lZCBpbiBSIHRvIGJlIHNvbWV0aGluZyBlbHNlIC0gaG93ZXZlciwgeW91IHdpbGwgbGVhcm4gdGhlIGF2b2lkIHRoaXMgYXMgeW91IHByb2dyZXNzIGluIHRoZSBjb3Vyc2UuCgpLZWVwIGluIG1pbmQsIHRoYXQgd2hpbGUgdmFyaWFibGUgbmFtZXMgYXJlIGFyYml0cmFyeSwgaXQncyBnb29kIHRvIGtlZXAgdGhlbSBjb25jaXNlIGFuZCBpbmZvcm1hdGl2ZSwgZXNwZWNpYWxseSBpZiB5b3UgaGF2ZSB0byBwcmVzZW50IHlvdXIgY29kZSB0byBzb21lb25lIG9yIHRvIGNvbWUgYmFjayB0byB5b3VyIG93biB3b3JrIGFmdGVyIGEgbG9uZyBwZXJpb2Qgb2YgdGltZS4KCkFzc2lnbmluZyB0aGUgdmFsdWVzIGRvZXMgbm90IHByb2R1Y2UgYW55IG91dHB1dC4gVG8gYWNjZXNzIHRoZSB2YWx1ZXMgYXNzaWduZWQgdG8gYSB2YXJpYWJsZSwgeW91IGhhdmUgdG8gY2FsbCBpdHMgbmFtZSBkaXJlY3RseSBpbiB0aGUgc2NyaXB0IG9yIHRoZSBjb25zb2xlLiBZb3UgY2FuIHVzZSB0aGlzIHRvIHBlcmZvcm0gbWF0aGVtYXRpY2FsIG9wZXJhdGlvbnMgb24gdGhlIG9iamVjdHMgYXMgd2VsbC4gCgpgYGB7cn0KeCA8LSA1CnkgPC0gNwp4CnkKeCArIHkKeiA8LSB4ICogeQp6CmBgYAoKRmluYWxseSwgeW91IGNhbiBhbHdheXMgYXNzaWduIGEgbmV3IHZhbHVlIHRvIHRoZSBzYW1lIG5hbWUuIEhvd2V2ZXIgdGhpcyBpbXBsaWVzIHRoYXQgdGhlIG9sZCB2YWx1ZSB3aWxsIGJlIGRpc2NhcmRlZC4gSXQgY2FuIGJlIHVzZWZ1bCB3aGVuIHlvdSBrbm93IHRoYXQgeW91IHdvbid0IG5lZWQgdG8gYWNjZXNzIHRoZSB2YWx1ZSBhZ2Fpbi4gRm9yIGV4YW1wbGUsIGl0J3MgYSBjb21tb24gcHJhY3RpY2UgdG8gbW9kaWZ5IGEgdmFyaWFibGUgYWxyZWFkeSBkZWZpbmVkIHN1Y2ggdGhhdCBgeCA8LSB4ICsgNWAuIFRoaXMgc2ltcGx5IG1lYW5zICJhZGQgNSB0byB4IGFuZCBzdG9yZSBpdCBpbiB4Ii4KCmBgYHtyfQp4IDwtIDUKeAp4IDwtIDcKeAp4IDwtIHggKyAyCmBgYAoKIyMjIFZlY3RvcnMgey19CgpXaGlsZSB0aGUgYWJvdmUgb3BlcmF0aW9ucyBhcmUgdXNlZnVsLCB0aGUgdHJ1ZSBwb3dlciBvZiBSIGNvbWVzIGZyb20gdGhlIHNvLWNhbGxlZCAqKnZlY3Rvcml6YXRpb24qKiBvZiBtYXRoZW1hdGljYWwgKGFuZCBvdGhlcikgb3BlcmF0aW9ucy4gQSAqKnZlY3RvcioqIGluIFIgdGVybWlub2xvZ3kgaXMganVzdCBhIGZhbmN5IHdvcmQgZm9yIGFuIG9yZGVyZWQgc2VxdWVuY2Ugb2YgbnVtYmVycyBvciBhICJjb2x1bW4iIGluIGFuIEV4Y2VsIHNoZWV0LiBWZWN0b3JzIGFyZSBhbHNvIGNvbW1vbmx5IHJlZmVycmVkIHRvIGFzICoqdmFyaWFibGVzKiogLSBpbiB0aGUgY29udGV4dCBvZiB0aGlzIGNvdXJzZSwgdGhlc2UgdGVybXMgd2lsbCBiZSB1c2VkIGludGVyY2hhbmdhYmx5LiBWZWN0b3JzIGFyZSBjcmVhdGVkIGJ5IHRoZSBjb21iaW5lIGZ1bmN0aW9uIGBjKClgLiBBICoqZnVuY3Rpb24qKiBpcyBzaW1wbHkgYW4gZXhwcmVzc2lvbiBmb2xsb3dlZCBieSBwYXJlbnRoZXNlcyB3aGljaCB0YWtlcyBzb21lIHZhbHVlcyBhcyBpbnB1dCBhbmQgZ2VuZXJhdGVzIG90aGVyIHZhbHVlcyBhcyBvdXRwdXQuIFZlY3RvcnMgYXJlIGFzc2lnbmVkIHRvIG5hbWVzIHRoZSBzYW1lIHdheSBhcyBudW1iZXJzLiBJbiBmYWN0LCBfYSBudW1iZXIgaW4gUiBpcyBlcXVpdmFsZW50IHRvIGEgdmVjdG9yIG9mIGxlbmd0aCAxXy4gQmVsb3cgeW91IGNhbiBzZWUgc29tZSBleGFtcGxlcyBvZiB2ZWN0b3JzIGJlaW5nIGNyZWF0ZWQuCgpgYGB7cn0KeCA8LSBjKDEsIDQsIDUsIDYpCngKeiA8LSBjKDUgLyAyLCA3ICogOCwgMiArIDEpCnoKdiA8LSBjKHgsIHopCnYKYGBgCgpSIGFsc28gb2ZmZXJzIGEgc2hvcnRoYW5kIGZvciBjcmVhdGluZyBzZXF1ZW5jZXMgb2YgaW50ZWdlcnMgYmV0d2VlbiB0d28gdmFsdWVzLCBmb3IgZXhhbXBsZToKCmBgYHtyfQoxOjEwCnggPC0gMTU6NQp4CmBgYAoKSXQgaXMgYWxzbyBwb3NzaWJsZSB0byBjcmVhdGUgbXVsdGlwbGUgcmVwZXRpdGlvbnMgb2YgYSBnaXZlbiB2ZWN0b3IgYnkgdXNpbmcgdGhlIGByZXAoKWAgZnVuY3Rpb24sIHdoaWNoIHRha2VzIGEgdmVjdG9yIGFzIGl0cyBmaXJzdCBhcmd1bWVudCBhbmQgdGhlIG51bWJlciBvZiByZXF1aXJlZCByZXBldGl0aW9ucyBhcyB0aGUgc2Vjb25kIGFyZ3VtZW50LgoKYGBge3J9CnJlcCg1LCAzKSAjcmVwcmVhdCB0aGUgbnVtYmVyIDUgMyB0aW1lcwphIDwtIGMoNSwgNiwgNykKYiA8LSByZXAoYSwgNCkgI3JlcGVhdCB2ZWN0b3IgYSAxMCB0aW1lcyBhbmQgYXNzaW5nIGl0IHRvIGIKYgpgYGAKCgpUaGUgbGVuZ3RoIG9mIGEgdmVjdG9yIHJlZmVycyB0byB0aGUgbnVtYmVyIG9mIGVsZW1lbnRzIGl0IGNvbnRhaW5zLiBJdCBjYW4gYmUgZXhhbWluZWQgdXNpbmcgdGhlIGBsZW5ndGgoKWAgZnVuY3Rpb246CgpgYGB7cn0KYSA8LSAxOjUKbGVuZ3RoKGEpCmBgYAoKCioqVmVjdG9yaXphdGlvbioqIG9mIGFuIG9wZXJhdGlvbiByZWZlcnMgdG8gdGhlIGZhY3QgdGhhdCBhbiBvcGVyYXRpb24gYXJlIHBlcmZvcm1lZCBvbiB2ZWN0b3JzIGVsZW1lbnQtd2lzZS4gVGhpcyBpcyB0cnVlIGZvciBtYWpvcml0eSBvZiBSIG9wZXJhdGlvbnMuIEZvciBleGFtcGxlLCBhZGRpbmcgdGhlIHZlY3RvcnMgWzEgMiAzXSBhbmQgWzUgNiA3XSB3aWxsIHByb2R1Y2UgdGhlIHZlY3RvciBbNiA4IDEwXS4gSWYgYW4gb3BlcmF0aW9uIGlzIHBlcmZvcm1lZCBiZXR3ZWVuIGEgdmVjdG9yIGFuZCBhIHNpbmdsZSBudW1iZXIgKG9yIGEgKnNjYWxhciosIHVzaW5nIG1vcmUgc3BlY2lmaWMgdGVybWlub2xvZ3kpLCBpdCBpcyBhcHBsaWVkIHRvIGVhY2ggcGFpciBvZiB0aGUgZWxlbWVudHMsIHN1Y2ggdGhhdCBbMSAxIDFdIG11bHRpcGxpZWQgYnkgMiB3b3VsZCB5aWVsZCBbMiAyIDJdLiBCZWxvdyB5b3UgY2FuIHNlZSBzb21lIGV4YW1wbGVzIG9mIHZlY3RvcnMgaW4gYWN0aW9uLgoKCgoKYGBge3J9CnggPC0gYygxLCAyLCAzLCAyKQp5IDwtIGMoNSwgNiwgNywgNCkKeCArIHkKYGBgCgoKCgpgYGB7cn0KeCAtIHkKeCBeIHkKeiA8LSA1ICogeCAtIDIgKiB5CnoKYGBgCgoKCkluIGNhc2Ugb2YgcGVyZm9ybWluZyBvcGVyYXRpb25zIG9uIGEgdmVjdG9yIGFuZCBhIHNjYWxhciAob25lIG51bWJlciksIHRoZSBvcGVyYXRpb24gaXMgYXBwbGllZCB0byBlYWNoIGVsZW1lbnQgb2YgdGhlIHZlY3Rvci4gRm9yIGV4YW1wbGU6CgpgYGB7cn0KeCA8LSBjKDEsIDIsIDMsIDIpCnggKiAzCmBgYAoKCgoKV2hpbGUgaXQgd2FzIG1lbnRpb25lZCBlYXJsaWVyIHRoYXQgdmVjdG9ycyBjYW4gYmUgdGhvdWdodCBvZiBhcyBvcmRlcmVkIHNlcXVlbmNlcyBvZiBudW1iZXJzLCB0aGV5IGNhbiBhbHNvIGNvbnRhaW4gdGV4dC4gU3VjaCB2ZWN0b3JzIGFyZSBjYWxsbGVkICJjaGFyYWN0ZXIgdmVjdG9ycyIgYW5kIGFyZSBjb25zdHJ1Y3RlZCBzaW1pbGFyaWx5IHRvIG51bWVyaWMgdmVjdG9ycy4gRWFjaCB0ZXh0IGhhcyB0byBiZSBlbnF1b3RlZCBpbiAiIiB0byBkZW5vdGUgdGhhdCBpdCBzaG91bGQgbm90IGJlIGludGVycHJldGVkIGFzIGEgdmFyaWFibGUgbmFtZSBvciBhIGZ1bmN0aW9uLgoKYGBge3J9CmEgPC0gIkhlbGxvIHdvcmxkIgphCndvcmRzIDwtIGMoIlRoaXMiLCAiSXMiLCAiQSIsICJTZXF1ZW5jZSIsICJPZiIsICJXb3JkcyIpCndvcmRzCmBgYAoKTWF0aGVtYXRpY2FsIG9wZXJhdGlvbnMgc3VjaCBhcyBhZGRpdGlvbiBvciBkaXZpc2lvbiBjYW5ub3QgYmUgcGVyZm9ybWVkIG9uIGNoYXJhY3RlciB2ZWN0b3JzIGZvciBvYnZpb3VzIHJlYXNvbnMgYW5kIHdpbGwgcHJvZHVjZSBhbiBlcnJvciBpZiB5b3UgYXR0ZW1wdCB0aGVtLiBIb3dldmVyLCB5b3UgY2FuIGNvbWJpbmUgd29yZHMgYW5kIG51bWJlcnMgaW50byBvbmUgdmVjdG9yIC0gaG93ZXZlciwgdGhleSB3aWxsIGFsbCBiZSB0cmVhdGVkIGFzIGlmIHRoZXkgd2VyZSB0ZXh0LCBzbyB0aGUgbnVtYmVyIDUgaW4gdGhlIGV4YW1wbGUgYmVsb3cgZ2V0cyBjb252ZXJ0ZWQgdG8gY2hhcmFjdGVyICI1Ii4KCmBgYHtyfQptaXhlZCA8LSBjKDUsICJzb21ldGhpbmciLCAic29tZXRoaW5nIGVsc2UiKQptaXhlZApgYGAKClRoZSBgcGFzdGVgIGZ1bmN0aW9uIGlzIGEgdXNlZnVsIGZvciBkZWFsaW5nIHdpdGggY2hhcmFjdGVyIHZlY3RvcnMgLSBpdCBjYW4gYmUgdGhvdWdodCBvZiBhcyBhbiBlcXVpdmFsZW50IG9mIGFkZGl0aW9uIG9wZXJhdGlvbiBmb3IgdGV4dC4KCmBgYHtyfQpuYW1lIDwtICJKb2huIgpzdXJuYW1lIDwtICJEb2UiCnBhc3RlKG5hbWUsIHN1cm5hbWUpCm5hbWVzIDwtIGMoIkpvaG4iLCJKYW5lIiwiVGhvbWFzIikKc3VybmFtZXMgPC0gYygiRG9lIiwiU21pdGgiLCJLb3dhbHNreSIpCnBhc3RlKG5hbWVzLCBzdXJuYW1lcykKYGBgCgojIyMgQ29lcmNpb24gey19CgpBbm90aGVyIGltcG9ydGFudCB0b3BpYyB3aGVuIGRlYWxpbmcgd2l0aCB2ZWN0b3JzIGlzIF9jb2VyZWNpb25fLiBUaGlzIHJlZmVycyB0byBmb3JjaW5nIG9uZSB2ZWN0b3IgdHlwZSB0byBiZWNvbWUgYW5vdGhlciB1c2luZyB0aGUgYGFzYCBmdW5jdGlvbnMuIEZvciBleGFtcGxlLCB3ZSB1c2UgYGFzLmNoYXJhY3RlcmAgdG8gZm9yY2UgYW4gYFJgIG9iamVjdCBpbnRvIGEgY2hhcmFjdGVyIHZlY3Rvciwgb3IgYGFzLm51bWVyaWNgIHRvIGZvcmNlIGl0IGludG8gYSBudW1lcmljIHZlY3RvcjoKCmBgYHtyfQpudW1iZXJzX2NoYXIgPC0gYygiNSIsIjYiLCI3IikKbnVtYmVyc19jaGFyCm51bWJlcnMgPC0gYXMubnVtZXJpYyhudW1iZXJzX2NoYXIpCm51bWJlcnMKYGBgCgpgYGB7cn0KbnVtYmVycyA8LSBjKDEwLCAxMjMsIDEyKQphcy5jaGFyYWN0ZXIobnVtYmVycykKYGBgCgpOb3RlIHRoYXQgdGhpcyB3aWxsIG5vdCBhbHdheXMgd29yaywgYXMgaW4gbWFueSBjYXNlcyBlbGVtZW50cyBvZiBvbmUgdmVjdG9yIHR5cGUgY2Fubm90IGJlIGludGVycHJldGVkIGFzIGFub3RoZXIuIEZvciBleGFtcGxlOgoKYGBge3J9Cm51bXMgPC0gYygiMSIsIjIiLCJ0aHJlZSIpCmFzLm51bWVyaWMobnVtcykKYGBgCgpJbiB0aGlzIGNhc2UsIFIgc3RpbGwgcmV0dXJucyB0aGUgb3V0cHV0LCBob3dldmVyIHRoZSB0aGlyZCBlbGVtZW50IG9mIHRoZSBgbnVtc2AgdmVjdG9yIGlzIHR1cm5lZCBpbnRvIGFuIGBOQWAgdmFsdWUuIGBOQWAgaXMgc2hvcnRoYW5kIGZvciBfTm90IEF2YWlsYWJsZV8gLSBpdCdzIGEgY29uc3RhbnQgdGhhdCBSIHVzZXMgdG8gZGVhbCB3aXRoIG1pc3NpbmcgdmFsdWVzLiBUaGlzIGlzIGluZGljYXRlZCBieSB0aGUgd2FybmluZyBwcmludGVkIGJ5IFIgdG8gdGhlIGNvbnNvbGUuIE1pc3NpbmcgdmFsdWVzIHdpbGwgYmUgY292ZXJlZCBpbiBtb3JlIGRldGFpbCBpbiB0aGUgW25leHQgY2hhcHRlcl0oI21pc3Npbmd2YWx1ZXMpLiAKCiMjIyBMb2dpY2FsIFZhbHVlcyBhbmQgT3BlcmF0b3JzIHstfQoKQW5vdGhlciBjcnVjaWFsIHR5cGUgb2Ygb3BlcmF0aW9ucyBpbiBSIGFyZSBsb2dpY2FsIG9wZXJhdGlvbnMsIGFsc28ga25vd24gYXMgYm9vbGVhbi4gVGhleSBhcmUgdXNlZCB0byBldmFsdWF0ZSB0aGUgdHJ1dGggdmFsdWUgb2YgbG9naWNhbCBzdGF0ZW1lbnRzIHN1Y2ggYXMgdmFyaWFibGUgImBBYCBpcyBlcXVhbCB0byB2YXJpYWJsZSBgQmAiIG9yIHZhcmlhYmxlIGBBYCBpcyBhIG51bWVyaWMgdmVjdG9yLiBXaGVuZXZlciB0aGUgcXVlcmllZCBzdGF0ZW1lbnQgaXMgVHJ1ZSwgdGhleSByZXR1cm4gVFJVRSBhbmQgRkFMU0Ugb3RoZXJ3aXNlLiBCZWxvdyB5b3UgY2FuIHNlZSBzb21lIHNpbXBsZSBleGFtcGxlcyB1c2luZyB0aGUgZXF1YWxpdHkgb3BlcmF0b3IgYD09YCAtIHRoZSBkb3VibGUgZXF1YWxpdHkgbWVhbnMgdGhhdCB3ZSBhcmUgY2hlY2tpbmcgd2hldGhlciB0d28gdmFsdWVzIGFyZSBlcXVhbCwgcmF0aGVyIHRoYW4gYXNzaWduaW5nIG9uZSB0byBhbm90aGVyLgoKYGBge3J9CmEgPC0gNQphID09IDUKYSA9PSAzCmEgLSAyID09IDMKIkpvaG4iID09ICJKYW1lcyIKYGBgCgpUaGUgYCFgIG9wZXJhdG9yIGlzIHVzZWQgZm9yIG5lZ2F0aW9uLCBzbyBgIVRSVUVgIHJlc3VsdHMgaW4gYEZBTFNFYCBhbmQgdmljZSB2ZXJzYS4gQWNjb3JkaW5nbHksIGAhPWAgaXMgdXNlZCB0byBkZW5vdGUgJ25vdCBlcXVhbHMgdG8nLgoKYGBge3J9CiFUUlVFCiFGQUxTRQo1ICE9IDYKIkpvaG4iICE9ICJKYW1lcyIKYGBgCgpMb2dpY2FsIG9wZXJhdGlvbnMgY2FuIGFsc28gYmUgdXNlZCB0byBjb21wYXJlIHZhbHVlcywgYnkgdXNpbmcgYGEgPCBiYCBmb3IgImEgaXMgbGVzcyB0aGFuIGIiLCBgYSA8PSBiYCBmb3IgImEgaXMgbGVzcyBvciBlcXVhbCB0byBiIiBhbmQgdmljZSB2ZXJzYS4gCgpgYGB7cn0KeCA8LSA1CnkgPC0gMwoKeCA+IHkKeCAtIDIgPCB5CnggLSAyIDw9IHkKYGBgCgoKCgoKRmluYWxseSwgdGhlIGAmYCAobG9naWNhbCAiYW5kIikgYW5kIGB8YCAobG9naWNhbCAib3IiKSBvcGVyYXRvcnMgYXJlIGRlc2lnbmVkIHRvIGNvbWJpbmUgYFRSVUVgL2BGQUxTRWAgdmFsdWVzLiBTbywgaWYgeW91IHB1dCBgJmAgYmV0d2VlbiB0d28gbG9naWNhbCB2YWx1ZXMsIGl0IHdpbGwgeWllbGQgYFRSVUVgIGlmIGFuZCBvbmx5IGlmIF9ib3RoXyB2YWx1ZXMgYXJlIFRSVUUuIGB8YCBvbiB0aGUgb3RoZXIgaGFuZCB3aWxsIHJldHVybiBgVFJVRWAgIGlmIF9hbnlfIG9mIHRoZSB2YWx1ZXMgaXMgYFRSVUVgCgpgYGB7cn0KVFJVRSAmIFRSVUUKVFJVRSAmIEZBTFNFClRSVUUgfCBGQUxTRQpGQUxTRSB8IEZBTFNFCig1ICsgMSA9PSA2KSB8ICgyICsgMiA9PSA1KQooNSArIDEgPT0gNikgJiAoMiAqIDIgPT0gMTApCmBgYAoKVGhlIGxvZ2ljYWwgdmFsdWVzIGFyZSBhbHNvIG9mdGVuIHVzZWQgdG8gdmVyaWZ5IHdoZXRoZXIgd2UgYXJlIGRlYWxpbmcgd2l0aCBhIGNlcnRhaW4gUiB0eXBlIC0gZm9yIGV4YW1wbGUgdG8gY2hlY2sgd2hldGhlciBhIHZhbHVlIGlzIGEgY2hhcmFjdGVyIG9yIG51bWVyaWMuIFRoaXMgaXMgYWNoaWV2ZWQgYnkgdXNpbmcgdGhlIGBpc2AgZnVuY3Rpb25zLCBzdWNoIGFzIGBpcy5udW1lcmljYCBvciBgaXMuY2hhcmFjdGVyYC4KCmBgYHtyfQpudW1iZXJzIDwtIGMoNSwgNiwgNykKaXMudmVjdG9yKG51bWJlcnMpCmlzLm51bWVyaWMobnVtYmVycykKaXMuY2hhcmFjdGVyKG51bWJlcnMpCgp3b3JkcyA8LSBjKCJXb3JkIiwiV29yZCIpCmlzLm51bWVyaWMod29yZHMpCmlzLmNoYXJhY3Rlcih3b3JkcykKYGBgCgpBcyB3aXRoIG51bWJlcnMgYW5kIGNoYXJhY3RlcnMsIHRoZSBsb2dpY2FsIHZhbHVlcyBhbHNvIGZvcm0gdGhlaXIgc3BlY2lhbCB0eXBlcyBvZiB2ZWN0b3JzIGFuZCBjYW4gYmUgdXNlZCB0byBwZXJmb3JtIGVsZW1lbnQtd2lzZSBvcGVyYXRpb25zLiAKCmBgYHtyfQphIDwtIGMoVFJVRSwgRkFMU0UsIEZBTFNFKQpiIDwtIGMoVFJVRSwgVFJVRSwgVFJVRSkKYSAmIGIKYGBgCgpUaGV5IGNhbiBhbHNvIGJlIHVzZWQgdG8gZmluZCB3aGV0aGVyIGVhY2ggdmFsdWUgaW4gYSBudW1lcmljIG9yIGNoYXJhY3RlciB2ZWN0b3IgaXMgZXF1YWwgdG8gYW5vdGhlci4KCmBgYHtyfQp4IDwtIGMoNSwgNiwgNywgOCkKeCA9PSA1Cgp5IDwtIGMoIkpvaG4iLCAiSmFtZXMiLCAiVGhvbWFzIikKeiA8LSBjKCJKb2huIiwiSmFtZXMiLCJSb2JlcnQiKQp6ID09IHkKYGBgCgpUaGUgYm9vbGVhbiB2ZWN0b3JzIGNhbiBiZSBhbHNvIHRob3VnaHQgb2YgYXMgYSBzcGVjaWFsIGNhc2Ugb2YgbnVtZXJpYyB2ZWN0b3JzIGNvbnNpc3Rpbmcgb25seSBvZiAwcyBhbmQgMXMsIHdoZXJlIDAgY29ycmVzcG9uZHMgd2l0aCBgRkFMU0VgIGFuZCAxIHdpdGggYFRSVUVgIHZhbHVlLiBUaGlzIGNhbiBiZSBlYXNpbHkgc2VlbiBpbiB0aGUgZXhhbXBsZSBiZWxvdzoKCmBgYHtyfQpUUlVFICsgVFJVRSArIFRSVUUKYGBgCgoKIyMjIEluZGV4aW5nIHstfQoKV2hpbGUgYSB2ZXJ5IGxhcmdlIHZvbHVtZSBvZiBkYXRhIGNhbiBiZSBzdG9yZWQgaW4gb25lIHZlY3Rvciwgd2Ugb2Z0ZW4gbWF5IHdhbnQgdG8gYWNjZXNzIG9ubHkgYSBzcGVjaWZpYyBlbGVtZW50IG9mIGl0LCBvciBhIGZyYWN0aW9uIG9mIHRoZSBlbGVtZW50cy4gQW4gX2luZGV4XyBvZiBhIHZlY3RvciwgaXMgc2ltcGx5IGFuIGludGVnZXIgY29ycmVzcG9uZGluZyB0byB0aGUgcG9zaXRpb24gb2YgYSB2YWx1ZSBpbiBhIHRoZSB2ZWN0b3IuIFNvLCBhIHZlY3RvciB3aXRoIE4gdmFsdWVzIGhhcyBpbnRlZ2VycyByYW5naW5nIGZyb20gMSB0byBOLiBGb3IgZXhhbXBsZSwgaW4gdmVjdG9yIGBjKDUsIDEwLCAzLCAyKWAsIHRoZSBpbmRleCBvZiA1IGlzIDEsIHRoZSBpbmRleCBvZiAxMCBpcyAyLCB0aGUgaW5kZXggb2YgMyBpcyAzLCBldGMuICpJbmRleGluZyogaXMgYW4gb3BlcmF0aW9uIG9mIGFjY2Vzc2luZyBhIHZlY3RvcidzIGVsZW1ldCBhdCBhIGdpdmVuIGluZGV4LCB1c2luZyB0aGUgc3F1YXJlIGJyYWNrZXRzIGBbXWAuIEZvciBleGFtcGxlLCBgYVs1XWAgbWVhbnMgImdldCB0aGUgZmlmdGggZWxlbWVudCBmcm9tIHZlY3RvciBhIi4gCgoKCgpgYGB7cn0KYSA8LSBjKDUuMiwgNC41LCA2LjIsIDguOSwgMTAuMiwgNC44LCAwLjEpCmFbNV0KYGBgCgoKCgoKSW5kZXhpbmcgY2FuIGFsc28gYmUgdXNlZCB0byBfcmVwbGFjZSB2YWx1ZXNfIGF0IGEgZ2l2ZW4gcG9zaXRpb24gaW4gYSB2ZWN0b3IuIEluIHRoZSBleGFtcGxlIGJlbG93LCB3ZSByZXBsYWNlIHRoZSBmaXJzdCBlbGVtZW50IG9mIGBhYCB3aXRoIHRoZSBudW1iZXIgMTAwMC4KCmBgYHtyfQphWzFdIDwtIDEwMDAKYSAKYGBgCgoKCgpJbmRleGluZyBjYW4gYWxzbyBiZSBkb25lIHVzaW5nIGFub3RoZXIgdmVjdG9yIG9mIG51bWVyaWMgdmFsdWVzLiBGb3IgZXhhbXBsZSB3ZSBtYXkgd2FudCB0byBnZXQgdGhlIGZpcnN0LCBzZWNvbmQgYW5kIGZpZnRoIGVsZW1lbnRzIG9mIGEgZ2l2ZW4gdmVjdG9yLCBvciBhIHNlcXVlbmNlIG9mIGVsZW1lbnRzIGJldHdlZW4gMSBhbmQgNC4KCmBgYHtyfQphIDwtIGMoNS4yLCA0LjUsIDYuMiwgOC45LCAxMC4yLCA0LjgsIDAuMSkKYVtjKDEsIDMsIDUpXQojZXF1aXZhbGVudCB0bzoKYiA8LSBjKDEsIDMsIDUpCmFbYl0KCiNjYW4gYWxzbyBiZSBkb25lIGZvciBhIHNlcXVlbmNlCmFbMTo1XQpgYGAKCgoKCkluZGV4aW5nIGlzIGV2ZW4gbW9yZSBwb3dlcmZ1bCBpbiBjb25qdW5jdGlvbiB3aXRoIGxvZ2ljYWwgb3BlcmF0aW9ucy4gVGhpcyBpcyBiZWNhdXNlLCBhIGxvZ2ljYWwgdmVjdG9yIGNhbiBiZSB1c2VkIHRvIGluZGV4IGFueSB2ZWN0b3IgLSBzdWNoIGluZGV4aW5nIG9wZXJhdGlvbnMgcmV0dXJucyBhbGwgdGhlIHZhbHVlcyBvZiB0aGUgaW5kZXhlZCB2ZWN0b3Igd2hlcmUgdGhlIGNvcnJlc3BvbmRpbmcgaW5kZXhpbmcgbG9naWNhbCB2ZWN0b3IgaXMgYFRSVUVgLiBUaGlzIG1heSBzb3VuZCBjb25mdXNpbmcgYXQgZmlyc3QsIGJ1dCBpcyBhY3R1YWxseSBxdWl0ZSBzdHJhaWdodGZvcndhcmQsIGFzIHNlZW4gYmVsb3c6CgpgYGB7cn0KeCA8LSBjKDQuMiwgNS42LCA3LjIsIDEuMSkKaW5kZXggPC0gYyhGQUxTRSwgVFJVRSwgVFJVRSwgRkFMU0UpICNvbmx5IHNlY29uZCBhbmQgdGhpcmQgZWxlbWVudHMgYXJlIFRSVUUKeFtpbmRleF0gI3JldHVybnMgb25seSBzZWNvbmQgYW5kIHRoaXJkIGVsZW1lbnRzIG9mIHRoZSB4IHZlY3RvcgpgYGAKCgoKCkZvciBleGFtcGxlLCBpbWFnaW5lIHZlY3RvciBgZ2RwYCB2ZWN0b3IgdGhhdCBob2xkcyB0aGUgR0RQIHBlciBjYXBpdGEgdmFsdWVzIGZvciBhIGxpc3Qgb2YgY291bnRyaWVzIGFuZCBgY291bnRyeWAgdmVjdG9yIHRoYXQgaG9sZHMgdGhlIGNvcnJlc3BvbmRpbmcgY291bnRyeSBuYW1lcy4gTG9naWNhbCBpbmRleGluZyBtYXkgYmUgdmVyeSB1c2VmdWwsIGlmIHdlIHdhbnQgdG8gZ2V0IG5hbWVzIG9mIGNvdW50cmllcyB3aXRoIEdEUCBwZXIgY2FwaXRhIGFib3ZlIG9yIGJlbG93IGEgY2VydGFpbiB2YWx1ZToKCmBgYHtyfQpnZHAgPC0gYyg2OTY4NywgNjcwMzcsIDY1MTExLCA1MjM2NywgNDEwMzAsIDMyOTQ2LCAyOTk2MSkKY291bnRyaWVzIDwtIGMoIlFhdGFyIiwgIkljZWxhbmQiLCAiVVNBIiwKICAgICAgICAgICAgICAgIkdlcm1hbnkiLCAiVW5pdGVkIEtpbmdkb20iLCAiSXRhbHkiLCAiU3BhaW4iKQpjb3VudHJpZXNbZ2RwID4gNDAwMDBdCmBgYAoKV2UgY2FuIGFsc28gdXNlIHRoaXMgd2l0aCBtdWx0aXBsZSBjcml0ZXJ0aWEsIGZvciBleGFtcGxlIGluZGV4IGNvdW50cmllcyB3aXRoIEdEUCBoaWdoZXIgdGhhbiA0MDAwMCBVU0QgYW5kIHRoZSBVTiBIdW1hbiBEZXZlbG9wbWVudCBJbmRleCBoaWdoZXIgdGhhbiAwLjkuCgpgYGB7cn0KaGRpIDwtIGMoMC44NDgsIDAuOTM4LCAwLjkyMCwgMC45MzksIDAuOTIwLCAwLjg4MywgMC44OTMpCmNvdW50cmllc1tnZHAgPiA0MDAwMCAmIGhkaSA+IDAuOV0KYGBgCgoKCgoKIyMjIFNvcnRpbmcgey19CgpPbiBtYW55IG9jY2FzaW9ucywgaXQncyB1c2VmdWwgdG8gc29ydCBhIHZlY3RvciB0byBzZWUgaXQncyBoaWdoZXN0IG9yIGxvd2VzdCB2YWx1ZXMuIFRoaXMgY2FuIGJlIGFjaGlldmVkIGJ5IHVzaW5nIHRoZSBgc29ydGAgZnVuY3Rpb24uCgpgYGB7cn0KbnVtYmVycyA8LSBjKDgsIDQsIDUsIDEwLCAyLCAxMjMpCnNvcnQobnVtYmVycykKYGBgCgpCeSBkZWZhdWx0LCBSIHNvcnRzIHZlY3RvcnMgaW4gYW4gaW5jcmVhc2luZyBvcmRlciAoaW4gY2FzZSBvZiBjaGFyYWN0ZXIgdmVjdG9ycywgdGhpcyB0cmFuc2xhdGVzIHRvIEEtWiBzb3J0aW5nKS4gSG93ZXZlciwgdGhlIHNvcnQgZnVuY3Rpb24gaGFzIGFuIGFkZGl0aW9uYWwgYXJndW1lbnQsIGBkZWNyZWFzaW5nYCwgdGhhdCBjYW4gYmUgdXNlZCB0byBzcGVjaWZ5IHdoZXRoZXIgdGhlIHNvcnRpbmcgc2hvdWxkIGJlIGRvbmUgaW4gdGhlIGRlY3JlYXNpbmcgb3JkZXIuIFRoZSBhcmd1bWVudCBpcyBhIF9kZWZhdWx0XyBhcmd1bWVudCwgaS5lLiB0YWtlcyBhIGNlcnRhaW4gdmFsdWUgdW5sZXNzIHNwZWNpZmllZCBvdGhlcndpc2UgYnkgdGhlIHVzZXIuIFRoaXMgaXMgY29tbW9uIGluIFIgYW5kIGEgbG90IG9mIGZ1bmN0aW9ucyBhbGxvdyBjdXN0b21pemluZyB0aGUgd2F5IHRoZXkgd29yayBieSBzcGVjaWZ5aW5nIGFkZGl0aW9uYWwgYXJndW1lbnRzLCB3aGljaCBoYXZlIGEgZGVmYXVsdCB2YWx1ZSB0byBhdm9pZCB0aGUgZWZmb3J0IG9mIHNwZWNpZnlpbmcgdGhlbSBldmVyeSB0aW1lIGEgY2VydGFpbiBmdW5jdGlvbiBpcyB1c2VkLiBTdWNoIGRlZmF1bHQgYXJndW1lbnRzIGNhbiBlYXNpbHkgYmUgcmVjb2duaXplZCBpbiBSIGRvY3VtZW50YXRpb24uIEluIGNhc2Ugb2Ygc29ydCwgdGhlICpVc2FnZSogc2VjdGlvbiByZWFkcyBgc29ydCh4LCBkZWNyZWFzaW5nID0gRkFMU0UsIC4uLilgLiBUaGlzIG1lYW5zLCB0aGF0IHRoZSBmdW5jdGlvbiB0YWtlcyBgeGAgKHRoZSB2ZWN0b3IgdG8gYmUgc29ydGVkKSBhcyBpdHMgbWFpbiBhcmd1bWVudCwgYW5kIGBkZWNyZWFzaW5nYCwgd2hpY2ggZGVmYXVsdHMgdG8gYEZBTFNFYC4gVGhlIGFyZ3VtZW50IGBkZWNyZWFzaW5nYCBpcyBhbHNvIF9sb2dpY2FsXyAtIGNhbiBvbmx5IHRha2UgYFRSVUVgIG9yIGBGQUxTRWAgdmFsdWVzIC0gdGhpcyBpcyBhIGNvbW1vbiBhcmd1bWVudCB0eXBlIGlmIGEgY2VydGFpbiBvcGVyYXRpb24gY2FuIGJlIHBlcmZvcm1lZCBpbiB0d28gZGlmZmVyZW50IHdheXMgb2Ygd2l0aCBhbiBhZGRpdGlvbmFsIGVsZW1lbnQgdGhhdCBtYXkgbm90IGFsd2F5cyBiZSBkZXNpcmVkLiAKCmBgYHtyfQpzb3J0KG51bWJlcnMsIGRlY3JlYXNpbmcgPSBUUlVFKQpgYGAKCldoaWxlIHNvcnRpbmcgYSB2ZWN0b3IgbWF5IGJlIHVzZWZ1bCBpbiBjZXJ0YWluIGNpcmN1bXN0YW5jZXMsIGEgbG90IG9mIHRoZSB0aW1lIHdlIG1heSBhY3R1YWxseSBuZWVkIHRvIHNvcnQgdGhlIHZhbHVlcyBieSBhbm90aGVyIHZlY3Rvci4gRm9yIGV4YW1wbGUsIGxldCdzIGFzc3VtZSB0aGF0IHdlIGhhdmUgYSB2ZWN0b3Igb2YgbmFtZXMgYW5kIGNvcnJlc3BvbmRpbmcgYWdlcywgYW5kIHdlIHdhbnQgdG8gc2VlIHRoZSBuYW1lcyBvcmRlcmVkIGJ5IHRoZSBhZ2UuIAoKYGBge3J9Cm5hbWVzIDwtIGMoIlRob21hcyIsIlBldGVyIiwiQWhtZWQiLCJFbWlseSIsIkhlbGVuYSIpCmFnZSA8LSBjKDUwLCAxMCwgMjAsIDE1LCA0MCkKYGBgCgoKVGhpcyBjYW4gYmUgYWNoaWV2ZWQgdXNpbmcgdGhlIGBvcmRlcmAgZnVuY3Rpb24sIHdoaWNoIHJldHVybnMgaW5kaWNlcyBvZiB0aGUgdmVjdG9yIG5lZWRlZCB0byByZS1hcnJhbmdlIGl0IGludG8gc29ydGVkIG9yZGVyLgoKYGBge3J9Cm9yZGVyKGFnZSkKYGBgCkluIHRoaXMgY2FzZSwgdGhlIGFnZSBvZiAxMCAoaW5kZXggMikgc2hvdWxkIGdvIHRvIHRoZSBmaXJzdCBwbGFjZSwgMTUgKGluZGV4IDQpIHRvIHRoZSBzZWNvbmQgcG9zaXRpb24sIDIwIChpbmRleCAzKSB0byB0aGUgdGhpcmQsIGV0Yy4gTm90ZSB0aGF0IHRoZSB0d28gZm9sbG93aW5nIG9wZXJhdGlvbnMgYXJlIGVxdWl2YWxlbnQ6CgpgYGB7cn0Kc29ydChhZ2UpCmFnZVtvcmRlcihhZ2UpXQpgYGAKClRoZSBmaXJzdCBvbmUgdGVsbHMgUiB0byBzaW1wbHkgX3NvcnQgdGhlIHZhbHVlcyBvZiBhZ2VfLCB3aGVyZWFzIHRoZSBzZWNvbmQgdG8gX2luZGV4XyBhZ2UgYnkgdGhlIGluZGljZXMgb2YgYWdlIGluIGEgc29ydGVkIG9yZGVyLiBUbyBnZXQgdGhlIG5hbWVzIHNvcnRlZCBieSBhZ2UsIHdlIGNhbiB1c2U6CgpgYGB7cn0KbmFtZXNbb3JkZXIoYWdlKV0KbmFtZXNbb3JkZXIoYWdlLCBkZWNyZWFzaW5nID0gVFJVRSldICNkZWNyZWFzaW5nIG9yZGVyCmBgYAoKCkZpbmFsbHksIHRoZSBgcmFua2AgZnVuY3Rpb24gcmV0dXJucyB0aGUgc2FtcGxlIHJhbmtzIG9mIGEgZ2l2ZW4gdmVjdG9yLCBpLmUuIHRoZWlyIHJlbGF0aXZlIHBvc2l0aW9uIGluIGEgc29ydGVkIGxpc3QuIE5vdGUgdGhhdCB0aGlzIGlzIGRpZmZlcmVudCBmcm9tIGBvcmRlcmAuIGByYW5rYCByZXR1cm5zIHRoZSBwb3NpdGlvbiBjb3JyZXNwb25kaW5nIHRvIGVhY2ggdmFsdWUgaW4gYSBzb3J0ZWQgb3JkZXIsIHdoZXJlYXMgYG9yZGVyYCByZXR1cm5zIGluZGljZXMgb2YgdGhlIG9yaWdpbmFsIHZlY3RvciBuZWVkZWQgdG8gcHV0IGl0IGluIGEgc29ydGVkIG9yZGVyLiAKCmBgYHtyfQphZ2UKcmFuayhhZ2UpCm9yZGVyKGFnZSkKYGBgCgpTbyBpbiBvdXIgZXhhbXBsZSwgdGhlIGZpcnN0IHZhbHVlIG9mIHRoZSB2ZWN0b3IgcmV0dXJuZWQgYnkgYHJhbmsoYWdlKWAgaXMgNSwgc2luY2UgdGhlIGZpcnN0IHZhbHVlIG9mIHRoZSBgYWdlYCB2ZWN0b3IgaXMgNTAsIHdoaWNoIHdvdWxkIGJlIGxhc3QgaW4gdGhlIG51bWVyaWMgb3JkZXIuIFRoZSBmaXJzdCB2YWx1ZSBvZiB0aGUgdmVjdG9yIHJldHVybmVkIGJ5IGBvcmRlcihhZ2UpYCBpcyAyIC0gdGhpcyBpcyBiZWNhdXNlLCB0aGUgMm5kIGVsZW1lbnQgb2YgYGFnZWAgKGkuZS4gdGhlIHZhbHVlIG9mIDEwKSBzaG91bGQgZ28gdG8gdGhlIGZpcnN0IHBvc2l0aW9uIGZvciB0aGUgdmVjdG9yIHRvIG1lIGNvcnJlY3RseSBvcmRlcmVkLgoKRmluYWxseSwgbG9naWNhbCBpbmRpY2VzIGNhbiBiZSBjb252ZXJ0ZWQgaW50byBudW1lcmljYWwgdmFsdWVzIHVzaW5nIHRoZSBgd2hpY2hgIGZ1bmN0aW9uLiBJdCB0YWtlcyBhIGxvZ2ljYWwgdmVjdG9yIGFzIGlucHV0IGFuZCByZXR1cm5zIHRoZSBpbmRpY2VzIGF0IHdoaWNoIHRoZSB2YWx1ZSBvZiB0aGUgdmVjdG9yIGlzIGBUUlVFYC4gWW91IGNhbiBzZWUgYW4gZXhhbXBsZSBiZWxvdzoKCmBgYHtyfQpudW1iZXJzIDwtIDE6MTAKbnVtYmVycyA+IDUKd2hpY2gobnVtYmVycyA+IDUpCmBgYAoKVGhpcyBmdW5jdGlvbiBpcyBoZWxwZnVsIGluIHNvbWUgY2VydGFpbiBzaXR1YXRpb25zLCBob3dldmVyIGl0J3MgYSBiYWQgcHJhY3RpY2UgdG8gYXBwbHkgaXQgaW4gY2FzZXMgd2hlbiBsb2dpY2FsIGluZGV4aW5nIGlzIHN1ZmZpY2llbnQsIGZvciBleGFtcGxlOgoKYGBge3J9Cm51bWJlcnNbbnVtYmVycyA+IDVdCmBgYAoKaXMgc3VmZmljaWVudCwgYW5kIHRoZXJlJ3Mgbm8gbmVlZCB0byB1c2U6CgpgYGB7cn0KbnVtYmVyc1t3aGljaChudW1iZXJzID4gNSldCmBgYAoKT25lIG9mIHRoZSBzaXR1YXRpb25zIGluIHdoaWNoIHRoZSB1c2Ugb2YgYHdoaWNoYCBmdW5jdGlvbiBjYW4gYmUgcHJlZmVycmVkIHRvIHNpbXBsZSBsb2dpY2FsIGluZGV4aW5nIGlzIHdoZW4gb3VyIHZlY3RvciBjb250YWlucyBtaXNzaW5nIHZhbHVlcyAoZGlzY3Vzc2VkIGluIHRoZSBbbmV4dCBjaGFwdGVyXSgjbWlzc2luZ3ZhbHVlcykuIEZvciBleGFtcGxlLCB0aGUgZmlyc3QgZXhwcmVzc2lvbiB3aWxsIHJldHVybiBgTkFgLiAKCmBgYHtyfQpudW1iZXJzIDwtIGMoMiwgNCwgMSwgMTAsIDIwLCBOQSkKbnVtYmVyc1tudW1iZXJzID4gNV0KYGBgCgpUaGlzIGlzIGJlY2F1c2UsIHJ1bm5pbmcgbG9naWNhbCBjb21wYXJpc29ucyBzdWNoIGFzIGBudW1iZXJzID4gNWAgYWx3YXlzIHJldHVybnMgbWlzc2luZyB2YWx1ZXMsIGFsb25nIHRoZSBgVFJVRWAgYW5kIGBGQUxTRWAgbG9naWNhbCB2YWx1ZXMuIFRoaXMgc2hvdWxkIG1ha2Ugc2Vuc2UsIHNpbmNlIGBOQWAgaXMgbm90IGNvbXBhcmFibGUgdG8gYW55IG51bWJlci4KCmBgYHtyfQpudW1iZXJzID4gNQpgYGAKCmB3aGljaGAgc2tpcHMgdGhlIGBOQWAgdmFsdWVzLCBvbmx5IHJldHVybmluZyB0aGUgaW5kaWNlcyBvZiB2YWx1ZXMgdGhhdCBhcmUgYFRSVUVgLgoKYGBge3J9CndoaWNoKG51bWJlcnMgPiA1KQpgYGAKCkFzIGEgcmVzdWx0LCB3ZSBjYW4gcGVyZm9ybSBpbmRleGluZyBvbiB2YXJpYWJsZSB3aXRoIG1pc3NpbmcgdmFsdWVzIHVzaW5nIGB3aGljaGA6IAoKYGBge3J9Cm51bWJlcnNbd2hpY2gobnVtYmVycyA+IDUpXQpgYGAKCgpUd28gY291c2lucyBvZiB0aGUgYHdoaWNoYCBmdW5jdGlvbiBhcmUgYHdoaWNoLm1heGAgYW5kIGB3aGljaC5taW5gLCB3aGljaCByZXR1cm4gdGhlIGluZGV4IG9mIHRoZSBoaWdoZXN0IGFuZCBsb3dlc3QgdmFsdWUgaW4gYSB2ZWN0b3IuIFNvLCBjb21pbmcgYmFjayB0byB0aGUgYWdlcyBleGFtcGxlLCB3ZSBjYW4gcmV0cmlldmUgdGhlIG5hbWUgb2YgdGhlIHBlcnNvbiB3aXRoIGhpZ2hlc3QgYW5kIGxvd2VzdCBhZ2UgdXNpbmcgcmVzcGVjdGl2ZWx5OgoKYGBge3J9Cm5hbWVzW3doaWNoLm1heChhZ2UpXQpuYW1lc1t3aGljaC5taW4oYWdlKV0KYGBgCgoKIyMgU3VtbWFyeQoKLSAqKlZlY3RvcnMqKiBhcmUgc2ltcGx5IG9yZGVyZWQgc2VxdWVuY2VzIG9mIGVsZW1lbnRzIHRoYXQgcmVwcmVzZW50IHNvbWUgY29uY2VwdCB3ZSBhbmFseXplIC0gZm9yIGV4YW1wbGUsIHdlIGNhbiBoYXZlIGEgdmVjdG9yIG9mIGNvdW50cnkgbmFtZXMgYW5kIGEgdmVjdG9yIG9mIGNvcnJlc3BvbmRpbmcgR0RQIHBlciBjYXBpdGEgYW1vdW50cy4gVGhleSBhcmUgYWxzbyBrbm93biBhcyAqKnZhcmlhYmxlcyoqLgoKLSAqKlZlY3Rvcml6YXRpb24qKiBzaW1wbHkgbWVhbnMsIHRoYXQgaWYgd2UgYWRkIChvciBwZXJmb3JtIGFueSBvdGhlciBvcGVyYXRpb24pIHR3byB2ZWN0b3JzIHRvZWdldGhlci9hbiBudW1lcmljIGVsZW1lbnQgdG8gYSB2ZWN0b3IsIGl0IHdpbGwgYmUgZG9uZSBlbGVtZW50LXdpc2UuCgotICoqRnVuY3Rpb25zKiogaW4gUiBhcmUgb2JqZWN0cyB3aGljaCB0YWtlIHNvbWUgdmFsdWVzIGFzIGlucHV0cyBhbmQgcHJvZHVjZSBvdGhlciB2YWx1ZXMgYXMgb3V0cHV0cy4KCi0gKipMb2dpY2FsIHZhbHVlcyoqIGFyZSB0aGUgcmVzdWx0IG9mIGNvbXBhcmluZyB2ZWN0b3JzIHVzaW5nIGxvZ2ljYWwgb3BlcmF0b3JzIChzdWNoIGFzIGA9PWAsIGA8YCwgYD5gKS4gVGhleSBjYW4gYmUgZWl0aGVyIGBUUlVFYCBpZiB0aGUgbG9naWNhbCBzdGF0bWVudCBpcyB0cnVlIChlLmcuIGAyICsgMiA9PSA0YCkgb3IgYEZBTFNFYCBvdGhlcndpc2UgKGUuZy4gYDcgPiAxMGApLgoKLSAqKkluZGV4aW5nKiogbWVhbnMgcmV0cmlldmluZyB2ZWN0b3IgZWxlbWVudHMgYnkgdGhlaXIgbnVtZXJpYyBpbmRleCAoaS5lLiB0aGVpciBwb3NpdGlvbiBpbiB0aGUgdmVjdG9yKS4gSXQgY2FuIGFsc28gYmUgZG9uZSB1c2luZyBsb2dpY2FsIHZhbHVlcyAtIGluIHRoaXMgY2FzZSwgYWxsIGVsZW1lbnRzIGNvcnJlc3BvbmRpbmcgdG8gYFRSVUVgIGFyZSByZXRyaWV2ZWQuCgotICoqU29ydGluZyoqIHJlZmVycyB0byBwdXR0aW5nIGVsZW1lbnRzIG9mIGEgdmVjdG9yIGludG8gbnVtZXJpYyBvciBhbHBoYWJldGlhbCBvcmRlci4gSXQgY2FuIGJlIGRvbmUgZWl0aGVyIGRpcmVjdGx5IG9uIGEgdmVjdG9yIHVzaW5nIGBzb3J0KClgIG9yIGluIHJlZmVyZW5jZSB0byBhbm90aGVyIHZlY3RvciB1c2luZyBgb3JkZXIoKWAuIGByYW5rKClgIGFsbG93cyB0byByZXRyaWV2ZSB0aGUgcmVsYXRpdmUgcmFuayBvZiBhbiBpdGVtIChpLmUuIHBvc2l0aW9uIHdoaWNoIGl0IHdvdWxkIGhhdmUgaWYgdGhlIHZlY3RvciB3YXMgc29ydGVkKS4KCiMjIyBGdW5jdGlvbnMgbGlzdCB7LX0KCgoKCgoKIyMgRXhlcmNpc2VzCgoKMS4gVGhlIGNvZGUgYmVsb3cgY3JlYXRlcyB0aHJlZSB2ZWN0b3JzIGNvcnJlc3BvbmRpbmcgd2l0aCBpbmRpdmlkdWFsJ3MgbmFtZSwgYmlydGggeWVhciBhbmQgYmlydGggbW9udGguIAoKYGBge3J9CnllYXIgPC0gYygxOTc2LCAxOTc0LCAxOTczLCAxOTkxLCAxOTcyLCAxOTU0LCAKICAgICAgICAgIDE5ODUsIDE5ODAsIDE5OTQsIDE5NzAsIDE5ODgsIDE5NTEsIAogICAgICAgICAgMTk1NywgMTk2NiwgMTk2OCwgMTk2MywgMTk5OSwgMTk3NywgCiAgICAgICAgICAxOTg0LCAxOTk4KQoKbW9udGggPC0gYygiRmVicnVhcnkiLCAiRmVicnVhcnkiLCAiQXByaWwiLAogICAgICAgICAgICJBdWd1c3QiLCAiU2VwdGVtYmVyIiwgIk5vdmVtYmVyIiwgCiAgICAgICAgICAgIk9jdG9iZXIiLCAiRGVjZW1iZXIiLCAiTWF5IiwgIk1hcmNoIiwgCiAgICAgICAgICAgIkp1bmUiLCAiTm92ZW1iZXIiLCAiT2N0b2JlciIsICJNYXkiLCAKICAgICAgICAgICAiSnVseSIsICJBdWd1c3QiLCAiTWFyY2giLCAiSnVseSIsIAogICAgICAgICAgICJPY3RvYmVyIiwgIkphbnVhcnkiKQoKbmFtZSA8LSBjKCJUaG9tYXMiLCAiTmF0YWxpZSIsICJKYW1lcyIsIAogICAgICAgICAgIkdpbmEiLCAiQ2F0ZSIsICJSb2IiLCAiRnJhbmsiLAogICAgICAgICAgIlR5bGUiLCAiTWFyc2hhbGwiLCAiVGVkIiwgIkVtaWx5IiwgCiAgICAgICAgICAiQnJhbmRvbiIsICJZYXNtaW4iLCAiVGluYSIsIAogICAgICAgICAgIlBoaWxsaXAiLCAiTmF0YXNoYSIsICJKb2FuIiwgCiAgICAgICAgICAiSmFjayIsICJBbGljZSIsICJCYXJuZXkiKQpgYGAKCmEuIENyZWF0ZSBhIHZlY3RvciBuYW1lZCBiaXJ0aGRheXMgd2hpY2ggY29udGFpbnMgbmFtZXMsIGJpcnRoIG1vbnRocyBhbmQgYmlydGggeWVhcnMgb2YgZWFjaCBwZXJzb24uIEZvciBleGFtcGxlLCB0aGUgZmlyc3Qgb25lIHNob3VsZCBsb29rIGxpa2UgYCJUaG9tYXMsIEZlYnJ1YXJ5IDE5NzZgLgoKCgoKCgpiLiBGaWx0ZXIgb3V0IHRoZSBwZW9wbGUgd2hvIHdlcmUgYm9ybiBpbiBPY3RvYmVyIGFmdGVyIHRoZSB5ZWFyIDE5ODAuIFN0b3JlIHRoZWlyIG5hbWVzIGluIHZlY3RvciBuYW1lZCBgb2N0MTk4MGAKCgoKCgoKCmMuIEZpbHRlciBvdXQgdGhlIHBlb3BsZSB3aG8gYXJlIG5vdCBvZiB3b3JraW5nIGFnZSAoaS5lLiAxNCBhbmQgeW91bmdlciBvciA2NSBhbmQgb2xkZXIpIGFzIG9mIEp1bHkgMjAyMC4gU3RvcmUgdGhlaXIgbmFtZXMgaW4gYSB2ZWN0b3IgY2FsbGVkIGBub253b3JraW5nYC4gCgoKCgoKMi4gR2l2ZW4gdGhlIHZlY3RvciB4IDwtIGMoNSwgNDAsIDE1LCAxMCwgMTEpLiBXaGF0IHdvdWxkIG91dHB1dCB3b3VsZCB5b3UgZXhwZWN0IGZyb20gdGhlIGZvbGxvd2luZyBmdW5jdGlvbnM/CiAgYS4gYHNvcnQoeClgCiAgYi4gYG9yZGVyKHgpYAogIGMuIGByYW5rKHgpYAoKVXNlIFIgdG8gdmVyaWZ5IHlvdXIgYW5zd2Vycy4KCgozLiBWZWN0b3IgYGNvdW50cnlgIGNvbnRhaW5zIHRoZSBuYW1lcyBvZiA2IGNvdW50cmllcyBhbmQgdGhlIGZvbGxvd2luZyA0IHZlY3RvcnMgY29udGFpbiB0aGUgY291bnRyaWVzJyBjb3JyZXNwb25kaWcgRXhwZWN0ZWQgWWVhcnMgb2YgU2Nob29saW5nLCBgZXlzYCwgTWVhbiBZZWFycyBvZiBTY2hvb2xpbmcgYG15c2AsIExpZmUgRXhwZWN0YW5jeSBhdCBCaXJ0aCBgbGV4cGAgYW5kIFBlciBjYXBpdGEgR3Jvc3MgTmF0aW9uYWwgSW5jb21lIGBnbmlgLgoKYGBge3J9CmNvdW50cnkgPC0gYygiQXJnZW50aW5hIiwgIkdlb3JnaWEiLAogICAgICAgICAgICAgIk1leGljbyIsICJQaGlsaXBwaW5lcyIsCiAgICAgICAgICAgICAiVHVya2V5IiwgIlVrcmFpbmUiKQpleXMgPC0gYygxNy42LCAxNS40LCAxNC4zLCAxMi43LCAxNi40LCAxNS4xKQpteXMgPC0gYygxMC42LCAxMi44LCA4LjYsIDkuNCwgNy43LCAxMS4zKQpsZXhwIDwtIGMoNzYuNSwgNzMuNiwgNzUsIDcxLjEsIDc3LjQsIDcyKQpnbmkgPC0gYygxNzYxMSwgOTU3MCwgMTc2MjgsIDk1NDAsIDI0OTA1LCA3OTk0KQoKYGBgCgpUaGUgVW5pdGVkIE5hdGlvbnMgSHVtYW4gRGV2ZWxvcG1lbnQgSW5kZXggKEhESSkgaXMgZ2l2ZW4gYnkgdGhlIGZvbGxvd2luZyBmb3JtdWxhOgoKSERJID0gJFxzcXJ0WzNde1x0ZXh0e0xpZmUgRXhwZWN0YW5jeSBJbmRleH0gKiBcdGV4dHtFZHVjYXRpb24gSW5kZXh9ICogXHRleHR7SW5jb21lIEluZGV4fX0kLCB3aGVyZQoKTGlmZSBFeHBlY3RhbmN5IEluZGV4ID0gJFxmcmFje1x0ZXh0e0xpZmUgRXhwZWN0YW5jeX0tMjB9ezg1LTIwfSQKCkVkdWNhdGlvbiBJbmRleCA9ICRcZnJhY3tcdGV4dHtNZWFuIFllYXJzIG9mIFNjaG9vbGluZyBJbmRleH0gKyBcdGV4dHtFeHBlY3RlZCBZZWFycyBvZiBTY2hvb2xpbmcgSW5kZXh9fXsyfSQKCk1lYW4gWWVhcnMgb2YgU2Nob29saW5nIEluZGV4ID0gJFxmcmFje1x0ZXh0e01lYW4gWWVhcnMgb2YgU2Nob29saW5nfX17MTV9JAoKRXhwZWN0ZWQgWWVhcnMgb2YgU2Nob29saW5nIEluZGV4ID0gJFxmcmFje1x0ZXh0e0V4cGVjdGVkIFllYXJzIG9mIFNjaG9vbGluZ319ezE4fSQKCkluY29tZSBJbmRleCA9ICRcZnJhY3tsbihHTklwYykgLSBsbigxMDApfXtsbig3NSwwMDApIC0gbG4oMTAwKX0kCgoKV3JpdGUgUiBjb2RlIHRvIGFuc3dlcnQgdGhlIGZvbGxvd2luZyBxdWVzdGlvbnM6CgphLiBDYWxjdWxhdGUgdGhlIEhESSBmb3IgZWFjaCBvZiB0aGUgY291bnRyaWVzLiAKCgoKCgoKYi4gU3RvcmUgY291bnRyeSBuYW1lcyB3aXRoIEhESSBsb3dlciB0aGFuIDAuNzUgaW4gdmVjdG9yIGBjb3V0cnlfbGhkaWAuIFByaW50IHRoZSBuYW1lcyBvZiB0aGUgY291bnRyaWVzLgoKCgoKCgpjLiBTdG9yZSBjb3VudHJ5IG5hbWVzIHdpdGggSERJIGxvd2VyIHRoYW4gMC44IGFuZCBHTkkgaGlnaGVyIHRoYW4gJDEwMDAwIGluIHZlY3RvciBgY291bnRyeV9obGdoYAoKCgoKCgpkLiBQcmludCBuYW1lcyBvZiB0aGUgY291bnRyaWVzIHdpdGggSERJIGF0IGxlYXN0IGFzIGhpZ2ggYXMgSERJIG9mIFR1cmtleSAoZXhjbHVkaW5nIFR1cmtleSkuCgoKCgoKCgplLiBQcmludCBuYW1lcyBvZiB0aGUgY291bnRyaWVzIGluIHdoaWNoIHRoZSBFeHBlY3RlZCBZZWFycyBvZiBTY2hvb2xpbmcgaW5kZXggaXMgaGlnaGVyIHRoYW4gdGhlIExpZmUgRXhwZWN0YW5jeSBJbmRleC4KCgoKCgoKCgo0LiBUaGUgZGF0YSBiZWxvdyBjb250YWlucyB0aGUgcmVjb3JkcyBvZiBVSyBHZW5lcmFsIEVsZWN0aW9uIHR1cm5vdXQgYmV0d2VlbiAxOTY0IGFuZCAyMDE5LgoKYGBge3J9CnR1cm5vdXQgPC0gYygwLjc3MSwgMC43NTgsIDAuNzIsIDAuNzg4LCAwLjcyOCwgMC43NiwgMC43MjcsIDAuNzUzLCAwLjc3NywgMC43MTQsIDAuNTk0LCAwLjYxNCwgMC42NTEsIDAuNjYxLCAwLjY4NywgMC42NzMpCgp5ZWFyIDwtIGMoMTk2NCwgMTk2NiwgMTk3MCwgMTk3NCwgMTk3NCwgMTk3OSwgMTk4MywgMTk4NywgMTk5MiwgMTk5NywgMjAwMSwgMjAwNSwgMjAxMCwgMjAxNSwgMjAxNywgMjAxOSkKCnBhcnR5IDwtIGMoIkxhYm91ciIsICJMYWJvdXIiLCAiQ29uc2VydmF0aXZlIiwgIkxhYm91ciIsCiAgICAgICAgICAgIkxhYm91ciIsICJMYWJvdXIiLCAiQ29uc2VydmF0aXZlIiwKICAgICAgICAgICAiQ29uc2VydmF0aXZlIiwgIkNvbnNlcnZhdGl2ZSIsCiAgICAgICAgICAgIkNvbnNlcnZhdGl2ZSIsICJMYWJvdXIiLCAiTGFib3VyIiwgIkxhYm91ciIsCiAgICAgICAgICAgIkNvbnNlcnZhdGl2ZSIsICJDb25zZXJ2YXRpdmUiLCAKICAgICAgICAgICAiQ29uc2VydmF0aXZlIikKYGBgCgpXcml0ZSBjb2RlIHRvIGFuc3dlciB0aGUgZm9sbG93aW5nIHF1ZXN0aW9uczoKCmEuIFdoaWNoIHllYXJzIGhhZCB0aGUgdHVybm91dCBoaWdoZXIgdGhhbiA3MC8lPwoKCgoKCgpiLiBXaGljaCBwYXJ0aWVzIHdvbiBpbiBlbGVjdGlvbnMgd2l0aCB0dXJub3V0IGJlbG93IDAuNjU/CgoKCgoKCgpjLiBPYnRhaW4gdGhlIHllYXJzIGluIHdoaWNoIHRoZSB0dXJub3V0IHdhcyB0aGUgbG93ZXN0IGFuZCB0aGUgaGlnaGVzdCBhbmQgc3RvcmUgdGhlbSBpbiB2ZWN0b3IgYHllYXJfbWlubWF4YC4KCgoKCgoKCmQuIFN0b3JlIHRoZSBuYW1lcyBvZiB0aGUgcGFydGllcyB3aGljaCB3b24gaW4gdGhlIDMgZWxlY3Rpb25zIHdpdGggdGhlIGhpZ2hlc3QgdHVybm91dCBpbiB2ZWN0b3IgYHRvcDNgCgpgYGB7ciBlY2hvPUZBTFNFLCBpbmNsdWRlID0gRkFMU0V9CiNBTlNXRVIKdG9wMyA8LSBwYXJ0eVtvcmRlcih0dXJub3V0LCBkZWNyZWFzaW5nID0gVFJVRSldWzE6M10KYGBgCgoKCgoKZS4gU3RvcmUgdGhlIG5hbWVzIG9mIHRoZSBwYXJ0aWVzIHdoaWNoIGdvdmVybmVkIGJlZm9yZSB0aGUgMyBlbGVjdGlvbnMgd2l0aCB0aGUgbG93ZXN0IHR1cm5vdXQgaW4gdmVjdG9yIGBsb3czX3ByZXZgLiBOb3RlIHRoYXQgeW91ciBjb2RlIHNob3VsZCB3b3JrIHJlZ2FyZGxlc3Mgb2Ygd2hldGhlciB0aGUgdmFyaWFibGVzIGFyZSBzb3J0ZWQgY2hyb25vbG9naWNhbGx5CgoKCgoKKlRoZSBzb2x1dGlvbnMgZm9yIHRoZSBleGVyY2lzZXMgd2lsbCBiZSBhdmFpbGFibGUgaGVyZSBvbiBgciBjb25maWckYmFzaWNzYC4qCgoKCgA=" download="02-basics.Rmd">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter markdown</button>
+</a><a href="data:text/plain;base64,IycgIyMgRXhlcmNpc2VzCiMnIAojJyAKIycgMS4gVGhlIGNvZGUgYmVsb3cgY3JlYXRlcyB0aHJlZSB2ZWN0b3JzIGNvcnJlc3BvbmRpbmcgd2l0aCBpbmRpdmlkdWFsJ3MgbmFtZSwgYmlydGggeWVhciBhbmQgYmlydGggbW9udGguIAojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnllYXIgPC0gYygxOTc2LCAxOTc0LCAxOTczLCAxOTkxLCAxOTcyLCAxOTU0LCAKICAgICAgICAgIDE5ODUsIDE5ODAsIDE5OTQsIDE5NzAsIDE5ODgsIDE5NTEsIAogICAgICAgICAgMTk1NywgMTk2NiwgMTk2OCwgMTk2MywgMTk5OSwgMTk3NywgCiAgICAgICAgICAxOTg0LCAxOTk4KQoKbW9udGggPC0gYygiRmVicnVhcnkiLCAiRmVicnVhcnkiLCAiQXByaWwiLAogICAgICAgICAgICJBdWd1c3QiLCAiU2VwdGVtYmVyIiwgIk5vdmVtYmVyIiwgCiAgICAgICAgICAgIk9jdG9iZXIiLCAiRGVjZW1iZXIiLCAiTWF5IiwgIk1hcmNoIiwgCiAgICAgICAgICAgIkp1bmUiLCAiTm92ZW1iZXIiLCAiT2N0b2JlciIsICJNYXkiLCAKICAgICAgICAgICAiSnVseSIsICJBdWd1c3QiLCAiTWFyY2giLCAiSnVseSIsIAogICAgICAgICAgICJPY3RvYmVyIiwgIkphbnVhcnkiKQoKbmFtZSA8LSBjKCJUaG9tYXMiLCAiTmF0YWxpZSIsICJKYW1lcyIsIAogICAgICAgICAgIkdpbmEiLCAiQ2F0ZSIsICJSb2IiLCAiRnJhbmsiLAogICAgICAgICAgIlR5bGUiLCAiTWFyc2hhbGwiLCAiVGVkIiwgIkVtaWx5IiwgCiAgICAgICAgICAiQnJhbmRvbiIsICJZYXNtaW4iLCAiVGluYSIsIAogICAgICAgICAgIlBoaWxsaXAiLCAiTmF0YXNoYSIsICJKb2FuIiwgCiAgICAgICAgICAiSmFjayIsICJBbGljZSIsICJCYXJuZXkiKQoKIycgCiMnIGEuIENyZWF0ZSBhIHZlY3RvciBuYW1lZCBiaXJ0aGRheXMgd2hpY2ggY29udGFpbnMgbmFtZXMsIGJpcnRoIG1vbnRocyBhbmQgYmlydGggeWVhcnMgb2YgZWFjaCBwZXJzb24uIEZvciBleGFtcGxlLCB0aGUgZmlyc3Qgb25lIHNob3VsZCBsb29rIGxpa2UgYCJUaG9tYXMsIEZlYnJ1YXJ5IDE5NzZgLgojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBiLiBGaWx0ZXIgb3V0IHRoZSBwZW9wbGUgd2hvIHdlcmUgYm9ybiBpbiBPY3RvYmVyIGFmdGVyIHRoZSB5ZWFyIDE5ODAuIFN0b3JlIHRoZWlyIG5hbWVzIGluIHZlY3RvciBuYW1lZCBgb2N0MTk4MGAKIycgCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIGMuIEZpbHRlciBvdXQgdGhlIHBlb3BsZSB3aG8gYXJlIG5vdCBvZiB3b3JraW5nIGFnZSAoaS5lLiAxNCBhbmQgeW91bmdlciBvciA2NSBhbmQgb2xkZXIpIGFzIG9mIEp1bHkgMjAyMC4gU3RvcmUgdGhlaXIgbmFtZXMgaW4gYSB2ZWN0b3IgY2FsbGVkIGBub253b3JraW5nYC4gCiMnIAojJyAKIycgCiMnIAojJyAKIycgMi4gR2l2ZW4gdGhlIHZlY3RvciB4IDwtIGMoNSwgNDAsIDE1LCAxMCwgMTEpLiBXaGF0IHdvdWxkIG91dHB1dCB3b3VsZCB5b3UgZXhwZWN0IGZyb20gdGhlIGZvbGxvd2luZyBmdW5jdGlvbnM/CiMnICAgYS4gYHNvcnQoeClgCiMnICAgYi4gYG9yZGVyKHgpYAojJyAgIGMuIGByYW5rKHgpYAojJyAKIycgVXNlIFIgdG8gdmVyaWZ5IHlvdXIgYW5zd2Vycy4KIycgCiMnIAojJyAzLiBWZWN0b3IgYGNvdW50cnlgIGNvbnRhaW5zIHRoZSBuYW1lcyBvZiA2IGNvdW50cmllcyBhbmQgdGhlIGZvbGxvd2luZyA0IHZlY3RvcnMgY29udGFpbiB0aGUgY291bnRyaWVzJyBjb3JyZXNwb25kaWcgRXhwZWN0ZWQgWWVhcnMgb2YgU2Nob29saW5nLCBgZXlzYCwgTWVhbiBZZWFycyBvZiBTY2hvb2xpbmcgYG15c2AsIExpZmUgRXhwZWN0YW5jeSBhdCBCaXJ0aCBgbGV4cGAgYW5kIFBlciBjYXBpdGEgR3Jvc3MgTmF0aW9uYWwgSW5jb21lIGBnbmlgLgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvdW50cnkgPC0gYygiQXJnZW50aW5hIiwgIkdlb3JnaWEiLAogICAgICAgICAgICAgIk1leGljbyIsICJQaGlsaXBwaW5lcyIsCiAgICAgICAgICAgICAiVHVya2V5IiwgIlVrcmFpbmUiKQpleXMgPC0gYygxNy42LCAxNS40LCAxNC4zLCAxMi43LCAxNi40LCAxNS4xKQpteXMgPC0gYygxMC42LCAxMi44LCA4LjYsIDkuNCwgNy43LCAxMS4zKQpsZXhwIDwtIGMoNzYuNSwgNzMuNiwgNzUsIDcxLjEsIDc3LjQsIDcyKQpnbmkgPC0gYygxNzYxMSwgOTU3MCwgMTc2MjgsIDk1NDAsIDI0OTA1LCA3OTk0KQoKCiMnIAojJyBUaGUgVW5pdGVkIE5hdGlvbnMgSHVtYW4gRGV2ZWxvcG1lbnQgSW5kZXggKEhESSkgaXMgZ2l2ZW4gYnkgdGhlIGZvbGxvd2luZyBmb3JtdWxhOgojJyAKIycgSERJID0gJFxzcXJ0WzNde1x0ZXh0e0xpZmUgRXhwZWN0YW5jeSBJbmRleH0gKiBcdGV4dHtFZHVjYXRpb24gSW5kZXh9ICogXHRleHR7SW5jb21lIEluZGV4fX0kLCB3aGVyZQojJyAKIycgTGlmZSBFeHBlY3RhbmN5IEluZGV4ID0gJFxmcmFje1x0ZXh0e0xpZmUgRXhwZWN0YW5jeX0tMjB9ezg1LTIwfSQKIycgCiMnIEVkdWNhdGlvbiBJbmRleCA9ICRcZnJhY3tcdGV4dHtNZWFuIFllYXJzIG9mIFNjaG9vbGluZyBJbmRleH0gKyBcdGV4dHtFeHBlY3RlZCBZZWFycyBvZiBTY2hvb2xpbmcgSW5kZXh9fXsyfSQKIycgCiMnIE1lYW4gWWVhcnMgb2YgU2Nob29saW5nIEluZGV4ID0gJFxmcmFje1x0ZXh0e01lYW4gWWVhcnMgb2YgU2Nob29saW5nfX17MTV9JAojJyAKIycgRXhwZWN0ZWQgWWVhcnMgb2YgU2Nob29saW5nIEluZGV4ID0gJFxmcmFje1x0ZXh0e0V4cGVjdGVkIFllYXJzIG9mIFNjaG9vbGluZ319ezE4fSQKIycgCiMnIEluY29tZSBJbmRleCA9ICRcZnJhY3tsbihHTklwYykgLSBsbigxMDApfXtsbig3NSwwMDApIC0gbG4oMTAwKX0kCiMnIAojJyAKIycgV3JpdGUgUiBjb2RlIHRvIGFuc3dlcnQgdGhlIGZvbGxvd2luZyBxdWVzdGlvbnM6CiMnIAojJyBhLiBDYWxjdWxhdGUgdGhlIEhESSBmb3IgZWFjaCBvZiB0aGUgY291bnRyaWVzLiAKIycgCiMnIAojJyAKIycgCiMnIAojJyAKIycgYi4gU3RvcmUgY291bnRyeSBuYW1lcyB3aXRoIEhESSBsb3dlciB0aGFuIDAuNzUgaW4gdmVjdG9yIGBjb3V0cnlfbGhkaWAuIFByaW50IHRoZSBuYW1lcyBvZiB0aGUgY291bnRyaWVzLgojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBjLiBTdG9yZSBjb3VudHJ5IG5hbWVzIHdpdGggSERJIGxvd2VyIHRoYW4gMC44IGFuZCBHTkkgaGlnaGVyIHRoYW4gJDEwMDAwIGluIHZlY3RvciBgY291bnRyeV9obGdoYAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBkLiBQcmludCBuYW1lcyBvZiB0aGUgY291bnRyaWVzIHdpdGggSERJIGF0IGxlYXN0IGFzIGhpZ2ggYXMgSERJIG9mIFR1cmtleSAoZXhjbHVkaW5nIFR1cmtleSkuCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBlLiBQcmludCBuYW1lcyBvZiB0aGUgY291bnRyaWVzIGluIHdoaWNoIHRoZSBFeHBlY3RlZCBZZWFycyBvZiBTY2hvb2xpbmcgaW5kZXggaXMgaGlnaGVyIHRoYW4gdGhlIExpZmUgRXhwZWN0YW5jeSBJbmRleC4KIycgCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyA0LiBUaGUgZGF0YSBiZWxvdyBjb250YWlucyB0aGUgcmVjb3JkcyBvZiBVSyBHZW5lcmFsIEVsZWN0aW9uIHR1cm5vdXQgYmV0d2VlbiAxOTY0IGFuZCAyMDE5LgojJyAKIyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnR1cm5vdXQgPC0gYygwLjc3MSwgMC43NTgsIDAuNzIsIDAuNzg4LCAwLjcyOCwgMC43NiwgMC43MjcsIDAuNzUzLCAwLjc3NywgMC43MTQsIDAuNTk0LCAwLjYxNCwgMC42NTEsIDAuNjYxLCAwLjY4NywgMC42NzMpCgp5ZWFyIDwtIGMoMTk2NCwgMTk2NiwgMTk3MCwgMTk3NCwgMTk3NCwgMTk3OSwgMTk4MywgMTk4NywgMTk5MiwgMTk5NywgMjAwMSwgMjAwNSwgMjAxMCwgMjAxNSwgMjAxNywgMjAxOSkKCnBhcnR5IDwtIGMoIkxhYm91ciIsICJMYWJvdXIiLCAiQ29uc2VydmF0aXZlIiwgIkxhYm91ciIsCiAgICAgICAgICAgIkxhYm91ciIsICJMYWJvdXIiLCAiQ29uc2VydmF0aXZlIiwKICAgICAgICAgICAiQ29uc2VydmF0aXZlIiwgIkNvbnNlcnZhdGl2ZSIsCiAgICAgICAgICAgIkNvbnNlcnZhdGl2ZSIsICJMYWJvdXIiLCAiTGFib3VyIiwgIkxhYm91ciIsCiAgICAgICAgICAgIkNvbnNlcnZhdGl2ZSIsICJDb25zZXJ2YXRpdmUiLCAKICAgICAgICAgICAiQ29uc2VydmF0aXZlIikKCiMnIAojJyBXcml0ZSBjb2RlIHRvIGFuc3dlciB0aGUgZm9sbG93aW5nIHF1ZXN0aW9uczoKIycgCiMnIGEuIFdoaWNoIHllYXJzIGhhZCB0aGUgdHVybm91dCBoaWdoZXIgdGhhbiA3MC8lPwojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBiLiBXaGljaCBwYXJ0aWVzIHdvbiBpbiBlbGVjdGlvbnMgd2l0aCB0dXJub3V0IGJlbG93IDAuNjU/CiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyBjLiBPYnRhaW4gdGhlIHllYXJzIGluIHdoaWNoIHRoZSB0dXJub3V0IHdhcyB0aGUgbG93ZXN0IGFuZCB0aGUgaGlnaGVzdCBhbmQgc3RvcmUgdGhlbSBpbiB2ZWN0b3IgYHllYXJfbWlubWF4YC4KIycgCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIGQuIFN0b3JlIHRoZSBuYW1lcyBvZiB0aGUgcGFydGllcyB3aGljaCB3b24gaW4gdGhlIDMgZWxlY3Rpb25zIHdpdGggdGhlIGhpZ2hlc3QgdHVybm91dCBpbiB2ZWN0b3IgYHRvcDNgCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KI0FOU1dFUgp0b3AzIDwtIHBhcnR5W29yZGVyKHR1cm5vdXQsIGRlY3JlYXNpbmcgPSBUUlVFKV1bMTozXQoKIycgCiMnIAojJyAKIycgCiMnIAojJyBlLiBTdG9yZSB0aGUgbmFtZXMgb2YgdGhlIHBhcnRpZXMgd2hpY2ggZ292ZXJuZWQgYmVmb3JlIHRoZSAzIGVsZWN0aW9ucyB3aXRoIHRoZSBsb3dlc3QgdHVybm91dCBpbiB2ZWN0b3IgYGxvdzNfcHJldmAuIE5vdGUgdGhhdCB5b3VyIGNvZGUgc2hvdWxkIHdvcmsgcmVnYXJkbGVzcyBvZiB3aGV0aGVyIHRoZSB2YXJpYWJsZXMgYXJlIHNvcnRlZCBjaHJvbm9sb2dpY2FsbHkKIycgCiMnIAojJyAKIycgCiMnIAojJyAqVGhlIHNvbHV0aW9ucyBmb3IgdGhlIGV4ZXJjaXNlcyB3aWxsIGJlIGF2YWlsYWJsZSBoZXJlIG9uIGByIGNvbmZpZyRiYXNpY3NgLioKIycgCiMnIAoA" download="02-basics-exercises.R">
+<button class="btn btn-default"><i class="fa fa-save"></i> Chapter exercises</button>
+</a></p>
+<div id="content-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Content</h2>
+<div id="arithmetic-operations-and-assignment" class="section level3 unnumbered">
+<h3>Arithmetic operations and assignment</h3>
+<p>R allows you to perform every basic mathematical operation, so it can simply be used as a calculator. Below, you can see several examples.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="basics.html#cb8-1"></a><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="co">#addition</span></span></code></pre></div>
+<pre><code>[1] 8</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basics.html#cb10-1"></a><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span> <span class="co">#subtraction</span></span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basics.html#cb12-1"></a><span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span> <span class="co">#division</span></span></code></pre></div>
+<pre><code>[1] 1.666667</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="basics.html#cb14-1"></a><span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">0</span></span></code></pre></div>
+<pre><code>[1] Inf</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="basics.html#cb16-1"></a><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="co">#multiplication</span></span></code></pre></div>
+<pre><code>[1] 15</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="basics.html#cb18-1"></a><span class="dv">5</span> <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="co">#exponentiation</span></span></code></pre></div>
+<pre><code>[1] 125</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="basics.html#cb20-1"></a><span class="kw">sqrt</span>(<span class="dv">4</span>) <span class="co">#square root</span></span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="basics.html#cb22-1"></a>(<span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#parenthesis</span></span></code></pre></div>
+<pre><code>[1] 2.5</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="basics.html#cb24-1"></a><span class="dv">9</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="co">#modulo</span></span></code></pre></div>
+<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="basics.html#cb26-1"></a><span class="dv">9</span> <span class="op">%/%</span><span class="st"> </span><span class="dv">2</span> <span class="co">#integer division</span></span></code></pre></div>
+<pre><code>[1] 4</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="basics.html#cb28-1"></a><span class="kw">log</span>(<span class="dv">2</span>) <span class="co">#natural logarithim</span></span></code></pre></div>
+<pre><code>[1] 0.6931472</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="basics.html#cb30-1"></a><span class="kw">exp</span>(<span class="dv">2</span>) <span class="co">#exponent</span></span></code></pre></div>
+<pre><code>[1] 7.389056</code></pre>
+<p>All the operations performed above generate some output, which is printed to the R console. Most of the time, however, it is useful to store the outputs of the operations we perform, so that they can be accessed repeatedly. To do that, we can store values in variables, which can be viewed and manipulated by referencing their names. Values are assigned to variables using the <code>&lt;-</code>operator. While <code>=</code> may seem equivalent, for more advanced reasons <code>&lt;-</code> is used whenever assigning a value. If you’re interested in the technical details behind it, you can check out this <a href="https://stackoverflow.com/questions/1741820/what-are-the-differences-between-and-assignment-operators-in-r">Stack Overflow post</a>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="basics.html#cb32-1"></a>x &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb32-2"><a href="basics.html#cb32-2"></a>my_number &lt;-<span class="st"> </span><span class="fl">4.2</span></span>
+<span id="cb32-3"><a href="basics.html#cb32-3"></a>result &lt;-<span class="st"> </span><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">6</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="dv">8</span></span></code></pre></div>
+<p>You can name a variable anything you like, however it cannot:</p>
+<ul>
+<li><p>start with a number</p></li>
+<li><p>have any whitespaces<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p></li>
+<li><p>include mathemtical operators in it’s name, such as *, /, ^, %, etc. - it’s best to avoid any special characters except for "<em>" and “.” to separate words if necessary, for example <code>my_variable</code> or <code>my.variable</code>. While you can see the dot being used in variable names by many users, technically using </em> is a better practice, as the dot has an additional special meaning attached to it.</p></li>
+</ul>
+<p>It is also useful to avoid naming variables using names that are already defined in R to be something else - however, you will learn the avoid this as you progress in the course.</p>
+<p>Keep in mind, that while variable names are arbitrary, it’s good to keep them concise and informative, especially if you have to present your code to someone or to come back to your own work after a long period of time.</p>
+<p>Assigning the values does not produce any output. To access the values assigned to a variable, you have to call its name directly in the script or the console. You can use this to perform mathematical operations on the objects as well.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="basics.html#cb33-1"></a>x &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb33-2"><a href="basics.html#cb33-2"></a>y &lt;-<span class="st"> </span><span class="dv">7</span></span>
+<span id="cb33-3"><a href="basics.html#cb33-3"></a>x</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="basics.html#cb35-1"></a>y</span></code></pre></div>
+<pre><code>[1] 7</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="basics.html#cb37-1"></a>x <span class="op">+</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1] 12</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="basics.html#cb39-1"></a>z &lt;-<span class="st"> </span>x <span class="op">*</span><span class="st"> </span>y</span>
+<span id="cb39-2"><a href="basics.html#cb39-2"></a>z</span></code></pre></div>
+<pre><code>[1] 35</code></pre>
+<p>Finally, you can always assign a new value to the same name. However this implies that the old value will be discarded. It can be useful when you know that you won’t need to access the value again. For example, it’s a common practice to modify a variable already defined such that <code>x &lt;- x + 5</code>. This simply means “add 5 to x and store it in x”.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="basics.html#cb41-1"></a>x &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb41-2"><a href="basics.html#cb41-2"></a>x</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="basics.html#cb43-1"></a>x &lt;-<span class="st"> </span><span class="dv">7</span></span>
+<span id="cb43-2"><a href="basics.html#cb43-2"></a>x</span></code></pre></div>
+<pre><code>[1] 7</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="basics.html#cb45-1"></a>x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+</div>
+<div id="vectors" class="section level3 unnumbered">
+<h3>Vectors</h3>
+<p>While the above operations are useful, the true power of R comes from the so-called <strong>vectorization</strong> of mathematical (and other) operations. A <strong>vector</strong> in R terminology is just a fancy word for an ordered sequence of numbers or a “column” in an Excel sheet. Vectors are also commonly referred to as <strong>variables</strong> - in the context of this course, these terms will be used interchangably. Vectors are created by the combine function <code>c()</code>. A <strong>function</strong> is simply an expression followed by parentheses which takes some values as input and generates other values as output. Vectors are assigned to names the same way as numbers. In fact, <em>a number in R is equivalent to a vector of length 1</em>. Below you can see some examples of vectors being created.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="basics.html#cb46-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb46-2"><a href="basics.html#cb46-2"></a>x</span></code></pre></div>
+<pre><code>[1] 1 4 5 6</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="basics.html#cb48-1"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">7</span> <span class="op">*</span><span class="st"> </span><span class="dv">8</span>, <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb48-2"><a href="basics.html#cb48-2"></a>z</span></code></pre></div>
+<pre><code>[1]  2.5 56.0  3.0</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="basics.html#cb50-1"></a>v &lt;-<span class="st"> </span><span class="kw">c</span>(x, z)</span>
+<span id="cb50-2"><a href="basics.html#cb50-2"></a>v</span></code></pre></div>
+<pre><code>[1]  1.0  4.0  5.0  6.0  2.5 56.0  3.0</code></pre>
+<p>R also offers a shorthand for creating sequences of integers between two values, for example:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="basics.html#cb52-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span></code></pre></div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="basics.html#cb54-1"></a>x &lt;-<span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb54-2"><a href="basics.html#cb54-2"></a>x</span></code></pre></div>
+<pre><code> [1] 15 14 13 12 11 10  9  8  7  6  5</code></pre>
+<p>It is also possible to create multiple repetitions of a given vector by using the <code>rep()</code> function, which takes a vector as its first argument and the number of required repetitions as the second argument.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="basics.html#cb56-1"></a><span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="co">#repreat the number 5 3 times</span></span></code></pre></div>
+<pre><code>[1] 5 5 5</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="basics.html#cb58-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb58-2"><a href="basics.html#cb58-2"></a>b &lt;-<span class="st"> </span><span class="kw">rep</span>(a, <span class="dv">4</span>) <span class="co">#repeat vector a 10 times and assing it to b</span></span>
+<span id="cb58-3"><a href="basics.html#cb58-3"></a>b</span></code></pre></div>
+<pre><code> [1] 5 6 7 5 6 7 5 6 7 5 6 7</code></pre>
+<p>The length of a vector refers to the number of elements it contains. It can be examined using the <code>length()</code> function:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="basics.html#cb60-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb60-2"><a href="basics.html#cb60-2"></a><span class="kw">length</span>(a)</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+<p><strong>Vectorization</strong> of an operation refers to the fact that an operation are performed on vectors element-wise. This is true for majority of R operations. For example, adding the vectors [1 2 3] and [5 6 7] will produce the vector [6 8 10]. If an operation is performed between a vector and a single number (or a <em>scalar</em>, using more specific terminology), it is applied to each pair of the elements, such that [1 1 1] multiplied by 2 would yield [2 2 2]. Below you can see some examples of vectors in action.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basics.html#cb62-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb62-2"><a href="basics.html#cb62-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">4</span>)</span>
+<span id="cb62-3"><a href="basics.html#cb62-3"></a>x <span class="op">+</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1]  6  8 10  6</code></pre>
+<p><img src="images/2/vectorization1.gif" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="basics.html#cb64-1"></a>x <span class="op">-</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1] -4 -4 -4 -2</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basics.html#cb66-1"></a>x <span class="op">^</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1]    1   64 2187   16</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="basics.html#cb68-1"></a>z &lt;-<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y</span>
+<span id="cb68-2"><a href="basics.html#cb68-2"></a>z</span></code></pre></div>
+<pre><code>[1] -5 -2  1  2</code></pre>
+<p>In case of performing operations on a vector and a scalar (one number), the operation is applied to each element of the vector. For example:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="basics.html#cb70-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb70-2"><a href="basics.html#cb70-2"></a>x <span class="op">*</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>[1] 3 6 9 6</code></pre>
+<p><img src="images/2/vectorization2.gif" /></p>
+<p>While it was mentioned earlier that vectors can be thought of as ordered sequences of numbers, they can also contain text. Such vectors are callled “character vectors” and are constructed similarily to numeric vectors. Each text has to be enquoted in "" to denote that it should not be interpreted as a variable name or a function.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="basics.html#cb72-1"></a>a &lt;-<span class="st"> &quot;Hello world&quot;</span></span>
+<span id="cb72-2"><a href="basics.html#cb72-2"></a>a</span></code></pre></div>
+<pre><code>[1] &quot;Hello world&quot;</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="basics.html#cb74-1"></a>words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;This&quot;</span>, <span class="st">&quot;Is&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;Sequence&quot;</span>, <span class="st">&quot;Of&quot;</span>, <span class="st">&quot;Words&quot;</span>)</span>
+<span id="cb74-2"><a href="basics.html#cb74-2"></a>words</span></code></pre></div>
+<pre><code>[1] &quot;This&quot;     &quot;Is&quot;       &quot;A&quot;        &quot;Sequence&quot; &quot;Of&quot;       &quot;Words&quot;   </code></pre>
+<p>Mathematical operations such as addition or division cannot be performed on character vectors for obvious reasons and will produce an error if you attempt them. However, you can combine words and numbers into one vector - however, they will all be treated as if they were text, so the number 5 in the example below gets converted to character “5”.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="basics.html#cb76-1"></a>mixed &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="st">&quot;something&quot;</span>, <span class="st">&quot;something else&quot;</span>)</span>
+<span id="cb76-2"><a href="basics.html#cb76-2"></a>mixed</span></code></pre></div>
+<pre><code>[1] &quot;5&quot;              &quot;something&quot;      &quot;something else&quot;</code></pre>
+<p>The <code>paste</code> function is a useful for dealing with character vectors - it can be thought of as an equivalent of addition operation for text.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="basics.html#cb78-1"></a>name &lt;-<span class="st"> &quot;John&quot;</span></span>
+<span id="cb78-2"><a href="basics.html#cb78-2"></a>surname &lt;-<span class="st"> &quot;Doe&quot;</span></span>
+<span id="cb78-3"><a href="basics.html#cb78-3"></a><span class="kw">paste</span>(name, surname)</span></code></pre></div>
+<pre><code>[1] &quot;John Doe&quot;</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="basics.html#cb80-1"></a>names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;John&quot;</span>,<span class="st">&quot;Jane&quot;</span>,<span class="st">&quot;Thomas&quot;</span>)</span>
+<span id="cb80-2"><a href="basics.html#cb80-2"></a>surnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Doe&quot;</span>,<span class="st">&quot;Smith&quot;</span>,<span class="st">&quot;Kowalsky&quot;</span>)</span>
+<span id="cb80-3"><a href="basics.html#cb80-3"></a><span class="kw">paste</span>(names, surnames)</span></code></pre></div>
+<pre><code>[1] &quot;John Doe&quot;        &quot;Jane Smith&quot;      &quot;Thomas Kowalsky&quot;</code></pre>
+</div>
+<div id="coercion" class="section level3 unnumbered">
+<h3>Coercion</h3>
+<p>Another important topic when dealing with vectors is <em>coerecion</em>. This refers to forcing one vector type to become another using the <code>as</code> functions. For example, we use <code>as.character</code> to force an <code>R</code> object into a character vector, or <code>as.numeric</code> to force it into a numeric vector:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="basics.html#cb82-1"></a>numbers_char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>)</span>
+<span id="cb82-2"><a href="basics.html#cb82-2"></a>numbers_char</span></code></pre></div>
+<pre><code>[1] &quot;5&quot; &quot;6&quot; &quot;7&quot;</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="basics.html#cb84-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(numbers_char)</span>
+<span id="cb84-2"><a href="basics.html#cb84-2"></a>numbers</span></code></pre></div>
+<pre><code>[1] 5 6 7</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="basics.html#cb86-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">123</span>, <span class="dv">12</span>)</span>
+<span id="cb86-2"><a href="basics.html#cb86-2"></a><span class="kw">as.character</span>(numbers)</span></code></pre></div>
+<pre><code>[1] &quot;10&quot;  &quot;123&quot; &quot;12&quot; </code></pre>
+<p>Note that this will not always work, as in many cases elements of one vector type cannot be interpreted as another. For example:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="basics.html#cb88-1"></a>nums &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;three&quot;</span>)</span>
+<span id="cb88-2"><a href="basics.html#cb88-2"></a><span class="kw">as.numeric</span>(nums)</span></code></pre></div>
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+<pre><code>[1]  1  2 NA</code></pre>
+<p>In this case, R still returns the output, however the third element of the <code>nums</code> vector is turned into an <code>NA</code> value. <code>NA</code> is shorthand for <em>Not Available</em> - it’s a constant that R uses to deal with missing values. This is indicated by the warning printed by R to the console. Missing values will be covered in more detail in the <a href="#missingvalues">next chapter</a>.</p>
+</div>
+<div id="logical-values-and-operators" class="section level3 unnumbered">
+<h3>Logical Values and Operators</h3>
+<p>Another crucial type of operations in R are logical operations, also known as boolean. They are used to evaluate the truth value of logical statements such as variable “<code>A</code> is equal to variable <code>B</code>” or variable <code>A</code> is a numeric vector. Whenever the queried statement is True, they return TRUE and FALSE otherwise. Below you can see some simple examples using the equality operator <code>==</code> - the double equality means that we are checking whether two values are equal, rather than assigning one to another.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="basics.html#cb91-1"></a>a &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb91-2"><a href="basics.html#cb91-2"></a>a <span class="op">==</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="basics.html#cb93-1"></a>a <span class="op">==</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="basics.html#cb95-1"></a>a <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="basics.html#cb97-1"></a><span class="st">&quot;John&quot;</span> <span class="op">==</span><span class="st"> &quot;James&quot;</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>The <code>!</code> operator is used for negation, so <code>!TRUE</code> results in <code>FALSE</code> and vice versa. Accordingly, <code>!=</code> is used to denote ‘not equals to’.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="basics.html#cb99-1"></a><span class="op">!</span><span class="ot">TRUE</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="basics.html#cb101-1"></a><span class="op">!</span><span class="ot">FALSE</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="basics.html#cb103-1"></a><span class="dv">5</span> <span class="op">!=</span><span class="st"> </span><span class="dv">6</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="basics.html#cb105-1"></a><span class="st">&quot;John&quot;</span> <span class="op">!=</span><span class="st"> &quot;James&quot;</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Logical operations can also be used to compare values, by using <code>a &lt; b</code> for “a is less than b”, <code>a &lt;= b</code> for “a is less or equal to b” and vice versa.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="basics.html#cb107-1"></a>x &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb107-2"><a href="basics.html#cb107-2"></a>y &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb107-3"><a href="basics.html#cb107-3"></a></span>
+<span id="cb107-4"><a href="basics.html#cb107-4"></a>x <span class="op">&gt;</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="basics.html#cb109-1"></a>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">&lt;</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="basics.html#cb111-1"></a>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">&lt;=</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Finally, the <code>&amp;</code> (logical “and”) and <code>|</code> (logical “or”) operators are designed to combine <code>TRUE</code>/<code>FALSE</code> values. So, if you put <code>&amp;</code> between two logical values, it will yield <code>TRUE</code> if and only if <em>both</em> values are TRUE. <code>|</code> on the other hand will return <code>TRUE</code> if <em>any</em> of the values is <code>TRUE</code></p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="basics.html#cb113-1"></a><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">TRUE</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="basics.html#cb115-1"></a><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="basics.html#cb117-1"></a><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">FALSE</span></span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="basics.html#cb119-1"></a><span class="ot">FALSE</span> <span class="op">|</span><span class="st"> </span><span class="ot">FALSE</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="basics.html#cb121-1"></a>(<span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">6</span>) <span class="op">|</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="basics.html#cb123-1"></a>(<span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">6</span>) <span class="op">&amp;</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>The logical values are also often used to verify whether we are dealing with a certain R type - for example to check whether a value is a character or numeric. This is achieved by using the <code>is</code> functions, such as <code>is.numeric</code> or <code>is.character</code>.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="basics.html#cb125-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb125-2"><a href="basics.html#cb125-2"></a><span class="kw">is.vector</span>(numbers)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="basics.html#cb127-1"></a><span class="kw">is.numeric</span>(numbers)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="basics.html#cb129-1"></a><span class="kw">is.character</span>(numbers)</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="basics.html#cb131-1"></a>words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Word&quot;</span>,<span class="st">&quot;Word&quot;</span>)</span>
+<span id="cb131-2"><a href="basics.html#cb131-2"></a><span class="kw">is.numeric</span>(words)</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="basics.html#cb133-1"></a><span class="kw">is.character</span>(words)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>As with numbers and characters, the logical values also form their special types of vectors and can be used to perform element-wise operations.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="basics.html#cb135-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</span>
+<span id="cb135-2"><a href="basics.html#cb135-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb135-3"><a href="basics.html#cb135-3"></a>a <span class="op">&amp;</span><span class="st"> </span>b</span></code></pre></div>
+<pre><code>[1]  TRUE FALSE FALSE</code></pre>
+<p>They can also be used to find whether each value in a numeric or character vector is equal to another.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="basics.html#cb137-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)</span>
+<span id="cb137-2"><a href="basics.html#cb137-2"></a>x <span class="op">==</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>[1]  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="basics.html#cb139-1"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Thomas&quot;</span>)</span>
+<span id="cb139-2"><a href="basics.html#cb139-2"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;John&quot;</span>,<span class="st">&quot;James&quot;</span>,<span class="st">&quot;Robert&quot;</span>)</span>
+<span id="cb139-3"><a href="basics.html#cb139-3"></a>z <span class="op">==</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>[1]  TRUE  TRUE FALSE</code></pre>
+<p>The boolean vectors can be also thought of as a special case of numeric vectors consisting only of 0s and 1s, where 0 corresponds with <code>FALSE</code> and 1 with <code>TRUE</code> value. This can be easily seen in the example below:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="basics.html#cb141-1"></a><span class="ot">TRUE</span> <span class="op">+</span><span class="st"> </span><span class="ot">TRUE</span> <span class="op">+</span><span class="st"> </span><span class="ot">TRUE</span></span></code></pre></div>
+<pre><code>[1] 3</code></pre>
+</div>
+<div id="indexing" class="section level3 unnumbered">
+<h3>Indexing</h3>
+<p>While a very large volume of data can be stored in one vector, we often may want to access only a specific element of it, or a fraction of the elements. An <em>index</em> of a vector, is simply an integer corresponding to the position of a value in a the vector. So, a vector with N values has integers ranging from 1 to N. For example, in vector <code>c(5, 10, 3, 2)</code>, the index of 5 is 1, the index of 10 is 2, the index of 3 is 3, etc. <em>Indexing</em> is an operation of accessing a vector’s elemet at a given index, using the square brackets <code>[]</code>. For example, <code>a[5]</code> means “get the fifth element from vector a”.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="basics.html#cb143-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.2</span>, <span class="fl">4.5</span>, <span class="fl">6.2</span>, <span class="fl">8.9</span>, <span class="fl">10.2</span>, <span class="fl">4.8</span>, <span class="fl">0.1</span>)</span>
+<span id="cb143-2"><a href="basics.html#cb143-2"></a>a[<span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[1] 10.2</code></pre>
+<p><img src="images/2/indexing1.gif" /></p>
+<p>Indexing can also be used to <em>replace values</em> at a given position in a vector. In the example below, we replace the first element of <code>a</code> with the number 1000.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="basics.html#cb145-1"></a>a[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb145-2"><a href="basics.html#cb145-2"></a>a </span></code></pre></div>
+<pre><code>[1] 1000.0    4.5    6.2    8.9   10.2    4.8    0.1</code></pre>
+<p>Indexing can also be done using another vector of numeric values. For example we may want to get the first, second and fifth elements of a given vector, or a sequence of elements between 1 and 4.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="basics.html#cb147-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.2</span>, <span class="fl">4.5</span>, <span class="fl">6.2</span>, <span class="fl">8.9</span>, <span class="fl">10.2</span>, <span class="fl">4.8</span>, <span class="fl">0.1</span>)</span>
+<span id="cb147-2"><a href="basics.html#cb147-2"></a>a[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>[1]  5.2  6.2 10.2</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="basics.html#cb149-1"></a><span class="co">#equivalent to:</span></span>
+<span id="cb149-2"><a href="basics.html#cb149-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb149-3"><a href="basics.html#cb149-3"></a>a[b]</span></code></pre></div>
+<pre><code>[1]  5.2  6.2 10.2</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="basics.html#cb151-1"></a><span class="co">#can also be done for a sequence</span></span>
+<span id="cb151-2"><a href="basics.html#cb151-2"></a>a[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[1]  5.2  4.5  6.2  8.9 10.2</code></pre>
+<p><img src="images/2/indexing2.gif" /></p>
+<p>Indexing is even more powerful in conjunction with logical operations. This is because, a logical vector can be used to index any vector - such indexing operations returns all the values of the indexed vector where the corresponding indexing logical vector is <code>TRUE</code>. This may sound confusing at first, but is actually quite straightforward, as seen below:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="basics.html#cb153-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">4.2</span>, <span class="fl">5.6</span>, <span class="fl">7.2</span>, <span class="fl">1.1</span>)</span>
+<span id="cb153-2"><a href="basics.html#cb153-2"></a>index &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>) <span class="co">#only second and third elements are TRUE</span></span>
+<span id="cb153-3"><a href="basics.html#cb153-3"></a>x[index] <span class="co">#returns only second and third elements of the x vector</span></span></code></pre></div>
+<pre><code>[1] 5.6 7.2</code></pre>
+<p><img src="images/2/indexing3.gif" /></p>
+<p>For example, imagine vector <code>gdp</code> vector that holds the GDP per capita values for a list of countries and <code>country</code> vector that holds the corresponding country names. Logical indexing may be very useful, if we want to get names of countries with GDP per capita above or below a certain value:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="basics.html#cb155-1"></a>gdp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">69687</span>, <span class="dv">67037</span>, <span class="dv">65111</span>, <span class="dv">52367</span>, <span class="dv">41030</span>, <span class="dv">32946</span>, <span class="dv">29961</span>)</span>
+<span id="cb155-2"><a href="basics.html#cb155-2"></a>countries &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Qatar&quot;</span>, <span class="st">&quot;Iceland&quot;</span>, <span class="st">&quot;USA&quot;</span>,</span>
+<span id="cb155-3"><a href="basics.html#cb155-3"></a>               <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;United Kingdom&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Spain&quot;</span>)</span>
+<span id="cb155-4"><a href="basics.html#cb155-4"></a>countries[gdp <span class="op">&gt;</span><span class="st"> </span><span class="dv">40000</span>]</span></code></pre></div>
+<pre><code>[1] &quot;Qatar&quot;          &quot;Iceland&quot;        &quot;USA&quot;            &quot;Germany&quot;        &quot;United Kingdom&quot;</code></pre>
+<p>We can also use this with multiple critertia, for example index countries with GDP higher than 40000 USD and the UN Human Development Index higher than 0.9.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="basics.html#cb157-1"></a>hdi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.848</span>, <span class="fl">0.938</span>, <span class="fl">0.920</span>, <span class="fl">0.939</span>, <span class="fl">0.920</span>, <span class="fl">0.883</span>, <span class="fl">0.893</span>)</span>
+<span id="cb157-2"><a href="basics.html#cb157-2"></a>countries[gdp <span class="op">&gt;</span><span class="st"> </span><span class="dv">40000</span> <span class="op">&amp;</span><span class="st"> </span>hdi <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.9</span>]</span></code></pre></div>
+<pre><code>[1] &quot;Iceland&quot;        &quot;USA&quot;            &quot;Germany&quot;        &quot;United Kingdom&quot;</code></pre>
+</div>
+<div id="sorting" class="section level3 unnumbered">
+<h3>Sorting</h3>
+<p>On many occasions, it’s useful to sort a vector to see it’s highest or lowest values. This can be achieved by using the <code>sort</code> function.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="basics.html#cb159-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">123</span>)</span>
+<span id="cb159-2"><a href="basics.html#cb159-2"></a><span class="kw">sort</span>(numbers)</span></code></pre></div>
+<pre><code>[1]   2   4   5   8  10 123</code></pre>
+<p>By default, R sorts vectors in an increasing order (in case of character vectors, this translates to A-Z sorting). However, the sort function has an additional argument, <code>decreasing</code>, that can be used to specify whether the sorting should be done in the decreasing order. The argument is a <em>default</em> argument, i.e. takes a certain value unless specified otherwise by the user. This is common in R and a lot of functions allow customizing the way they work by specifying additional arguments, which have a default value to avoid the effort of specifying them every time a certain function is used. Such default arguments can easily be recognized in R documentation. In case of sort, the <em>Usage</em> section reads <code>sort(x, decreasing = FALSE, ...)</code>. This means, that the function takes <code>x</code> (the vector to be sorted) as its main argument, and <code>decreasing</code>, which defaults to <code>FALSE</code>. The argument <code>decreasing</code> is also <em>logical</em> - can only take <code>TRUE</code> or <code>FALSE</code> values - this is a common argument type if a certain operation can be performed in two different ways of with an additional element that may not always be desired.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="basics.html#cb161-1"></a><span class="kw">sort</span>(numbers, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>[1] 123  10   8   5   4   2</code></pre>
+<p>While sorting a vector may be useful in certain circumstances, a lot of the time we may actually need to sort the values by another vector. For example, let’s assume that we have a vector of names and corresponding ages, and we want to see the names ordered by the age.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="basics.html#cb163-1"></a>names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thomas&quot;</span>,<span class="st">&quot;Peter&quot;</span>,<span class="st">&quot;Ahmed&quot;</span>,<span class="st">&quot;Emily&quot;</span>,<span class="st">&quot;Helena&quot;</span>)</span>
+<span id="cb163-2"><a href="basics.html#cb163-2"></a>age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">40</span>)</span></code></pre></div>
+<p>This can be achieved using the <code>order</code> function, which returns indices of the vector needed to re-arrange it into sorted order.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="basics.html#cb164-1"></a><span class="kw">order</span>(age)</span></code></pre></div>
+<pre><code>[1] 2 4 3 5 1</code></pre>
+<p>In this case, the age of 10 (index 2) should go to the first place, 15 (index 4) to the second position, 20 (index 3) to the third, etc. Note that the two following operations are equivalent:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="basics.html#cb166-1"></a><span class="kw">sort</span>(age)</span></code></pre></div>
+<pre><code>[1] 10 15 20 40 50</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="basics.html#cb168-1"></a>age[<span class="kw">order</span>(age)]</span></code></pre></div>
+<pre><code>[1] 10 15 20 40 50</code></pre>
+<p>The first one tells R to simply <em>sort the values of age</em>, whereas the second to <em>index</em> age by the indices of age in a sorted order. To get the names sorted by age, we can use:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="basics.html#cb170-1"></a>names[<span class="kw">order</span>(age)]</span></code></pre></div>
+<pre><code>[1] &quot;Peter&quot;  &quot;Emily&quot;  &quot;Ahmed&quot;  &quot;Helena&quot; &quot;Thomas&quot;</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="basics.html#cb172-1"></a>names[<span class="kw">order</span>(age, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)] <span class="co">#decreasing order</span></span></code></pre></div>
+<pre><code>[1] &quot;Thomas&quot; &quot;Helena&quot; &quot;Ahmed&quot;  &quot;Emily&quot;  &quot;Peter&quot; </code></pre>
+<p>Finally, the <code>rank</code> function returns the sample ranks of a given vector, i.e. their relative position in a sorted list. Note that this is different from <code>order</code>. <code>rank</code> returns the position corresponding to each value in a sorted order, whereas <code>order</code> returns indices of the original vector needed to put it in a sorted order.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="basics.html#cb174-1"></a>age</span></code></pre></div>
+<pre><code>[1] 50 10 20 15 40</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="basics.html#cb176-1"></a><span class="kw">rank</span>(age)</span></code></pre></div>
+<pre><code>[1] 5 1 3 2 4</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="basics.html#cb178-1"></a><span class="kw">order</span>(age)</span></code></pre></div>
+<pre><code>[1] 2 4 3 5 1</code></pre>
+<p>So in our example, the first value of the vector returned by <code>rank(age)</code> is 5, since the first value of the <code>age</code> vector is 50, which would be last in the numeric order. The first value of the vector returned by <code>order(age)</code> is 2 - this is because, the 2nd element of <code>age</code> (i.e. the value of 10) should go to the first position for the vector to me correctly ordered.</p>
+<p>Finally, logical indices can be converted into numerical values using the <code>which</code> function. It takes a logical vector as input and returns the indices at which the value of the vector is <code>TRUE</code>. You can see an example below:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="basics.html#cb180-1"></a>numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb180-2"><a href="basics.html#cb180-2"></a>numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="basics.html#cb182-1"></a><span class="kw">which</span>(numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>[1]  6  7  8  9 10</code></pre>
+<p>This function is helpful in some certain situations, however it’s a bad practice to apply it in cases when logical indexing is sufficient, for example:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="basics.html#cb184-1"></a>numbers[numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[1]  6  7  8  9 10</code></pre>
+<p>is sufficient, and there’s no need to use:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="basics.html#cb186-1"></a>numbers[<span class="kw">which</span>(numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>[1]  6  7  8  9 10</code></pre>
+<p>One of the situations in which the use of <code>which</code> function can be preferred to simple logical indexing is when our vector contains missing values (discussed in the <a href="#missingvalues">next chapter</a>. For example, the first expression will return <code>NA</code>.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="basics.html#cb188-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="ot">NA</span>)</span>
+<span id="cb188-2"><a href="basics.html#cb188-2"></a>numbers[numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[1] 10 20 NA</code></pre>
+<p>This is because, running logical comparisons such as <code>numbers &gt; 5</code> always returns missing values, along the <code>TRUE</code> and <code>FALSE</code> logical values. This should make sense, since <code>NA</code> is not comparable to any number.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="basics.html#cb190-1"></a>numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE    NA</code></pre>
+<p><code>which</code> skips the <code>NA</code> values, only returning the indices of values that are <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="basics.html#cb192-1"></a><span class="kw">which</span>(numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>[1] 4 5</code></pre>
+<p>As a result, we can perform indexing on variable with missing values using <code>which</code>:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="basics.html#cb194-1"></a>numbers[<span class="kw">which</span>(numbers <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>[1] 10 20</code></pre>
+<p>Two cousins of the <code>which</code> function are <code>which.max</code> and <code>which.min</code>, which return the index of the highest and lowest value in a vector. So, coming back to the ages example, we can retrieve the name of the person with highest and lowest age using respectively:</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="basics.html#cb196-1"></a>names[<span class="kw">which.max</span>(age)]</span></code></pre></div>
+<pre><code>[1] &quot;Thomas&quot;</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="basics.html#cb198-1"></a>names[<span class="kw">which.min</span>(age)]</span></code></pre></div>
+<pre><code>[1] &quot;Peter&quot;</code></pre>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">2.2</span> Summary</h2>
+<ul>
+<li><p><strong>Vectors</strong> are simply ordered sequences of elements that represent some concept we analyze - for example, we can have a vector of country names and a vector of corresponding GDP per capita amounts. They are also known as <strong>variables</strong>.</p></li>
+<li><p><strong>Vectorization</strong> simply means, that if we add (or perform any other operation) two vectors toegether/an numeric element to a vector, it will be done element-wise.</p></li>
+<li><p><strong>Functions</strong> in R are objects which take some values as inputs and produce other values as outputs.</p></li>
+<li><p><strong>Logical values</strong> are the result of comparing vectors using logical operators (such as <code>==</code>, <code>&lt;</code>, <code>&gt;</code>). They can be either <code>TRUE</code> if the logical statment is true (e.g. <code>2 + 2 == 4</code>) or <code>FALSE</code> otherwise (e.g. <code>7 &gt; 10</code>).</p></li>
+<li><p><strong>Indexing</strong> means retrieving vector elements by their numeric index (i.e. their position in the vector). It can also be done using logical values - in this case, all elements corresponding to <code>TRUE</code> are retrieved.</p></li>
+<li><p><strong>Sorting</strong> refers to putting elements of a vector into numeric or alphabetial order. It can be done either directly on a vector using <code>sort()</code> or in reference to another vector using <code>order()</code>. <code>rank()</code> allows to retrieve the relative rank of an item (i.e. position which it would have if the vector was sorted).</p></li>
+</ul>
+<div id="functions-list" class="section level3 unnumbered">
+<h3>Functions list</h3>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="8%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">function</th>
+<th align="left">package</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">as.character()</td>
+<td align="left">base</td>
+<td align="left">coerce a vector to character</td>
+</tr>
+<tr class="even">
+<td align="left">as.numeric()</td>
+<td align="left">base</td>
+<td align="left">coerce a vector to numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">c()</td>
+<td align="left">base</td>
+<td align="left">Combine values/vectors into a vector</td>
+</tr>
+<tr class="even">
+<td align="left">exp()</td>
+<td align="left">base</td>
+<td align="left">exponent</td>
+</tr>
+<tr class="odd">
+<td align="left">is.character()</td>
+<td align="left">base</td>
+<td align="left">check if vector is character</td>
+</tr>
+<tr class="even">
+<td align="left">is.numeric()</td>
+<td align="left">base</td>
+<td align="left">check if vector is numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">is.vector()</td>
+<td align="left">base</td>
+<td align="left">check if an object is a vector</td>
+</tr>
+<tr class="even">
+<td align="left">length()</td>
+<td align="left">base</td>
+<td align="left">get number of elements in a vector or list</td>
+</tr>
+<tr class="odd">
+<td align="left">log()</td>
+<td align="left">base</td>
+<td align="left">log (default base = e)</td>
+</tr>
+<tr class="even">
+<td align="left">order()</td>
+<td align="left">base</td>
+<td align="left">get indexes that will sort a vector</td>
+</tr>
+<tr class="odd">
+<td align="left">paste()</td>
+<td align="left">base</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">rank()</td>
+<td align="left">base</td>
+<td align="left">rank the values of a vector</td>
+</tr>
+<tr class="odd">
+<td align="left">rep()</td>
+<td align="left">base</td>
+<td align="left">repeat a value or a vector N times</td>
+</tr>
+<tr class="even">
+<td align="left">sort()</td>
+<td align="left">base</td>
+<td align="left">sort the values. Specify decreasing = FALSE to sort in decreasing order</td>
+</tr>
+<tr class="odd">
+<td align="left">sqrt()</td>
+<td align="left">base</td>
+<td align="left">square root</td>
+</tr>
+<tr class="even">
+<td align="left">which()</td>
+<td align="left">base</td>
+<td align="left">return indexes of TRUE entries of a logical vector</td>
+</tr>
+<tr class="odd">
+<td align="left">which.max()</td>
+<td align="left">base</td>
+<td align="left">return index of the largest value in a vector</td>
+</tr>
+<tr class="even">
+<td align="left">which.min()</td>
+<td align="left">base</td>
+<td align="left">return index of the smallest value in a vector</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2><span class="header-section-number">2.3</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>The code below creates three vectors corresponding with individual’s name, birth year and birth month.</li>
+</ol>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="basics.html#cb200-1"></a>year &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1976</span>, <span class="dv">1974</span>, <span class="dv">1973</span>, <span class="dv">1991</span>, <span class="dv">1972</span>, <span class="dv">1954</span>, </span>
+<span id="cb200-2"><a href="basics.html#cb200-2"></a>          <span class="dv">1985</span>, <span class="dv">1980</span>, <span class="dv">1994</span>, <span class="dv">1970</span>, <span class="dv">1988</span>, <span class="dv">1951</span>, </span>
+<span id="cb200-3"><a href="basics.html#cb200-3"></a>          <span class="dv">1957</span>, <span class="dv">1966</span>, <span class="dv">1968</span>, <span class="dv">1963</span>, <span class="dv">1999</span>, <span class="dv">1977</span>, </span>
+<span id="cb200-4"><a href="basics.html#cb200-4"></a>          <span class="dv">1984</span>, <span class="dv">1998</span>)</span>
+<span id="cb200-5"><a href="basics.html#cb200-5"></a></span>
+<span id="cb200-6"><a href="basics.html#cb200-6"></a>month &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;February&quot;</span>, <span class="st">&quot;February&quot;</span>, <span class="st">&quot;April&quot;</span>,</span>
+<span id="cb200-7"><a href="basics.html#cb200-7"></a>           <span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;November&quot;</span>, </span>
+<span id="cb200-8"><a href="basics.html#cb200-8"></a>           <span class="st">&quot;October&quot;</span>, <span class="st">&quot;December&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;March&quot;</span>, </span>
+<span id="cb200-9"><a href="basics.html#cb200-9"></a>           <span class="st">&quot;June&quot;</span>, <span class="st">&quot;November&quot;</span>, <span class="st">&quot;October&quot;</span>, <span class="st">&quot;May&quot;</span>, </span>
+<span id="cb200-10"><a href="basics.html#cb200-10"></a>           <span class="st">&quot;July&quot;</span>, <span class="st">&quot;August&quot;</span>, <span class="st">&quot;March&quot;</span>, <span class="st">&quot;July&quot;</span>, </span>
+<span id="cb200-11"><a href="basics.html#cb200-11"></a>           <span class="st">&quot;October&quot;</span>, <span class="st">&quot;January&quot;</span>)</span>
+<span id="cb200-12"><a href="basics.html#cb200-12"></a></span>
+<span id="cb200-13"><a href="basics.html#cb200-13"></a>name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thomas&quot;</span>, <span class="st">&quot;Natalie&quot;</span>, <span class="st">&quot;James&quot;</span>, </span>
+<span id="cb200-14"><a href="basics.html#cb200-14"></a>          <span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Cate&quot;</span>, <span class="st">&quot;Rob&quot;</span>, <span class="st">&quot;Frank&quot;</span>,</span>
+<span id="cb200-15"><a href="basics.html#cb200-15"></a>          <span class="st">&quot;Tyle&quot;</span>, <span class="st">&quot;Marshall&quot;</span>, <span class="st">&quot;Ted&quot;</span>, <span class="st">&quot;Emily&quot;</span>, </span>
+<span id="cb200-16"><a href="basics.html#cb200-16"></a>          <span class="st">&quot;Brandon&quot;</span>, <span class="st">&quot;Yasmin&quot;</span>, <span class="st">&quot;Tina&quot;</span>, </span>
+<span id="cb200-17"><a href="basics.html#cb200-17"></a>          <span class="st">&quot;Phillip&quot;</span>, <span class="st">&quot;Natasha&quot;</span>, <span class="st">&quot;Joan&quot;</span>, </span>
+<span id="cb200-18"><a href="basics.html#cb200-18"></a>          <span class="st">&quot;Jack&quot;</span>, <span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;Barney&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li><p>Create a vector named birthdays which contains names, birth months and birth years of each person. For example, the first one should look like <code>"Thomas, February 1976</code>.</p></li>
+<li><p>Filter out the people who were born in October after the year 1980. Store their names in vector named <code>oct1980</code></p></li>
+<li><p>Filter out the people who are not of working age (i.e. 14 and younger or 65 and older) as of July 2020. Store their names in a vector called <code>nonworking</code>.</p></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>Given the vector x &lt;- c(5, 40, 15, 10, 11). What would output would you expect from the following functions?</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><code>sort(x)</code></li>
+<li><code>order(x)</code></li>
+<li><code>rank(x)</code></li>
+</ol>
+<p>Use R to verify your answers.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Vector <code>country</code> contains the names of 6 countries and the following 4 vectors contain the countries’ correspondig Expected Years of Schooling, <code>eys</code>, Mean Years of Schooling <code>mys</code>, Life Expectancy at Birth <code>lexp</code> and Per capita Gross National Income <code>gni</code>.</li>
+</ol>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="basics.html#cb201-1"></a>country &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Georgia&quot;</span>,</span>
+<span id="cb201-2"><a href="basics.html#cb201-2"></a>             <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Philippines&quot;</span>,</span>
+<span id="cb201-3"><a href="basics.html#cb201-3"></a>             <span class="st">&quot;Turkey&quot;</span>, <span class="st">&quot;Ukraine&quot;</span>)</span>
+<span id="cb201-4"><a href="basics.html#cb201-4"></a>eys &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">17.6</span>, <span class="fl">15.4</span>, <span class="fl">14.3</span>, <span class="fl">12.7</span>, <span class="fl">16.4</span>, <span class="fl">15.1</span>)</span>
+<span id="cb201-5"><a href="basics.html#cb201-5"></a>mys &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">10.6</span>, <span class="fl">12.8</span>, <span class="fl">8.6</span>, <span class="fl">9.4</span>, <span class="fl">7.7</span>, <span class="fl">11.3</span>)</span>
+<span id="cb201-6"><a href="basics.html#cb201-6"></a>lexp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">76.5</span>, <span class="fl">73.6</span>, <span class="dv">75</span>, <span class="fl">71.1</span>, <span class="fl">77.4</span>, <span class="dv">72</span>)</span>
+<span id="cb201-7"><a href="basics.html#cb201-7"></a>gni &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">17611</span>, <span class="dv">9570</span>, <span class="dv">17628</span>, <span class="dv">9540</span>, <span class="dv">24905</span>, <span class="dv">7994</span>)</span></code></pre></div>
+<p>The United Nations Human Development Index (HDI) is given by the following formula:</p>
+<p>HDI = <span class="math inline">\(\sqrt[3]{\text{Life Expectancy Index} * \text{Education Index} * \text{Income Index}}\)</span>, where</p>
+<p>Life Expectancy Index = <span class="math inline">\(\frac{\text{Life Expectancy}-20}{85-20}\)</span></p>
+<p>Education Index = <span class="math inline">\(\frac{\text{Mean Years of Schooling Index} + \text{Expected Years of Schooling Index}}{2}\)</span></p>
+<p>Mean Years of Schooling Index = <span class="math inline">\(\frac{\text{Mean Years of Schooling}}{15}\)</span></p>
+<p>Expected Years of Schooling Index = <span class="math inline">\(\frac{\text{Expected Years of Schooling}}{18}\)</span></p>
+<p>Income Index = <span class="math inline">\(\frac{ln(GNIpc) - ln(100)}{ln(75,000) - ln(100)}\)</span></p>
+<p>Write R code to answert the following questions:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Calculate the HDI for each of the countries.</p></li>
+<li><p>Store country names with HDI lower than 0.75 in vector <code>coutry_lhdi</code>. Print the names of the countries.</p></li>
+<li><p>Store country names with HDI lower than 0.8 and GNI higher than $10000 in vector <code>country_hlgh</code></p></li>
+<li><p>Print names of the countries with HDI at least as high as HDI of Turkey (excluding Turkey).</p></li>
+<li><p>Print names of the countries in which the Expected Years of Schooling index is higher than the Life Expectancy Index.</p></li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>The data below contains the records of UK General Election turnout between 1964 and 2019.</li>
+</ol>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="basics.html#cb202-1"></a>turnout &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.771</span>, <span class="fl">0.758</span>, <span class="fl">0.72</span>, <span class="fl">0.788</span>, <span class="fl">0.728</span>, <span class="fl">0.76</span>, <span class="fl">0.727</span>, <span class="fl">0.753</span>, <span class="fl">0.777</span>, <span class="fl">0.714</span>, <span class="fl">0.594</span>, <span class="fl">0.614</span>, <span class="fl">0.651</span>, <span class="fl">0.661</span>, <span class="fl">0.687</span>, <span class="fl">0.673</span>)</span>
+<span id="cb202-2"><a href="basics.html#cb202-2"></a></span>
+<span id="cb202-3"><a href="basics.html#cb202-3"></a>year &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1964</span>, <span class="dv">1966</span>, <span class="dv">1970</span>, <span class="dv">1974</span>, <span class="dv">1974</span>, <span class="dv">1979</span>, <span class="dv">1983</span>, <span class="dv">1987</span>, <span class="dv">1992</span>, <span class="dv">1997</span>, <span class="dv">2001</span>, <span class="dv">2005</span>, <span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2017</span>, <span class="dv">2019</span>)</span>
+<span id="cb202-4"><a href="basics.html#cb202-4"></a></span>
+<span id="cb202-5"><a href="basics.html#cb202-5"></a>party &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Conservative&quot;</span>, <span class="st">&quot;Labour&quot;</span>,</span>
+<span id="cb202-6"><a href="basics.html#cb202-6"></a>           <span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Conservative&quot;</span>,</span>
+<span id="cb202-7"><a href="basics.html#cb202-7"></a>           <span class="st">&quot;Conservative&quot;</span>, <span class="st">&quot;Conservative&quot;</span>,</span>
+<span id="cb202-8"><a href="basics.html#cb202-8"></a>           <span class="st">&quot;Conservative&quot;</span>, <span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Labour&quot;</span>, <span class="st">&quot;Labour&quot;</span>,</span>
+<span id="cb202-9"><a href="basics.html#cb202-9"></a>           <span class="st">&quot;Conservative&quot;</span>, <span class="st">&quot;Conservative&quot;</span>, </span>
+<span id="cb202-10"><a href="basics.html#cb202-10"></a>           <span class="st">&quot;Conservative&quot;</span>)</span></code></pre></div>
+<p>Write code to answer the following questions:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Which years had the turnout higher than 70/%?</p></li>
+<li><p>Which parties won in elections with turnout below 0.65?</p></li>
+<li><p>Obtain the years in which the turnout was the lowest and the highest and store them in vector <code>year_minmax</code>.</p></li>
+<li><p>Store the names of the parties which won in the 3 elections with the highest turnout in vector <code>top3</code></p></li>
+<li><p>Store the names of the parties which governed before the 3 elections with the lowest turnout in vector <code>low3_prev</code>. Note that your code should work regardless of whether the variables are sorted chronologically</p></li>
+</ol>
+<p><em>The solutions for the exercises will be available here on 2020-11-12.</em></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Technically, you can create a variable with whitespaces or numbers in its name using the reverse quotation marks `, for example <code>5 my variable</code>. However this is not a common practice and makes your code difficult to read, so this should be avoided.<a href="basics.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datastructures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_depth": 2
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
