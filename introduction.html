@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/font-awesome-5.13.0/js/script.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
@@ -62,41 +63,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -284,105 +312,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>What is R and why should I learn it?</h3>
 <p>R is an open-source statistical programming language used for data processing, analysis and visualization. It was released in 1993 by University of Auckland and is based on the older S programming language. Since then, it has grown to be one of the most popular languages for quantitative data analysis across multiple disciplines.</p>
 <p>There are many reasons why learning R is worth your time:</p>
-<p><strong>1. It's open-source</strong> - as opposed to other popular statistical packages such as SPSS, Stata or SAS, R is an open-source tool. This means that using R and all its public libraries is completely free of charge and requires no special licences. It is maintained by the user community, and thus all the improvements directly coincide with the requirements of the end-users, rather than profit-driven considerations often guiding the introduction of new functionalities to proprietary statistical packages.</p>
-<p><strong>2. It <em>can</em> be widely applied</strong> - since it's developed by users, there are tools in R for doing almost everything, from simple data manipulation and visualization to automated web data collection, natural language processing, survey data analysis, epidemiology, computational biology, social network analysis, cognitive modelling, geospatial analysis, deep learning and many more.</p>
-<div class="figure">
-<img src="images/1/tiobe_index_r.png" />
-
-</div>
+<p><strong>1. It’s open-source</strong> - as opposed to other popular statistical packages such as SPSS, Stata or SAS, R is an open-source tool. This means that using R and all its public libraries is completely free of charge and requires no special licences. It is maintained by the user community, and thus all the improvements directly coincide with the requirements of the end-users, rather than profit-driven considerations often guiding the introduction of new functionalities to proprietary statistical packages.</p>
+<p><strong>2. It <em>can</em> be widely applied</strong> - since it’s developed by users, there are tools in R for doing almost everything, from simple data manipulation and visualization to automated web data collection, natural language processing, survey data analysis, epidemiology, computational biology, social network analysis, cognitive modelling, geospatial analysis, deep learning and many more.</p>
+<p><img src="images/1/tiobe_index_r.png" /></p>
 <p><strong>3. It <em>is</em> widely applied</strong> - in 2019, R was the 5th most popular tool for data science mentioned by job advertisements on indeed.com. It is widely used in a variety of industries, including tech, consulting, think-tanks and public institutions.</p>
 <p><strong>4. It has an abundance of resources available on-line</strong> - due to its increase in popularity in recent years, there are multiple R courses available on-line, which help you master the usage of particular techniques and libraries through practical exercises. The considerable size of the community that emerged surrounding the language throughout the recent decades means that almost all of the problems you will face on different levels of advancement in R programming are likely to have been encountered by others in the past. As a result, Google is a tremendous resource for troubleshooting, debugging and deepening your understanding of the ins and outs of R programming. Examples of useful MOOC course websites include DataCamp, Coursera and Edex.</p>
 <p><strong>5. It is a <em>programming language</em> for analysing <em>data</em></strong>. While this may sound like a cliché, the ubiquity of data is transforming almost every area of life nowadays. Therefore data literacy and understanding of key programming concepts are extremely useful in itself, as you never know when you may need these in the future. Majority of the concepts covered in this course are to a large extent transferable to other commonly used languages and data analysis tools. Having a high level of technical and data analysis skills is one of the most desirable skills according to employers - a fact which is largely overlooked by many prospective job seekers:</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 <div id="the-course-structure" class="section level3 unnumbered">
 <h3>The course structure</h3>
 <p>This course is divided into four parts. The first one will introduce you to R, covering the basic concepts related to different data structures, simple tools for analysis and core programming concepts. The second part extends this to the application of specialist R libraries used for data manipulation and visualization. Part 3 covers key statistical analysis techniques, such as correlation and linear regression and discusses how they can be applied in R. Finally, part 4 is devoted to advanced topics.</p>
-<p>Each chapter consists of the content part, discussing new R tools and techniques with examples, followed by a summary, which includes the list of the functions used in the chapter along with short explanations and finally a set of practical _exrcises with solutions. All the material presented in the chapter - the R Script, the Markdown file, the exercises and the data - are available to be downloaded at the top of each chapter page. Throughout each chapter's content, R code is always presented in &quot;chunks&quot; followed by the output they produce, as you can see in the image below. Note that you can always use the button in the top right corner to copy the content of the chunk into the clipboard and paste into your R session.</p>
-<div class="figure">
-<img src="images/1/code_chunk.png" />
-
-</div>
+<p>Each chapter consists of the content part, discussing new R tools and techniques with examples, followed by a summary, which includes the list of the functions used in the chapter along with short explanations and finally a set of practical _exrcises with solutions. All the material presented in the chapter - the R Script, the Markdown file, the exercises and the data - are available to be downloaded at the top of each chapter page. Throughout each chapter’s content, R code is always presented in “chunks” followed by the output they produce, as you can see in the image below. Note that you can always use the button in the top right corner to copy the content of the chunk into the clipboard and paste into your R session.</p>
+<p><img src="images/1/code_chunk.png" /></p>
 <p>In the remainder of this chapter, we will go through the process of setting up all the necessary tools on your personal computer.</p>
 </div>
 <div id="setup" class="section level3 unnumbered">
 <h3>Setup</h3>
-<p>To get started with R, you'll need to download two things: the R language and the R Studio IDE (Integrated Development Environment). You can get the first one from <a href="https://cran.r-project.org/">CRAN</a> by following the appropriate installation link for your operating system at the top of the page. Once you install R, go to <a href="https://rstudio.com/products/rstudio/download/">RStudio website</a> and download and install R Studio.</p>
-<div class="figure">
-<img src="images/1/R_settings1.png" />
-
-</div>
-<p>Now that you are done with the installation, you are ready to start using R - you can do that by clicking the RStudio shortcut. After opening the application, there are a couple of things that are useful to set up. First, open the &quot;Tools&quot; tab at the top of the window and select &quot;Global Options&quot;. There, under the &quot;General tab&quot; uncheck &quot;restore .RData into workspace at startup&quot; and set &quot;Save workspace to .RData on exit&quot; to &quot;Never&quot;. This is to ensure your R session always starts clean, without the objects loaded from the previous time you have used it. Then, in the &quot;Code&quot; section, check the option &quot;Soft-wrap R Source file&quot;. Finally in the &quot;Appearance&quot; section select editor theme of choice, as well as the appropriate font size and zoom. Click Apply and then OK once all this is done.</p>
+<p>To get started with R, you’ll need to download two things: the R language and the R Studio IDE (Integrated Development Environment). You can get the first one from <a href="https://cran.r-project.org/">CRAN</a> by following the appropriate installation link for your operating system at the top of the page. Once you install R, go to <a href="https://rstudio.com/products/rstudio/download/">RStudio website</a> and download and install R Studio.</p>
+<p><img src="images/1/R_settings1.png" /></p>
+<p>Now that you are done with the installation, you are ready to start using R - you can do that by clicking the RStudio shortcut. After opening the application, there are a couple of things that are useful to set up. First, open the “Tools” tab at the top of the window and select “Global Options”. There, under the “General tab” uncheck “restore .RData into workspace at startup” and set “Save workspace to .RData on exit” to “Never”. This is to ensure your R session always starts clean, without the objects loaded from the previous time you have used it. Then, in the “Code” section, check the option “Soft-wrap R Source file”. Finally in the “Appearance” section select editor theme of choice, as well as the appropriate font size and zoom. Click Apply and then OK once all this is done.</p>
 <p><img src="images/1/R_settings2.png" /> <img src="images/1/R_settings3.png" /></p>
 </div>
 <div id="layout" class="section level3 unnumbered">
 <h3>Layout</h3>
-<p>The R Studio editor consists of R main panes - the &quot;Source&quot;, &quot;Console&quot;, &quot;Environment/History/... &quot;, and &quot;Files/Plots/Packages/...&quot;. You can adjust their location and hide them under the pane button, located on the right side of the navigation bar.</p>
-<div class="figure">
-<img src="images/1/RGUI1.png" />
-
-</div>
+<p>The R Studio editor consists of R main panes - the “Source”, “Console”, “Environment/History/…”, and “Files/Plots/Packages/…”. You can adjust their location and hide them under the pane button, located on the right side of the navigation bar.</p>
+<p><img src="images/1/RGUI1.png" /></p>
 <div id="console-pane" class="section level4 unnumbered">
 <h4>Console pane</h4>
-<div class="figure">
-<img src="images/1/R_console1.png" />
-
-</div>
-<p>The console is where all the output generated by R (except for plots) goes. You can also enter R Studio function calls in there to produce output. Give it a try and type <code>print(&quot;Hello world!&quot;)</code> into the command line.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</code></pre></div>
+<p><img src="images/1/R_console1.png" /></p>
+<p>The console is where all the output generated by R (except for plots) goes. You can also enter R Studio function calls in there to produce output. Give it a try and type <code>print("Hello world!")</code> into the command line.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1"></a><span class="kw">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;Hello world!&quot;</code></pre>
 <p>You can also try entering simple mathematical calculations such as <code>2+2</code> and see that R works perfectly as a calculator. Note that you should rarely enter longer pieces of code into the console. To ensure reproducibility of your work, the code should always be executed from saved R Scripts.</p>
 </div>
 <div id="source-pane" class="section level4 unnumbered">
 <h4>Source pane</h4>
-<div class="figure">
-<img src="images/1/RGUI_source.png" />
-
-</div>
-<p>The source pane contains the R Scripts - these are essentially text files in which you save longer pieces of R code that you can execute sequentially. You can open a new R-Script by clicking on the icon in the top left corner or by pressing Ctrl + Shift + N in Windows (or Command + Shift + N in Macbooks). You can then save the R script by clicking the floppy disk icon at the top of your R script or by pressing Ctrl + S (Command + S). Please save your file and name it <code>hello.R</code>. Make sure to create a separate folder such as <code>r_course</code> in which you will store all the files related to the lessons. You can then type the same <code>print(&quot;Hello world!&quot;)</code> function call as you did into the console and execute it by selecting the line and pressing Ctrl + Enter (Command + Enter) or pressing the small icon at the top right corner. Generally, you can execute longer pieces of code by first selecting the entire chunk using your cursor and then pressing the appropriate execution keyboard shortcut or clicking on the execution button. You can also comment on your code by using the <code>#</code> hashtag. Everything following <code>#</code> will not be interpreted by R as code, therefore you can write anything you want after it until you begin a new line by pressing Enter. Generally, it's crucial to comment your code, as when you come back to some of your scripts in half a year, you are likely to not remember why and how you did everything. So rather than keeping <code>print(&quot;Hello world!&quot;)</code> in your first R script, type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello world!&quot;</span>) <span class="co">#this function prints it input to the console</span></code></pre></div>
+<p><img src="images/1/RGUI_source.png" /></p>
+<p>The source pane contains the R Scripts - these are essentially text files in which you save longer pieces of R code that you can execute sequentially. You can open a new R-Script by clicking on the icon in the top left corner or by pressing Ctrl + Shift + N in Windows (or Command + Shift + N in Macbooks). You can then save the R script by clicking the floppy disk icon at the top of your R script or by pressing Ctrl + S (Command + S). Please save your file and name it <code>hello.R</code>. Make sure to create a separate folder such as <code>r_course</code> in which you will store all the files related to the lessons. You can then type the same <code>print("Hello world!")</code> function call as you did into the console and execute it by selecting the line and pressing Ctrl + Enter (Command + Enter) or pressing the small icon at the top right corner. Generally, you can execute longer pieces of code by first selecting the entire chunk using your cursor and then pressing the appropriate execution keyboard shortcut or clicking on the execution button. You can also comment on your code by using the <code>#</code> hashtag. Everything following <code>#</code> will not be interpreted by R as code, therefore you can write anything you want after it until you begin a new line by pressing Enter. Generally, it’s crucial to comment your code, as when you come back to some of your scripts in half a year, you are likely to not remember why and how you did everything. So rather than keeping <code>print("Hello world!")</code> in your first R script, type:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction.html#cb3-1"></a><span class="kw">print</span>(<span class="st">&quot;Hello world!&quot;</span>) <span class="co">#this function prints it input to the console</span></span></code></pre></div>
 <div id="a-short-note-on-reproducibility" class="section level5 unnumbered">
 <h5><em>A short note on reproducibility</em></h5>
-<p>It is vital that all the essential code that you work on both during this course and in all future cases of R usage is stored in R scripts rather than executed directly from the console. An ideal R project would consist of the file containing the data you have used in the format it was collected (in case of primary data) or provided (in case of secondary data) and an R script(s) used for the analysis with appropriate comments made at each step, including data preprocessing, visualization and any statistical analyses you run as part of the project. This way, anyone who wants to reproduce your analysis (including yourself in a year) can simply open the script, &quot;press play&quot; and get the same results again, as well as trace back all the steps and decisions you made to arrive at these results. This is crucial in academia, as it allows your supervisor/reviewer to ensure methodological correctness of your work, which is an important step in tackling the <a href="https://en.wikipedia.org/wiki/Replication_crisis">replication crisis</a> haunting many academic disciplines. It is also very important in a business setting, as it allows your co-workers to understand your work, find possible errors in it or re-use it when necessary, rather than looking at it as a black box producing an output of potentially questionable quality.</p>
-<p><em>Essential code</em> here refers to anything needed to reproduce your analysis. Some examples of non-essential operations you may still execute from your console include getting an overview of the data (for example printing the variable names, number of records, variable types or producing a simple plot that you are not going to include in your final work) as well as looking at function documentation described below. <em>However, for this course, it's recommended that you keep all the code you use in your R scripts</em>. This will allow you to come back to each lesson and review all the tools that you have learned throughout the course. Every section will provide you with an R script with all the code that it uses in order at the top of the page. It will also include the R markdown file (<code>.Rmd</code>) with the same content. <code>Rmarkdown</code> is a special format used to produce documents in formats such as HTML, pdf or Docx mixing text and R code - you will learn about it in the <a href="rmarkdown.html#rmarkdown">R Markdown section</a> at the end of this course.</p>
+<p>It is vital that all the essential code that you work on both during this course and in all future cases of R usage is stored in R scripts rather than executed directly from the console. An ideal R project would consist of the file containing the data you have used in the format it was collected (in case of primary data) or provided (in case of secondary data) and an R script(s) used for the analysis with appropriate comments made at each step, including data preprocessing, visualization and any statistical analyses you run as part of the project. This way, anyone who wants to reproduce your analysis (including yourself in a year) can simply open the script, “press play” and get the same results again, as well as trace back all the steps and decisions you made to arrive at these results. This is crucial in academia, as it allows your supervisor/reviewer to ensure methodological correctness of your work, which is an important step in tackling the <a href="https://en.wikipedia.org/wiki/Replication_crisis">replication crisis</a> haunting many academic disciplines. It is also very important in a business setting, as it allows your co-workers to understand your work, find possible errors in it or re-use it when necessary, rather than looking at it as a black box producing an output of potentially questionable quality.</p>
+<p><em>Essential code</em> here refers to anything needed to reproduce your analysis. Some examples of non-essential operations you may still execute from your console include getting an overview of the data (for example printing the variable names, number of records, variable types or producing a simple plot that you are not going to include in your final work) as well as looking at function documentation described below. <em>However, for this course, it’s recommended that you keep all the code you use in your R scripts</em>. This will allow you to come back to each lesson and review all the tools that you have learned throughout the course. Every section will provide you with an R script with all the code that it uses in order at the top of the page. It will also include the R markdown file (<code>.Rmd</code>) with the same content. <code>Rmarkdown</code> is a special format used to produce documents in formats such as HTML, pdf or Docx mixing text and R code - you will learn about it in the <a href="rmarkdown.html#rmarkdown">R Markdown section</a> at the end of this course.</p>
 </div>
 </div>
 <div id="environment-pane" class="section level4 unnumbered">
 <h4>Environment pane</h4>
-<p>The third tab provides a list of R Environments. While an important idea in R, they are irrelevant for this course. For more advanced readers, Hadley Wickham's <a href="https://adv-r.hadley.nz/environments.html">Advanced R</a> provides a good overview of the concept. During this course, you will only work with R's <code>Global Environment</code>. This is where all the objects you assign in R will be stored and displayed. For example, before you have printed the output of <code>2 + 2</code> to the R console. However, you can also store the same output in an object of (almost) arbitrary name, say <code>x</code>, using the <code>&lt;-</code> assignment operator. The output that would normally be stored in the console will instead be passed into the object on its left. You can then type <code>x</code> in your script and execute it or type x into the console and press enter to see the value stored in <code>x</code>, as seen below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>
-x</code></pre></div>
+<p>The third tab provides a list of R Environments. While an important idea in R, they are irrelevant for this course. For more advanced readers, Hadley Wickham’s <a href="https://adv-r.hadley.nz/environments.html">Advanced R</a> provides a good overview of the concept. During this course, you will only work with R’s <code>Global Environment</code>. This is where all the objects you assign in R will be stored and displayed. For example, before you have printed the output of <code>2 + 2</code> to the R console. However, you can also store the same output in an object of (almost) arbitrary name, say <code>x</code>, using the <code>&lt;-</code> assignment operator. The output that would normally be stored in the console will instead be passed into the object on its left. You can then type <code>x</code> in your script and execute it or type x into the console and press enter to see the value stored in <code>x</code>, as seen below.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction.html#cb4-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb4-2"><a href="introduction.html#cb4-2"></a>x</span></code></pre></div>
 <pre><code>[1] 4</code></pre>
 <p>Note that <code>x</code> appeared in the environment pane under the <em>Values</em> section. Similarly, we can create a function, by typing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
-<div class="figure">
-<img src="images/1/RGUI_environment_2.png" />
-
-</div>
-<p>Again, function <code>foo</code> will appear in your environment with an appropriate label. You will learn more about assignment and functions in <a href="basics.html#basics">R Programming Basics</a> and <a href="programming.html#programming">Key Programming Concepts</a>. Here, the most important takeout point is that the &quot;Environment&quot; tab allows you to see all the objects you have defined in R, along with some of their key properties.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction.html#cb6-1"></a>foo &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<p><img src="images/1/RGUI_environment_2.png" /></p>
+<p>Again, function <code>foo</code> will appear in your environment with an appropriate label. You will learn more about assignment and functions in <a href="basics.html#basics">R Programming Basics</a> and <a href="programming.html#programming">Key Programming Concepts</a>. Here, the most important takeout point is that the “Environment” tab allows you to see all the objects you have defined in R, along with some of their key properties.</p>
 <div id="a-short-note-on-keeping-your-working-environment-clean" class="section level5 unnumbered">
 <h5><em>A short note on keeping your working environment clean</em></h5>
-<p>While working on an R project, it's important to always start with a clean environment. Especially when you start receiving an error that you cannot trace back easily, the best first step is often to clean your run session and run your script run by line carefully examining the output. To clean the working environment, you should simply restart your R Studio session, either by selecting the &quot;Restart R&quot; option from the &quot;Session&quot; tab at the top of the window or by pressing Ctrl + Shift + F10 (Command + Shift + F10). <em>Note that this will cause you to lose everything that is stored in your environment</em>. This is yet another reason to put all your code in a script - as a result, even when you restart the session, you should be able to reproduce everything that was previously present in your Global Environment.</p>
+<p>While working on an R project, it’s important to always start with a clean environment. Especially when you start receiving an error that you cannot trace back easily, the best first step is often to clean your run session and run your script run by line carefully examining the output. To clean the working environment, you should simply restart your R Studio session, either by selecting the “Restart R” option from the “Session” tab at the top of the window or by pressing Ctrl + Shift + F10 (Command + Shift + F10). <em>Note that this will cause you to lose everything that is stored in your environment</em>. This is yet another reason to put all your code in a script - as a result, even when you restart the session, you should be able to reproduce everything that was previously present in your Global Environment.</p>
 </div>
 </div>
-<div id="filesplothelp-...-pane" class="section level4 unnumbered">
-<h4>Files/plot/help ... pane</h4>
-<p>The last pane contains a file browser, a plot viewer and documentation. You will learn more about plotting data in the chapters on <a href="exploratory.html#exploratory">Exploratory analysis</a> and <a href="visualization.html#visualization">Data visualization</a>. More importantly, this section is also where you can view the help coming from R documentation. Every function in R has an offline documentation file associated with it that you can access while using R Studio. To do it simply type <code>help(functionname)</code> or a question mark <code>?</code> followed by the function name. Give it a try by typing <code>?sum</code> into the R console and pressing enter - you should be able to see the help for the <code>sum</code> function. The documentation is extremely useful when working with R. While its content may seem a bit technical at first, as you learn more about R, a lot of things should become clearer, making it easier to learn and understand new functionalities. Furthermore, it usually provides <em>reproducible examples</em> of R function's usage (you need to scroll to the very bottom of the documentation to find it), which allow you to understand in what context and how can the function be used. For example, in the <code>sum</code> function documentation, we can see:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Pass several numbers to sum, and it also adds the elements.
-<span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
+<div id="filesplothelp-pane" class="section level4 unnumbered">
+<h4>Files/plot/help … pane</h4>
+<p>The last pane contains a file browser, a plot viewer and documentation. You will learn more about plotting data in the chapters on <a href="exploratory.html#exploratory">Exploratory analysis</a> and <a href="visualization.html#visualization">Data visualization</a>. More importantly, this section is also where you can view the help coming from R documentation. Every function in R has an offline documentation file associated with it that you can access while using R Studio. To do it simply type <code>help(functionname)</code> or a question mark <code>?</code> followed by the function name. Give it a try by typing <code>?sum</code> into the R console and pressing enter - you should be able to see the help for the <code>sum</code> function. The documentation is extremely useful when working with R. While its content may seem a bit technical at first, as you learn more about R, a lot of things should become clearer, making it easier to learn and understand new functionalities. Furthermore, it usually provides <em>reproducible examples</em> of R function’s usage (you need to scroll to the very bottom of the documentation to find it), which allow you to understand in what context and how can the function be used. For example, in the <code>sum</code> function documentation, we can see:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introduction.html#cb7-1"></a><span class="co">## Pass several numbers to sum, and it also adds the elements.</span></span>
+<span id="cb7-2"><a href="introduction.html#cb7-2"></a><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code></pre></div>
 <p>Give it a try in your <code>hello.R</code> R script - you should see the <code>sum</code> function behaving exactly as expected.</p>
 <div id="a-short-note-on-finding-help-when-working-with-r" class="section level5 unnumbered">
 <h5><em>A short note on finding help when working with R</em></h5>
-<div class="figure">
-<img src="images/1/google_it.jpg" />
-
-</div>
-<p>While the built-in documentation is useful, sometimes you may run into trouble that's difficult to work out on your own. The simplest solution is to concisely describe your problem (or copy the error message you are receiving) and Google it. Usually, the first result that will show will come from StackOverflow. <a href="https://stackoverflow.com/">StackOverflow</a> is a Q &amp; A website focused on programming in all languages, and has an extensive section solely on R (almost 350 000 questions at the time of this course creation). For example, you can try typing <code>&quot;a&quot; + 5</code> into the console. The resulting error message <code>Error in &quot;a&quot; + 5 : non-numeric argument to binary operator</code> is rather complicated, and might put many first-time users off. However, a quick <a href="https://lmgtfy.com/?q=non-numeric+argument+to+binary+operator">Google search</a> will lead you to this <a href="https://stackoverflow.com/questions/29665428/non-numeric-argument-to-binary-operator-error-in-r">Stack Overflow post</a>, which explains that <em>A binary operation is a calculation that takes two values (operands) and produces another value (...) When you see that error message, it means that you are (or the function you're calling is) trying to perform a binary operation with something that isn't a number</em>. Note that it's good to make sure that your question has not been answered previously (which is the case 99 out of 100 times) before posting a new one. Should you decide to post your question, make sure to follow <a href="https://stackoverflow.com/help/how-to-ask">Stack Overflow guidelines</a>, as well as to make your example reproducible, as described in <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">this post</a>.</p>
+<p><img src="images/1/google_it.jpg" /></p>
+<p>While the built-in documentation is useful, sometimes you may run into trouble that’s difficult to work out on your own. The simplest solution is to concisely describe your problem (or copy the error message you are receiving) and Google it. Usually, the first result that will show will come from StackOverflow. <a href="https://stackoverflow.com/">StackOverflow</a> is a Q &amp; A website focused on programming in all languages, and has an extensive section solely on R (almost 350 000 questions at the time of this course creation). For example, you can try typing <code>"a" + 5</code> into the console. The resulting error message <code>Error in "a" + 5 : non-numeric argument to binary operator</code> is rather complicated, and might put many first-time users off. However, a quick <a href="https://lmgtfy.com/?q=non-numeric+argument+to+binary+operator">Google search</a> will lead you to this <a href="https://stackoverflow.com/questions/29665428/non-numeric-argument-to-binary-operator-error-in-r">Stack Overflow post</a>, which explains that <em>A binary operation is a calculation that takes two values (operands) and produces another value (…) When you see that error message, it means that you are (or the function you’re calling is) trying to perform a binary operation with something that isn’t a number</em>. Note that it’s good to make sure that your question has not been answered previously (which is the case 99 out of 100 times) before posting a new one. Should you decide to post your question, make sure to follow <a href="https://stackoverflow.com/help/how-to-ask">Stack Overflow guidelines</a>, as well as to make your example reproducible, as described in <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">this post</a>.</p>
 <center>
-<div class="figure">
-<img src="images/1/stackoverflow.png" />
-
-</div>
+<p><img src="images/1/stackoverflow.png" /></p>
 </center>
 
 </div>
@@ -452,7 +453,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
