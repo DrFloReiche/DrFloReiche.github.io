@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/font-awesome-5.13.0/js/script.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
@@ -62,41 +63,68 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -277,9 +305,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="ols" class="section level1">
 <h1><span class="header-section-number">9</span> Linear Regression</h1>
-<p><a href="data:text/plain;base64,CgA=" download="09-ols.R">
+<p><a href="data:text/plain;base64,IycgIyBMaW5lYXIgUmVncmVzc2lvbiAKCiMnIAojJyAKIycgCiMnIAojJyAjIyBDb250ZW50CiMnIAojJyA8Y2VudGVyPiBfX1NpdGUgc3RpbGwgdW5kZXIgY29uc3RydWN0aW9uIV9fIDwvY2VudGVyPgojJyAKIycgIyMjIEludHJvZHVjdGlvbiAKCiMnIAojJyAKIycgRGF0YSBhcmUgdGFrZW4gZnJvbSBodHRwczovL2VsZWN0aW9uc3R1ZGllcy5vcmcvZGF0YS1jZW50ZXIvMjAyMC1leHBsb3JhdG9yeS10ZXN0aW5nLXN1cnZleS8gdG8gbW9kZWwgdGhlIGZlZWxpbmdzIHRvd2FyZHMgRG9uYWxkIFRydW1wIGluIHRoZSBsZWFkLXVwIHRvIHRoZSBwcmVzaWRlbnRpYWwgZWxlY3Rpb24gMjAyMC4KIycgCiMnIAojJyAKIycgIyMjIEJpdmFyaWF0ZSBMaW5lYXIgUmVncmVzc2lvbiAKCiMnIAojJyAjIyMjIFRoZSBUaGVvcnkgCgojJyAKIycgIyMjIyBUaGUgQXBwbGljYXRpb24gCgojJyAKIycgV2UgYXJlIHVzaW5nIHRoZSAiMjAyMCBFeHBsb3JhdG9yeSBUZXN0aW5nIFN1cnZleSIKIycgCiMnIExvYWQgdGhlIEFORVMgZGF0YSBzZXQKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmFuZXMgPC0gcmVhZC5jc3YoImRhdGEvYW5lcy5jc3YiKQoKIycgCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzdW1tYXJ5KGFuZXMkZnR0cnVtcDEpCgojJyAKIycgVGhpcyBpcyBubyBnb29kLCBhcyB0aGUgdmFyaWFibGUgaXMgYm91bmRlZCBiZXR3ZWVuIDAgYW5kIDEwMC4gSW4gZmFjdCA5OTkgaXMgYSBwbGFjZWhvbGRlciBmb3IgbWlzc2luZyBkYXRhIHRocm91Z2hvdXQgdGhlIGRhdGEgc2V0LiBXZSBuZWVkIHRvIHJlcGxhY2UgdGhpcyB3aXRoIE5Bcy4KIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmFuZXNbYW5lcyA9PSA5OTldIDwtIE5BCgojJyAKIycgSWYgd2UgbG9vayBhdCB0aGUgc3VtbWFyeSBhZ2FpbiwgZXZlcnl0aGluZyBsb29rcyBmaW5lIG5vdzoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnN1bW1hcnkoYW5lcyRmdHRydW1wMSkKCiMnIAojJyBEbyBvbGRlciBwZW9wbGUgcmF0ZSBUcnVtcCBoaWdoZXIgdGhhbiB5b3VuZ2VyIHBlb3BsZT8gTGV0J3MgZmluZCBvdXQuIE91ciBpbmRlcGVuZGVudCB2YXJpYWJsZXMgaXMgYGFnZWAuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzdW1tYXJ5KGFuZXMkYWdlKQoKIycgCiMnIExldCdzIGV2YWx1YXRlIHRoZSByZWxhdGlvbnNoaXAgdGhyb3VnaCBhIHNjYXR0ZXIgcGxvdCB3aXRoIGEgbGluZSBvZiBiZXN0IGZpdDoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmxpYnJhcnkoZ2dwbG90MikKCmdncGxvdChhbmVzLCBhZXMoeCA9IGFnZSwgeSA9IGZ0dHJ1bXAxKSkgKwogIGdlb21fcG9pbnQoKSArCiAgZ2VvbV9zbW9vdGgobWV0aG9kID0gbG0pCgojJyAKIycgVGhlcmUgaXMgYSBwb3NpdGl2ZSByZWxhdGlvbnNoaXAuIFdlIGNhbiBjYWxjdWxhdGUgdGhlIGV4YWN0IG51bWVyaWNhbCBuYXR1cmUgb2YgdGhhdCByZWxhdGlvbnNoaXAgYXMgZm9sbG93czoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCm1vZGVsMSA8LSBsbShmdHRydW1wMSB+IGFnZSwgZGF0YSA9IGFuZXMpCgojJyAKIycgV2Ugc3RhcnQgYnkgc3BlY2lmeWluZyBhbiBvYmplY3QgaW50byB3aGljaCB3ZSBzdG9yZSB0aGUgcmVzdWx0cy4gVGhlbiB3ZSBjYWxsIGBsbWAgd2hpY2ggbWVhbnMgbGluZWFyIG1vZGVsLiBPdXIgZGVwZW5kZW50IHZhcmlhYmxlIGBmdHRydW1wMWAgaXMgbGlzdGVkIGZpcnN0LCBhbmQgdGhlbiBhZnRlciBhIHRpbGRlIHRoZSBpbmRlcGVuZGVudCB2YXJpYWJsZSwgYGFnZWAuIEZpbmFsbHksIHdlIHRlbGwgUiB3aGljaCBkYXRhIHNldCB0byB1c2UuIFdlIGNhbiB0aGVuIHByaW50IHRoZSByZXN1bHQsIGJ5IGNhbGxpbmcgYG1vZGVsMWAuCiMnIAojIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQptb2RlbDEKCiMnIAojJyBIb3cgd291bGQgd2UgaW50ZXJwcmV0IHRoZXNlIHJlc3VsdHM/CiMnIAojJyAtIEF0IGFuIGFnZSBvZiB6ZXJvLCBhIHBlcnNvbiB3b3VsZCByYXRlIFRydW1wIGF0IDMxLjY4ICpvbiBhdmVyYWdlKi4gVGhpcyBvZiBjb3Vyc2UgbWFrZXMgbGl0dGxlIHNlbnNlIGluIGFueXRoaW5nIGJ1dCBhIHRoZW9yZXRpY2FsIC8gbWF0aGVtYXRpY2FsIGNvbnNpZGVyYXRpb24uIAojJyAtIFdpdGggZXZlcnkgYWRkaXRpb25hbCB5ZWFyIG9mIGFnZSwgYSBwZXJzb24gd291bGQgcmF0ZSBUcnVtcCAwLjIyIHBvaW50cyBoaWdoZXIgKm9uIGF2ZXJhZ2UqLgojJyAKIycgQnV0IGFyZSB0aGVzZSBmaW5kaW5ncyBzaWduaWZpY2FudCBhdCBhbiBhY2NlcHRhYmxlIHNpZ25pZmljYW5jZSBsZXZlbD8gTGV0J3MgZmluZCBvdXQsIGJ5IGdldHRpbmcgYSBtb3JlIGRldGFpbGVkIG91dHB1dDoKIycgCiMjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnN1bW1hcnkobW9kZWwxKQoKIycgCiMnIE9LLCB0aGVyZSBpcyBhIGxvdCBtb3JlIGhlcmUsIGFuZCBpdCBpcyB3b3J0aCBwYXVzaW5nIHRvIGdvIHRocm91Z2ggdGhpcyBzdGVwIGJ5IHN0ZXAuIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAojJyAKIycgIyMjIE11bHRpcGxlIExpbmVhciBSZWdyZXNzaW9uIAoKIycgCiMnICMjIyMgVGhlIFRoZW9yeSAKCiMnIAojJyAjIyMjIFRoZSBBcHBsaWNhdGlvbiAKCiMnIAojJyAjIyMgVGhlIENsYXNzaWNhbCBMaW5lYXIgQXNzdW1wdGlvbnMgCgojJyAKIycgIyMjIyBGdW5jdGlvbmFsIEZvcm0gCgojJyAKIycgIyMjIyBGaXhlZCB4LXZhbHVlcyAKCiMnIAojJyBJbmRlcGVuZGVuY2Ugb2YgZXJyb3IgdGVybSBmcm9tIHgsIFJhbXNleXMgUmVzZXQgVGVzdAojJyAKIycgIyMjIyBaZXJvIE1lYW4gVmFsdWUgb2YgRGlzdHVyYmFuY2UgCgojJyAKIycgIyMjIyBIb21vc2NlZGFzdGljaXR5IAoKIycgCiMnICMjIyMgTm8gQXV0b2NvcnJlbGF0aW9uIGJldHdlZW4gRXJyb3JzIAoKIycgCiMnICMjIyMgTm8gTXVsdGljb2xsaW5lYXJpdHkgCgojJyAKIycgIyMjIyBUaGUgTnVtYmVyIG9mIE9ic2VydmF0aW9ucyAKCiMnIAojJyAuLi4gbiBtdXN0IGJlIGdyZWF0ZXIgdGhhbiB0aGUgTnVtYmVyIG9mCiMnIFBhcmFtZXRlcnMgdG8gYmUgZXN0aW1hdGVkCiMnIAojJyAKIycgCiMnIAojJyAKIycgCiMnIAoA" download="09-ols.R">
 <button class="btn btn-default"><i class="fa fa-save"></i> Chapter script</button>
-</a><a href="data:text/x-markdown;base64,LS0tCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KIyBMaW5lYXIgUmVncmVzc2lvbiB7I29sc30KCgoKCiMjIENvbnRlbnQKCjxjZW50ZXI+IF9fU2l0ZSBzdGlsbCB1bmRlciBjb25zdHJ1Y3Rpb24hX18gPC9jZW50ZXI+CgojIyMgSW50cm9kdWN0aW9uIHstfQoKCkRhdGEgYXJlIHRha2VuIGZyb20gaHR0cHM6Ly9lbGVjdGlvbnN0dWRpZXMub3JnL2RhdGEtY2VudGVyLzIwMjAtZXhwbG9yYXRvcnktdGVzdGluZy1zdXJ2ZXkvIHRvIG1vZGVsIHRoZSBmZWVsaW5ncyB0b3dhcmRzIERvbmFsZCBUcnVtcCBpbiB0aGUgbGVhZC11cCB0byB0aGUgcHJlc2lkZW50aWFsIGVsZWN0aW9uIDIwMjAuCgoKCiMjIyBCaXZhcmlhdGUgTGluZWFyIFJlZ3Jlc3Npb24gey19CgojIyMjIFRoZSBUaGVvcnkgey19CgojIyMjIFRoZSBBcHBsaWNhdGlvbiB7LX0KCiMjIyBNdWx0aXBsZSBMaW5lYXIgUmVncmVzc2lvbiB7LX0KCiMjIyMgVGhlIFRoZW9yeSB7LX0KCiMjIyMgVGhlIEFwcGxpY2F0aW9uIHstfQoKIyMjIFRoZSBDbGFzc2ljYWwgTGluZWFyIEFzc3VtcHRpb25zIHstfQoKIyMjIyBGdW5jdGlvbmFsIEZvcm0gey19CgojIyMjIEZpeGVkIHgtdmFsdWVzIHstfQoKSW5kZXBlbmRlbmNlIG9mIGVycm9yIHRlcm0gZnJvbSB4LCBSYW1zZXlzIFJlc2V0IFRlc3QKCiMjIyMgWmVybyBNZWFuIFZhbHVlIG9mIERpc3R1cmJhbmNlIHstfQoKIyMjIyBIb21vc2NlZGFzdGljaXR5IHstfQoKIyMjIyBObyBBdXRvY29ycmVsYXRpb24gYmV0d2VlbiBFcnJvcnMgey19CgojIyMjIE5vIE11bHRpY29sbGluZWFyaXR5IHstfQoKIyMjIyBUaGUgTnVtYmVyIG9mIE9ic2VydmF0aW9ucyB7LX0KCi4uLiBuIG11c3QgYmUgZ3JlYXRlciB0aGFuIHRoZSBOdW1iZXIgb2YKUGFyYW1ldGVycyB0byBiZSBlc3RpbWF0ZWQKCgojIyBTdW1tYXJ5CgotICpPTFMqIGlzIGFuIGFjcm9ueW0gZm9yICJPcmRpbmFyeSBMZWFzdCBTcXVhcmVzIi4KCi0gKkNMTSogaXMgYW4gYWNyb255bSBmb3IgIkNsYXNzaWNhbCBMaW5lYXIgTW9kZWwiLgoKLSAqQkxVRSogaXMgYW4gYWNyb255bSBmb3IgIkJlc3QgTGluZWFyIFVuYmlhc2VkIEVzdGltYXRvciIuCgoKIyMjIEZ1bmN0aW9ucyBsaXN0IHstfQoKCgoKIyMgRXhlcmNpc2VzCgoxLiBGaXJzdCBFeGVyY2lzZQoKCgoKCipUaGUgc29sdXRpb25zIGZvciB0aGUgZXhlcmNpc2VzIHdpbGwgYmUgYXZhaWxhYmxlIGhlcmUgb24gYHIgY29uZmlnJG9sc2AuKgoKCgoA" download="09-ols.Rmd">
+</a><a href="data:text/x-markdown;base64,LS0tCm91dHB1dDogaHRtbF9kb2N1bWVudAotLS0KIyBMaW5lYXIgUmVncmVzc2lvbiB7I29sc30KCgoKCiMjIENvbnRlbnQKCjxjZW50ZXI+IF9fU2l0ZSBzdGlsbCB1bmRlciBjb25zdHJ1Y3Rpb24hX18gPC9jZW50ZXI+CgojIyMgSW50cm9kdWN0aW9uIHstfQoKCkRhdGEgYXJlIHRha2VuIGZyb20gaHR0cHM6Ly9lbGVjdGlvbnN0dWRpZXMub3JnL2RhdGEtY2VudGVyLzIwMjAtZXhwbG9yYXRvcnktdGVzdGluZy1zdXJ2ZXkvIHRvIG1vZGVsIHRoZSBmZWVsaW5ncyB0b3dhcmRzIERvbmFsZCBUcnVtcCBpbiB0aGUgbGVhZC11cCB0byB0aGUgcHJlc2lkZW50aWFsIGVsZWN0aW9uIDIwMjAuCgoKCiMjIyBCaXZhcmlhdGUgTGluZWFyIFJlZ3Jlc3Npb24gey19CgojIyMjIFRoZSBUaGVvcnkgey19CgojIyMjIFRoZSBBcHBsaWNhdGlvbiB7LX0KCldlIGFyZSB1c2luZyB0aGUgIjIwMjAgRXhwbG9yYXRvcnkgVGVzdGluZyBTdXJ2ZXkiCgpMb2FkIHRoZSBBTkVTIGRhdGEgc2V0CgpgYGB7cn0KYW5lcyA8LSByZWFkLmNzdigiZGF0YS9hbmVzLmNzdiIpCmBgYAoKCmBgYHtyfQpzdW1tYXJ5KGFuZXMkZnR0cnVtcDEpCmBgYAoKVGhpcyBpcyBubyBnb29kLCBhcyB0aGUgdmFyaWFibGUgaXMgYm91bmRlZCBiZXR3ZWVuIDAgYW5kIDEwMC4gSW4gZmFjdCA5OTkgaXMgYSBwbGFjZWhvbGRlciBmb3IgbWlzc2luZyBkYXRhIHRocm91Z2hvdXQgdGhlIGRhdGEgc2V0LiBXZSBuZWVkIHRvIHJlcGxhY2UgdGhpcyB3aXRoIE5Bcy4KCmBgYHtyfQphbmVzW2FuZXMgPT0gOTk5XSA8LSBOQQpgYGAKCklmIHdlIGxvb2sgYXQgdGhlIHN1bW1hcnkgYWdhaW4sIGV2ZXJ5dGhpbmcgbG9va3MgZmluZSBub3c6CgpgYGB7cn0Kc3VtbWFyeShhbmVzJGZ0dHJ1bXAxKQpgYGAKCkRvIG9sZGVyIHBlb3BsZSByYXRlIFRydW1wIGhpZ2hlciB0aGFuIHlvdW5nZXIgcGVvcGxlPyBMZXQncyBmaW5kIG91dC4gT3VyIGluZGVwZW5kZW50IHZhcmlhYmxlcyBpcyBgYWdlYC4KCmBgYHtyfQpzdW1tYXJ5KGFuZXMkYWdlKQpgYGAKCkxldCdzIGV2YWx1YXRlIHRoZSByZWxhdGlvbnNoaXAgdGhyb3VnaCBhIHNjYXR0ZXIgcGxvdCB3aXRoIGEgbGluZSBvZiBiZXN0IGZpdDoKCmBgYHtyfQpsaWJyYXJ5KGdncGxvdDIpCgpnZ3Bsb3QoYW5lcywgYWVzKHggPSBhZ2UsIHkgPSBmdHRydW1wMSkpICsKICBnZW9tX3BvaW50KCkgKwogIGdlb21fc21vb3RoKG1ldGhvZCA9IGxtKQpgYGAKClRoZXJlIGlzIGEgcG9zaXRpdmUgcmVsYXRpb25zaGlwLiBXZSBjYW4gY2FsY3VsYXRlIHRoZSBleGFjdCBudW1lcmljYWwgbmF0dXJlIG9mIHRoYXQgcmVsYXRpb25zaGlwIGFzIGZvbGxvd3M6CgpgYGB7cn0KbW9kZWwxIDwtIGxtKGZ0dHJ1bXAxIH4gYWdlLCBkYXRhID0gYW5lcykKYGBgCgpXZSBzdGFydCBieSBzcGVjaWZ5aW5nIGFuIG9iamVjdCBpbnRvIHdoaWNoIHdlIHN0b3JlIHRoZSByZXN1bHRzLiBUaGVuIHdlIGNhbGwgYGxtYCB3aGljaCBtZWFucyBsaW5lYXIgbW9kZWwuIE91ciBkZXBlbmRlbnQgdmFyaWFibGUgYGZ0dHJ1bXAxYCBpcyBsaXN0ZWQgZmlyc3QsIGFuZCB0aGVuIGFmdGVyIGEgdGlsZGUgdGhlIGluZGVwZW5kZW50IHZhcmlhYmxlLCBgYWdlYC4gRmluYWxseSwgd2UgdGVsbCBSIHdoaWNoIGRhdGEgc2V0IHRvIHVzZS4gV2UgY2FuIHRoZW4gcHJpbnQgdGhlIHJlc3VsdCwgYnkgY2FsbGluZyBgbW9kZWwxYC4KCmBgYHtyfQptb2RlbDEKYGBgCgpIb3cgd291bGQgd2UgaW50ZXJwcmV0IHRoZXNlIHJlc3VsdHM/CgotIEF0IGFuIGFnZSBvZiB6ZXJvLCBhIHBlcnNvbiB3b3VsZCByYXRlIFRydW1wIGF0IDMxLjY4ICpvbiBhdmVyYWdlKi4gVGhpcyBvZiBjb3Vyc2UgbWFrZXMgbGl0dGxlIHNlbnNlIGluIGFueXRoaW5nIGJ1dCBhIHRoZW9yZXRpY2FsIC8gbWF0aGVtYXRpY2FsIGNvbnNpZGVyYXRpb24uIAotIFdpdGggZXZlcnkgYWRkaXRpb25hbCB5ZWFyIG9mIGFnZSwgYSBwZXJzb24gd291bGQgcmF0ZSBUcnVtcCAwLjIyIHBvaW50cyBoaWdoZXIgKm9uIGF2ZXJhZ2UqLgoKQnV0IGFyZSB0aGVzZSBmaW5kaW5ncyBzaWduaWZpY2FudCBhdCBhbiBhY2NlcHRhYmxlIHNpZ25pZmljYW5jZSBsZXZlbD8gTGV0J3MgZmluZCBvdXQsIGJ5IGdldHRpbmcgYSBtb3JlIGRldGFpbGVkIG91dHB1dDoKCmBgYHtyfQpzdW1tYXJ5KG1vZGVsMSkKYGBgCgpPSywgdGhlcmUgaXMgYSBsb3QgbW9yZSBoZXJlLCBhbmQgaXQgaXMgd29ydGggcGF1c2luZyB0byBnbyB0aHJvdWdoIHRoaXMgc3RlcCBieSBzdGVwLiAKCgoKCgoKCiMjIyBNdWx0aXBsZSBMaW5lYXIgUmVncmVzc2lvbiB7LX0KCiMjIyMgVGhlIFRoZW9yeSB7LX0KCiMjIyMgVGhlIEFwcGxpY2F0aW9uIHstfQoKIyMjIFRoZSBDbGFzc2ljYWwgTGluZWFyIEFzc3VtcHRpb25zIHstfQoKIyMjIyBGdW5jdGlvbmFsIEZvcm0gey19CgojIyMjIEZpeGVkIHgtdmFsdWVzIHstfQoKSW5kZXBlbmRlbmNlIG9mIGVycm9yIHRlcm0gZnJvbSB4LCBSYW1zZXlzIFJlc2V0IFRlc3QKCiMjIyMgWmVybyBNZWFuIFZhbHVlIG9mIERpc3R1cmJhbmNlIHstfQoKIyMjIyBIb21vc2NlZGFzdGljaXR5IHstfQoKIyMjIyBObyBBdXRvY29ycmVsYXRpb24gYmV0d2VlbiBFcnJvcnMgey19CgojIyMjIE5vIE11bHRpY29sbGluZWFyaXR5IHstfQoKIyMjIyBUaGUgTnVtYmVyIG9mIE9ic2VydmF0aW9ucyB7LX0KCi4uLiBuIG11c3QgYmUgZ3JlYXRlciB0aGFuIHRoZSBOdW1iZXIgb2YKUGFyYW1ldGVycyB0byBiZSBlc3RpbWF0ZWQKCgojIyBTdW1tYXJ5CgotICpPTFMqIGlzIGFuIGFjcm9ueW0gZm9yICJPcmRpbmFyeSBMZWFzdCBTcXVhcmVzIi4KCi0gKkNMTSogaXMgYW4gYWNyb255bSBmb3IgIkNsYXNzaWNhbCBMaW5lYXIgTW9kZWwiLgoKLSAqQkxVRSogaXMgYW4gYWNyb255bSBmb3IgIkJlc3QgTGluZWFyIFVuYmlhc2VkIEVzdGltYXRvciIuCgoKIyMjIEZ1bmN0aW9ucyBsaXN0IHstfQoKCgoKIyMgRXhlcmNpc2VzCgoxLiBGaXJzdCBFeGVyY2lzZQoKCgoKCipUaGUgc29sdXRpb25zIGZvciB0aGUgZXhlcmNpc2VzIHdpbGwgYmUgYXZhaWxhYmxlIGhlcmUgb24gYHIgY29uZmlnJG9sc2AuKgoKCgoA" download="09-ols.Rmd">
 <button class="btn btn-default"><i class="fa fa-save"></i> Chapter markdown</button>
 </a></p>
 <div id="content-8" class="section level2">
@@ -298,6 +326,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-application" class="section level4 unnumbered">
 <h4>The Application</h4>
+<p>We are using the “2020 Exploratory Testing Survey”</p>
+<p>Load the ANES data set</p>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="ols.html#cb670-1"></a>anes &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/anes.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="ols.html#cb671-1"></a><span class="kw">summary</span>(anes<span class="op">$</span>fttrump1)</span></code></pre></div>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    0.00   40.00   44.59   80.00  999.00 </code></pre>
+<p>This is no good, as the variable is bounded between 0 and 100. In fact 999 is a placeholder for missing data throughout the data set. We need to replace this with NAs.</p>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="ols.html#cb673-1"></a>anes[anes <span class="op">==</span><span class="st"> </span><span class="dv">999</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<p>If we look at the summary again, everything looks fine now:</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="ols.html#cb674-1"></a><span class="kw">summary</span>(anes<span class="op">$</span>fttrump1)</span></code></pre></div>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+   0.00    0.00   40.00   42.42   80.00  100.00       7 </code></pre>
+<p>Do older people rate Trump higher than younger people? Let’s find out. Our independent variables is <code>age</code>.</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="ols.html#cb676-1"></a><span class="kw">summary</span>(anes<span class="op">$</span>age)</span></code></pre></div>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.00   34.75   49.00   48.87   63.00  110.00 </code></pre>
+<p>Let’s evaluate the relationship through a scatter plot with a line of best fit:</p>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="ols.html#cb678-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb678-2"><a href="ols.html#cb678-2"></a></span>
+<span id="cb678-3"><a href="ols.html#cb678-3"></a><span class="kw">ggplot</span>(anes, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> fttrump1)) <span class="op">+</span></span>
+<span id="cb678-4"><a href="ols.html#cb678-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb678-5"><a href="ols.html#cb678-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-402-1.png" width="672" /></p>
+<p>There is a positive relationship. We can calculate the exact numerical nature of that relationship as follows:</p>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="ols.html#cb679-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fttrump1 <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> anes)</span></code></pre></div>
+<p>We start by specifying an object into which we store the results. Then we call <code>lm</code> which means linear model. Our dependent variable <code>fttrump1</code> is listed first, and then after a tilde the independent variable, <code>age</code>. Finally, we tell R which data set to use. We can then print the result, by calling <code>model1</code>.</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="ols.html#cb680-1"></a>model1</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = fttrump1 ~ age, data = anes)
+
+Coefficients:
+(Intercept)          age  
+    31.6837       0.2197  </code></pre>
+<p>How would we interpret these results?</p>
+<ul>
+<li>At an age of zero, a person would rate Trump at 31.68 <em>on average</em>. This of course makes little sense in anything but a theoretical / mathematical consideration.</li>
+<li>With every additional year of age, a person would rate Trump 0.22 points higher <em>on average</em>.</li>
+</ul>
+<p>But are these findings significant at an acceptable significance level? Let’s find out, by getting a more detailed output:</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="ols.html#cb682-1"></a><span class="kw">summary</span>(model1)</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = fttrump1 ~ age, data = anes)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-55.847 -39.152  -0.523  39.258  64.143 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 31.68372    2.14801  14.750  &lt; 2e-16 ***
+age          0.21967    0.04157   5.284 1.35e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 38.67 on 3071 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.009011,  Adjusted R-squared:  0.008688 
+F-statistic: 27.92 on 1 and 3071 DF,  p-value: 1.35e-07</code></pre>
+<p>OK, there is a lot more here, and it is worth pausing to go through this step by step. First, R reminds us of the actual formula we have used to estimate the model:</p>
+<p><img src="images/9/formula.png" /></p>
+<p>I am ignoring the section on residuals for now, as we don’t need to make our lives more difficult than it needs to be. I will come back to this under the <a href="ols.html#the-classical-linear-assumptions">The Classical Linear Assumptions</a>. Now come the coefficients:</p>
+<p><img src="images/9/coeff.png" /></p>
+<p>The size and direction is of course the same as in our previous output, but this output now contains some additional information about the standard error, the resulting t-value, and the p-value. R is very helpful here, in that it offers us a varying amount of asterisks according to different, commonly accepted levels of significance. 0.05 is standard practice in the social sciences, so we will accept anything with one, or more asterisks. Both our intercept and the slope coefficient are significant at a 95% confidence level, so we have shown that there is a statistical relationship between age and ratings for Trump.</p>
+<p>I am omitting the residual standard error for the same reason as before, but let us look at the model fit indicators.</p>
+<p><img src="images/9/rsquared.png" /></p>
+<p>Multiple R-Squared (aka <span class="math inline">\(R^{2}\)</span>) tells us how much variation in the dependent variable <code>fttrump1</code> is explained through the independent variable <code>age</code>. <span class="math inline">\(R^{2}\)</span> runs between 0 and 1, where 1 is equal to 100% of the variation. In our case, we have explained a mere 0.09% of the Trump rating. This is lousy, and we can do a lot better than that. Never expect anything near 100% unless you work with a toy data set from a text book. If you get 60-70% you can be very happy. I will return to Adjusted <span class="math inline">\(R^{2}\)</span> when in the Section on <a href="ols.html#multiple-linear-regression">Multiple Linear Regression</a>.</p>
+<p>The F-statistic at the end:</p>
+<p><img src="images/9/fstatistic.png" />
+is a test with the null hypothesis that all coefficients of the model are jointly zero. In our case, we can reject this null hypothesis very soundly, as the p-value is far below the commonly accepted maximum of 5%.</p>
+<p>And that’s it! You have made the first big step to understanding regression output and producing such output yourself. But not only has our <code>age</code> variable been rubbish in explaining Trump ratings, but also explanations in the real world are never mono-causal. There are always multiple influences working at the same time, and we need to set up our statistical model to take this complexity into account. Which brings us to the next step: multiple regression.</p>
 </div>
 </div>
 <div id="multiple-linear-regression" class="section level3 unnumbered">
@@ -332,20 +432,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-number-of-observations" class="section level4 unnumbered">
 <h4>The Number of Observations</h4>
-<p>... n must be greater than the Number of Parameters to be estimated</p>
+<p>… n must be greater than the Number of
+Parameters to be estimated</p>
 </div>
 </div>
 </div>
 <div id="summary-7" class="section level2">
 <h2><span class="header-section-number">9.2</span> Summary</h2>
 <ul>
-<li><p><em>OLS</em> is an acronym for &quot;Ordinary Least Squares&quot;.</p></li>
-<li><p><em>CLM</em> is an acronym for &quot;Classical Linear Model&quot;.</p></li>
-<li><p><em>BLUE</em> is an acronym for &quot;Best Linear Unbiased Estimator&quot;.</p></li>
+<li><p><em>OLS</em> is an acronym for “Ordinary Least Squares”.</p></li>
+<li><p><em>CLM</em> is an acronym for “Classical Linear Model”.</p></li>
+<li><p><em>BLUE</em> is an acronym for “Best Linear Unbiased Estimator”.</p></li>
 </ul>
 <div id="functions-list-7" class="section level3 unnumbered">
 <h3>Functions list</h3>
 <table>
+<colgroup>
+<col width="11%" />
+<col width="6%" />
+<col width="82%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">function</th>
@@ -354,6 +460,46 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td align="left">library()</td>
+<td align="left">base</td>
+<td align="left">load an R package</td>
+</tr>
+<tr class="even">
+<td align="left">summary()</td>
+<td align="left">base</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">aes()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">geom_point()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">geom_smooth()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">ggplot()</td>
+<td align="left">ggplot2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">lm()</td>
+<td align="left">stats</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">read.csv()</td>
+<td align="left">utils</td>
+<td align="left">read a csv file to data frame. Specify stringsAsFactors = FALSE to keep all string columns as characters</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -429,7 +575,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
