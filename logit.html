@@ -324,22 +324,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Latent variable: the Propensity to go out</p>
 <p><img src="files/logit/tau.png" width="75%" /></p>
 <p>A Question of the budget</p>
-<p><img src="main_files/figure-html/unnamed-chunk-419-1.png" width="95%" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-425-1.png" width="95%" /></p>
 <p>Influence on the Probability</p>
 <p><img src="files/logit/tau_prob.png" width="1366" height="90%" /></p>
 <p>Cumulative Probability (Density Function)</p>
-<p><img src="main_files/figure-html/unnamed-chunk-421-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-427-1.png" width="672" /></p>
 </div>
 <div id="logit---the-estimation" class="section level3 unnumbered">
 <h3>Logit - The Estimation</h3>
 <p>We are going to use data on the passengers of the Titanic in 1912 and will investigate why or why not passengers survived.</p>
 <p>The Logit Command</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="logit.html#cb697-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(depvar <span class="op">~</span><span class="st"> </span>indepvar, </span>
-<span id="cb697-2"><a href="logit.html#cb697-2"></a>             <span class="dt">data =</span> mydata, </span>
-<span id="cb697-3"><a href="logit.html#cb697-3"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="logit.html#cb709-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(depvar <span class="op">~</span><span class="st"> </span>indepvar, </span>
+<span id="cb709-2"><a href="logit.html#cb709-2"></a>             <span class="dt">data =</span> mydata, </span>
+<span id="cb709-3"><a href="logit.html#cb709-3"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Data Preparation</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="logit.html#cb698-1"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
-<span id="cb698-2"><a href="logit.html#cb698-2"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="logit.html#cb710-1"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
+<span id="cb710-2"><a href="logit.html#cb710-2"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
 <p>The First Logit - Hypotheses</p>
 <blockquote>
 <ul>
@@ -348,15 +348,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </blockquote>
 <p>The Null-Hypothesis visualised</p>
-<p><img src="main_files/figure-html/unnamed-chunk-424-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-430-1.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>The First Logit</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="logit.html#cb699-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(survived <span class="op">~</span><span class="st"> </span>age, </span>
-<span id="cb699-2"><a href="logit.html#cb699-2"></a>             <span class="dt">data =</span> titanic, </span>
-<span id="cb699-3"><a href="logit.html#cb699-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
-<span id="cb699-4"><a href="logit.html#cb699-4"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="logit.html#cb711-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(survived <span class="op">~</span><span class="st"> </span>age, </span>
+<span id="cb711-2"><a href="logit.html#cb711-2"></a>             <span class="dt">data =</span> titanic, </span>
+<span id="cb711-3"><a href="logit.html#cb711-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
+<span id="cb711-4"><a href="logit.html#cb711-4"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Output</p>
 
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="logit.html#cb700-1"></a><span class="kw">summary</span>(logit)</span></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="logit.html#cb712-1"></a><span class="kw">summary</span>(logit)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = survived ~ age, family = &quot;binomial&quot;, data = titanic, 
@@ -407,7 +407,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Simple: The proportion of correctly predicted deaths</li>
 </ul>
 <p>But</p>
-<p><img src="main_files/figure-html/unnamed-chunk-431-1.png" width="80%" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-437-1.png" width="80%" /></p>
 <p>ROC-Curves</p>
 <ul>
 <li>Capture the trade-off between correctly predicting 1s and 0s.</li>
@@ -420,9 +420,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul>
 <p>Install </p>
 <p>Package:</p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="logit.html#cb702-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="logit.html#cb714-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
 <p>Example</p>
-<p><img src="main_files/figure-html/unnamed-chunk-433-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-439-1.png" width="672" /></p>
 <p>Interpretation</p>
 <ul>
 <li>The further away from the diagonal, the better the model predicts 1s and 0s.</li>
@@ -434,22 +434,22 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li>Load the package</li>
 </ul>
-<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="logit.html#cb703-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="logit.html#cb715-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
 <ul>
 <li>and then calculate the curve:</li>
 </ul>
 
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="logit.html#cb704-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb704-2"><a href="logit.html#cb704-2"></a></span>
-<span id="cb704-3"><a href="logit.html#cb704-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
-<span id="cb704-4"><a href="logit.html#cb704-4"></a></span>
-<span id="cb704-5"><a href="logit.html#cb704-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
-<span id="cb704-6"><a href="logit.html#cb704-6"></a></span>
-<span id="cb704-7"><a href="logit.html#cb704-7"></a><span class="kw">auc</span>(roc)</span></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="logit.html#cb716-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb716-2"><a href="logit.html#cb716-2"></a></span>
+<span id="cb716-3"><a href="logit.html#cb716-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
+<span id="cb716-4"><a href="logit.html#cb716-4"></a></span>
+<span id="cb716-5"><a href="logit.html#cb716-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
+<span id="cb716-6"><a href="logit.html#cb716-6"></a></span>
+<span id="cb716-7"><a href="logit.html#cb716-7"></a><span class="kw">auc</span>(roc)</span></code></pre></div>
 <pre><code>Area under the curve: 0.5245</code></pre>
 <p>We can also look at this graphically again:</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="logit.html#cb706-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-436-1.png" width="70%" /></p>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="logit.html#cb718-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-442-1.png" width="70%" /></p>
 </div>
 </div>
 <div id="summary-8" class="section level2">
