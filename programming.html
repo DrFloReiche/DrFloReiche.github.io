@@ -324,193 +324,194 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="for-loops" class="section level3 unnumbered">
 <h3>For loops</h3>
 <p>For loops are essentially a way of telling the programming language “perform the operations I ask you to do N times”. A for loop in R beginns with an <code>for()</code> statement, which is followed by an opening curly brace <code>{</code> in the same line - this is esentially <em>opening the for-loop</em>. After this, usually in a new line, you place the code which you want to execute. Then, in the last line you <em>close the for loop</em> by another curly brace <code>}</code>. You can execute the for loop by placing the cursor either on the for statement (first line) or the closing brace (last line) and executing it as any other code. Below, you can see the for loop printing the string <code>"Hello world!"</code> 5 times</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="programming.html#cb397-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
-<span id="cb397-2"><a href="programming.html#cb397-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Hello world&quot;</span>)</span>
-<span id="cb397-3"><a href="programming.html#cb397-3"></a>}</span></code></pre></div>
-<pre><code>[1] &quot;Hello world&quot;
-[1] &quot;Hello world&quot;
-[1] &quot;Hello world&quot;
-[1] &quot;Hello world&quot;
-[1] &quot;Hello world&quot;</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="programming.html#cb148-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
+<span id="cb148-2"><a href="programming.html#cb148-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Hello world&quot;</span>)</span>
+<span id="cb148-3"><a href="programming.html#cb148-3"></a>}</span>
+<span id="cb148-4"><a href="programming.html#cb148-4"></a>[<span class="dv">1</span>] <span class="st">&quot;Hello world&quot;</span></span>
+<span id="cb148-5"><a href="programming.html#cb148-5"></a>[<span class="dv">1</span>] <span class="st">&quot;Hello world&quot;</span></span>
+<span id="cb148-6"><a href="programming.html#cb148-6"></a>[<span class="dv">1</span>] <span class="st">&quot;Hello world&quot;</span></span>
+<span id="cb148-7"><a href="programming.html#cb148-7"></a>[<span class="dv">1</span>] <span class="st">&quot;Hello world&quot;</span></span>
+<span id="cb148-8"><a href="programming.html#cb148-8"></a>[<span class="dv">1</span>] <span class="st">&quot;Hello world&quot;</span></span></code></pre></div>
 <p>The <code>i</code> in the for statements is the variable that will sequentially take all the values of the object (usually a vector) specified on the right hand side of the <code>in</code> keyword. In majority of the cases, the object is a sequence of integers, as in the example below, where <code>i</code> takes the values of each element of the vector <code>1:5</code> and prints it.</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="programming.html#cb399-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
-<span id="cb399-2"><a href="programming.html#cb399-2"></a>  <span class="kw">print</span>(i)</span>
-<span id="cb399-3"><a href="programming.html#cb399-3"></a>}</span></code></pre></div>
-<pre><code>[1] 1
-[1] 2
-[1] 3
-[1] 4
-[1] 5</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="programming.html#cb149-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</span>
+<span id="cb149-2"><a href="programming.html#cb149-2"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb149-3"><a href="programming.html#cb149-3"></a>}</span>
+<span id="cb149-4"><a href="programming.html#cb149-4"></a>[<span class="dv">1</span>] <span class="dv">1</span></span>
+<span id="cb149-5"><a href="programming.html#cb149-5"></a>[<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb149-6"><a href="programming.html#cb149-6"></a>[<span class="dv">1</span>] <span class="dv">3</span></span>
+<span id="cb149-7"><a href="programming.html#cb149-7"></a>[<span class="dv">1</span>] <span class="dv">4</span></span>
+<span id="cb149-8"><a href="programming.html#cb149-8"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
 <p>A for loop could be used to add a constant to each element of a vector:</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="programming.html#cb401-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb401-2"><a href="programming.html#cb401-2"></a>x</span></code></pre></div>
-<pre><code>[1] 4 5 1 2 9 8 0 5 3</code></pre>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="programming.html#cb403-1"></a><span class="co">#for all integers between 1 and length of vector x:</span></span>
-<span id="cb403-2"><a href="programming.html#cb403-2"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) { </span>
-<span id="cb403-3"><a href="programming.html#cb403-3"></a>  x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span>
-<span id="cb403-4"><a href="programming.html#cb403-4"></a>}</span>
-<span id="cb403-5"><a href="programming.html#cb403-5"></a>x</span></code></pre></div>
-<pre><code>[1]  9 10  6  7 14 13  5 10  8</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="programming.html#cb150-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb150-2"><a href="programming.html#cb150-2"></a>x</span>
+<span id="cb150-3"><a href="programming.html#cb150-3"></a>[<span class="dv">1</span>] <span class="dv">4</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">3</span></span>
+<span id="cb150-4"><a href="programming.html#cb150-4"></a><span class="co">#for all integers between 1 and length of vector x:</span></span>
+<span id="cb150-5"><a href="programming.html#cb150-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) { </span>
+<span id="cb150-6"><a href="programming.html#cb150-6"></a>  x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb150-7"><a href="programming.html#cb150-7"></a>}</span>
+<span id="cb150-8"><a href="programming.html#cb150-8"></a>x</span>
+<span id="cb150-9"><a href="programming.html#cb150-9"></a>[<span class="dv">1</span>]  <span class="dv">9</span> <span class="dv">10</span>  <span class="dv">6</span>  <span class="dv">7</span> <span class="dv">14</span> <span class="dv">13</span>  <span class="dv">5</span> <span class="dv">10</span>  <span class="dv">8</span></span></code></pre></div>
 <p>However, in R this is redundant, because of <strong>vectorization</strong> (see the <a href="basics.html#vectors">section on vectors</a> from chapter 2). The above statement os equivalent to:</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="programming.html#cb405-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb405-2"><a href="programming.html#cb405-2"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
-<pre><code>[1]  9 10  6  7 14 13  5 10  8</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="programming.html#cb151-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb151-2"><a href="programming.html#cb151-2"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb151-3"><a href="programming.html#cb151-3"></a>[<span class="dv">1</span>]  <span class="dv">9</span> <span class="dv">10</span>  <span class="dv">6</span>  <span class="dv">7</span> <span class="dv">14</span> <span class="dv">13</span>  <span class="dv">5</span> <span class="dv">10</span>  <span class="dv">8</span></span></code></pre></div>
 <p>This is not only simpler, but also more efficient.</p>
 <p>Another, more practical aplication of the for loop could examine all columns of a data frame for missing values, so that:</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="programming.html#cb407-1"></a>dev &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/un_data/dev2018.csv&quot;</span>,</span>
-<span id="cb407-2"><a href="programming.html#cb407-2"></a>                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb407-3"><a href="programming.html#cb407-3"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>() <span class="co">#create empty numeric vector</span></span>
-<span id="cb407-4"><a href="programming.html#cb407-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)){</span>
-<span id="cb407-5"><a href="programming.html#cb407-5"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(dev[,i])) <span class="co">#get sum of missing for ith column</span></span>
-<span id="cb407-6"><a href="programming.html#cb407-6"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i] <span class="co">#name it with ith column name</span></span>
-<span id="cb407-7"><a href="programming.html#cb407-7"></a>}</span>
-<span id="cb407-8"><a href="programming.html#cb407-8"></a>missing</span></code></pre></div>
-<pre><code>country     eys     gni    lexp     mys 
-      0       1       3       3       5 </code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="programming.html#cb152-1"></a>dev &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/un_data/dev2018.csv&quot;</span>,</span>
+<span id="cb152-2"><a href="programming.html#cb152-2"></a>                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb152-3"><a href="programming.html#cb152-3"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>() <span class="co">#create empty numeric vector</span></span>
+<span id="cb152-4"><a href="programming.html#cb152-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)){</span>
+<span id="cb152-5"><a href="programming.html#cb152-5"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(dev[,i])) <span class="co">#get sum of missing for ith column</span></span>
+<span id="cb152-6"><a href="programming.html#cb152-6"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i] <span class="co">#name it with ith column name</span></span>
+<span id="cb152-7"><a href="programming.html#cb152-7"></a>}</span>
+<span id="cb152-8"><a href="programming.html#cb152-8"></a>missing</span>
+<span id="cb152-9"><a href="programming.html#cb152-9"></a>country     eys     gni    lexp     mys </span>
+<span id="cb152-10"><a href="programming.html#cb152-10"></a>      <span class="dv">0</span>       <span class="dv">1</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">5</span> </span></code></pre></div>
 <p>From this, we can see that there are 0 misisng values in the country name, 1 missing value in the expected years of schooling variable and, 3 missing values in gni and life expectancy and 5 missing values in mean years of schooling.</p>
 <p>While this is a bit more useful than the previous example, R still offers a shorthand method for such problems, which is discussed in more detail in the <a href="#apply-family">last part of this chapter</a>. In general, due to the phenomena of vectorization, for loops are rarely used in simple data analysis in R. However, they are a core element of programming as such, therefore it’s important to understand them. In fact, vectorization is made possible only because of for loops being used by R in the background - simply their faster and more efficient versions.</p>
 </div>
 <div id="if-statements" class="section level3 unnumbered">
 <h3>If statements</h3>
 <p>If statements are another crucial programming concept. They essentially allow performing computation <em>conditionally</em> on a logical statement. In other words, depending on a <a href="logical-values-and-operators">logical expression</a> an operation is performed or not. If loops in R are constructed in the following way:</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="programming.html#cb409-1"></a><span class="cf">if</span> (logical_expression) {</span>
-<span id="cb409-2"><a href="programming.html#cb409-2"></a>  operations</span>
-<span id="cb409-3"><a href="programming.html#cb409-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="programming.html#cb153-1"></a><span class="cf">if</span> (logical_expression) {</span>
+<span id="cb153-2"><a href="programming.html#cb153-2"></a>  operations</span>
+<span id="cb153-3"><a href="programming.html#cb153-3"></a>}</span></code></pre></div>
 <p>Where <code>logical_expression</code> must an expression that evaluates to a logical value, for example <code>X &gt; 5</code>, <code>country == "France"</code> or <code>is.na(x)</code>. <code>operations</code> are performed if and only if the <code>logical_expression</code> evaluates to <code>TRUE</code>. The simples possible example would be</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="programming.html#cb410-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb410-2"><a href="programming.html#cb410-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb410-3"><a href="programming.html#cb410-3"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
-<span id="cb410-4"><a href="programming.html#cb410-4"></a>}</span></code></pre></div>
-<pre><code>[1] &quot;the value is greater than 0&quot;</code></pre>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="programming.html#cb412-1"></a>x &lt;-<span class="st"> </span><span class="dv">-2</span></span>
-<span id="cb412-2"><a href="programming.html#cb412-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb412-3"><a href="programming.html#cb412-3"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
-<span id="cb412-4"><a href="programming.html#cb412-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="programming.html#cb154-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb154-2"><a href="programming.html#cb154-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb154-3"><a href="programming.html#cb154-3"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
+<span id="cb154-4"><a href="programming.html#cb154-4"></a>}</span>
+<span id="cb154-5"><a href="programming.html#cb154-5"></a>[<span class="dv">1</span>] <span class="st">&quot;the value is greater than 0&quot;</span></span>
+<span id="cb154-6"><a href="programming.html#cb154-6"></a></span>
+<span id="cb154-7"><a href="programming.html#cb154-7"></a>x &lt;-<span class="st"> </span><span class="dv">-2</span></span>
+<span id="cb154-8"><a href="programming.html#cb154-8"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb154-9"><a href="programming.html#cb154-9"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
+<span id="cb154-10"><a href="programming.html#cb154-10"></a>}</span></code></pre></div>
 <p>If is naturally complemented by the <code>else</code> clause, i.e. the operations that should be performed otherwise. The general form of such statement is:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="programming.html#cb413-1"></a><span class="cf">if</span> (logical_expression) {</span>
-<span id="cb413-2"><a href="programming.html#cb413-2"></a>  operations</span>
-<span id="cb413-3"><a href="programming.html#cb413-3"></a>} <span class="cf">else</span> {</span>
-<span id="cb413-4"><a href="programming.html#cb413-4"></a>  other_operations</span>
-<span id="cb413-5"><a href="programming.html#cb413-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="programming.html#cb155-1"></a><span class="cf">if</span> (logical_expression) {</span>
+<span id="cb155-2"><a href="programming.html#cb155-2"></a>  operations</span>
+<span id="cb155-3"><a href="programming.html#cb155-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb155-4"><a href="programming.html#cb155-4"></a>  other_operations</span>
+<span id="cb155-5"><a href="programming.html#cb155-5"></a>}</span></code></pre></div>
 <p>In this case, R first checks if the <code>logical_expression</code> evaluates to <code>TRUE</code>, and if it doesn’t, performs the <code>other_operations</code>. For example:</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="programming.html#cb414-1"></a>x &lt;-<span class="st"> </span><span class="dv">-2</span></span>
-<span id="cb414-2"><a href="programming.html#cb414-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb414-3"><a href="programming.html#cb414-3"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
-<span id="cb414-4"><a href="programming.html#cb414-4"></a>} <span class="cf">else</span> {</span>
-<span id="cb414-5"><a href="programming.html#cb414-5"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is less or equal than 0&quot;</span>)</span>
-<span id="cb414-6"><a href="programming.html#cb414-6"></a>}</span></code></pre></div>
-<pre><code>[1] &quot;the value is less or equal than 0&quot;</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="programming.html#cb156-1"></a>x &lt;-<span class="st"> </span><span class="dv">-2</span></span>
+<span id="cb156-2"><a href="programming.html#cb156-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb156-3"><a href="programming.html#cb156-3"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is greater than 0&quot;</span>)</span>
+<span id="cb156-4"><a href="programming.html#cb156-4"></a>} <span class="cf">else</span> {</span>
+<span id="cb156-5"><a href="programming.html#cb156-5"></a>  <span class="kw">print</span>(<span class="st">&quot;the value is less or equal than 0&quot;</span>)</span>
+<span id="cb156-6"><a href="programming.html#cb156-6"></a>}</span>
+<span id="cb156-7"><a href="programming.html#cb156-7"></a>[<span class="dv">1</span>] <span class="st">&quot;the value is less or equal than 0&quot;</span></span></code></pre></div>
 <p>Finally, <code>else if</code> allows to provide another statement to be evaluated. The general form of such statement would be:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="programming.html#cb416-1"></a><span class="cf">if</span> (logical_statement) { </span>
-<span id="cb416-2"><a href="programming.html#cb416-2"></a>  operation</span>
-<span id="cb416-3"><a href="programming.html#cb416-3"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_statement) {</span>
-<span id="cb416-4"><a href="programming.html#cb416-4"></a>  other_operation</span>
-<span id="cb416-5"><a href="programming.html#cb416-5"></a>} <span class="cf">else</span> {</span>
-<span id="cb416-6"><a href="programming.html#cb416-6"></a>  yet_another_operation</span>
-<span id="cb416-7"><a href="programming.html#cb416-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="programming.html#cb157-1"></a><span class="cf">if</span> (logical_statement) { </span>
+<span id="cb157-2"><a href="programming.html#cb157-2"></a>  operation</span>
+<span id="cb157-3"><a href="programming.html#cb157-3"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_statement) {</span>
+<span id="cb157-4"><a href="programming.html#cb157-4"></a>  other_operation</span>
+<span id="cb157-5"><a href="programming.html#cb157-5"></a>} <span class="cf">else</span> {</span>
+<span id="cb157-6"><a href="programming.html#cb157-6"></a>  yet_another_operation</span>
+<span id="cb157-7"><a href="programming.html#cb157-7"></a>}</span></code></pre></div>
 <p>Here, R first checks the <code>logical_statement</code>, if it’s <code>FALSE</code> then it proceeds to check the <code>other_logical_statement</code>. If the second one is <code>TRUE</code> if performs the <code>other_operation</code> and if it’s <code>FALSE</code> it proceeds to perform the <code>yet_another_operation</code>. An extension of the previous example:</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="programming.html#cb417-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb417-2"><a href="programming.html#cb417-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb417-3"><a href="programming.html#cb417-3"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is positive&quot;</span>)</span>
-<span id="cb417-4"><a href="programming.html#cb417-4"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb417-5"><a href="programming.html#cb417-5"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is negative&quot;</span>) </span>
-<span id="cb417-6"><a href="programming.html#cb417-6"></a>} <span class="cf">else</span> {</span>
-<span id="cb417-7"><a href="programming.html#cb417-7"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is 0&quot;</span>)</span>
-<span id="cb417-8"><a href="programming.html#cb417-8"></a>}</span></code></pre></div>
-<pre><code>[1] &quot;The value is positive&quot;</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="programming.html#cb158-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb158-2"><a href="programming.html#cb158-2"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb158-3"><a href="programming.html#cb158-3"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is positive&quot;</span>)</span>
+<span id="cb158-4"><a href="programming.html#cb158-4"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb158-5"><a href="programming.html#cb158-5"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is negative&quot;</span>) </span>
+<span id="cb158-6"><a href="programming.html#cb158-6"></a>} <span class="cf">else</span> {</span>
+<span id="cb158-7"><a href="programming.html#cb158-7"></a>  <span class="kw">print</span>(<span class="st">&quot;The value is 0&quot;</span>)</span>
+<span id="cb158-8"><a href="programming.html#cb158-8"></a>}</span>
+<span id="cb158-9"><a href="programming.html#cb158-9"></a>[<span class="dv">1</span>] <span class="st">&quot;The value is positive&quot;</span></span></code></pre></div>
 <p>IF-ELSE statments can be used to conditionally replace values. For example, suppose that we want to create a variable that is 1 when country is France and 0 otherwise. We could do that by:</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="programming.html#cb419-1"></a>dev<span class="op">$</span>france &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb419-2"><a href="programming.html#cb419-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dev)) {</span>
-<span id="cb419-3"><a href="programming.html#cb419-3"></a>  <span class="cf">if</span> (dev<span class="op">$</span>country[i] <span class="op">==</span><span class="st"> &quot;France&quot;</span>) {</span>
-<span id="cb419-4"><a href="programming.html#cb419-4"></a>    dev<span class="op">$</span>france[i] &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb419-5"><a href="programming.html#cb419-5"></a>  }</span>
-<span id="cb419-6"><a href="programming.html#cb419-6"></a>}</span>
-<span id="cb419-7"><a href="programming.html#cb419-7"></a></span>
-<span id="cb419-8"><a href="programming.html#cb419-8"></a>dev<span class="op">$</span>france[dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>]</span></code></pre></div>
-<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="programming.html#cb159-1"></a>dev<span class="op">$</span>france &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb159-2"><a href="programming.html#cb159-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dev)) {</span>
+<span id="cb159-3"><a href="programming.html#cb159-3"></a>  <span class="cf">if</span> (dev<span class="op">$</span>country[i] <span class="op">==</span><span class="st"> &quot;France&quot;</span>) {</span>
+<span id="cb159-4"><a href="programming.html#cb159-4"></a>    dev<span class="op">$</span>france[i] &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb159-5"><a href="programming.html#cb159-5"></a>  }</span>
+<span id="cb159-6"><a href="programming.html#cb159-6"></a>}</span>
+<span id="cb159-7"><a href="programming.html#cb159-7"></a></span>
+<span id="cb159-8"><a href="programming.html#cb159-8"></a>dev<span class="op">$</span>france[dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>]</span>
+<span id="cb159-9"><a href="programming.html#cb159-9"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
 <p>Again, because of vectorization, R offers a shorthand for this, through the <code>ifelse()</code> function:</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="programming.html#cb421-1"></a>dev<span class="op">$</span>france &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb421-2"><a href="programming.html#cb421-2"></a>dev<span class="op">$</span>france[dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>]</span></code></pre></div>
-<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="programming.html#cb160-1"></a>dev<span class="op">$</span>france &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb160-2"><a href="programming.html#cb160-2"></a>dev<span class="op">$</span>france[dev<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;France&quot;</span>]</span>
+<span id="cb160-3"><a href="programming.html#cb160-3"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
 <p>When you look at the documentation <code>?ifelse</code>, you can see that it takes three arguments - <code>test</code>, <code>yes</code> and <code>no</code>. The <code>test</code> argument is the logical condition - same as <code>logical_statement</code> in the <code>if</code>, with the small subtle difference that it can evaluate to a logical vector rather than one single logical value. The <code>yes</code> argument is the value returned by the function if the <code>test</code> is <code>TRUE</code> and the <code>no</code> argument is returned when <code>test</code> is <code>FALSE</code>. You can fully see this in the example below:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="programming.html#cb423-1"></a><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)</span></code></pre></div>
-<pre><code>[1] &quot;yes&quot; &quot;no&quot;  &quot;no&quot;  &quot;yes&quot;</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="programming.html#cb425-1"></a><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
-<pre><code>[1] 1 0 0 1</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="programming.html#cb161-1"></a><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)</span>
+<span id="cb161-2"><a href="programming.html#cb161-2"></a>[<span class="dv">1</span>] <span class="st">&quot;yes&quot;</span> <span class="st">&quot;no&quot;</span>  <span class="st">&quot;no&quot;</span>  <span class="st">&quot;yes&quot;</span></span>
+<span id="cb161-3"><a href="programming.html#cb161-3"></a><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb161-4"><a href="programming.html#cb161-4"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="functions" class="section level3 unnumbered">
 <h3>Functions</h3>
 <p>R is known as a <em>functional programming language</em> - as you have already seen, almost all of the operations performed are done using functions. It is also possible to create our own, custom functions by combining other functions and data structures. This is done using the <code>function()</code> keyword. The general syntax of a function looks as follows:</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="programming.html#cb427-1"></a>function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arg1, arg2) {</span>
-<span id="cb427-2"><a href="programming.html#cb427-2"></a>  output &lt;-<span class="st"> </span><span class="kw">operations</span>(arg1, arg2)</span>
-<span id="cb427-3"><a href="programming.html#cb427-3"></a>  output</span>
-<span id="cb427-4"><a href="programming.html#cb427-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="programming.html#cb162-1"></a>function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arg1, arg2) {</span>
+<span id="cb162-2"><a href="programming.html#cb162-2"></a>  output &lt;-<span class="st"> </span><span class="kw">operations</span>(arg1, arg2)</span>
+<span id="cb162-3"><a href="programming.html#cb162-3"></a>  output</span>
+<span id="cb162-4"><a href="programming.html#cb162-4"></a>}</span></code></pre></div>
 <p>As with any R object, you can use almost any name instead of <code>function_name</code>. Arguments are separeted by commas (in the above example <code>arg1</code>, <code>arg2</code>) - these are the objects you pass to your function on which you perform some arbitrary <code>operations</code>. Again, the arguments can have arbitrary names, but you need to use them within the function consistently. Finally, most of the functions return a value - this is the last object called within the function (<code>output</code> in the above example).</p>
 <p>After creating the function we can run it, exactly the same way as we would with any of R’s built-in functions. A simple example could return the number of missing values in an object:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="programming.html#cb428-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb428-2"><a href="programming.html#cb428-2"></a>  <span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
-<span id="cb428-3"><a href="programming.html#cb428-3"></a>}</span>
-<span id="cb428-4"><a href="programming.html#cb428-4"></a></span>
-<span id="cb428-5"><a href="programming.html#cb428-5"></a><span class="kw">count_na</span>(dev<span class="op">$</span>mys)</span></code></pre></div>
-<pre><code>[1] 5</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="programming.html#cb163-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb163-2"><a href="programming.html#cb163-2"></a>  <span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
+<span id="cb163-3"><a href="programming.html#cb163-3"></a>}</span>
+<span id="cb163-4"><a href="programming.html#cb163-4"></a></span>
+<span id="cb163-5"><a href="programming.html#cb163-5"></a><span class="kw">count_na</span>(dev<span class="op">$</span>mys)</span>
+<span id="cb163-6"><a href="programming.html#cb163-6"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
 <p>We could also implement our own summary statistics function, similar to <code>describe()</code> discussed in <a href="exploratory.html#exploratory">the previous chapter</a>:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="programming.html#cb430-1"></a>summary_stats &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb430-2"><a href="programming.html#cb430-2"></a>  <span class="cf">if</span> (<span class="kw">is.numeric</span>(x)) {</span>
-<span id="cb430-3"><a href="programming.html#cb430-3"></a>    <span class="kw">list</span>(<span class="dt">Mean =</span> <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb430-4"><a href="programming.html#cb430-4"></a>                <span class="dt">SD =</span> <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb430-5"><a href="programming.html#cb430-5"></a>                <span class="dt">IQR =</span> <span class="kw">IQR</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
-<span id="cb430-6"><a href="programming.html#cb430-6"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">is.character</span>(x)) {</span>
-<span id="cb430-7"><a href="programming.html#cb430-7"></a>    <span class="kw">list</span>(<span class="dt">Length =</span> <span class="kw">length</span>(x), </span>
-<span id="cb430-8"><a href="programming.html#cb430-8"></a>                  <span class="dt">Mean_Nchar =</span> <span class="kw">mean</span>(<span class="kw">nchar</span>(x)))</span>
-<span id="cb430-9"><a href="programming.html#cb430-9"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">is.factor</span>(x)) {</span>
-<span id="cb430-10"><a href="programming.html#cb430-10"></a>  <span class="kw">list</span>(<span class="dt">Length =</span> <span class="kw">length</span>(x), </span>
-<span id="cb430-11"><a href="programming.html#cb430-11"></a>       <span class="dt">Nlevels  =</span> <span class="kw">length</span>(<span class="kw">levels</span>(x)))</span>
-<span id="cb430-12"><a href="programming.html#cb430-12"></a>  }</span>
-<span id="cb430-13"><a href="programming.html#cb430-13"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="programming.html#cb164-1"></a>summary_stats &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb164-2"><a href="programming.html#cb164-2"></a>  <span class="cf">if</span> (<span class="kw">is.numeric</span>(x)) {</span>
+<span id="cb164-3"><a href="programming.html#cb164-3"></a>    <span class="kw">list</span>(<span class="dt">Mean =</span> <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
+<span id="cb164-4"><a href="programming.html#cb164-4"></a>                <span class="dt">SD =</span> <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
+<span id="cb164-5"><a href="programming.html#cb164-5"></a>                <span class="dt">IQR =</span> <span class="kw">IQR</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb164-6"><a href="programming.html#cb164-6"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">is.character</span>(x)) {</span>
+<span id="cb164-7"><a href="programming.html#cb164-7"></a>    <span class="kw">list</span>(<span class="dt">Length =</span> <span class="kw">length</span>(x), </span>
+<span id="cb164-8"><a href="programming.html#cb164-8"></a>                  <span class="dt">Mean_Nchar =</span> <span class="kw">mean</span>(<span class="kw">nchar</span>(x)))</span>
+<span id="cb164-9"><a href="programming.html#cb164-9"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">is.factor</span>(x)) {</span>
+<span id="cb164-10"><a href="programming.html#cb164-10"></a>  <span class="kw">list</span>(<span class="dt">Length =</span> <span class="kw">length</span>(x), </span>
+<span id="cb164-11"><a href="programming.html#cb164-11"></a>       <span class="dt">Nlevels  =</span> <span class="kw">length</span>(<span class="kw">levels</span>(x)))</span>
+<span id="cb164-12"><a href="programming.html#cb164-12"></a>  }</span>
+<span id="cb164-13"><a href="programming.html#cb164-13"></a>}</span></code></pre></div>
 <p>Let’s walk through the above function Given a vector <code>x</code>, the function :
 1. Checks whether <code>x</code> is a numeric vector. If so, returns a list of it’s mean, standard deviation and interquartile range.
 2. Else, checks if <code>x</code> is a character vector. If so, returns a list containng its length and average number of characters.
 3. Else, checks if <code>x</code> is a factor. If so returns a list containing its length and average number of character.</p>
 <p>We can see how it works below:</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="programming.html#cb431-1"></a><span class="kw">summary_stats</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span></code></pre></div>
-<pre><code>$Mean
-[1] 4
-
-$SD
-[1] 4.082483
-
-$IQR
-[1] 3</code></pre>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="programming.html#cb433-1"></a><span class="kw">summary_stats</span>(dev<span class="op">$</span>country)</span></code></pre></div>
-<pre><code>$Length
-[1] 195
-
-$Mean_Nchar
-[1] 9.902564</code></pre>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="programming.html#cb435-1"></a><span class="kw">summary_stats</span>(<span class="kw">as.factor</span>(dev<span class="op">$</span>country))</span></code></pre></div>
-<pre><code>$Length
-[1] 195
-
-$Nlevels
-[1] 195</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="programming.html#cb165-1"></a><span class="kw">summary_stats</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span>
+<span id="cb165-2"><a href="programming.html#cb165-2"></a><span class="op">$</span>Mean</span>
+<span id="cb165-3"><a href="programming.html#cb165-3"></a>[<span class="dv">1</span>] <span class="dv">4</span></span>
+<span id="cb165-4"><a href="programming.html#cb165-4"></a></span>
+<span id="cb165-5"><a href="programming.html#cb165-5"></a><span class="op">$</span>SD</span>
+<span id="cb165-6"><a href="programming.html#cb165-6"></a>[<span class="dv">1</span>] <span class="fl">4.082483</span></span>
+<span id="cb165-7"><a href="programming.html#cb165-7"></a></span>
+<span id="cb165-8"><a href="programming.html#cb165-8"></a><span class="op">$</span>IQR</span>
+<span id="cb165-9"><a href="programming.html#cb165-9"></a>[<span class="dv">1</span>] <span class="dv">3</span></span>
+<span id="cb165-10"><a href="programming.html#cb165-10"></a><span class="kw">summary_stats</span>(dev<span class="op">$</span>country)</span>
+<span id="cb165-11"><a href="programming.html#cb165-11"></a><span class="op">$</span>Length</span>
+<span id="cb165-12"><a href="programming.html#cb165-12"></a>[<span class="dv">1</span>] <span class="dv">195</span></span>
+<span id="cb165-13"><a href="programming.html#cb165-13"></a></span>
+<span id="cb165-14"><a href="programming.html#cb165-14"></a><span class="op">$</span>Mean_Nchar</span>
+<span id="cb165-15"><a href="programming.html#cb165-15"></a>[<span class="dv">1</span>] <span class="fl">9.902564</span></span>
+<span id="cb165-16"><a href="programming.html#cb165-16"></a><span class="kw">summary_stats</span>(<span class="kw">as.factor</span>(dev<span class="op">$</span>country))</span>
+<span id="cb165-17"><a href="programming.html#cb165-17"></a><span class="op">$</span>Length</span>
+<span id="cb165-18"><a href="programming.html#cb165-18"></a>[<span class="dv">1</span>] <span class="dv">195</span></span>
+<span id="cb165-19"><a href="programming.html#cb165-19"></a></span>
+<span id="cb165-20"><a href="programming.html#cb165-20"></a><span class="op">$</span>Nlevels</span>
+<span id="cb165-21"><a href="programming.html#cb165-21"></a>[<span class="dv">1</span>] <span class="dv">195</span></span></code></pre></div>
 <div id="keyword-arguments" class="section level4 unnumbered">
 <h4>Keyword arguments</h4>
 <p>Many of the functions used in R come with so-called <em>default</em> arguments - this was already mentioned in <a href="basics.html#sorting">sorting</a>. When defining our own functions, we can make use of that functionality as well. For example, the <code>count_na</code> example can be modified in the following way:</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="programming.html#cb437-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">proportion =</span> <span class="ot">TRUE</span>) {</span>
-<span id="cb437-2"><a href="programming.html#cb437-2"></a>  num_na &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
-<span id="cb437-3"><a href="programming.html#cb437-3"></a>  <span class="cf">if</span> (proportion <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) {</span>
-<span id="cb437-4"><a href="programming.html#cb437-4"></a>    num_na<span class="op">/</span><span class="kw">length</span>(x)</span>
-<span id="cb437-5"><a href="programming.html#cb437-5"></a>  } <span class="cf">else</span> {</span>
-<span id="cb437-6"><a href="programming.html#cb437-6"></a>    num_na</span>
-<span id="cb437-7"><a href="programming.html#cb437-7"></a>  }</span>
-<span id="cb437-8"><a href="programming.html#cb437-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="programming.html#cb166-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">proportion =</span> <span class="ot">TRUE</span>) {</span>
+<span id="cb166-2"><a href="programming.html#cb166-2"></a>  num_na &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
+<span id="cb166-3"><a href="programming.html#cb166-3"></a>  <span class="cf">if</span> (proportion <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) {</span>
+<span id="cb166-4"><a href="programming.html#cb166-4"></a>    num_na<span class="op">/</span><span class="kw">length</span>(x)</span>
+<span id="cb166-5"><a href="programming.html#cb166-5"></a>  } <span class="cf">else</span> {</span>
+<span id="cb166-6"><a href="programming.html#cb166-6"></a>    num_na</span>
+<span id="cb166-7"><a href="programming.html#cb166-7"></a>  }</span>
+<span id="cb166-8"><a href="programming.html#cb166-8"></a>}</span></code></pre></div>
 <p>The <code>proportion</code> argument controls whether the function returns the number of NAs as value or as proportion of the entire vector:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="programming.html#cb438-1"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni)</span></code></pre></div>
-<pre><code>[1] 0.01538462</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="programming.html#cb440-1"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni, <span class="dt">proportion =</span> <span class="ot">TRUE</span>) <span class="co">#same as above</span></span></code></pre></div>
-<pre><code>[1] 0.01538462</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="programming.html#cb442-1"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni, <span class="dt">proportion =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>[1] 3</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="programming.html#cb167-1"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni)</span>
+<span id="cb167-2"><a href="programming.html#cb167-2"></a>[<span class="dv">1</span>] <span class="fl">0.01538462</span></span>
+<span id="cb167-3"><a href="programming.html#cb167-3"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni, <span class="dt">proportion =</span> <span class="ot">TRUE</span>) <span class="co">#same as above</span></span>
+<span id="cb167-4"><a href="programming.html#cb167-4"></a>[<span class="dv">1</span>] <span class="fl">0.01538462</span></span>
+<span id="cb167-5"><a href="programming.html#cb167-5"></a><span class="kw">count_na</span>(dev<span class="op">$</span>gni, <span class="dt">proportion =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb167-6"><a href="programming.html#cb167-6"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
 <p>There are couple of reasons why functions are frequently applied when analyzing data:
 1. <em>To avoid repetition</em> - often, you need to perform the same operation repeatedly - sometimes on a dataframe with tens or hunderds of columns or even multiple data frames. To avoid re-writing the same code over and over again (which always increases the chance of an error occuring).
 2. <em>To enhance clarity</em> - when you perform a long and complicated series of operations on a dataset, it’s often much easier to break it down into functions. Then when you need to come back to your code after a long time, it is often much easier to see <code>recode_missing_values(data)</code> appear in your code, with the <code>record_missing_values</code> function defined somewhere else, as you don’t need to go through your code step by step, but only understand what particular functions return.
@@ -520,90 +521,90 @@ $Nlevels
 <div id="sapply" class="section level3 unnumbered">
 <h3>Sapply</h3>
 <p>Recall the code we used to check each column of our data frame for missingness in the <a href="for-loops">for loops section</a>:</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="programming.html#cb444-1"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>() <span class="co">#create empty numeric vector</span></span>
-<span id="cb444-2"><a href="programming.html#cb444-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)){</span>
-<span id="cb444-3"><a href="programming.html#cb444-3"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(dev[,i])) <span class="co">#get sum of missing for ith column</span></span>
-<span id="cb444-4"><a href="programming.html#cb444-4"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i] <span class="co">#name it with ith column name</span></span>
-<span id="cb444-5"><a href="programming.html#cb444-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="programming.html#cb168-1"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>() <span class="co">#create empty numeric vector</span></span>
+<span id="cb168-2"><a href="programming.html#cb168-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)){</span>
+<span id="cb168-3"><a href="programming.html#cb168-3"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(dev[,i])) <span class="co">#get sum of missing for ith column</span></span>
+<span id="cb168-4"><a href="programming.html#cb168-4"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i] <span class="co">#name it with ith column name</span></span>
+<span id="cb168-5"><a href="programming.html#cb168-5"></a>}</span></code></pre></div>
 <p>We could re-write it using our new knowledge of functions, such that:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="programming.html#cb445-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb445-2"><a href="programming.html#cb445-2"></a>  <span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
-<span id="cb445-3"><a href="programming.html#cb445-3"></a>}</span>
-<span id="cb445-4"><a href="programming.html#cb445-4"></a></span>
-<span id="cb445-5"><a href="programming.html#cb445-5"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>()</span>
-<span id="cb445-6"><a href="programming.html#cb445-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)) {</span>
-<span id="cb445-7"><a href="programming.html#cb445-7"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">count_na</span>(dev[,i])</span>
-<span id="cb445-8"><a href="programming.html#cb445-8"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i]</span>
-<span id="cb445-9"><a href="programming.html#cb445-9"></a>}</span>
-<span id="cb445-10"><a href="programming.html#cb445-10"></a>missing</span></code></pre></div>
-<pre><code>country     eys     gni    lexp     mys  france 
-      0       1       3       3       5       0 </code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="programming.html#cb169-1"></a>count_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb169-2"><a href="programming.html#cb169-2"></a>  <span class="kw">sum</span>(<span class="kw">is.na</span>(x))</span>
+<span id="cb169-3"><a href="programming.html#cb169-3"></a>}</span>
+<span id="cb169-4"><a href="programming.html#cb169-4"></a></span>
+<span id="cb169-5"><a href="programming.html#cb169-5"></a>missing &lt;-<span class="st"> </span><span class="kw">numeric</span>()</span>
+<span id="cb169-6"><a href="programming.html#cb169-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dev)) {</span>
+<span id="cb169-7"><a href="programming.html#cb169-7"></a>  missing[i] &lt;-<span class="st"> </span><span class="kw">count_na</span>(dev[,i])</span>
+<span id="cb169-8"><a href="programming.html#cb169-8"></a>  <span class="kw">names</span>(missing)[i] &lt;-<span class="st"> </span><span class="kw">names</span>(dev)[i]</span>
+<span id="cb169-9"><a href="programming.html#cb169-9"></a>}</span>
+<span id="cb169-10"><a href="programming.html#cb169-10"></a>missing</span>
+<span id="cb169-11"><a href="programming.html#cb169-11"></a>country     eys     gni    lexp     mys  france </span>
+<span id="cb169-12"><a href="programming.html#cb169-12"></a>      <span class="dv">0</span>       <span class="dv">1</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">5</span>       <span class="dv">0</span> </span></code></pre></div>
 <p>While this may look a bit more fancy, in fact more code was used to perform this operation and it doesn’t differ too much in terms of clarity. The exact same result can be achieved using the <code>sapply()</code> function. <code>sapply()</code> takes two arguments - an R object, such as a vector and a data frame and a function. Then, it applies the function to each element of this object (i.e. value in case of vectors, column/variable in case of data frames).</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="programming.html#cb447-1"></a><span class="kw">sapply</span>(dev, count_na)</span></code></pre></div>
-<pre><code>country     eys     gni    lexp     mys  france 
-      0       1       3       3       5       0 </code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="programming.html#cb170-1"></a><span class="kw">sapply</span>(dev, count_na)</span>
+<span id="cb170-2"><a href="programming.html#cb170-2"></a>country     eys     gni    lexp     mys  france </span>
+<span id="cb170-3"><a href="programming.html#cb170-3"></a>      <span class="dv">0</span>       <span class="dv">1</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">5</span>       <span class="dv">0</span> </span></code></pre></div>
 <p>The result is exactly the same as in the previous case. <code>sapply()</code> used the <code>count_na</code> function on each columns of the <code>dev</code> dataset.</p>
 <p>When using short, simple functions, <code>sapply()</code> can be even more concise, as we can defined our function without giving it a name. In the example below, instead of defining <code>count_na</code> separately, we define it directly within the <code>sapply()</code> call (i.e. inside the parentheses). This yields the same result.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="programming.html#cb449-1"></a><span class="kw">sapply</span>(dev, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))</span></code></pre></div>
-<pre><code>country     eys     gni    lexp     mys  france 
-      0       1       3       3       5       0 </code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="programming.html#cb171-1"></a><span class="kw">sapply</span>(dev, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))</span>
+<span id="cb171-2"><a href="programming.html#cb171-2"></a>country     eys     gni    lexp     mys  france </span>
+<span id="cb171-3"><a href="programming.html#cb171-3"></a>      <span class="dv">0</span>       <span class="dv">1</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">5</span>       <span class="dv">0</span> </span></code></pre></div>
 <p>Consider the function below. What do you expect it to return? Try going through each element of the code separately. You can check how the <code>rowSums</code> command works by typing <code>?rowSums</code> into the R console.</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="programming.html#cb451-1"></a>quartile &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb451-2"><a href="programming.html#cb451-2"></a>  quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb451-3"><a href="programming.html#cb451-3"></a>  comparisons &lt;-<span class="st"> </span><span class="kw">sapply</span>(quantiles, <span class="cf">function</span>(y) y <span class="op">&lt;=</span><span class="st"> </span>x)</span>
-<span id="cb451-4"><a href="programming.html#cb451-4"></a>  <span class="kw">rowSums</span>(comparisons) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb451-5"><a href="programming.html#cb451-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="programming.html#cb172-1"></a>quartile &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb172-2"><a href="programming.html#cb172-2"></a>  quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb172-3"><a href="programming.html#cb172-3"></a>  comparisons &lt;-<span class="st"> </span><span class="kw">sapply</span>(quantiles, <span class="cf">function</span>(y) y <span class="op">&lt;=</span><span class="st"> </span>x)</span>
+<span id="cb172-4"><a href="programming.html#cb172-4"></a>  <span class="kw">rowSums</span>(comparisons) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb172-5"><a href="programming.html#cb172-5"></a>}</span></code></pre></div>
 <p>The function takes a vector as input and computes three quantiles of its values - 25%, 50%, 75%. You may recall from the <a href="exploratory.html#exploratory">previous chapter</a> that quantiles are cut points that divide a variable into ranges of equal proportions in the data set. The resulting <code>quantiles</code> vector consists of three values, corresponding with thre three quantiles. We then use <code>sapply</code> on these three values to compare each of them with the value of the <code>x</code> vector. As a result, we obtain a 3 x n array, where n is length of <code>x</code>. For each of the values of <code>x</code> we get three logical values. Each of them is <code>TRUE</code> when the corresponding value of x was larger than the quantile and <code>FALSE</code> if the corresponding value of x was lower than the quantile. We can then sum the results by row, using <code>rowSums</code>. Our final result is a vector with values of 0, 1 and 2. Its value is 0 if the corresponding value of x was less than all quartiles, 1 if it was greater or equal than the .25, 2 if it was greater or equal than 0.5 and 3 if it was greater or equal than all of them. We then finally add 1 to each, so that they correspond to true quartile numbers (1st quartile, rather than 0th quartile, etc).</p>
 <p>We can then use the <code>split</code> function, which takes a data frame and a vector as input and splits the data frame into several parts, each with the same value of the splitting variable. As a result, we obtain <code>dev_split</code> dataset, which stores 4 data frames, each only with countries in the respective quantile of expected years of schooling.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="programming.html#cb452-1"></a>dev_split &lt;-<span class="st"> </span><span class="kw">split</span>(dev, <span class="kw">quartile</span>(dev<span class="op">$</span>eys))</span>
-<span id="cb452-2"><a href="programming.html#cb452-2"></a><span class="kw">head</span>(dev_split[[<span class="dv">1</span>]])</span></code></pre></div>
-<pre><code>                    country  eys  gni lexp mys france
-1               Afghanistan 10.1 1746 64.5 3.9      0
-14               Bangladesh 11.2 4057 72.3 6.1      0
-27             Burkina Faso  8.9 1705 61.2 1.6      0
-33 Central African Republic  7.6  777 52.8 4.3      0
-34                     Chad  7.5 1716 54.0 2.4      0
-38                  Comoros 11.2 2426 64.1 4.9      0</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="programming.html#cb173-1"></a>dev_split &lt;-<span class="st"> </span><span class="kw">split</span>(dev, <span class="kw">quartile</span>(dev<span class="op">$</span>eys))</span>
+<span id="cb173-2"><a href="programming.html#cb173-2"></a><span class="kw">head</span>(dev_split[[<span class="dv">1</span>]])</span>
+<span id="cb173-3"><a href="programming.html#cb173-3"></a>                    country  eys  gni lexp mys france</span>
+<span id="cb173-4"><a href="programming.html#cb173-4"></a><span class="dv">1</span>               Afghanistan <span class="fl">10.1</span> <span class="dv">1746</span> <span class="fl">64.5</span> <span class="fl">3.9</span>      <span class="dv">0</span></span>
+<span id="cb173-5"><a href="programming.html#cb173-5"></a><span class="dv">14</span>               Bangladesh <span class="fl">11.2</span> <span class="dv">4057</span> <span class="fl">72.3</span> <span class="fl">6.1</span>      <span class="dv">0</span></span>
+<span id="cb173-6"><a href="programming.html#cb173-6"></a><span class="dv">27</span>             Burkina Faso  <span class="fl">8.9</span> <span class="dv">1705</span> <span class="fl">61.2</span> <span class="fl">1.6</span>      <span class="dv">0</span></span>
+<span id="cb173-7"><a href="programming.html#cb173-7"></a><span class="dv">33</span> Central African Republic  <span class="fl">7.6</span>  <span class="dv">777</span> <span class="fl">52.8</span> <span class="fl">4.3</span>      <span class="dv">0</span></span>
+<span id="cb173-8"><a href="programming.html#cb173-8"></a><span class="dv">34</span>                     Chad  <span class="fl">7.5</span> <span class="dv">1716</span> <span class="fl">54.0</span> <span class="fl">2.4</span>      <span class="dv">0</span></span>
+<span id="cb173-9"><a href="programming.html#cb173-9"></a><span class="dv">38</span>                  Comoros <span class="fl">11.2</span> <span class="dv">2426</span> <span class="fl">64.1</span> <span class="fl">4.9</span>      <span class="dv">0</span></span></code></pre></div>
 <p>You can then look at descriptive statistics of each of the quartiles using:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="programming.html#cb454-1"></a><span class="kw">sapply</span>(dev_split, summary)</span></code></pre></div>
-<pre><code>$`1`
-   country               eys              gni             lexp            mys            france 
- Length:47          Min.   : 5.000   Min.   :  777   Min.   :52.80   Min.   :1.600   Min.   :0  
- Class :character   1st Qu.: 8.700   1st Qu.: 1611   1st Qu.:60.80   1st Qu.:3.700   1st Qu.:0  
- Mode  :character   Median : 9.700   Median : 2318   Median :64.30   Median :4.850   Median :0  
-                    Mean   : 9.415   Mean   : 3579   Mean   :63.89   Mean   :4.861   Mean   :0  
-                    3rd Qu.:10.550   3rd Qu.: 3731   3rd Qu.:67.00   3rd Qu.:6.075   3rd Qu.:0  
-                    Max.   :11.200   Max.   :17796   Max.   :75.10   Max.   :9.800   Max.   :0  
-                                     NA&#39;s   :1                       NA&#39;s   :1                  
-
-$`2`
-   country               eys             gni              lexp            mys             france 
- Length:50          Min.   :11.30   Min.   :   660   Min.   :58.90   Min.   : 3.100   Min.   :0  
- Class :character   1st Qu.:11.80   1st Qu.:  4232   1st Qu.:68.03   1st Qu.: 6.500   1st Qu.:0  
- Mode  :character   Median :12.30   Median :  6903   Median :71.50   Median : 7.850   Median :0  
-                    Mean   :12.22   Mean   : 10788   Mean   :70.39   Mean   : 7.869   Mean   :0  
-                    3rd Qu.:12.70   3rd Qu.: 11578   3rd Qu.:73.83   3rd Qu.: 9.475   3rd Qu.:0  
-                    Max.   :13.00   Max.   :110489   Max.   :80.10   Max.   :11.600   Max.   :0  
-                                                     NA&#39;s   :2       NA&#39;s   :2                   
-
-$`3`
-   country               eys             gni             lexp            mys             france 
- Length:47          Min.   :13.10   Min.   : 3317   Min.   :63.90   Min.   : 5.500   Min.   :0  
- Class :character   1st Qu.:13.65   1st Qu.:10694   1st Qu.:74.53   1st Qu.: 8.600   1st Qu.:0  
- Mode  :character   Median :14.30   Median :14356   Median :76.05   Median : 9.900   Median :0  
-                    Mean   :14.19   Mean   :22644   Mean   :75.45   Mean   : 9.883   Mean   :0  
-                    3rd Qu.:14.70   3rd Qu.:26054   3rd Qu.:76.88   3rd Qu.:11.200   3rd Qu.:0  
-                    Max.   :15.10   Max.   :99732   Max.   :82.10   Max.   :12.600   Max.   :0  
-                                    NA&#39;s   :1       NA&#39;s   :1       NA&#39;s   :1                   
-
-$`4`
-   country               eys             gni             lexp            mys            france    
- Length:50          Min.   :15.20   Min.   : 9570   Min.   :72.40   Min.   : 7.70   Min.   :0.00  
- Class :character   1st Qu.:15.68   1st Qu.:24906   1st Qu.:77.25   1st Qu.:10.43   1st Qu.:0.00  
- Mode  :character   Median :16.35   Median :34918   Median :81.20   Median :12.25   Median :0.00  
-                    Mean   :16.79   Mean   :35322   Mean   :79.66   Mean   :11.55   Mean   :0.02  
-                    3rd Qu.:17.40   3rd Qu.:45698   3rd Qu.:82.38   3rd Qu.:12.70   3rd Qu.:0.00  
-                    Max.   :22.10   Max.   :83793   Max.   :84.70   Max.   :14.10   Max.   :1.00  </code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="programming.html#cb174-1"></a><span class="kw">sapply</span>(dev_split, summary)</span>
+<span id="cb174-2"><a href="programming.html#cb174-2"></a><span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></span>
+<span id="cb174-3"><a href="programming.html#cb174-3"></a>   country               eys              gni             lexp            mys            france </span>
+<span id="cb174-4"><a href="programming.html#cb174-4"></a> Length<span class="op">:</span><span class="dv">47</span>          Min.   <span class="op">:</span><span class="st"> </span><span class="fl">5.000</span>   Min.   <span class="op">:</span><span class="st">  </span><span class="dv">777</span>   Min.   <span class="op">:</span><span class="fl">52.80</span>   Min.   <span class="op">:</span><span class="fl">1.600</span>   Min.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-5"><a href="programming.html#cb174-5"></a> Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.700</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="dv">1611</span>   1st Qu.<span class="op">:</span><span class="fl">60.80</span>   1st Qu.<span class="op">:</span><span class="fl">3.700</span>   1st Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-6"><a href="programming.html#cb174-6"></a> Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="st"> </span><span class="fl">9.700</span>   Median <span class="op">:</span><span class="st"> </span><span class="dv">2318</span>   Median <span class="op">:</span><span class="fl">64.30</span>   Median <span class="op">:</span><span class="fl">4.850</span>   Median <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-7"><a href="programming.html#cb174-7"></a>                    Mean   <span class="op">:</span><span class="st"> </span><span class="fl">9.415</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="dv">3579</span>   Mean   <span class="op">:</span><span class="fl">63.89</span>   Mean   <span class="op">:</span><span class="fl">4.861</span>   Mean   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-8"><a href="programming.html#cb174-8"></a>                    3rd Qu.<span class="op">:</span><span class="fl">10.550</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="dv">3731</span>   3rd Qu.<span class="op">:</span><span class="fl">67.00</span>   3rd Qu.<span class="op">:</span><span class="fl">6.075</span>   3rd Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-9"><a href="programming.html#cb174-9"></a>                    Max.   <span class="op">:</span><span class="fl">11.200</span>   Max.   <span class="op">:</span><span class="dv">17796</span>   Max.   <span class="op">:</span><span class="fl">75.10</span>   Max.   <span class="op">:</span><span class="fl">9.800</span>   Max.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-10"><a href="programming.html#cb174-10"></a>                                     NA<span class="st">&#39;s   :1                       NA&#39;</span>s   <span class="op">:</span><span class="dv">1</span>                  </span>
+<span id="cb174-11"><a href="programming.html#cb174-11"></a></span>
+<span id="cb174-12"><a href="programming.html#cb174-12"></a><span class="op">$</span><span class="st">`</span><span class="dt">2</span><span class="st">`</span></span>
+<span id="cb174-13"><a href="programming.html#cb174-13"></a>   country               eys             gni              lexp            mys             france </span>
+<span id="cb174-14"><a href="programming.html#cb174-14"></a> Length<span class="op">:</span><span class="dv">50</span>          Min.   <span class="op">:</span><span class="fl">11.30</span>   Min.   <span class="op">:</span><span class="st">   </span><span class="dv">660</span>   Min.   <span class="op">:</span><span class="fl">58.90</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">3.100</span>   Min.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-15"><a href="programming.html#cb174-15"></a> Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="fl">11.80</span>   1st Qu.<span class="op">:</span><span class="st">  </span><span class="dv">4232</span>   1st Qu.<span class="op">:</span><span class="fl">68.03</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">6.500</span>   1st Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-16"><a href="programming.html#cb174-16"></a> Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="fl">12.30</span>   Median <span class="op">:</span><span class="st">  </span><span class="dv">6903</span>   Median <span class="op">:</span><span class="fl">71.50</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">7.850</span>   Median <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-17"><a href="programming.html#cb174-17"></a>                    Mean   <span class="op">:</span><span class="fl">12.22</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="dv">10788</span>   Mean   <span class="op">:</span><span class="fl">70.39</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">7.869</span>   Mean   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-18"><a href="programming.html#cb174-18"></a>                    3rd Qu.<span class="op">:</span><span class="fl">12.70</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="dv">11578</span>   3rd Qu.<span class="op">:</span><span class="fl">73.83</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">9.475</span>   3rd Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-19"><a href="programming.html#cb174-19"></a>                    Max.   <span class="op">:</span><span class="fl">13.00</span>   Max.   <span class="op">:</span><span class="dv">110489</span>   Max.   <span class="op">:</span><span class="fl">80.10</span>   Max.   <span class="op">:</span><span class="fl">11.600</span>   Max.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-20"><a href="programming.html#cb174-20"></a>                                                     NA<span class="st">&#39;s   :2       NA&#39;</span>s   <span class="op">:</span><span class="dv">2</span>                   </span>
+<span id="cb174-21"><a href="programming.html#cb174-21"></a></span>
+<span id="cb174-22"><a href="programming.html#cb174-22"></a><span class="op">$</span><span class="st">`</span><span class="dt">3</span><span class="st">`</span></span>
+<span id="cb174-23"><a href="programming.html#cb174-23"></a>   country               eys             gni             lexp            mys             france </span>
+<span id="cb174-24"><a href="programming.html#cb174-24"></a> Length<span class="op">:</span><span class="dv">47</span>          Min.   <span class="op">:</span><span class="fl">13.10</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="dv">3317</span>   Min.   <span class="op">:</span><span class="fl">63.90</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">5.500</span>   Min.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-25"><a href="programming.html#cb174-25"></a> Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="fl">13.65</span>   1st Qu.<span class="op">:</span><span class="dv">10694</span>   1st Qu.<span class="op">:</span><span class="fl">74.53</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.600</span>   1st Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-26"><a href="programming.html#cb174-26"></a> Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="fl">14.30</span>   Median <span class="op">:</span><span class="dv">14356</span>   Median <span class="op">:</span><span class="fl">76.05</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">9.900</span>   Median <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-27"><a href="programming.html#cb174-27"></a>                    Mean   <span class="op">:</span><span class="fl">14.19</span>   Mean   <span class="op">:</span><span class="dv">22644</span>   Mean   <span class="op">:</span><span class="fl">75.45</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">9.883</span>   Mean   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-28"><a href="programming.html#cb174-28"></a>                    3rd Qu.<span class="op">:</span><span class="fl">14.70</span>   3rd Qu.<span class="op">:</span><span class="dv">26054</span>   3rd Qu.<span class="op">:</span><span class="fl">76.88</span>   3rd Qu.<span class="op">:</span><span class="fl">11.200</span>   3rd Qu.<span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-29"><a href="programming.html#cb174-29"></a>                    Max.   <span class="op">:</span><span class="fl">15.10</span>   Max.   <span class="op">:</span><span class="dv">99732</span>   Max.   <span class="op">:</span><span class="fl">82.10</span>   Max.   <span class="op">:</span><span class="fl">12.600</span>   Max.   <span class="op">:</span><span class="dv">0</span>  </span>
+<span id="cb174-30"><a href="programming.html#cb174-30"></a>                                    NA<span class="st">&#39;s   :1       NA&#39;</span>s   <span class="op">:</span><span class="dv">1</span>       NA<span class="st">&#39;s   :1                   </span></span>
+<span id="cb174-31"><a href="programming.html#cb174-31"></a></span>
+<span id="cb174-32"><a href="programming.html#cb174-32"></a><span class="st">$`4`</span></span>
+<span id="cb174-33"><a href="programming.html#cb174-33"></a><span class="st">   country               eys             gni             lexp            mys            france    </span></span>
+<span id="cb174-34"><a href="programming.html#cb174-34"></a><span class="st"> Length:50          Min.   :15.20   Min.   : 9570   Min.   :72.40   Min.   : 7.70   Min.   :0.00  </span></span>
+<span id="cb174-35"><a href="programming.html#cb174-35"></a><span class="st"> Class :character   1st Qu.:15.68   1st Qu.:24906   1st Qu.:77.25   1st Qu.:10.43   1st Qu.:0.00  </span></span>
+<span id="cb174-36"><a href="programming.html#cb174-36"></a><span class="st"> Mode  :character   Median :16.35   Median :34918   Median :81.20   Median :12.25   Median :0.00  </span></span>
+<span id="cb174-37"><a href="programming.html#cb174-37"></a><span class="st">                    Mean   :16.79   Mean   :35322   Mean   :79.66   Mean   :11.55   Mean   :0.02  </span></span>
+<span id="cb174-38"><a href="programming.html#cb174-38"></a><span class="st">                    3rd Qu.:17.40   3rd Qu.:45698   3rd Qu.:82.38   3rd Qu.:12.70   3rd Qu.:0.00  </span></span>
+<span id="cb174-39"><a href="programming.html#cb174-39"></a><span class="st">                    Max.   :22.10   Max.   :83793   Max.   :84.70   Max.   :14.10   Max.   :1.00  </span></span></code></pre></div>
 <p>While working an R and looking for help online, you may stumble upon other variants of the <code>sapply()</code> functions. Essentially, all R functions with <code>apply</code> in their name serve the same purpose - applying a function to each element of an object. <code>lapply()</code> is a less user friendy version of <code>sapply()</code>, which always returns a list, not a vector. <code>vapply()</code> forces the user to determine the type of the output, which makes its behaviour more predictible and slightly faster. <code>tapply()</code> applies the function to data frame by group determined by another variable - a similar procedure to what we did using <code>split()</code> and <code>sapply()</code>, but in less steps.</p>
 </div>
 </div>
@@ -785,23 +786,23 @@ $`4`
 <li><p>Use the <code>summary_stats</code> function to summarize each variable from the <code>iris</code> dataset. You can load it using <code>data(iris)</code>.</p></li>
 <li><p>Use a for loop to create a scatter plot of <code>Sepal.Width</code> and <code>Sepal.length</code> attributes from the <code>iris</code> dataset with each flower species (specified by the <code>Species</code> variable) having a different marker and color. To do that, use the skeleton code below.</p></li>
 </ol>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="programming.html#cb456-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb456-2"><a href="programming.html#cb456-2"></a><span class="kw">plot</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-99</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">min</span>(iris<span class="op">$</span>Sepal.Width), <span class="kw">max</span>(iris<span class="op">$</span>Sepal.Width)),</span>
-<span id="cb456-3"><a href="programming.html#cb456-3"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(iris<span class="op">$</span>Sepal.Length), <span class="kw">max</span>(iris<span class="op">$</span>Petal.Length)))</span>
-<span id="cb456-4"><a href="programming.html#cb456-4"></a><span class="cf">for</span> (...) {</span>
-<span id="cb456-5"><a href="programming.html#cb456-5"></a>  <span class="kw">points</span>(<span class="dt">x =</span> , <span class="dt">y =</span> , <span class="dt">col =</span> , <span class="dt">pch =</span> )</span>
-<span id="cb456-6"><a href="programming.html#cb456-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="programming.html#cb175-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb175-2"><a href="programming.html#cb175-2"></a><span class="kw">plot</span>(<span class="op">-</span><span class="dv">99</span>, <span class="dv">-99</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">min</span>(iris<span class="op">$</span>Sepal.Width), <span class="kw">max</span>(iris<span class="op">$</span>Sepal.Width)),</span>
+<span id="cb175-3"><a href="programming.html#cb175-3"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(iris<span class="op">$</span>Sepal.Length), <span class="kw">max</span>(iris<span class="op">$</span>Petal.Length)))</span>
+<span id="cb175-4"><a href="programming.html#cb175-4"></a><span class="cf">for</span> (...) {</span>
+<span id="cb175-5"><a href="programming.html#cb175-5"></a>  <span class="kw">points</span>(<span class="dt">x =</span> , <span class="dt">y =</span> , <span class="dt">col =</span> , <span class="dt">pch =</span> )</span>
+<span id="cb175-6"><a href="programming.html#cb175-6"></a>}</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Create function called <code>detect_outliers</code> that will take a vector and a quantile threshold as an argument and will return the indices of the values that can be considered outliers given this threshold (i.e. lie above the nth quantile or below 100 - nth quantile).</p></li>
 <li><p>Extend this function so that it returns rows of the data frame that contain outliers in <em>any</em> of the (numerical) variables.</p></li>
 <li><p>Apply the function from the above exercise to the <code>dev</code> dataset. Which countries can be considered outliers?</p></li>
 <li><p>Recall the <code>quartile</code> function from the examples above. Can you extend it so that:</p></li>
 </ol>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="programming.html#cb457-1"></a>quartile &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb457-2"><a href="programming.html#cb457-2"></a>  quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb457-3"><a href="programming.html#cb457-3"></a>  comparisons &lt;-<span class="st"> </span><span class="kw">sapply</span>(quantiles, <span class="cf">function</span>(y) y <span class="op">&lt;=</span><span class="st"> </span>x)</span>
-<span id="cb457-4"><a href="programming.html#cb457-4"></a>  <span class="kw">rowSums</span>(comparisons) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb457-5"><a href="programming.html#cb457-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="programming.html#cb176-1"></a>quartile &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb176-2"><a href="programming.html#cb176-2"></a>  quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb176-3"><a href="programming.html#cb176-3"></a>  comparisons &lt;-<span class="st"> </span><span class="kw">sapply</span>(quantiles, <span class="cf">function</span>(y) y <span class="op">&lt;=</span><span class="st"> </span>x)</span>
+<span id="cb176-4"><a href="programming.html#cb176-4"></a>  <span class="kw">rowSums</span>(comparisons) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb176-5"><a href="programming.html#cb176-5"></a>}</span></code></pre></div>
 <ul>
 <li><p>it splits a variable into an arbitary number of ranges with equal proportions (for example into <a href="https://en.wikipedia.org/wiki/Decile">deciles</a>).</p></li>
 <li><p>it returns a sensible default when a value of the vector is missing. What could such “sensible default” be? Make it the default value when specifying function arguments.</p></li>

@@ -334,12 +334,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Logit - The Estimation</h3>
 <p>We are going to use data on the passengers of the Titanic in 1912 and will investigate why or why not passengers survived.</p>
 <p>The Logit Command</p>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="logit.html#cb709-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(depvar <span class="op">~</span><span class="st"> </span>indepvar, </span>
-<span id="cb709-2"><a href="logit.html#cb709-2"></a>             <span class="dt">data =</span> mydata, </span>
-<span id="cb709-3"><a href="logit.html#cb709-3"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="logit.html#cb321-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(depvar <span class="op">~</span><span class="st"> </span>indepvar, </span>
+<span id="cb321-2"><a href="logit.html#cb321-2"></a>             <span class="dt">data =</span> mydata, </span>
+<span id="cb321-3"><a href="logit.html#cb321-3"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Data Preparation</p>
-<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="logit.html#cb710-1"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
-<span id="cb710-2"><a href="logit.html#cb710-2"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="logit.html#cb322-1"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
+<span id="cb322-2"><a href="logit.html#cb322-2"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
 <p>The First Logit - Hypotheses</p>
 <blockquote>
 <ul>
@@ -350,37 +350,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Null-Hypothesis visualised</p>
 <p><img src="main_files/figure-html/unnamed-chunk-430-1.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>The First Logit</p>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="logit.html#cb711-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(survived <span class="op">~</span><span class="st"> </span>age, </span>
-<span id="cb711-2"><a href="logit.html#cb711-2"></a>             <span class="dt">data =</span> titanic, </span>
-<span id="cb711-3"><a href="logit.html#cb711-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
-<span id="cb711-4"><a href="logit.html#cb711-4"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="logit.html#cb323-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(survived <span class="op">~</span><span class="st"> </span>age, </span>
+<span id="cb323-2"><a href="logit.html#cb323-2"></a>             <span class="dt">data =</span> titanic, </span>
+<span id="cb323-3"><a href="logit.html#cb323-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
+<span id="cb323-4"><a href="logit.html#cb323-4"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Output</p>
 
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="logit.html#cb712-1"></a><span class="kw">summary</span>(logit)</span></code></pre></div>
-<pre><code>
-Call:
-glm(formula = survived ~ age, family = &quot;binomial&quot;, data = titanic, 
-    na.action = na.exclude)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.1189  -1.0361  -0.9768   1.3187   1.5162  
-
-Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)  
-(Intercept) -0.136531   0.144715  -0.943   0.3455  
-age         -0.007899   0.004407  -1.792   0.0731 .
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 1414.6  on 1045  degrees of freedom
-Residual deviance: 1411.4  on 1044  degrees of freedom
-  (263 observations deleted due to missingness)
-AIC: 1415.4
-
-Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="logit.html#cb324-1"></a><span class="kw">summary</span>(logit)</span>
+<span id="cb324-2"><a href="logit.html#cb324-2"></a></span>
+<span id="cb324-3"><a href="logit.html#cb324-3"></a>Call<span class="op">:</span></span>
+<span id="cb324-4"><a href="logit.html#cb324-4"></a><span class="kw">glm</span>(<span class="dt">formula =</span> survived <span class="op">~</span><span class="st"> </span>age, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> titanic, </span>
+<span id="cb324-5"><a href="logit.html#cb324-5"></a>    <span class="dt">na.action =</span> na.exclude)</span>
+<span id="cb324-6"><a href="logit.html#cb324-6"></a></span>
+<span id="cb324-7"><a href="logit.html#cb324-7"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb324-8"><a href="logit.html#cb324-8"></a><span class="st">    </span>Min       1Q   Median       3Q      Max  </span>
+<span id="cb324-9"><a href="logit.html#cb324-9"></a><span class="fl">-1.1189</span>  <span class="fl">-1.0361</span>  <span class="fl">-0.9768</span>   <span class="fl">1.3187</span>   <span class="fl">1.5162</span>  </span>
+<span id="cb324-10"><a href="logit.html#cb324-10"></a></span>
+<span id="cb324-11"><a href="logit.html#cb324-11"></a>Coefficients<span class="op">:</span></span>
+<span id="cb324-12"><a href="logit.html#cb324-12"></a><span class="st">             </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)  </span>
+<span id="cb324-13"><a href="logit.html#cb324-13"></a>(Intercept) <span class="fl">-0.136531</span>   <span class="fl">0.144715</span>  <span class="fl">-0.943</span>   <span class="fl">0.3455</span>  </span>
+<span id="cb324-14"><a href="logit.html#cb324-14"></a>age         <span class="fl">-0.007899</span>   <span class="fl">0.004407</span>  <span class="fl">-1.792</span>   <span class="fl">0.0731</span> .</span>
+<span id="cb324-15"><a href="logit.html#cb324-15"></a><span class="op">---</span></span>
+<span id="cb324-16"><a href="logit.html#cb324-16"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb324-17"><a href="logit.html#cb324-17"></a></span>
+<span id="cb324-18"><a href="logit.html#cb324-18"></a>(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)</span>
+<span id="cb324-19"><a href="logit.html#cb324-19"></a></span>
+<span id="cb324-20"><a href="logit.html#cb324-20"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">1414.6</span>  on <span class="dv">1045</span>  degrees of freedom</span>
+<span id="cb324-21"><a href="logit.html#cb324-21"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">1411.4</span>  on <span class="dv">1044</span>  degrees of freedom</span>
+<span id="cb324-22"><a href="logit.html#cb324-22"></a>  (<span class="dv">263</span> observations deleted due to missingness)</span>
+<span id="cb324-23"><a href="logit.html#cb324-23"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">1415.4</span></span>
+<span id="cb324-24"><a href="logit.html#cb324-24"></a></span>
+<span id="cb324-25"><a href="logit.html#cb324-25"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
 </div>
 <div id="logit---the-output" class="section level3 unnumbered">
 <h3>Logit - The Output</h3>
@@ -420,7 +420,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul>
 <p>Install </p>
 <p>Package:</p>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="logit.html#cb714-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="logit.html#cb325-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
 <p>Example</p>
 <p><img src="main_files/figure-html/unnamed-chunk-439-1.png" width="672" /></p>
 <p>Interpretation</p>
@@ -434,21 +434,21 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li>Load the package</li>
 </ul>
-<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="logit.html#cb715-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="logit.html#cb326-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
 <ul>
 <li>and then calculate the curve:</li>
 </ul>
 
-<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="logit.html#cb716-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb716-2"><a href="logit.html#cb716-2"></a></span>
-<span id="cb716-3"><a href="logit.html#cb716-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
-<span id="cb716-4"><a href="logit.html#cb716-4"></a></span>
-<span id="cb716-5"><a href="logit.html#cb716-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
-<span id="cb716-6"><a href="logit.html#cb716-6"></a></span>
-<span id="cb716-7"><a href="logit.html#cb716-7"></a><span class="kw">auc</span>(roc)</span></code></pre></div>
-<pre><code>Area under the curve: 0.5245</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="logit.html#cb327-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb327-2"><a href="logit.html#cb327-2"></a></span>
+<span id="cb327-3"><a href="logit.html#cb327-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
+<span id="cb327-4"><a href="logit.html#cb327-4"></a></span>
+<span id="cb327-5"><a href="logit.html#cb327-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
+<span id="cb327-6"><a href="logit.html#cb327-6"></a></span>
+<span id="cb327-7"><a href="logit.html#cb327-7"></a><span class="kw">auc</span>(roc)</span>
+<span id="cb327-8"><a href="logit.html#cb327-8"></a>Area under the curve<span class="op">:</span><span class="st"> </span><span class="fl">0.5245</span></span></code></pre></div>
 <p>We can also look at this graphically again:</p>
-<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="logit.html#cb718-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="logit.html#cb328-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-442-1.png" width="70%" /></p>
 </div>
 </div>

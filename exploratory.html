@@ -319,94 +319,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>What is exploratory data analysis?</h3>
 <p>Next to data cleaning, exploratory data analysis is one of the first steps taken in the process of analysing quantitative data of any kind. Essentially, it refers to getting an overview of the data through looking at simple summary statistics and plots to understand the distribution of each variable, as well as look for particularly obvious and pronounced relationships between the variables. If one is taking a <em>deductive</em> approach, with a clear-cut, falsifiable hypothesis about the data defined upfront (such as <em>higher per capita income is related to higher levels of democracy</em> or <em>income equality increases levels of subjective well-being</em>), exploratory data analysis helps you verify whether the hypothetized relationship is in the data at all - for example by applying the so-called <em>Inter-Ocular Trauma Test</em> (<em>if it hits you between the eyes, it’s there!</em>) to a plot. This informs further formal statistical analyses. It also allows you to identify factors that may be important for the hypothesized relationship and should be included in the formal statistical model. In case of an <em>inductive</em> approach, exploratory data analysis allows you to find patterns and form hypothesis to be furhter tested using formal statistical methods. [MAKE SOME SORT OF REFERENCE THE PART ON STATISTICAL SIGNIFICANCE TESTING].</p>
 <p>In this chapter, we will cover some basic exploratory methods that can be applied to examine numeric and categorical data. For this purpose we will use the data from <a href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a>, which covers math grades achieved in three years of education by a sample of students, along with some demographic variables <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. The data download link is available at the top of this course page. To load it, we can use the familiar <code>read.csv</code> function. Note that in this case, the <code>sep</code> optional argument is specified to <code>";"</code>. You can find out why by reading about this argument in the function documentation (<code>?read.csv</code>) and by examining the dataset using your computer’s notepad app.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="exploratory.html#cb312-1"></a>math &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/student/student-mat-data.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="exploratory.html#cb106-1"></a>math &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/student/student-mat-data.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 </div>
 <div id="first-look-at-the-data" class="section level3 unnumbered">
 <h3>First look at the data</h3>
 <p>After loading the data into R, it’s useful to get an overview of it. The first thing it’s worth to look at is how many variables and how many observations are there in the dataset. This can be seen in the environment browser next to the name of the data frame. We can also access the <em>dimensions</em> of our data (i.e. how many rows and columns/observations and variables it has) through the <code>dim</code> function.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="exploratory.html#cb313-1"></a><span class="kw">dim</span>(math)</span></code></pre></div>
-<pre><code>[1] 395  33</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="exploratory.html#cb107-1"></a><span class="kw">dim</span>(math)</span>
+<span id="cb107-2"><a href="exploratory.html#cb107-2"></a>[<span class="dv">1</span>] <span class="dv">395</span>  <span class="dv">33</span></span></code></pre></div>
 <p>We can see that the <code>math</code> dataset consists of 395 observations of 33 variables. The next useful step is to look at the dataset’s structure using the <code>str</code> variable:</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="exploratory.html#cb315-1"></a><span class="kw">str</span>(math)</span></code></pre></div>
-<pre><code>&#39;data.frame&#39;:   395 obs. of  33 variables:
- $ school    : chr  &quot;GP&quot; &quot;GP&quot; &quot;GP&quot; &quot;GP&quot; ...
- $ sex       : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
- $ age       : int  18 17 15 15 16 16 16 17 15 15 ...
- $ address   : chr  &quot;U&quot; &quot;U&quot; &quot;U&quot; &quot;U&quot; ...
- $ famsize   : chr  &quot;GT3&quot; &quot;GT3&quot; &quot;LE3&quot; &quot;GT3&quot; ...
- $ Pstatus   : chr  &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; ...
- $ Medu      : int  4 1 1 4 3 4 2 4 3 3 ...
- $ Fedu      : int  4 1 1 2 3 3 2 4 2 4 ...
- $ Mjob      : chr  &quot;at_home&quot; &quot;at_home&quot; &quot;at_home&quot; &quot;health&quot; ...
- $ Fjob      : chr  &quot;teacher&quot; &quot;other&quot; &quot;other&quot; &quot;services&quot; ...
- $ reason    : chr  &quot;course&quot; &quot;course&quot; &quot;other&quot; &quot;home&quot; ...
- $ guardian  : chr  &quot;mother&quot; &quot;father&quot; &quot;mother&quot; &quot;mother&quot; ...
- $ traveltime: int  2 1 1 1 1 1 1 2 1 1 ...
- $ studytime : int  2 2 2 3 2 2 2 2 2 2 ...
- $ failures  : int  0 0 3 0 0 0 0 0 0 0 ...
- $ schoolsup : chr  &quot;yes&quot; &quot;no&quot; &quot;yes&quot; &quot;no&quot; ...
- $ famsup    : chr  &quot;no&quot; &quot;yes&quot; &quot;no&quot; &quot;yes&quot; ...
- $ paid      : chr  &quot;no&quot; &quot;no&quot; &quot;yes&quot; &quot;yes&quot; ...
- $ activities: chr  &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;yes&quot; ...
- $ nursery   : chr  &quot;yes&quot; &quot;no&quot; &quot;yes&quot; &quot;yes&quot; ...
- $ higher    : chr  &quot;yes&quot; &quot;yes&quot; &quot;yes&quot; &quot;yes&quot; ...
- $ internet  : chr  &quot;no&quot; &quot;yes&quot; &quot;yes&quot; &quot;yes&quot; ...
- $ romantic  : chr  &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;yes&quot; ...
- $ famrel    : int  4 5 4 3 4 5 4 4 4 5 ...
- $ freetime  : int  3 3 3 2 3 4 4 1 2 5 ...
- $ goout     : int  4 3 2 2 2 2 4 4 2 1 ...
- $ Dalc      : int  1 1 2 1 1 1 1 1 1 1 ...
- $ Walc      : int  1 1 3 1 2 2 1 1 1 1 ...
- $ health    : int  3 3 3 5 5 5 3 1 1 5 ...
- $ absences  : int  6 4 10 2 4 10 0 6 0 0 ...
- $ G1        : int  5 5 7 15 6 15 12 6 16 14 ...
- $ G2        : int  6 5 8 14 10 15 12 5 18 15 ...
- $ G3        : int  6 6 10 15 10 15 11 6 19 15 ...</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="exploratory.html#cb108-1"></a><span class="kw">str</span>(math)</span>
+<span id="cb108-2"><a href="exploratory.html#cb108-2"></a><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">395</span> obs. of  <span class="dv">33</span> variables<span class="op">:</span></span>
+<span id="cb108-3"><a href="exploratory.html#cb108-3"></a><span class="st"> </span><span class="er">$</span><span class="st"> </span>school    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;GP&quot;</span> <span class="st">&quot;GP&quot;</span> <span class="st">&quot;GP&quot;</span> <span class="st">&quot;GP&quot;</span> ...</span>
+<span id="cb108-4"><a href="exploratory.html#cb108-4"></a> <span class="op">$</span><span class="st"> </span>sex       <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;F&quot;</span> <span class="st">&quot;F&quot;</span> <span class="st">&quot;F&quot;</span> <span class="st">&quot;F&quot;</span> ...</span>
+<span id="cb108-5"><a href="exploratory.html#cb108-5"></a> <span class="op">$</span><span class="st"> </span>age       <span class="op">:</span><span class="st"> </span>int  <span class="dv">18</span> <span class="dv">17</span> <span class="dv">15</span> <span class="dv">15</span> <span class="dv">16</span> <span class="dv">16</span> <span class="dv">16</span> <span class="dv">17</span> <span class="dv">15</span> <span class="dv">15</span> ...</span>
+<span id="cb108-6"><a href="exploratory.html#cb108-6"></a> <span class="op">$</span><span class="st"> </span>address   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;U&quot;</span> <span class="st">&quot;U&quot;</span> <span class="st">&quot;U&quot;</span> <span class="st">&quot;U&quot;</span> ...</span>
+<span id="cb108-7"><a href="exploratory.html#cb108-7"></a> <span class="op">$</span><span class="st"> </span>famsize   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;GT3&quot;</span> <span class="st">&quot;GT3&quot;</span> <span class="st">&quot;LE3&quot;</span> <span class="st">&quot;GT3&quot;</span> ...</span>
+<span id="cb108-8"><a href="exploratory.html#cb108-8"></a> <span class="op">$</span><span class="st"> </span>Pstatus   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;A&quot;</span> <span class="st">&quot;T&quot;</span> <span class="st">&quot;T&quot;</span> <span class="st">&quot;T&quot;</span> ...</span>
+<span id="cb108-9"><a href="exploratory.html#cb108-9"></a> <span class="op">$</span><span class="st"> </span>Medu      <span class="op">:</span><span class="st"> </span>int  <span class="dv">4</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> ...</span>
+<span id="cb108-10"><a href="exploratory.html#cb108-10"></a> <span class="op">$</span><span class="st"> </span>Fedu      <span class="op">:</span><span class="st"> </span>int  <span class="dv">4</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">4</span> ...</span>
+<span id="cb108-11"><a href="exploratory.html#cb108-11"></a> <span class="op">$</span><span class="st"> </span>Mjob      <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;at_home&quot;</span> <span class="st">&quot;at_home&quot;</span> <span class="st">&quot;at_home&quot;</span> <span class="st">&quot;health&quot;</span> ...</span>
+<span id="cb108-12"><a href="exploratory.html#cb108-12"></a> <span class="op">$</span><span class="st"> </span>Fjob      <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;teacher&quot;</span> <span class="st">&quot;other&quot;</span> <span class="st">&quot;other&quot;</span> <span class="st">&quot;services&quot;</span> ...</span>
+<span id="cb108-13"><a href="exploratory.html#cb108-13"></a> <span class="op">$</span><span class="st"> </span>reason    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;course&quot;</span> <span class="st">&quot;course&quot;</span> <span class="st">&quot;other&quot;</span> <span class="st">&quot;home&quot;</span> ...</span>
+<span id="cb108-14"><a href="exploratory.html#cb108-14"></a> <span class="op">$</span><span class="st"> </span>guardian  <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;mother&quot;</span> <span class="st">&quot;father&quot;</span> <span class="st">&quot;mother&quot;</span> <span class="st">&quot;mother&quot;</span> ...</span>
+<span id="cb108-15"><a href="exploratory.html#cb108-15"></a> <span class="op">$</span><span class="st"> </span>traveltime<span class="op">:</span><span class="st"> </span>int  <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb108-16"><a href="exploratory.html#cb108-16"></a> <span class="op">$</span><span class="st"> </span>studytime <span class="op">:</span><span class="st"> </span>int  <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> ...</span>
+<span id="cb108-17"><a href="exploratory.html#cb108-17"></a> <span class="op">$</span><span class="st"> </span>failures  <span class="op">:</span><span class="st"> </span>int  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> ...</span>
+<span id="cb108-18"><a href="exploratory.html#cb108-18"></a> <span class="op">$</span><span class="st"> </span>schoolsup <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;yes&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;no&quot;</span> ...</span>
+<span id="cb108-19"><a href="exploratory.html#cb108-19"></a> <span class="op">$</span><span class="st"> </span>famsup    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-20"><a href="exploratory.html#cb108-20"></a> <span class="op">$</span><span class="st"> </span>paid      <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;no&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-21"><a href="exploratory.html#cb108-21"></a> <span class="op">$</span><span class="st"> </span>activities<span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;no&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-22"><a href="exploratory.html#cb108-22"></a> <span class="op">$</span><span class="st"> </span>nursery   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;yes&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-23"><a href="exploratory.html#cb108-23"></a> <span class="op">$</span><span class="st"> </span>higher    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-24"><a href="exploratory.html#cb108-24"></a> <span class="op">$</span><span class="st"> </span>internet  <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-25"><a href="exploratory.html#cb108-25"></a> <span class="op">$</span><span class="st"> </span>romantic  <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;no&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;no&quot;</span> <span class="st">&quot;yes&quot;</span> ...</span>
+<span id="cb108-26"><a href="exploratory.html#cb108-26"></a> <span class="op">$</span><span class="st"> </span>famrel    <span class="op">:</span><span class="st"> </span>int  <span class="dv">4</span> <span class="dv">5</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">5</span> ...</span>
+<span id="cb108-27"><a href="exploratory.html#cb108-27"></a> <span class="op">$</span><span class="st"> </span>freetime  <span class="op">:</span><span class="st"> </span>int  <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> ...</span>
+<span id="cb108-28"><a href="exploratory.html#cb108-28"></a> <span class="op">$</span><span class="st"> </span>goout     <span class="op">:</span><span class="st"> </span>int  <span class="dv">4</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">1</span> ...</span>
+<span id="cb108-29"><a href="exploratory.html#cb108-29"></a> <span class="op">$</span><span class="st"> </span>Dalc      <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb108-30"><a href="exploratory.html#cb108-30"></a> <span class="op">$</span><span class="st"> </span>Walc      <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb108-31"><a href="exploratory.html#cb108-31"></a> <span class="op">$</span><span class="st"> </span>health    <span class="op">:</span><span class="st"> </span>int  <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">5</span> ...</span>
+<span id="cb108-32"><a href="exploratory.html#cb108-32"></a> <span class="op">$</span><span class="st"> </span>absences  <span class="op">:</span><span class="st"> </span>int  <span class="dv">6</span> <span class="dv">4</span> <span class="dv">10</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">10</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> ...</span>
+<span id="cb108-33"><a href="exploratory.html#cb108-33"></a> <span class="op">$</span><span class="st"> </span>G1        <span class="op">:</span><span class="st"> </span>int  <span class="dv">5</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">15</span> <span class="dv">6</span> <span class="dv">15</span> <span class="dv">12</span> <span class="dv">6</span> <span class="dv">16</span> <span class="dv">14</span> ...</span>
+<span id="cb108-34"><a href="exploratory.html#cb108-34"></a> <span class="op">$</span><span class="st"> </span>G2        <span class="op">:</span><span class="st"> </span>int  <span class="dv">6</span> <span class="dv">5</span> <span class="dv">8</span> <span class="dv">14</span> <span class="dv">10</span> <span class="dv">15</span> <span class="dv">12</span> <span class="dv">5</span> <span class="dv">18</span> <span class="dv">15</span> ...</span>
+<span id="cb108-35"><a href="exploratory.html#cb108-35"></a> <span class="op">$</span><span class="st"> </span>G3        <span class="op">:</span><span class="st"> </span>int  <span class="dv">6</span> <span class="dv">6</span> <span class="dv">10</span> <span class="dv">15</span> <span class="dv">10</span> <span class="dv">15</span> <span class="dv">11</span> <span class="dv">6</span> <span class="dv">19</span> <span class="dv">15</span> ...</span></code></pre></div>
 <p>This lists all the variables in the dataset, with their names and types. This way, we can scope the dataset for the variables that are interesting for our analysis and start thinking about possible relationships we might want to investigate.</p>
 <p>Finally, we can get some basic summary statistics using the <code>summary</code> function:</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="exploratory.html#cb317-1"></a><span class="kw">summary</span>(math)</span></code></pre></div>
-<pre><code>    school              sex                 age         address            famsize            Pstatus         
- Length:395         Length:395         Min.   :15.0   Length:395         Length:395         Length:395        
- Class :character   Class :character   1st Qu.:16.0   Class :character   Class :character   Class :character  
- Mode  :character   Mode  :character   Median :17.0   Mode  :character   Mode  :character   Mode  :character  
-                                       Mean   :16.7                                                           
-                                       3rd Qu.:18.0                                                           
-                                       Max.   :22.0                                                           
-                                                                                                              
-      Medu            Fedu           Mjob               Fjob              reason            guardian           traveltime   
- Min.   :0.000   Min.   :0.000   Length:395         Length:395         Length:395         Length:395         Min.   :1.000  
- 1st Qu.:2.000   1st Qu.:2.000   Class :character   Class :character   Class :character   Class :character   1st Qu.:1.000  
- Median :3.000   Median :2.000   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :1.000  
- Mean   :2.749   Mean   :2.522                                                                               Mean   :1.448  
- 3rd Qu.:4.000   3rd Qu.:3.000                                                                               3rd Qu.:2.000  
- Max.   :4.000   Max.   :4.000                                                                               Max.   :4.000  
-                                                                                                                            
-   studytime        failures       schoolsup            famsup              paid            activities       
- Min.   :1.000   Min.   :0.0000   Length:395         Length:395         Length:395         Length:395        
- 1st Qu.:1.000   1st Qu.:0.0000   Class :character   Class :character   Class :character   Class :character  
- Median :2.000   Median :0.0000   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
- Mean   :2.031   Mean   :0.3342                                                                              
- 3rd Qu.:2.000   3rd Qu.:0.0000                                                                              
- Max.   :4.000   Max.   :3.0000                                                                              
- NA&#39;s   :3                                                                                                   
-   nursery             higher            internet           romantic             famrel         freetime         goout      
- Length:395         Length:395         Length:395         Length:395         Min.   :1.000   Min.   :1.000   Min.   :1.000  
- Class :character   Class :character   Class :character   Class :character   1st Qu.:4.000   1st Qu.:3.000   1st Qu.:2.000  
- Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :4.000   Median :3.000   Median :3.000  
-                                                                             Mean   :3.944   Mean   :3.235   Mean   :3.104  
-                                                                             3rd Qu.:5.000   3rd Qu.:4.000   3rd Qu.:4.000  
-                                                                             Max.   :5.000   Max.   :5.000   Max.   :5.000  
-                                                                                                             NA&#39;s   :1      
-      Dalc            Walc           health         absences            G1              G2              G3       
- Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   : 0.000   Min.   : 3.00   Min.   : 0.00   Min.   : 0.00  
- 1st Qu.:1.000   1st Qu.:1.000   1st Qu.:3.000   1st Qu.: 0.000   1st Qu.: 8.00   1st Qu.: 9.00   1st Qu.: 8.00  
- Median :1.000   Median :2.000   Median :4.000   Median : 4.000   Median :11.00   Median :11.00   Median :11.00  
- Mean   :1.481   Mean   :2.287   Mean   :3.554   Mean   : 5.709   Mean   :10.91   Mean   :10.71   Mean   :10.42  
- 3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000   3rd Qu.: 8.000   3rd Qu.:13.00   3rd Qu.:13.00   3rd Qu.:14.00  
- Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :75.000   Max.   :19.00   Max.   :19.00   Max.   :20.00  
-                 NA&#39;s   :1                                        NA&#39;s   :1                                      </code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="exploratory.html#cb109-1"></a><span class="kw">summary</span>(math)</span>
+<span id="cb109-2"><a href="exploratory.html#cb109-2"></a>    school              sex                 age         address            famsize            Pstatus         </span>
+<span id="cb109-3"><a href="exploratory.html#cb109-3"></a> Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Min.   <span class="op">:</span><span class="fl">15.0</span>   Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>        </span>
+<span id="cb109-4"><a href="exploratory.html#cb109-4"></a> Class <span class="op">:</span>character   Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="fl">16.0</span>   Class <span class="op">:</span>character   Class <span class="op">:</span>character   Class <span class="op">:</span>character  </span>
+<span id="cb109-5"><a href="exploratory.html#cb109-5"></a> Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="fl">17.0</span>   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character  </span>
+<span id="cb109-6"><a href="exploratory.html#cb109-6"></a>                                       Mean   <span class="op">:</span><span class="fl">16.7</span>                                                           </span>
+<span id="cb109-7"><a href="exploratory.html#cb109-7"></a>                                       3rd Qu.<span class="op">:</span><span class="fl">18.0</span>                                                           </span>
+<span id="cb109-8"><a href="exploratory.html#cb109-8"></a>                                       Max.   <span class="op">:</span><span class="fl">22.0</span>                                                           </span>
+<span id="cb109-9"><a href="exploratory.html#cb109-9"></a>                                                                                                              </span>
+<span id="cb109-10"><a href="exploratory.html#cb109-10"></a>      Medu            Fedu           Mjob               Fjob              reason            guardian           traveltime   </span>
+<span id="cb109-11"><a href="exploratory.html#cb109-11"></a> Min.   <span class="op">:</span><span class="fl">0.000</span>   Min.   <span class="op">:</span><span class="fl">0.000</span>   Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Min.   <span class="op">:</span><span class="fl">1.000</span>  </span>
+<span id="cb109-12"><a href="exploratory.html#cb109-12"></a> 1st Qu.<span class="op">:</span><span class="fl">2.000</span>   1st Qu.<span class="op">:</span><span class="fl">2.000</span>   Class <span class="op">:</span>character   Class <span class="op">:</span>character   Class <span class="op">:</span>character   Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="fl">1.000</span>  </span>
+<span id="cb109-13"><a href="exploratory.html#cb109-13"></a> Median <span class="op">:</span><span class="fl">3.000</span>   Median <span class="op">:</span><span class="fl">2.000</span>   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="fl">1.000</span>  </span>
+<span id="cb109-14"><a href="exploratory.html#cb109-14"></a> Mean   <span class="op">:</span><span class="fl">2.749</span>   Mean   <span class="op">:</span><span class="fl">2.522</span>                                                                               Mean   <span class="op">:</span><span class="fl">1.448</span>  </span>
+<span id="cb109-15"><a href="exploratory.html#cb109-15"></a> 3rd Qu.<span class="op">:</span><span class="fl">4.000</span>   3rd Qu.<span class="op">:</span><span class="fl">3.000</span>                                                                               3rd Qu.<span class="op">:</span><span class="fl">2.000</span>  </span>
+<span id="cb109-16"><a href="exploratory.html#cb109-16"></a> Max.   <span class="op">:</span><span class="fl">4.000</span>   Max.   <span class="op">:</span><span class="fl">4.000</span>                                                                               Max.   <span class="op">:</span><span class="fl">4.000</span>  </span>
+<span id="cb109-17"><a href="exploratory.html#cb109-17"></a>                                                                                                                            </span>
+<span id="cb109-18"><a href="exploratory.html#cb109-18"></a>   studytime        failures       schoolsup            famsup              paid            activities       </span>
+<span id="cb109-19"><a href="exploratory.html#cb109-19"></a> Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="fl">0.0000</span>   Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>         Length<span class="op">:</span><span class="dv">395</span>        </span>
+<span id="cb109-20"><a href="exploratory.html#cb109-20"></a> 1st Qu.<span class="op">:</span><span class="fl">1.000</span>   1st Qu.<span class="op">:</span><span class="fl">0.0000</span>   Class <span class="op">:</span>character   Class <span class="op">:</span>character   Class <span class="op">:</span>character   Class <span class="op">:</span>character  </span>
+<span id="cb109-21"><a href="exploratory.html#cb109-21"></a> Median <span class="op">:</span><span class="fl">2.000</span>   Median <span class="op">:</span><span class="fl">0.0000</span>   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character   Mode  <span class="op">:</span>character  </span>
+<span id="cb109-22"><a href="exploratory.html#cb109-22"></a> Mean   <span class="op">:</span><span class="fl">2.031</span>   Mean   <span class="op">:</span><span class="fl">0.3342</span>                                                                              </span>
+<span id="cb109-23"><a href="exploratory.html#cb109-23"></a> 3rd Qu.<span class="op">:</span><span class="fl">2.000</span>   3rd Qu.<span class="op">:</span><span class="fl">0.0000</span>                                                                              </span>
+<span id="cb109-24"><a href="exploratory.html#cb109-24"></a> Max.   <span class="op">:</span><span class="fl">4.000</span>   Max.   <span class="op">:</span><span class="fl">3.0000</span>                                                                              </span>
+<span id="cb109-25"><a href="exploratory.html#cb109-25"></a> NA<span class="st">&#39;s   :3                                                                                                   </span></span>
+<span id="cb109-26"><a href="exploratory.html#cb109-26"></a><span class="st">   nursery             higher            internet           romantic             famrel         freetime         goout      </span></span>
+<span id="cb109-27"><a href="exploratory.html#cb109-27"></a><span class="st"> Length:395         Length:395         Length:395         Length:395         Min.   :1.000   Min.   :1.000   Min.   :1.000  </span></span>
+<span id="cb109-28"><a href="exploratory.html#cb109-28"></a><span class="st"> Class :character   Class :character   Class :character   Class :character   1st Qu.:4.000   1st Qu.:3.000   1st Qu.:2.000  </span></span>
+<span id="cb109-29"><a href="exploratory.html#cb109-29"></a><span class="st"> Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :4.000   Median :3.000   Median :3.000  </span></span>
+<span id="cb109-30"><a href="exploratory.html#cb109-30"></a><span class="st">                                                                             Mean   :3.944   Mean   :3.235   Mean   :3.104  </span></span>
+<span id="cb109-31"><a href="exploratory.html#cb109-31"></a><span class="st">                                                                             3rd Qu.:5.000   3rd Qu.:4.000   3rd Qu.:4.000  </span></span>
+<span id="cb109-32"><a href="exploratory.html#cb109-32"></a><span class="st">                                                                             Max.   :5.000   Max.   :5.000   Max.   :5.000  </span></span>
+<span id="cb109-33"><a href="exploratory.html#cb109-33"></a><span class="st">                                                                                                             NA&#39;</span>s   <span class="op">:</span><span class="dv">1</span>      </span>
+<span id="cb109-34"><a href="exploratory.html#cb109-34"></a>      Dalc            Walc           health         absences            G1              G2              G3       </span>
+<span id="cb109-35"><a href="exploratory.html#cb109-35"></a> Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.000</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">3.00</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.00</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.00</span>  </span>
+<span id="cb109-36"><a href="exploratory.html#cb109-36"></a> 1st Qu.<span class="op">:</span><span class="fl">1.000</span>   1st Qu.<span class="op">:</span><span class="fl">1.000</span>   1st Qu.<span class="op">:</span><span class="fl">3.000</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">0.000</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.00</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">9.00</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.00</span>  </span>
+<span id="cb109-37"><a href="exploratory.html#cb109-37"></a> Median <span class="op">:</span><span class="fl">1.000</span>   Median <span class="op">:</span><span class="fl">2.000</span>   Median <span class="op">:</span><span class="fl">4.000</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">4.000</span>   Median <span class="op">:</span><span class="fl">11.00</span>   Median <span class="op">:</span><span class="fl">11.00</span>   Median <span class="op">:</span><span class="fl">11.00</span>  </span>
+<span id="cb109-38"><a href="exploratory.html#cb109-38"></a> Mean   <span class="op">:</span><span class="fl">1.481</span>   Mean   <span class="op">:</span><span class="fl">2.287</span>   Mean   <span class="op">:</span><span class="fl">3.554</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">5.709</span>   Mean   <span class="op">:</span><span class="fl">10.91</span>   Mean   <span class="op">:</span><span class="fl">10.71</span>   Mean   <span class="op">:</span><span class="fl">10.42</span>  </span>
+<span id="cb109-39"><a href="exploratory.html#cb109-39"></a> 3rd Qu.<span class="op">:</span><span class="fl">2.000</span>   3rd Qu.<span class="op">:</span><span class="fl">3.000</span>   3rd Qu.<span class="op">:</span><span class="fl">5.000</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.000</span>   3rd Qu.<span class="op">:</span><span class="fl">13.00</span>   3rd Qu.<span class="op">:</span><span class="fl">13.00</span>   3rd Qu.<span class="op">:</span><span class="fl">14.00</span>  </span>
+<span id="cb109-40"><a href="exploratory.html#cb109-40"></a> Max.   <span class="op">:</span><span class="fl">5.000</span>   Max.   <span class="op">:</span><span class="fl">5.000</span>   Max.   <span class="op">:</span><span class="fl">5.000</span>   Max.   <span class="op">:</span><span class="fl">75.000</span>   Max.   <span class="op">:</span><span class="fl">19.00</span>   Max.   <span class="op">:</span><span class="fl">19.00</span>   Max.   <span class="op">:</span><span class="fl">20.00</span>  </span>
+<span id="cb109-41"><a href="exploratory.html#cb109-41"></a>                 NA<span class="st">&#39;s   :1                                        NA&#39;</span>s   <span class="op">:</span><span class="dv">1</span>                                      </span></code></pre></div>
 <p>This lists the minimum, maximum, mean and quartiles for each of the numeric variables, along with the count of missing values in it. These concepts will be discussed in more detail in the next sections of this chapter. In case of factor variables, it provides a count of each level of the variable. It also mentions the number of missing variable - in this case, we can see that there are couple of <code>NA</code>s in there. Before starting the analysis, we need to address that - in this case, we simply drop them.</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="exploratory.html#cb319-1"></a>math &lt;-<span class="st"> </span>math[<span class="kw">complete.cases</span>(math), ]</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="exploratory.html#cb110-1"></a>math &lt;-<span class="st"> </span>math[<span class="kw">complete.cases</span>(math), ]</span></code></pre></div>
 </div>
 <div id="numeric-vs-categorical-variables" class="section level3 unnumbered">
 <h3>Numeric vs categorical variables</h3>
@@ -416,81 +416,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="histograms" class="section level4 unnumbered">
 <h4>Histograms</h4>
 <p>The simplest and often most powerful way to examine a single numeric variable is through the use of <em>histogram</em>. Histogram divides a variable in ranges of equal size called <em>bins</em>. Each bin is then represented as a bar, the height of which corresponds with the count/proportion of the observations falling in that range. The main difference between a histogram and a bar chart is that a histogram does not have breaks between the bars, because the variable it describes is assumed to be continuous, not discrete. Let’s examine two numeric variables from the <code>math</code> dataset - <code>age</code> and <code>absences</code> (total absent hours recorded by the teacher for each student) using histograms. A histogram is created using the <code>hist</code> function:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="exploratory.html#cb320-1"></a><span class="kw">hist</span>(math<span class="op">$</span>age, <span class="dt">breaks =</span> <span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">na.omit</span>(math<span class="op">$</span>age))))</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="exploratory.html#cb111-1"></a><span class="kw">hist</span>(math<span class="op">$</span>age, <span class="dt">breaks =</span> <span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">na.omit</span>(math<span class="op">$</span>age))))</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="exploratory.html#cb321-1"></a><span class="kw">hist</span>(math<span class="op">$</span>absences)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="exploratory.html#cb112-1"></a><span class="kw">hist</span>(math<span class="op">$</span>absences)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
 <p>In both cases, we can see that the lowest values are the least frequent. For example, from the second histogram we can read that 250 of the 395 students in the samples were absent between 0-5 hours during the school year.</p>
 </div>
 <div id="mean" class="section level4 unnumbered">
 <h4>Mean</h4>
 <p>Mean (aka average) is the simplest statistic describing any numeric variable - it is simply the sum of a variable/vector divided by its length. In R, we can calculate the mean of any variable using the <code>mean</code> function. For example, let’s examine the average number of absences in the sample:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="exploratory.html#cb322-1"></a><span class="kw">sum</span>(math<span class="op">$</span>absences)<span class="op">/</span><span class="kw">nrow</span>(math)</span></code></pre></div>
-<pre><code>[1] 5.763636</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="exploratory.html#cb324-1"></a><span class="kw">mean</span>(math<span class="op">$</span>absences)</span></code></pre></div>
-<pre><code>[1] 5.763636</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="exploratory.html#cb113-1"></a><span class="kw">sum</span>(math<span class="op">$</span>absences)<span class="op">/</span><span class="kw">nrow</span>(math)</span>
+<span id="cb113-2"><a href="exploratory.html#cb113-2"></a>[<span class="dv">1</span>] <span class="fl">5.763636</span></span>
+<span id="cb113-3"><a href="exploratory.html#cb113-3"></a><span class="kw">mean</span>(math<span class="op">$</span>absences)</span>
+<span id="cb113-4"><a href="exploratory.html#cb113-4"></a>[<span class="dv">1</span>] <span class="fl">5.763636</span></span></code></pre></div>
 <p>The same done for age returns a missing value <code>NA</code>.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="exploratory.html#cb326-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age)</span></code></pre></div>
-<pre><code>[1] 16.67013</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="exploratory.html#cb114-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age)</span>
+<span id="cb114-2"><a href="exploratory.html#cb114-2"></a>[<span class="dv">1</span>] <span class="fl">16.67013</span></span></code></pre></div>
 <p>This is because there are missing values in the age variable (how can you verify this?). To compute the mean without those values, you can specify the argument <code>na.rm</code>(remove <code>NA</code> values) to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="exploratory.html#cb328-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>[1] 16.67013</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="exploratory.html#cb115-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb115-2"><a href="exploratory.html#cb115-2"></a>[<span class="dv">1</span>] <span class="fl">16.67013</span></span></code></pre></div>
 <p>We can also use the <code>trim</code> argument from to specify the fraction of observations to be removed from each end of the sorted variables before calculating the mean. This makes our estimate of the mean more robust to potentially large and unrepresentative values affecting the calculated value - so-called <em>outliers</em>, which will be discussed more extensively in the <a href="exploratory.html#quantiles">section on quantiles</a>. Note that specifying the <code>trim</code> argument to 0.1 doesn’t seem to change the mean of age significantly:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="exploratory.html#cb330-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">trim =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<pre><code>[1] 16.59871</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="exploratory.html#cb116-1"></a><span class="kw">mean</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">trim =</span> <span class="fl">0.1</span>)</span>
+<span id="cb116-2"><a href="exploratory.html#cb116-2"></a>[<span class="dv">1</span>] <span class="fl">16.59871</span></span></code></pre></div>
 <p>However, doing the same in case of absences changes the value of average absences quite a lot. Can you think of the reason why? Take a look at the histograms of both variables.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="exploratory.html#cb332-1"></a><span class="kw">mean</span>(math<span class="op">$</span>absences, <span class="dt">trim =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<pre><code>[1] 4.278317</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="exploratory.html#cb117-1"></a><span class="kw">mean</span>(math<span class="op">$</span>absences, <span class="dt">trim =</span> <span class="fl">0.1</span>)</span>
+<span id="cb117-2"><a href="exploratory.html#cb117-2"></a>[<span class="dv">1</span>] <span class="fl">4.278317</span></span></code></pre></div>
 </div>
 <div id="variance-and-standard-deviation" class="section level4 unnumbered">
 <h4>Variance and standard deviation</h4>
 <p>While a mean offers a good description of the central tendency of a variable (i.e. a value that we would expect to see most often), describing a variable just by its mean can be very misleading. For example, consider the values <code>-10000, 20, 10000</code> and <code>15, 20, 25</code>. In both cases the mean is the same:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="exploratory.html#cb334-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
-<span id="cb334-2"><a href="exploratory.html#cb334-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">985</span>, <span class="dv">20</span>, <span class="dv">1025</span>)</span>
-<span id="cb334-3"><a href="exploratory.html#cb334-3"></a><span class="kw">mean</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">mean</span>(y)</span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="exploratory.html#cb118-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
+<span id="cb118-2"><a href="exploratory.html#cb118-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">985</span>, <span class="dv">20</span>, <span class="dv">1025</span>)</span>
+<span id="cb118-3"><a href="exploratory.html#cb118-3"></a><span class="kw">mean</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">mean</span>(y)</span>
+<span id="cb118-4"><a href="exploratory.html#cb118-4"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
 <p>However, it would be very misleading to say that these variables are similar. We could try to describe this difference by computing the average distance between each value and the mean:</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="exploratory.html#cb336-1"></a><span class="kw">mean</span>(x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</span></code></pre></div>
-<pre><code>[1] 0</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="exploratory.html#cb338-1"></a><span class="kw">mean</span>(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))</span></code></pre></div>
-<pre><code>[1] 0</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="exploratory.html#cb119-1"></a><span class="kw">mean</span>(x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))</span>
+<span id="cb119-2"><a href="exploratory.html#cb119-2"></a>[<span class="dv">1</span>] <span class="dv">0</span></span>
+<span id="cb119-3"><a href="exploratory.html#cb119-3"></a><span class="kw">mean</span>(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))</span>
+<span id="cb119-4"><a href="exploratory.html#cb119-4"></a>[<span class="dv">1</span>] <span class="dv">0</span></span></code></pre></div>
 <p>However, this results in a 0, since the negative and positive values in our example cancel each other out. To avoid this, we can measure <strong>variance</strong>, which calculate the squared distance between each value of a variable and its mean. Since the distance is squared (always positive), the positive and negative values will not cancel out.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="exploratory.html#cb340-1"></a><span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>[1] 16.66667</code></pre>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="exploratory.html#cb342-1"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>[1] 673350</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="exploratory.html#cb120-1"></a><span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb120-2"><a href="exploratory.html#cb120-2"></a>[<span class="dv">1</span>] <span class="fl">16.66667</span></span>
+<span id="cb120-3"><a href="exploratory.html#cb120-3"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb120-4"><a href="exploratory.html#cb120-4"></a>[<span class="dv">1</span>] <span class="dv">673350</span></span></code></pre></div>
 <p>We can see that this captures the difference between our two vectors. The variance is calculated using the <code>var</code> function:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="exploratory.html#cb344-1"></a><span class="kw">var</span>(x)</span></code></pre></div>
-<pre><code>[1] 25</code></pre>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="exploratory.html#cb346-1"></a><span class="kw">var</span>(y)</span></code></pre></div>
-<pre><code>[1] 1010025</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="exploratory.html#cb121-1"></a><span class="kw">var</span>(x)</span>
+<span id="cb121-2"><a href="exploratory.html#cb121-2"></a>[<span class="dv">1</span>] <span class="dv">25</span></span>
+<span id="cb121-3"><a href="exploratory.html#cb121-3"></a><span class="kw">var</span>(y)</span>
+<span id="cb121-4"><a href="exploratory.html#cb121-4"></a>[<span class="dv">1</span>] <span class="dv">1010025</span></span></code></pre></div>
 <p>Note that this gives us different results that our variance computed by hand. This is because the <code>var</code> function calculates the <em>sample variance</em>, in which we divide the sum of squared distances between the samples. The variance we calculated “manually” above is equivalent to:</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="exploratory.html#cb348-1"></a><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(x)</span></code></pre></div>
-<pre><code>[1] 16.66667</code></pre>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="exploratory.html#cb350-1"></a><span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>[1] 16.66667</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="exploratory.html#cb122-1"></a><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(x)</span>
+<span id="cb122-2"><a href="exploratory.html#cb122-2"></a>[<span class="dv">1</span>] <span class="fl">16.66667</span></span>
+<span id="cb122-3"><a href="exploratory.html#cb122-3"></a><span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb122-4"><a href="exploratory.html#cb122-4"></a>[<span class="dv">1</span>] <span class="fl">16.66667</span></span></code></pre></div>
 <p>Instead, when calculating sample variance, we divide the sum of squared distances from the mean by <span class="math inline">\(N-1\)</span>, where N is the number of observations/length of the vector. This is because dividing the sample by N tends to underestimate the variance of the population. The mathematical reasons behind it are clearly outlined in <a href="https://towardsdatascience.com/why-sample-variance-is-divided-by-n-1-89821b83ef6d">this article</a>. So, we can “manually” arrive at equivalent estiamte to the one obtained using the <code>var</code> function by:</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="exploratory.html#cb352-1"></a><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">==</span><span class="st"> </span><span class="kw">var</span>(x)</span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="exploratory.html#cb123-1"></a><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">==</span><span class="st"> </span><span class="kw">var</span>(x)</span>
+<span id="cb123-2"><a href="exploratory.html#cb123-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
 <p>We can apply the variance function to <code>absence</code> and <code>age</code>, to see their spread:</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="exploratory.html#cb354-1"></a><span class="kw">var</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>[1] 1.622673</code></pre>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="exploratory.html#cb356-1"></a><span class="kw">var</span>(math<span class="op">$</span>absences)</span></code></pre></div>
-<pre><code>[1] 65.31117</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="exploratory.html#cb124-1"></a><span class="kw">var</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb124-2"><a href="exploratory.html#cb124-2"></a>[<span class="dv">1</span>] <span class="fl">1.622673</span></span>
+<span id="cb124-3"><a href="exploratory.html#cb124-3"></a><span class="kw">var</span>(math<span class="op">$</span>absences)</span>
+<span id="cb124-4"><a href="exploratory.html#cb124-4"></a>[<span class="dv">1</span>] <span class="fl">65.31117</span></span></code></pre></div>
 <p>One problem arising when using variance to describe the data is that its units aren’t interpretable, since they are squared. Therefore, saying that the variance of the absence time is 64 squared hours doesn’t sound too intuitive. To avoid this, we usually use use the <em>standard deviation</em> in practice, which is simply the square root of the variance. Through taking the square root we return the variable to its original units. The standard deviation of a variable is calculated using the <code>sd</code> function:</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="exploratory.html#cb358-1"></a><span class="kw">sd</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>[1] 1.273842</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="exploratory.html#cb360-1"></a><span class="kw">sd</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="exploratory.html#cb125-1"></a><span class="kw">sd</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb125-2"><a href="exploratory.html#cb125-2"></a>[<span class="dv">1</span>] <span class="fl">1.273842</span></span>
+<span id="cb125-3"><a href="exploratory.html#cb125-3"></a><span class="kw">sd</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb125-4"><a href="exploratory.html#cb125-4"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
 <p>We can know compare the standard deviation and mean of both variables:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="exploratory.html#cb362-1"></a><span class="kw">with</span>(math, <span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb362-2"><a href="exploratory.html#cb362-2"></a>  <span class="dt">sd =</span> <span class="kw">sd</span>(age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)))</span></code></pre></div>
-<pre><code>     mean        sd 
-16.670130  1.273842 </code></pre>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="exploratory.html#cb364-1"></a><span class="kw">with</span>(math, <span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(absences, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb364-2"><a href="exploratory.html#cb364-2"></a>  <span class="dt">sd =</span> <span class="kw">sd</span>(absences, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)))</span></code></pre></div>
-<pre><code>    mean       sd 
-5.763636 8.081533 </code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="exploratory.html#cb126-1"></a><span class="kw">with</span>(math, <span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
+<span id="cb126-2"><a href="exploratory.html#cb126-2"></a>  <span class="dt">sd =</span> <span class="kw">sd</span>(age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)))</span>
+<span id="cb126-3"><a href="exploratory.html#cb126-3"></a>     mean        sd </span>
+<span id="cb126-4"><a href="exploratory.html#cb126-4"></a><span class="fl">16.670130</span>  <span class="fl">1.273842</span> </span>
+<span id="cb126-5"><a href="exploratory.html#cb126-5"></a></span>
+<span id="cb126-6"><a href="exploratory.html#cb126-6"></a><span class="kw">with</span>(math, <span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(absences, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </span>
+<span id="cb126-7"><a href="exploratory.html#cb126-7"></a>  <span class="dt">sd =</span> <span class="kw">sd</span>(absences, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)))</span>
+<span id="cb126-8"><a href="exploratory.html#cb126-8"></a>    mean       sd </span>
+<span id="cb126-9"><a href="exploratory.html#cb126-9"></a><span class="fl">5.763636</span> <span class="fl">8.081533</span> </span></code></pre></div>
 <p>It can be clearly seen that the hours of students’ absence have more variability than the students’ ages. This makes intuitive sense, since the sample consists of students from roughly the same age group (the easiest way you can see it is by running <code>unique(math$age)</code>). At the same time, students differ match more in the total hours of absence. This explains why the trimmed mean was that different from overall mean in case of <code>absences</code>, yet quite similar for <code>age</code>.</p>
 <p>You can use the widget below to see how varying the standard deviation and the mean affects the distribution of a variable (in this case a normally distributed random variable). Note that you need an active internet connection for the app to load.</p>
 <iframe src="https://drflorianreiche.shinyapps.io/standard_deviation/?showcase=0" width="672" height="800px">
@@ -499,17 +500,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quantiles" class="section level4 unnumbered">
 <h4>Quantiles</h4>
 <p>The final statistic we are going to discuss is <em>quantile</em>. Quantiles allow us to get a better grasp of the distribution of the data. Essentially, quantiles are cut points that divide the variable into intervals of equal sizes. For example, <em>deciles</em> are 10-quantiles, dividing the variable into 10 ranges. For example the 8th decile of a variable is the value greater than 80% of the values in this variable. In R we can obtain an arbitrary quantile using the <code>quantile</code> function, specifying the proportion below each of the cutpoints through the <code>probs</code> argument.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="exploratory.html#cb366-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="fl">0.9</span>)</span></code></pre></div>
-<pre><code>90% 
- 14 </code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="exploratory.html#cb127-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="fl">0.9</span>)</span>
+<span id="cb127-2"><a href="exploratory.html#cb127-2"></a><span class="dv">90</span>% </span>
+<span id="cb127-3"><a href="exploratory.html#cb127-3"></a> <span class="dv">14</span> </span></code></pre></div>
 <p>In the above example, we can see that 90% of the values of the variable <code>absences</code> are lower than 14. The <code>probs</code> argument can be either a scalar or a vector, so we can obtain multiple quantiles at once. For example in the example below we obtain so-called quartiles (4-quantiles).</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="exploratory.html#cb368-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="dv">1</span>)) <span class="co">#quartiles</span></span></code></pre></div>
-<pre><code>  0%  25%  50%  75% 100% 
-   0    0    4    8   75 </code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="exploratory.html#cb128-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="dv">1</span>)) <span class="co">#quartiles</span></span>
+<span id="cb128-2"><a href="exploratory.html#cb128-2"></a>  <span class="dv">0</span><span class="op">%  25%</span><span class="st">  </span><span class="dv">50</span><span class="op">%  75%</span><span class="st"> </span><span class="dv">100</span>% </span>
+<span id="cb128-3"><a href="exploratory.html#cb128-3"></a>   <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">8</span>   <span class="dv">75</span> </span></code></pre></div>
 <p>We could get deciles by:</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="exploratory.html#cb370-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>))</span></code></pre></div>
-<pre><code>  0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
-   0    0    0    2    2    4    4    6   10   14   75 </code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="exploratory.html#cb129-1"></a><span class="kw">quantile</span>(math<span class="op">$</span>absences, <span class="dt">probs =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>))</span>
+<span id="cb129-2"><a href="exploratory.html#cb129-2"></a>  <span class="dv">0</span><span class="op">%  10%</span><span class="st">  </span><span class="dv">20</span><span class="op">%  30%</span><span class="st">  </span><span class="dv">40</span><span class="op">%  50%</span><span class="st">  </span><span class="dv">60</span><span class="op">%  70%</span><span class="st">  </span><span class="dv">80</span><span class="op">%  90%</span><span class="st"> </span><span class="dv">100</span>% </span>
+<span id="cb129-3"><a href="exploratory.html#cb129-3"></a>   <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">2</span>    <span class="dv">2</span>    <span class="dv">4</span>    <span class="dv">4</span>    <span class="dv">6</span>   <span class="dv">10</span>   <span class="dv">14</span>   <span class="dv">75</span> </span></code></pre></div>
 <p>We can visualize this using a histogram:</p>
 <p><img src="main_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 <div id="median" class="section level5 unnumbered">
@@ -526,13 +527,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="box-plots" class="section level4 unnumbered">
 <h4>Box plots</h4>
 <p><em>Box plots</em> are commonly used to visualize the distribution of a variable. Below, we use the <code>boxplot</code> function to plot a boxplot of the <code>age</code> variable from the <code>math</code> dataset.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="exploratory.html#cb372-1"></a><span class="kw">boxplot</span>(math<span class="op">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="exploratory.html#cb130-1"></a><span class="kw">boxplot</span>(math<span class="op">$</span>age)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>The box in the middle of the plot corresponds with the inter-quartile range of the varible (IQR) - this is the range between the 1st and the 3rd quartile of the variable (which is equivalent to the value range between 25th and 75th percentile). The thick line in the middle corrsponds to the variable’s median (the 2nd quartile/50th percentile). The ‘whiskers’ (i.e. the horizontal lines connected by the dashed line with each end of the box) correspond to the minimum and the maximum values of the variable. The maximum is defined as the largest value in the variable that is <em>smaller than the number 1.5 IQR above the third quartile</em> and the minimum is the lowest value in the variable that is <em>larger than the number 1.5 IQR below the first quartile</em>. Anything above/below the whiskers numbers is considered an outlier and marked with a dot. In the above example we can see that one observation is an outlier, lying significantly above the upper whisker of the boxplot. We can identify this value by plugging in the above formula for the upper whisker (#3rd quartile + <span class="math inline">\(1.5IQR\)</span>) and finding the value that lies above it.</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="exploratory.html#cb373-1"></a>maximum &lt;-<span class="st"> </span><span class="kw">quantile</span>(math<span class="op">$</span>age, <span class="fl">0.75</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">names =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb373-2"><a href="exploratory.html#cb373-2"></a><span class="st">  </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">IQR</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb373-3"><a href="exploratory.html#cb373-3"></a>math<span class="op">$</span>age[<span class="kw">which</span>(math<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span>maximum)]</span></code></pre></div>
-<pre><code>[1] 22</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="exploratory.html#cb131-1"></a>maximum &lt;-<span class="st"> </span><span class="kw">quantile</span>(math<span class="op">$</span>age, <span class="fl">0.75</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">names =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb131-2"><a href="exploratory.html#cb131-2"></a><span class="st">  </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">IQR</span>(math<span class="op">$</span>age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb131-3"><a href="exploratory.html#cb131-3"></a>math<span class="op">$</span>age[<span class="kw">which</span>(math<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span>maximum)]</span>
+<span id="cb131-4"><a href="exploratory.html#cb131-4"></a>[<span class="dv">1</span>] <span class="dv">22</span></span></code></pre></div>
 <p>While useful under many circumstances, box plots can be deceiving, as two similarily looking box plots can represent very different disttributions. That’s why it is always useful to look at the variable’s histogram as well. This can be seen in the example below:</p>
 <p><img src="main_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p><img src="main_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
@@ -540,7 +541,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="scatter-plots" class="section level4 unnumbered">
 <h4>Scatter plots</h4>
 <p>Finally, a good way to explore the relationship between two numeric variables visually are scatter plots. Scatter plots represent each observation as a marker, with x-axis represnting value of one variable and y-axis of another. Scatter plots are simply created using the <code>plot</code> function.</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="exploratory.html#cb375-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="exploratory.html#cb132-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
 <p>In the example above, we can see that there’s a positive relationship between student’s grade in first year and the grade in the second year. While such plot would not be sufficient to make any strong empirical claims, it is usually a valuable first step in finding statistical regularities in the dataset. More formal ways of measuring association between variables will be discussed in sections on <a href="association.html#association">statisical association</a> and <a href="ols.html#ols">linear regression</a>.</p>
 </div>
@@ -550,54 +551,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cross-tabulation" class="section level4 unnumbered">
 <h4>Cross-tabulation</h4>
 <p>Categorical variables are often best described by frequency tables, which provide the counts of the number of occurences of each level of the categorical variable.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="exploratory.html#cb376-1"></a><span class="kw">table</span>(math<span class="op">$</span>sex)</span></code></pre></div>
-<pre><code>
-  F   M 
-203 182 </code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="exploratory.html#cb133-1"></a><span class="kw">table</span>(math<span class="op">$</span>sex)</span>
+<span id="cb133-2"><a href="exploratory.html#cb133-2"></a></span>
+<span id="cb133-3"><a href="exploratory.html#cb133-3"></a>  F   M </span>
+<span id="cb133-4"><a href="exploratory.html#cb133-4"></a><span class="dv">203</span> <span class="dv">182</span> </span></code></pre></div>
 <p>Additionally, we can transform this into a table of proportions, rather than frequencies, by using the <code>prop.table</code> function to transform the output of <code>table</code>.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="exploratory.html#cb378-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>sex))</span></code></pre></div>
-<pre><code>
-        F         M 
-0.5272727 0.4727273 </code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="exploratory.html#cb134-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>sex))</span>
+<span id="cb134-2"><a href="exploratory.html#cb134-2"></a></span>
+<span id="cb134-3"><a href="exploratory.html#cb134-3"></a>        F         M </span>
+<span id="cb134-4"><a href="exploratory.html#cb134-4"></a><span class="fl">0.5272727</span> <span class="fl">0.4727273</span> </span></code></pre></div>
 <p>We can also convert such table into a bar plot, by using the <code>barplot</code> function.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="exploratory.html#cb380-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(math<span class="op">$</span>Mjob))</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="exploratory.html#cb135-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(math<span class="op">$</span>Mjob))</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="exploratory.html#cb381-1"></a><span class="kw">barplot</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>Mjob)),</span>
-<span id="cb381-2"><a href="exploratory.html#cb381-2"></a>        <span class="dt">names.arg =</span> <span class="kw">c</span>(<span class="st">&quot;At home&quot;</span>, <span class="st">&quot;Health&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Services&quot;</span>, <span class="st">&quot;Teacher&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="exploratory.html#cb136-1"></a><span class="kw">barplot</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>Mjob)),</span>
+<span id="cb136-2"><a href="exploratory.html#cb136-2"></a>        <span class="dt">names.arg =</span> <span class="kw">c</span>(<span class="st">&quot;At home&quot;</span>, <span class="st">&quot;Health&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Services&quot;</span>, <span class="st">&quot;Teacher&quot;</span>))</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>The <code>table</code> function can also be used for <em>cross-tabulation</em> - creating a table summarizing the count of observations in the overlap of two categories. In the example we look at the relationship between the reason for choosing the particular school and paid classes attendance.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="exploratory.html#cb382-1"></a><span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid)</span></code></pre></div>
-<pre><code>            
-             no yes
-  course     92  47
-  home       52  56
-  other      16  20
-  reputation 50  52</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="exploratory.html#cb137-1"></a><span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid)</span>
+<span id="cb137-2"><a href="exploratory.html#cb137-2"></a>            </span>
+<span id="cb137-3"><a href="exploratory.html#cb137-3"></a>             no yes</span>
+<span id="cb137-4"><a href="exploratory.html#cb137-4"></a>  course     <span class="dv">92</span>  <span class="dv">47</span></span>
+<span id="cb137-5"><a href="exploratory.html#cb137-5"></a>  home       <span class="dv">52</span>  <span class="dv">56</span></span>
+<span id="cb137-6"><a href="exploratory.html#cb137-6"></a>  other      <span class="dv">16</span>  <span class="dv">20</span></span>
+<span id="cb137-7"><a href="exploratory.html#cb137-7"></a>  reputation <span class="dv">50</span>  <span class="dv">52</span></span></code></pre></div>
 <p>It appears that students who chose the school because of their course preference were less likely to attend extra paid classes than students choosing the school for other reasons.</p>
 <p>This can be made more apparent if we substitute frequencies with proportions:</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="exploratory.html#cb384-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid))</span></code></pre></div>
-<pre><code>            
-                     no        yes
-  course     0.23896104 0.12207792
-  home       0.13506494 0.14545455
-  other      0.04155844 0.05194805
-  reputation 0.12987013 0.13506494</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="exploratory.html#cb138-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid))</span>
+<span id="cb138-2"><a href="exploratory.html#cb138-2"></a>            </span>
+<span id="cb138-3"><a href="exploratory.html#cb138-3"></a>                     no        yes</span>
+<span id="cb138-4"><a href="exploratory.html#cb138-4"></a>  course     <span class="fl">0.23896104</span> <span class="fl">0.12207792</span></span>
+<span id="cb138-5"><a href="exploratory.html#cb138-5"></a>  home       <span class="fl">0.13506494</span> <span class="fl">0.14545455</span></span>
+<span id="cb138-6"><a href="exploratory.html#cb138-6"></a>  other      <span class="fl">0.04155844</span> <span class="fl">0.05194805</span></span>
+<span id="cb138-7"><a href="exploratory.html#cb138-7"></a>  reputation <span class="fl">0.12987013</span> <span class="fl">0.13506494</span></span></code></pre></div>
 <p>Note that in this case, the proportions are calculated with respect to the total count of participants (i.e. they add up to 1). For comparison purposes, it might be useful to look at the proportion with respect to the total of each of the categories. This can be specified by the <code>margin</code> argument. By setting it to 1, we calculate the proportions with respect to the row margins, i.e. divide the counts of individuals in the <code>paid</code> variable by the total of each category of the <code>reason</code> variable.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="exploratory.html#cb386-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid), <span class="dt">margin =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>            
-                    no       yes
-  course     0.6618705 0.3381295
-  home       0.4814815 0.5185185
-  other      0.4444444 0.5555556
-  reputation 0.4901961 0.5098039</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="exploratory.html#cb139-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid), <span class="dt">margin =</span> <span class="dv">1</span>)</span>
+<span id="cb139-2"><a href="exploratory.html#cb139-2"></a>            </span>
+<span id="cb139-3"><a href="exploratory.html#cb139-3"></a>                    no       yes</span>
+<span id="cb139-4"><a href="exploratory.html#cb139-4"></a>  course     <span class="fl">0.6618705</span> <span class="fl">0.3381295</span></span>
+<span id="cb139-5"><a href="exploratory.html#cb139-5"></a>  home       <span class="fl">0.4814815</span> <span class="fl">0.5185185</span></span>
+<span id="cb139-6"><a href="exploratory.html#cb139-6"></a>  other      <span class="fl">0.4444444</span> <span class="fl">0.5555556</span></span>
+<span id="cb139-7"><a href="exploratory.html#cb139-7"></a>  reputation <span class="fl">0.4901961</span> <span class="fl">0.5098039</span></span></code></pre></div>
 <p>By analogy, <code>margin = 2</code> leads to the division by the column margins, i.e. sums of both categories of the <code>paid</code> variable.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="exploratory.html#cb388-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid), <span class="dt">margin =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>            
-                     no        yes
-  course     0.43809524 0.26857143
-  home       0.24761905 0.32000000
-  other      0.07619048 0.11428571
-  reputation 0.23809524 0.29714286</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="exploratory.html#cb140-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(math<span class="op">$</span>reason, math<span class="op">$</span>paid), <span class="dt">margin =</span> <span class="dv">2</span>)</span>
+<span id="cb140-2"><a href="exploratory.html#cb140-2"></a>            </span>
+<span id="cb140-3"><a href="exploratory.html#cb140-3"></a>                     no        yes</span>
+<span id="cb140-4"><a href="exploratory.html#cb140-4"></a>  course     <span class="fl">0.43809524</span> <span class="fl">0.26857143</span></span>
+<span id="cb140-5"><a href="exploratory.html#cb140-5"></a>  home       <span class="fl">0.24761905</span> <span class="fl">0.32000000</span></span>
+<span id="cb140-6"><a href="exploratory.html#cb140-6"></a>  other      <span class="fl">0.07619048</span> <span class="fl">0.11428571</span></span>
+<span id="cb140-7"><a href="exploratory.html#cb140-7"></a>  reputation <span class="fl">0.23809524</span> <span class="fl">0.29714286</span></span></code></pre></div>
 </div>
 </div>
 <div id="customizing-visualizations" class="section level3 unnumbered">
@@ -606,44 +607,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="changing-axis-labels" class="section level4 unnumbered">
 <h4>Changing axis labels</h4>
 <p>In case of every plot in R you can change the axis labels by using the <code>xlab</code> and <code>ylab</code> arguments:</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="exploratory.html#cb390-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="exploratory.html#cb141-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
 <p>You can also add the title by specifying the <code>main</code> argument:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="exploratory.html#cb391-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
-<span id="cb391-2"><a href="exploratory.html#cb391-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
-<span id="cb391-3"><a href="exploratory.html#cb391-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="exploratory.html#cb142-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
+<span id="cb142-2"><a href="exploratory.html#cb142-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
+<span id="cb142-3"><a href="exploratory.html#cb142-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
 <p>The color of the objects in the plot can be altered using the <code>col</code> argument:</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="exploratory.html#cb392-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
-<span id="cb392-2"><a href="exploratory.html#cb392-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
-<span id="cb392-3"><a href="exploratory.html#cb392-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
-<span id="cb392-4"><a href="exploratory.html#cb392-4"></a>     <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="exploratory.html#cb143-1"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
+<span id="cb143-2"><a href="exploratory.html#cb143-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
+<span id="cb143-3"><a href="exploratory.html#cb143-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
+<span id="cb143-4"><a href="exploratory.html#cb143-4"></a>     <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
 <p>It can also be specified as character vector, with a different color for each point:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="exploratory.html#cb393-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
-<span id="cb393-2"><a href="exploratory.html#cb393-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
-<span id="cb393-3"><a href="exploratory.html#cb393-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
-<span id="cb393-4"><a href="exploratory.html#cb393-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
-<span id="cb393-5"><a href="exploratory.html#cb393-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
-<span id="cb393-6"><a href="exploratory.html#cb393-6"></a>     <span class="dt">col =</span> col_gender)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="exploratory.html#cb144-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
+<span id="cb144-2"><a href="exploratory.html#cb144-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
+<span id="cb144-3"><a href="exploratory.html#cb144-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
+<span id="cb144-4"><a href="exploratory.html#cb144-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
+<span id="cb144-5"><a href="exploratory.html#cb144-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
+<span id="cb144-6"><a href="exploratory.html#cb144-6"></a>     <span class="dt">col =</span> col_gender)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>To make it more informative, you can also add a legend using the <code>legend</code> function:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="exploratory.html#cb394-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
-<span id="cb394-2"><a href="exploratory.html#cb394-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
-<span id="cb394-3"><a href="exploratory.html#cb394-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
-<span id="cb394-4"><a href="exploratory.html#cb394-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
-<span id="cb394-5"><a href="exploratory.html#cb394-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
-<span id="cb394-6"><a href="exploratory.html#cb394-6"></a>     <span class="dt">col =</span> col_gender)</span>
-<span id="cb394-7"><a href="exploratory.html#cb394-7"></a><span class="kw">legend</span>(<span class="st">&#39;bottomright&#39;</span>, </span>
-<span id="cb394-8"><a href="exploratory.html#cb394-8"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Female&#39;</span>, <span class="st">&#39;Male&#39;</span>),</span>
-<span id="cb394-9"><a href="exploratory.html#cb394-9"></a>       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="exploratory.html#cb145-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
+<span id="cb145-2"><a href="exploratory.html#cb145-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
+<span id="cb145-3"><a href="exploratory.html#cb145-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
+<span id="cb145-4"><a href="exploratory.html#cb145-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
+<span id="cb145-5"><a href="exploratory.html#cb145-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>,</span>
+<span id="cb145-6"><a href="exploratory.html#cb145-6"></a>     <span class="dt">col =</span> col_gender)</span>
+<span id="cb145-7"><a href="exploratory.html#cb145-7"></a><span class="kw">legend</span>(<span class="st">&#39;bottomright&#39;</span>, </span>
+<span id="cb145-8"><a href="exploratory.html#cb145-8"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Female&#39;</span>, <span class="st">&#39;Male&#39;</span>),</span>
+<span id="cb145-9"><a href="exploratory.html#cb145-9"></a>       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
 <p>You can also change the limits of each of the axes, by specifying the <code>xlim</code> and <code>ylim</code> arguments</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="exploratory.html#cb395-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
-<span id="cb395-2"><a href="exploratory.html#cb395-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
-<span id="cb395-3"><a href="exploratory.html#cb395-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
-<span id="cb395-4"><a href="exploratory.html#cb395-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
-<span id="cb395-5"><a href="exploratory.html#cb395-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="exploratory.html#cb146-1"></a>col_gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, <span class="kw">nrow</span>(math))</span>
+<span id="cb146-2"><a href="exploratory.html#cb146-2"></a>col_gender[<span class="kw">which</span>(math<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;F&quot;</span>)] &lt;-<span class="st"> &quot;blue&quot;</span></span>
+<span id="cb146-3"><a href="exploratory.html#cb146-3"></a><span class="kw">plot</span>(math<span class="op">$</span>G1, math<span class="op">$</span>G2, </span>
+<span id="cb146-4"><a href="exploratory.html#cb146-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Grade in term 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Grade in term 2&quot;</span>,</span>
+<span id="cb146-5"><a href="exploratory.html#cb146-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Student grades&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>))</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 </div>
 </div>
@@ -874,7 +875,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The variable x contains the numbers [1, 20, 4, 50, 30, 40]. Compute the IQR. Which values would be the whiskers in the box plot? Which (if any) would be the outliers? Confirm your calculations by plotting the box plot</p></li>
 <li><p>Load the <code>student-por.csv</code> into your R session. The data describes the grades obtained by students from a Portugeese class and consists of variables similar to those in the <code>math</code> dataset. Conduct an EDA by preforming the following steps:</p></li>
 </ol>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="exploratory.html#cb396-1"></a>por &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/student/student-por.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="exploratory.html#cb147-1"></a>por &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/student/student-por.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Examine the variables in the dataset, their types, their distribution and the first 5 observations.</p></li>
 <li><p>Get the proportion of missing observations (overall and in each variable) and remove the observations with missing values.</p></li>

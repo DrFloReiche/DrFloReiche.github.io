@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </a></p>
 <div id="content-7" class="section level2">
 <h2><span class="header-section-number">8.1</span> Content</h2>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="association.html#cb618-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="association.html#cb275-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <p>So far, we have described variety of methods to wrangle and explore data in R. After performing cleaning and exploratory analysis, it is common to perform more formal tests on the data to verify whether the relationships we hypothesized hold under the scrutiny of tests supported by statistical theory. In this chapter we will present couple of testing such relationships. While some formal knowledge of statistical inference will be useful, the chapter does not rely on your background knowledge to heavily.</p>
 <div id="comparing-means" class="section level3 unnumbered">
 <h3>Comparing means</h3>
@@ -323,31 +323,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="is-mean-different-from-0---one-sample-t-test" class="section level4 unnumbered">
 <h4>Is mean different from 0? - one sample t-test</h4>
 <p>We’ll start with a simple case. The data in the file <code>wages.csv</code> contains the information on the average salary of a sample of 100 individuals in 2005 and2 2010. We are interested in whether there was any growth in their salary. First, we read the data and obtain the percentege growth:</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="association.html#cb619-1"></a>wages &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/wages.csv&#39;</span>)</span></code></pre></div>
-<pre><code>Parsed with column specification:
-cols(
-  gender = col_character(),
-  salary2005 = col_double(),
-  salary2010 = col_double()
-)</code></pre>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="association.html#cb621-1"></a>wages &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">change =</span> (salary2010 <span class="op">-</span><span class="st"> </span>salary2005)<span class="op">/</span>salary2005)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="association.html#cb276-1"></a>wages &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/wages.csv&#39;</span>)</span>
+<span id="cb276-2"><a href="association.html#cb276-2"></a>Parsed with column specification<span class="op">:</span></span>
+<span id="cb276-3"><a href="association.html#cb276-3"></a><span class="kw">cols</span>(</span>
+<span id="cb276-4"><a href="association.html#cb276-4"></a>  <span class="dt">gender =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb276-5"><a href="association.html#cb276-5"></a>  <span class="dt">salary2005 =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb276-6"><a href="association.html#cb276-6"></a>  <span class="dt">salary2010 =</span> <span class="kw">col_double</span>()</span>
+<span id="cb276-7"><a href="association.html#cb276-7"></a>)</span>
+<span id="cb276-8"><a href="association.html#cb276-8"></a>wages &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">change =</span> (salary2010 <span class="op">-</span><span class="st"> </span>salary2005)<span class="op">/</span>salary2005)</span></code></pre></div>
 <p>We can then examine the average:</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="association.html#cb622-1"></a><span class="kw">mean</span>(wages<span class="op">$</span>change)</span></code></pre></div>
-<pre><code>[1] 0.01489452</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="association.html#cb277-1"></a><span class="kw">mean</span>(wages<span class="op">$</span>change)</span>
+<span id="cb277-2"><a href="association.html#cb277-2"></a>[<span class="dv">1</span>] <span class="fl">0.01489452</span></span></code></pre></div>
 <p>We see that the mean is around 0.015. Is that sufficient to claim that the average salary of employees in our target population has grown between 2005 and 2010? To check that, we can perform the so-called t-test, which takes into account the variability of our sample and its size, and determines the <em>probability that we falsely reject the hypothesis that the mean is equal to 0</em> - this probability is the p-value. <strong>Note that p-value is not the probability of the mean being equal to 0</strong>. For those familiar with frequentist statistical inference, recall that the <em>p-value is the probability of obtaining a statistic more extreme than the sample statistic in under the assumption that the null hypothesis is true in repeated sampling</em>.</p>
 <p>To conduct the t-test, we can simply use the <code>t.test</code> function:</p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="association.html#cb624-1"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  wages$change
-t = 2.7211, df = 99, p-value = 0.007688
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.004033511 0.025755527
-sample estimates:
- mean of x 
-0.01489452 </code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="association.html#cb278-1"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span>
+<span id="cb278-2"><a href="association.html#cb278-2"></a></span>
+<span id="cb278-3"><a href="association.html#cb278-3"></a>    One Sample t<span class="op">-</span>test</span>
+<span id="cb278-4"><a href="association.html#cb278-4"></a></span>
+<span id="cb278-5"><a href="association.html#cb278-5"></a>data<span class="op">:</span><span class="st">  </span>wages<span class="op">$</span>change</span>
+<span id="cb278-6"><a href="association.html#cb278-6"></a>t =<span class="st"> </span><span class="fl">2.7211</span>, df =<span class="st"> </span><span class="dv">99</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.007688</span></span>
+<span id="cb278-7"><a href="association.html#cb278-7"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="dv">0</span></span>
+<span id="cb278-8"><a href="association.html#cb278-8"></a><span class="dv">95</span> percent confidence interval<span class="op">:</span></span>
+<span id="cb278-9"><a href="association.html#cb278-9"></a><span class="st"> </span><span class="fl">0.004033511</span> <span class="fl">0.025755527</span></span>
+<span id="cb278-10"><a href="association.html#cb278-10"></a>sample estimates<span class="op">:</span></span>
+<span id="cb278-11"><a href="association.html#cb278-11"></a><span class="st"> </span>mean of x </span>
+<span id="cb278-12"><a href="association.html#cb278-12"></a><span class="fl">0.01489452</span> </span></code></pre></div>
 <p>The p-value is usually the most important part of the output produced by the function. In this case, it is 0.0077. This means, that the mean is <em>significantly different from 0 at the 95% confidence level</em>. Confidence level is a way in which we can quantify our certainty in the difference of the parameter from some hypothesized value (in this case 0). The 95% confidence level is one of the most commonly used thresholds in the social sciences. Generally, the recipe for checking if a p-value satisfies a cerain confidence level is to subtract our confidence level from 1 and compare it with the p-value. If the p-value is smaller than the value obtained in the subtraction, the significance of the test statistic satisfies it. So, in our example, for 95% confidence <span class="math inline">\(1 - 0.95 = 0.05\)</span> and 0.0077 $ &lt; 0.05$, thus we can say the the mean is significantly different from 0 at the 95% confidence level.</p>
 <p>Another important information reported by the output of the t-test is the confidence interval. The confidence interval provides us with a way of quantifying our uncertainty about the underlying value of a statistic (in our case the mean), given the variability of our sample (measured by the standard deviation, as described in <a href="exploratory.html#variance-and-standard-deviation">chapter 4</a>. Suppose we take 100 random samples from our original population. The 95% confidence interval describes the <em>range into which we exepct the mean of 95 out of 100 samples</em> to fall. In case of the mean, it is given by <span class="math inline">\(\bar{\mu}\pm 1.96SE(\bar{\mu})\)</span>, where <span class="math inline">\(\bar\mu\)</span> is the sample mean we obtained and <span class="math inline">\(SE(\bar{\mu})\)</span> is the <em>standard error of the mean</em> given by <span class="math inline">\(\sigma/\sqrt{n}\)</span>, which is the sample standard deviation divided by the square root of the number of the observations in our sample. Note that 95% confidence interval not including 0 is equivalent with the statistic being significantly different from 0 at the 95% level.</p>
 </div>
@@ -355,43 +355,43 @@ sample estimates:
 <h4>Error bars</h4>
 <p>The confidence interval around the mean can be displayed in <code>ggplot</code> using the <code>geom_errorbar</code> function. The so-called errorbar is a good way to display the range of the likely values around the mean.</p>
 <p>In case of our data, to plot the errorbars, we first compute the standard error of the mean using the formula discussed above.</p>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="association.html#cb626-1"></a>wages_summary &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span></span>
-<span id="cb626-2"><a href="association.html#cb626-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">change_mean =</span> <span class="kw">mean</span>(change), </span>
-<span id="cb626-3"><a href="association.html#cb626-3"></a>            <span class="dt">change_err =</span> <span class="kw">sd</span>(change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="association.html#cb279-1"></a>wages_summary &lt;-<span class="st"> </span>wages <span class="op">%&gt;%</span></span>
+<span id="cb279-2"><a href="association.html#cb279-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">change_mean =</span> <span class="kw">mean</span>(change), </span>
+<span id="cb279-3"><a href="association.html#cb279-3"></a>            <span class="dt">change_err =</span> <span class="kw">sd</span>(change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>()))</span></code></pre></div>
 <p>We than create a bar plot and add the <code>geom_errorbar</code> on top of it. Note that in this case we specify the x aesthetic as a chraracter <code>'Wage change'</code>. This is because it is unusual to plot just one bar in the plot, and <code>geom_col</code> and <code>geom_errorbar</code> require some x aesthetic to be passed.</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="association.html#cb627-1"></a><span class="kw">ggplot</span>(wages_summary, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&#39;Wage change&#39;</span>, <span class="dt">y =</span> change_mean)) <span class="op">+</span></span>
-<span id="cb627-2"><a href="association.html#cb627-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb627-3"><a href="association.html#cb627-3"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> change_mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err, </span>
-<span id="cb627-4"><a href="association.html#cb627-4"></a>                <span class="dt">ymax =</span> change_mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err), <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb627-5"><a href="association.html#cb627-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&#39;&#39;</span>, <span class="dt">y =</span> <span class="st">&#39;Mean change in wage&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="association.html#cb280-1"></a><span class="kw">ggplot</span>(wages_summary, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&#39;Wage change&#39;</span>, <span class="dt">y =</span> change_mean)) <span class="op">+</span></span>
+<span id="cb280-2"><a href="association.html#cb280-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb280-3"><a href="association.html#cb280-3"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> change_mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err, </span>
+<span id="cb280-4"><a href="association.html#cb280-4"></a>                <span class="dt">ymax =</span> change_mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>change_err), <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb280-5"><a href="association.html#cb280-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&#39;&#39;</span>, <span class="dt">y =</span> <span class="st">&#39;Mean change in wage&#39;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
 </div>
 <div id="are-two-means-different---two-sample-t-test" class="section level4 unnumbered">
 <h4>Are two means different? - two sample t-test</h4>
 <p>By simple extension, we can apply the logic of the t-test to the difference between two means within one sample - this is so called a <em>two sample t-test</em> and is implemented in R by the same function. The grouping variable is specified using the <em>formula notation</em>, which we will encounter in the next chapter when dealing with linear regression. To test the difference in mean of variable x between groups defined by y, we specify <code>t.test(x ~ y)</code>. So, coming back to our example, we can examine whether the average salary in 2005 is different for male and female employees.</p>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="association.html#cb628-1"></a><span class="kw">t.test</span>(salary2005 <span class="op">~</span><span class="st"> </span>gender, <span class="dt">data =</span> wages)</span></code></pre></div>
-<pre><code>
-    Welch Two Sample t-test
-
-data:  salary2005 by gender
-t = -2.4595, df = 97.494, p-value = 0.01568
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -19486.287  -2082.285
-sample estimates:
-mean in group F mean in group M 
-       31020.72        41805.01 </code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="association.html#cb281-1"></a><span class="kw">t.test</span>(salary2005 <span class="op">~</span><span class="st"> </span>gender, <span class="dt">data =</span> wages)</span>
+<span id="cb281-2"><a href="association.html#cb281-2"></a></span>
+<span id="cb281-3"><a href="association.html#cb281-3"></a>    Welch Two Sample t<span class="op">-</span>test</span>
+<span id="cb281-4"><a href="association.html#cb281-4"></a></span>
+<span id="cb281-5"><a href="association.html#cb281-5"></a>data<span class="op">:</span><span class="st">  </span>salary2005 by gender</span>
+<span id="cb281-6"><a href="association.html#cb281-6"></a>t =<span class="st"> </span><span class="fl">-2.4595</span>, df =<span class="st"> </span><span class="fl">97.494</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.01568</span></span>
+<span id="cb281-7"><a href="association.html#cb281-7"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span></span>
+<span id="cb281-8"><a href="association.html#cb281-8"></a><span class="dv">95</span> percent confidence interval<span class="op">:</span></span>
+<span id="cb281-9"><a href="association.html#cb281-9"></a><span class="st"> </span><span class="fl">-19486.287</span>  <span class="fl">-2082.285</span></span>
+<span id="cb281-10"><a href="association.html#cb281-10"></a>sample estimates<span class="op">:</span></span>
+<span id="cb281-11"><a href="association.html#cb281-11"></a>mean <span class="cf">in</span> group F mean <span class="cf">in</span> group M </span>
+<span id="cb281-12"><a href="association.html#cb281-12"></a>       <span class="fl">31020.72</span>        <span class="fl">41805.01</span> </span></code></pre></div>
 <p>The result seem to be significant, meaning that we have statistical evidence that there is a real difference between male and female earnings in the underlying populations (or more precisely, that if we took 100 samples from the underlying population, more than 95 of them would show a non-zero difference). Based on our sample, however, the magnitude of that difference is quite difficult to determine, as we expect it to range between 19000 and 2000 dollars. We can visualize this again using <code>geom_errorbar</code>:</p>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="association.html#cb630-1"></a>wages <span class="op">%&gt;%</span></span>
-<span id="cb630-2"><a href="association.html#cb630-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
-<span id="cb630-3"><a href="association.html#cb630-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wage_mean =</span> <span class="kw">mean</span>(salary2005), </span>
-<span id="cb630-4"><a href="association.html#cb630-4"></a>            <span class="dt">wage_err =</span> <span class="kw">sd</span>(salary2005)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span></span>
-<span id="cb630-5"><a href="association.html#cb630-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gender, <span class="dt">y =</span> wage_mean)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb630-6"><a href="association.html#cb630-6"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb630-7"><a href="association.html#cb630-7"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> wage_mean <span class="op">-</span><span class="st"> </span>wage_err, </span>
-<span id="cb630-8"><a href="association.html#cb630-8"></a>                    <span class="dt">ymax =</span> wage_mean <span class="op">+</span><span class="st"> </span>wage_err), <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
-<span id="cb630-9"><a href="association.html#cb630-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Average salary in 2005&#39;</span>)</span></code></pre></div>
-<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="association.html#cb282-1"></a>wages <span class="op">%&gt;%</span></span>
+<span id="cb282-2"><a href="association.html#cb282-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
+<span id="cb282-3"><a href="association.html#cb282-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wage_mean =</span> <span class="kw">mean</span>(salary2005), </span>
+<span id="cb282-4"><a href="association.html#cb282-4"></a>            <span class="dt">wage_err =</span> <span class="kw">sd</span>(salary2005)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span></span>
+<span id="cb282-5"><a href="association.html#cb282-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gender, <span class="dt">y =</span> wage_mean)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb282-6"><a href="association.html#cb282-6"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb282-7"><a href="association.html#cb282-7"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> wage_mean <span class="op">-</span><span class="st"> </span>wage_err, </span>
+<span id="cb282-8"><a href="association.html#cb282-8"></a>                    <span class="dt">ymax =</span> wage_mean <span class="op">+</span><span class="st"> </span>wage_err), <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
+<span id="cb282-9"><a href="association.html#cb282-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Average salary in 2005&#39;</span>)</span>
+<span id="cb282-10"><a href="association.html#cb282-10"></a><span class="st">`</span><span class="dt">summarise()</span><span class="st">`</span> ungrouping <span class="kw">output</span> (override with <span class="st">`</span><span class="dt">.groups</span><span class="st">`</span> argument)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-369-1.png" width="672" /></p>
 </div>
 </div>
@@ -400,90 +400,90 @@ mean in group F mean in group M
 <div id="covariance" class="section level4 unnumbered">
 <h4>Covariance</h4>
 <p>So far we have discussed some techniques for looking at statistical relationships between one continuous variable (such as wage) and one categoric variable (such as salary). Under many circumstances, however, we would be interested in measuring the association between two continuous variables. In this part we will consider data on a sample of students with free variables: average weekly time spent studying, days a student has been home ill and achieved GPA.</p>
-<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="association.html#cb632-1"></a>scores &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/scores.csv&#39;</span>)</span></code></pre></div>
-<pre><code>Parsed with column specification:
-cols(
-  study_time = col_double(),
-  days_ill = col_double(),
-  gpa = col_double()
-)</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="association.html#cb283-1"></a>scores &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/scores.csv&#39;</span>)</span>
+<span id="cb283-2"><a href="association.html#cb283-2"></a>Parsed with column specification<span class="op">:</span></span>
+<span id="cb283-3"><a href="association.html#cb283-3"></a><span class="kw">cols</span>(</span>
+<span id="cb283-4"><a href="association.html#cb283-4"></a>  <span class="dt">study_time =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb283-5"><a href="association.html#cb283-5"></a>  <span class="dt">days_ill =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb283-6"><a href="association.html#cb283-6"></a>  <span class="dt">gpa =</span> <span class="kw">col_double</span>()</span>
+<span id="cb283-7"><a href="association.html#cb283-7"></a>)</span></code></pre></div>
 <p>We can examine pairwise relationships between the variables using the <code>pairs()</code> function, which is a useful tool when analyzing datasets with multiple continuous variables.</p>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="association.html#cb634-1"></a><span class="kw">pairs</span>(scores,<span class="dt">upper.panel =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="association.html#cb284-1"></a><span class="kw">pairs</span>(scores,<span class="dt">upper.panel =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-371-1.png" width="672" /></p>
 <p>Let’s start by interpreting this plot. The rectangles with variable tell as the name of the axis. For example, the plot in the lower left corner shows the relationship between the GPA (x axis) and study time (y axis). We can see that students in our sample who spent more time studying seem to have had higher grades - points higher on one axis tend to also be higher on the other. On the other hand, students who were ill more had, on average, achieved lower grades. There seems to be no relationship between being ill and time spent studying.</p>
 <p>In statistical terms, this relationship can be measured with <em>covariance</em> between these two variables. Recall our discussion of <em>variance</em> in the <a href="exploratory.html#exploratory">exploratory analysis chapter</a>. We calculated it for vector x using <code>sum((x - mean(x))^2)/(length(x) - 1)</code>, or the <code>var(x)</code> function for short. Covariance is essentially the same, but calculated for two variables instead of one, using <code>sum((x - mean(x)) * mean((y - mean(y))))/(length(x) - 1)</code> or the <code>cov</code> function for short. You can see that demonstrated below:</p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="association.html#cb635-1"></a>cov_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">*</span><span class="st"> </span>(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)))<span class="op">/</span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb635-2"><a href="association.html#cb635-2"></a><span class="kw">cov_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
-<pre><code>[1] 1.337834</code></pre>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="association.html#cb637-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
-<pre><code>[1] 1.337834</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="association.html#cb285-1"></a>cov_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">*</span><span class="st"> </span>(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)))<span class="op">/</span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb285-2"><a href="association.html#cb285-2"></a><span class="kw">cov_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span>
+<span id="cb285-3"><a href="association.html#cb285-3"></a>[<span class="dv">1</span>] <span class="fl">1.337834</span></span>
+<span id="cb285-4"><a href="association.html#cb285-4"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span>
+<span id="cb285-5"><a href="association.html#cb285-5"></a>[<span class="dv">1</span>] <span class="fl">1.337834</span></span></code></pre></div>
 <p>The <em>variance</em> is actually nothing else but covariance of a variable with itself!</p>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="association.html#cb639-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>gpa) <span class="op">==</span><span class="st"> </span><span class="kw">var</span>(scores<span class="op">$</span>gpa)</span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="association.html#cb286-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>gpa) <span class="op">==</span><span class="st"> </span><span class="kw">var</span>(scores<span class="op">$</span>gpa)</span>
+<span id="cb286-2"><a href="association.html#cb286-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
 <p>Essentially covariance measures the average of element-wise product of each observations deviation from its mean for two variables. This may sound complicated, but breaking it down makes it simple. In our two variables, <code>gpa</code> and <code>days_ill</code>, people who have grades higher than the average grade also tend to study longer than the average study time. So, if for all students we subtract the mean grade and mean study time from their respective grades and study times, the average of that will be positive.</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="association.html#cb641-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
-<pre><code>[1] 1.337834</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="association.html#cb287-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span>
+<span id="cb287-2"><a href="association.html#cb287-2"></a>[<span class="dv">1</span>] <span class="fl">1.337834</span></span></code></pre></div>
 <p>If, on the other hand people who have higher grades than average tend to have lower time spent ill at home than average, the average of the products of these demeaned (i.e. with the mean subtracted from each) variables will be negative, since the majority of the products will be negative.</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="association.html#cb643-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>days_ill)</span></code></pre></div>
-<pre><code>[1] -11.16068</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="association.html#cb288-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>days_ill)</span>
+<span id="cb288-2"><a href="association.html#cb288-2"></a>[<span class="dv">1</span>] <span class="fl">-11.16068</span></span></code></pre></div>
 <p>Finally, if there’s no relationship between two variables - for example between <code>days_ill</code> and <code>study_time</code>, we expect the average of the products of the demeaned variables to be close to 0, since around the same number will be positive and negative.</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="association.html#cb645-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span></code></pre></div>
-<pre><code>[1] 2.419399</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="association.html#cb289-1"></a><span class="kw">cov</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span>
+<span id="cb289-2"><a href="association.html#cb289-2"></a>[<span class="dv">1</span>] <span class="fl">2.419399</span></span></code></pre></div>
 <p>The last example seems to be incorrect? How is that possible that the covariance between <code>study_time</code> and <code>days_ill</code> is larger than the covariance between <code>study_time</code> and <code>gpa</code>, even though the plot suggests a much stronger relationship between the latter? We will explore this in the next section on correlation.</p>
 </div>
 <div id="correlation" class="section level4 unnumbered">
 <h4>Correlation</h4>
 <p>The downside of covariance as a measure of relationship is that it is completely dependent on the units of the two variables measures, or, more percisely, the range of values they take. If we take covariance average time spent studying and GPA and compare it with the covariance between average time spent studying and time ill, the latter will be greater, simply because time is expressed in hours and days, with values ranging between 0.8 and 15.1 and 1 and 110 respectively, while GPA ranges between 1 and 5:</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="association.html#cb647-1"></a><span class="kw">vapply</span>(scores, range, <span class="kw">numeric</span>(<span class="dv">2</span>))</span></code></pre></div>
-<pre><code>     study_time days_ill  gpa
-[1,]       1.42        4 1.33
-[2,]      15.28      100 4.70</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="association.html#cb290-1"></a><span class="kw">vapply</span>(scores, range, <span class="kw">numeric</span>(<span class="dv">2</span>))</span>
+<span id="cb290-2"><a href="association.html#cb290-2"></a>     study_time days_ill  gpa</span>
+<span id="cb290-3"><a href="association.html#cb290-3"></a>[<span class="dv">1</span>,]       <span class="fl">1.42</span>        <span class="dv">4</span> <span class="fl">1.33</span></span>
+<span id="cb290-4"><a href="association.html#cb290-4"></a>[<span class="dv">2</span>,]      <span class="fl">15.28</span>      <span class="dv">100</span> <span class="fl">4.70</span></span></code></pre></div>
 <p>So, the values we get by multiplying <code>study_time</code> and <code>days_ill</code> will tend to be higher in general. This makes the use of covariance problematic in estimating the objective strength of the relationship between two variables.</p>
 <p>In order to avoid it, we use <em>correlation</em> instead. Correlation is simply covariance, but divided by the product of the standard deviation of each of the variables. Without going into the mathematical details, suffice to say that it <em>standardizes</em> the covariance, so that it ranges between -1 and 1, -1 meaning perfect negative relationship (i.e. when one variable increases, the other always decreases) and 1 meaning perfect positive relationship (when one variable increases, the other decreases). 0 means that there’s no relationship between these variables.</p>
 <p>We can see that again using R code. <code>cor_fun</code> is created for demonstration purposes, but the usual function used in R to obtain correlation is simply <code>cor</code>.</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="association.html#cb649-1"></a>cor_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">cov_fun</span>(x, y)<span class="op">/</span>(<span class="kw">sd</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(y))</span>
-<span id="cb649-2"><a href="association.html#cb649-2"></a><span class="kw">cor_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
-<pre><code>[1] 0.5538811</code></pre>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="association.html#cb651-1"></a><span class="kw">cor</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span></code></pre></div>
-<pre><code>[1] 0.5538811</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="association.html#cb291-1"></a>cor_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="kw">cov_fun</span>(x, y)<span class="op">/</span>(<span class="kw">sd</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(y))</span>
+<span id="cb291-2"><a href="association.html#cb291-2"></a><span class="kw">cor_fun</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span>
+<span id="cb291-3"><a href="association.html#cb291-3"></a>[<span class="dv">1</span>] <span class="fl">0.5538811</span></span>
+<span id="cb291-4"><a href="association.html#cb291-4"></a><span class="kw">cor</span>(scores<span class="op">$</span>gpa, scores<span class="op">$</span>study_time)</span>
+<span id="cb291-5"><a href="association.html#cb291-5"></a>[<span class="dv">1</span>] <span class="fl">0.5538811</span></span></code></pre></div>
 <p>Now we can see, that the relationship between <code>study_time</code> and <code>days_ill</code> is indeed close to 0:</p>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="association.html#cb653-1"></a><span class="kw">cor</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span></code></pre></div>
-<pre><code>[1] 0.03523657</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="association.html#cb292-1"></a><span class="kw">cor</span>(scores<span class="op">$</span>study_time, scores<span class="op">$</span>days_ill)</span>
+<span id="cb292-2"><a href="association.html#cb292-2"></a>[<span class="dv">1</span>] <span class="fl">0.03523657</span></span></code></pre></div>
 <p>We can also use <code>cor</code> on entire data frame to obtain the so-called correlation matrix, which shows pairwise relationships between two variables</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="association.html#cb655-1"></a><span class="kw">cor</span>(scores)</span></code></pre></div>
-<pre><code>           study_time    days_ill        gpa
-study_time 1.00000000  0.03523657  0.5538811
-days_ill   0.03523657  1.00000000 -0.7001128
-gpa        0.55388114 -0.70011285  1.0000000</code></pre>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="association.html#cb293-1"></a><span class="kw">cor</span>(scores)</span>
+<span id="cb293-2"><a href="association.html#cb293-2"></a>           study_time    days_ill        gpa</span>
+<span id="cb293-3"><a href="association.html#cb293-3"></a>study_time <span class="fl">1.00000000</span>  <span class="fl">0.03523657</span>  <span class="fl">0.5538811</span></span>
+<span id="cb293-4"><a href="association.html#cb293-4"></a>days_ill   <span class="fl">0.03523657</span>  <span class="fl">1.00000000</span> <span class="fl">-0.7001128</span></span>
+<span id="cb293-5"><a href="association.html#cb293-5"></a>gpa        <span class="fl">0.55388114</span> <span class="fl">-0.70011285</span>  <span class="fl">1.0000000</span></span></code></pre></div>
 <p>Note that the diagonal is always 1, i.e. the correlation of a variable with itself is always 1.</p>
 <p>For obvious reasons, the function also won’t work if applied to a data frame containing any text data:</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="association.html#cb657-1"></a><span class="kw">cor</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="association.html#cb294-1"></a><span class="kw">cor</span>(wages)</span></code></pre></div>
 <p>To visualize pariswise relationships between two variables using a plot that is a bit more sophisticated that the one produced by <code>pairs()</code> we can use the <code>ggpairs</code> function from the <code>GGally</code> package, which produced a <code>ggplot</code> style plot, presenting correlations, density plots and scatter plots of all the numeric variables in our dataset:</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="association.html#cb658-1"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb658-2"><a href="association.html#cb658-2"></a><span class="kw">ggpairs</span>(scores)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="association.html#cb295-1"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb295-2"><a href="association.html#cb295-2"></a><span class="kw">ggpairs</span>(scores)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-382-1.png" width="672" /></p>
 </div>
 </div>
 <div id="further-details" class="section level3 unnumbered">
 <h3>Further details</h3>
 <p>Here some more details on how the p-value is computed:</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="association.html#cb659-1"></a>err &lt;-<span class="st"> </span><span class="kw">sd</span>(wages<span class="op">$</span>change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">nrow</span>(wages))</span>
-<span id="cb659-2"><a href="association.html#cb659-2"></a>tscore &lt;-<span class="st"> </span><span class="kw">mean</span>(wages<span class="op">$</span>change)<span class="op">/</span>err</span>
-<span id="cb659-3"><a href="association.html#cb659-3"></a>df &lt;-<span class="st"> </span><span class="kw">length</span>(wages<span class="op">$</span>change) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb659-4"><a href="association.html#cb659-4"></a><span class="kw">pt</span>(tscore, df, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
-<pre><code>[1] 0.007687596</code></pre>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="association.html#cb661-1"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  wages$change
-t = 2.7211, df = 99, p-value = 0.007688
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.004033511 0.025755527
-sample estimates:
- mean of x 
-0.01489452 </code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="association.html#cb296-1"></a>err &lt;-<span class="st"> </span><span class="kw">sd</span>(wages<span class="op">$</span>change)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">nrow</span>(wages))</span>
+<span id="cb296-2"><a href="association.html#cb296-2"></a>tscore &lt;-<span class="st"> </span><span class="kw">mean</span>(wages<span class="op">$</span>change)<span class="op">/</span>err</span>
+<span id="cb296-3"><a href="association.html#cb296-3"></a>df &lt;-<span class="st"> </span><span class="kw">length</span>(wages<span class="op">$</span>change) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb296-4"><a href="association.html#cb296-4"></a><span class="kw">pt</span>(tscore, df, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb296-5"><a href="association.html#cb296-5"></a>[<span class="dv">1</span>] <span class="fl">0.007687596</span></span>
+<span id="cb296-6"><a href="association.html#cb296-6"></a><span class="kw">t.test</span>(wages<span class="op">$</span>change)</span>
+<span id="cb296-7"><a href="association.html#cb296-7"></a></span>
+<span id="cb296-8"><a href="association.html#cb296-8"></a>    One Sample t<span class="op">-</span>test</span>
+<span id="cb296-9"><a href="association.html#cb296-9"></a></span>
+<span id="cb296-10"><a href="association.html#cb296-10"></a>data<span class="op">:</span><span class="st">  </span>wages<span class="op">$</span>change</span>
+<span id="cb296-11"><a href="association.html#cb296-11"></a>t =<span class="st"> </span><span class="fl">2.7211</span>, df =<span class="st"> </span><span class="dv">99</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.007688</span></span>
+<span id="cb296-12"><a href="association.html#cb296-12"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="dv">0</span></span>
+<span id="cb296-13"><a href="association.html#cb296-13"></a><span class="dv">95</span> percent confidence interval<span class="op">:</span></span>
+<span id="cb296-14"><a href="association.html#cb296-14"></a><span class="st"> </span><span class="fl">0.004033511</span> <span class="fl">0.025755527</span></span>
+<span id="cb296-15"><a href="association.html#cb296-15"></a>sample estimates<span class="op">:</span></span>
+<span id="cb296-16"><a href="association.html#cb296-16"></a><span class="st"> </span>mean of x </span>
+<span id="cb296-17"><a href="association.html#cb296-17"></a><span class="fl">0.01489452</span> </span></code></pre></div>
 </div>
 </div>
 <div id="summary-6" class="section level2">
@@ -663,12 +663,12 @@ sample estimates:
 <ol start="3" style="list-style-type: decimal">
 <li>Using correlation, examine which relationship is stronger - the one between years since PhD and salary or the one between years in service and salary.</li>
 </ol>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="association.html#cb663-1"></a><span class="co">#ANSWER</span></span>
-<span id="cb663-2"><a href="association.html#cb663-2"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.since.phd)</span></code></pre></div>
-<pre><code>[1] 0.4192311</code></pre>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="association.html#cb665-1"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.service)</span></code></pre></div>
-<pre><code>[1] 0.3347447</code></pre>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="association.html#cb667-1"></a><span class="co">#the relationship between years since PhD and salary appears to be stronger</span></span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="association.html#cb297-1"></a><span class="co">#ANSWER</span></span>
+<span id="cb297-2"><a href="association.html#cb297-2"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.since.phd)</span>
+<span id="cb297-3"><a href="association.html#cb297-3"></a>[<span class="dv">1</span>] <span class="fl">0.4192311</span></span>
+<span id="cb297-4"><a href="association.html#cb297-4"></a><span class="kw">cor</span>(Salaries<span class="op">$</span>salary, Salaries<span class="op">$</span>yrs.service)</span>
+<span id="cb297-5"><a href="association.html#cb297-5"></a>[<span class="dv">1</span>] <span class="fl">0.3347447</span></span>
+<span id="cb297-6"><a href="association.html#cb297-6"></a><span class="co">#the relationship between years since PhD and salary appears to be stronger</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Use t-tests to check whether we can confirm or reject the following hypothesis, based on the sample in the <code>Salaries</code> dataset.</li>
 </ol>
@@ -680,12 +680,12 @@ sample estimates:
 <ol start="5" style="list-style-type: decimal">
 <li>Recall the plot produced towards the end of the previous chapter depicting the average salary by age group and academic discipline. Produce the same plot, but this time include error bars depicting the confidence intervals around each of the means. The code to produce the table used in the last exercises is below. Note that you need to modify it (by computing the standard errors) before plotting the data. Remeber about adding appropriate labels to the plot.</li>
 </ol>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="association.html#cb668-1"></a>byage &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span></span>
-<span id="cb668-2"><a href="association.html#cb668-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yrs_range =</span> <span class="kw">cut_width</span>(yrs.since.phd, <span class="dv">5</span>, <span class="dt">boundary =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb668-3"><a href="association.html#cb668-3"></a><span class="st">  </span><span class="kw">group_by</span>(yrs_range, discipline) <span class="op">%&gt;%</span></span>
-<span id="cb668-4"><a href="association.html#cb668-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(salary, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb668-5"><a href="association.html#cb668-5"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
-<pre><code>`summarise()` regrouping output by &#39;yrs_range&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="association.html#cb298-1"></a>byage &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span></span>
+<span id="cb298-2"><a href="association.html#cb298-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yrs_range =</span> <span class="kw">cut_width</span>(yrs.since.phd, <span class="dv">5</span>, <span class="dt">boundary =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb298-3"><a href="association.html#cb298-3"></a><span class="st">  </span><span class="kw">group_by</span>(yrs_range, discipline) <span class="op">%&gt;%</span></span>
+<span id="cb298-4"><a href="association.html#cb298-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(salary, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb298-5"><a href="association.html#cb298-5"></a><span class="st">  </span><span class="kw">ungroup</span>()</span>
+<span id="cb298-6"><a href="association.html#cb298-6"></a><span class="st">`</span><span class="dt">summarise()</span><span class="st">`</span> regrouping output by <span class="st">&#39;yrs_range&#39;</span> (override with <span class="st">`</span><span class="dt">.groups</span><span class="st">`</span> argument)</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Examine the correlation between years since phd and average salary in each of the groups defined in the data.</li>
 </ol>
