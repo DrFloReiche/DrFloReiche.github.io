@@ -262,6 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-intuition"><i class="fa fa-check"></i>Logit - The Intuition</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-estimation"><i class="fa fa-check"></i>Logit - The Estimation</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-output"><i class="fa fa-check"></i>Logit - The Output</a></li>
+<li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---interpreting-the-coefficients"><i class="fa fa-check"></i>Logit - Interpreting the Coefficients</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---model-fit"><i class="fa fa-check"></i>Logit - Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="logit.html"><a href="logit.html#summary-8"><i class="fa fa-check"></i><b>10.2</b> Summary</a><ul>
@@ -422,26 +423,26 @@ line 2</code></pre>
 <li>Two ways to set equations</li>
 <li>Either wrapped in $ signs</li>
 </ul>
-<div class="sourceCode" id="cb336"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb336-1"><a href="rmarkdown.html#cb336-1"></a>$ equation $</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb344-1"><a href="rmarkdown.html#cb344-1"></a>$ equation $</span></code></pre></div>
 <ul>
 <li>or</li>
 </ul>
-<div class="sourceCode" id="cb337"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb337-1"><a href="rmarkdown.html#cb337-1"></a>\begin{equation}</span>
-<span id="cb337-2"><a href="rmarkdown.html#cb337-2"></a>equation</span>
-<span id="cb337-3"><a href="rmarkdown.html#cb337-3"></a>\end{equation}</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb345-1"><a href="rmarkdown.html#cb345-1"></a>\begin{equation}</span>
+<span id="cb345-2"><a href="rmarkdown.html#cb345-2"></a>equation</span>
+<span id="cb345-3"><a href="rmarkdown.html#cb345-3"></a>\end{equation}</span></code></pre></div>
 <p>Example</p>
 <p>The command</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb338-1"><a href="rmarkdown.html#cb338-1"></a>\begin{equation}</span>
-<span id="cb338-2"><a href="rmarkdown.html#cb338-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
-<span id="cb338-3"><a href="rmarkdown.html#cb338-3"></a>\end{equation}</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb346-1"><a href="rmarkdown.html#cb346-1"></a>\begin{equation}</span>
+<span id="cb346-2"><a href="rmarkdown.html#cb346-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
+<span id="cb346-3"><a href="rmarkdown.html#cb346-3"></a>\end{equation}</span></code></pre></div>
 <p>results in:</p>
 <p><span class="math display">\[\begin{equation}
   Y = \beta_{0} + \beta_{1} x_{i} + \epsilon
 \end{equation}\]</span></p>
 <p>To suppress the numbering you type:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb339-1"><a href="rmarkdown.html#cb339-1"></a>\begin{equation*}</span>
-<span id="cb339-2"><a href="rmarkdown.html#cb339-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
-<span id="cb339-3"><a href="rmarkdown.html#cb339-3"></a>\end{equation*}</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown.html#cb347-1"></a>\begin{equation*}</span>
+<span id="cb347-2"><a href="rmarkdown.html#cb347-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
+<span id="cb347-3"><a href="rmarkdown.html#cb347-3"></a>\end{equation*}</span></code></pre></div>
 <p><span class="math display">\[\begin{equation*}
   Y = \beta_{0} + \beta_{1} x_{i} + \epsilon
 \end{equation*}\]</span></p>
@@ -457,60 +458,60 @@ line 2</code></pre>
 <div id="in-line-r-code" class="section level5 unnumbered">
 <h5>In-Line R Code</h5>
 <p>You can include R Code in Markdown by wrapping it in</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb340-1"><a href="rmarkdown.html#cb340-1"></a><span class="bn">```{r}</span></span>
-<span id="cb340-2"><a href="rmarkdown.html#cb340-2"></a></span>
-<span id="cb340-3"><a href="rmarkdown.html#cb340-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb348-1"><a href="rmarkdown.html#cb348-1"></a><span class="bn">```{r}</span></span>
+<span id="cb348-2"><a href="rmarkdown.html#cb348-2"></a></span>
+<span id="cb348-3"><a href="rmarkdown.html#cb348-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>Shortcut:</p>
 <ul>
 <li>Mac: Option + Command + I</li>
 <li>Windows: Ctrl + Alt + I</li>
 </ul>
 <p>Example</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb341-1"><a href="rmarkdown.html#cb341-1"></a><span class="bn">```{r}</span></span>
-<span id="cb341-2"><a href="rmarkdown.html#cb341-2"></a><span class="bn">5+3</span></span>
-<span id="cb341-3"><a href="rmarkdown.html#cb341-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb349-1"><a href="rmarkdown.html#cb349-1"></a><span class="bn">```{r}</span></span>
+<span id="cb349-2"><a href="rmarkdown.html#cb349-2"></a><span class="bn">5+3</span></span>
+<span id="cb349-3"><a href="rmarkdown.html#cb349-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>results in</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="rmarkdown.html#cb342-1"></a><span class="dv">5</span><span class="op">+</span><span class="dv">3</span></span>
-<span id="cb342-2"><a href="rmarkdown.html#cb342-2"></a>[<span class="dv">1</span>] <span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="rmarkdown.html#cb350-1"></a><span class="dv">5</span><span class="op">+</span><span class="dv">3</span></span>
+<span id="cb350-2"><a href="rmarkdown.html#cb350-2"></a>[<span class="dv">1</span>] <span class="dv">8</span></span></code></pre></div>
 <p>Chunk Options</p>
 <p>Types of Output Suppressed by:</p>
 <p><img src="files/markdown/table.png" width="75%" /></p>
 <p>Examples</p>
 <p>Display, but not calculate:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb343-1"><a href="rmarkdown.html#cb343-1"></a><span class="bn">```{r eval=F}</span></span>
-<span id="cb343-2"><a href="rmarkdown.html#cb343-2"></a><span class="bn">5+3</span></span>
-<span id="cb343-3"><a href="rmarkdown.html#cb343-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb351-1"><a href="rmarkdown.html#cb351-1"></a><span class="bn">```{r eval=F}</span></span>
+<span id="cb351-2"><a href="rmarkdown.html#cb351-2"></a><span class="bn">5+3</span></span>
+<span id="cb351-3"><a href="rmarkdown.html#cb351-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>Suppress Messages from Packages</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb344-1"><a href="rmarkdown.html#cb344-1"></a><span class="bn">```{r message=F}</span></span>
-<span id="cb344-2"><a href="rmarkdown.html#cb344-2"></a><span class="bn">library(tidyverse)</span></span>
-<span id="cb344-3"><a href="rmarkdown.html#cb344-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb352-1"><a href="rmarkdown.html#cb352-1"></a><span class="bn">```{r message=F}</span></span>
+<span id="cb352-2"><a href="rmarkdown.html#cb352-2"></a><span class="bn">library(tidyverse)</span></span>
+<span id="cb352-3"><a href="rmarkdown.html#cb352-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>Suppress Messages from Packages and only display</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb345-1"><a href="rmarkdown.html#cb345-1"></a><span class="bn">```{r message=F, eval=F}</span></span>
-<span id="cb345-2"><a href="rmarkdown.html#cb345-2"></a><span class="bn">library(tidyverse)</span></span>
-<span id="cb345-3"><a href="rmarkdown.html#cb345-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb353-1"><a href="rmarkdown.html#cb353-1"></a><span class="bn">```{r message=F, eval=F}</span></span>
+<span id="cb353-2"><a href="rmarkdown.html#cb353-2"></a><span class="bn">library(tidyverse)</span></span>
+<span id="cb353-3"><a href="rmarkdown.html#cb353-3"></a><span class="bn">```</span></span></code></pre></div>
 </div>
 </div>
 </div>
 <div id="figures-and-graphs" class="section level3 unnumbered">
 <h3>Figures and Graphs</h3>
 <p>You can also use this to include figures and graphs:</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb346-1"><a href="rmarkdown.html#cb346-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;}</span></span>
-<span id="cb346-2"><a href="rmarkdown.html#cb346-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
-<span id="cb346-3"><a href="rmarkdown.html#cb346-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb354-1"><a href="rmarkdown.html#cb354-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;}</span></span>
+<span id="cb354-2"><a href="rmarkdown.html#cb354-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
+<span id="cb354-3"><a href="rmarkdown.html#cb354-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>Add a Caption!</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown.html#cb347-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:test}Test Caption&quot;}</span></span>
-<span id="cb347-2"><a href="rmarkdown.html#cb347-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
-<span id="cb347-3"><a href="rmarkdown.html#cb347-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb355-1"><a href="rmarkdown.html#cb355-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:test}Test Caption&quot;}</span></span>
+<span id="cb355-2"><a href="rmarkdown.html#cb355-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
+<span id="cb355-3"><a href="rmarkdown.html#cb355-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>And then refer to it in the text with</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb348-1"><a href="rmarkdown.html#cb348-1"></a>\ref{fig:test}</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb356-1"><a href="rmarkdown.html#cb356-1"></a>\ref{fig:test}</span></code></pre></div>
 <p>Example</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb349-1"><a href="rmarkdown.html#cb349-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:spell}RStudio Task Bar&quot;}</span></span>
-<span id="cb349-2"><a href="rmarkdown.html#cb349-2"></a><span class="bn">knitr::include_graphics(&#39;./spell.png&#39;)</span></span>
-<span id="cb349-3"><a href="rmarkdown.html#cb349-3"></a><span class="bn">```</span></span>
-<span id="cb349-4"><a href="rmarkdown.html#cb349-4"></a></span>
-<span id="cb349-5"><a href="rmarkdown.html#cb349-5"></a>As we can see in \ref{fig:spell}</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb357-1"><a href="rmarkdown.html#cb357-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:spell}RStudio Task Bar&quot;}</span></span>
+<span id="cb357-2"><a href="rmarkdown.html#cb357-2"></a><span class="bn">knitr::include_graphics(&#39;./spell.png&#39;)</span></span>
+<span id="cb357-3"><a href="rmarkdown.html#cb357-3"></a><span class="bn">```</span></span>
+<span id="cb357-4"><a href="rmarkdown.html#cb357-4"></a></span>
+<span id="cb357-5"><a href="rmarkdown.html#cb357-5"></a>As we can see in \ref{fig:spell}</span></code></pre></div>
 <p>turns into</p>
-<div class="figure"><span id="fig:unnamed-chunk-451"></span>
+<div class="figure"><span id="fig:unnamed-chunk-460"></span>
 <img src="files/markdown/spell.png" alt="\label{fig:spell}RStudio Task Bar" width="75%" />
 <p class="caption">
 Figure 11.1: RStudio Task Bar
@@ -529,13 +530,13 @@ Figure 11.1: RStudio Task Bar
 <ul>
 <li>New page</li>
 </ul>
-<div class="sourceCode" id="cb350"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb350-1"><a href="rmarkdown.html#cb350-1"></a>\newpage</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb358-1"><a href="rmarkdown.html#cb358-1"></a>\newpage</span></code></pre></div>
 <ul>
 <li>Centering a Line</li>
 </ul>
-<div class="sourceCode" id="cb351"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb351-1"><a href="rmarkdown.html#cb351-1"></a>\begin{center}</span>
-<span id="cb351-2"><a href="rmarkdown.html#cb351-2"></a>Text to be centred.</span>
-<span id="cb351-3"><a href="rmarkdown.html#cb351-3"></a>\end{center}</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb359-1"><a href="rmarkdown.html#cb359-1"></a>\begin{center}</span>
+<span id="cb359-2"><a href="rmarkdown.html#cb359-2"></a>Text to be centred.</span>
+<span id="cb359-3"><a href="rmarkdown.html#cb359-3"></a>\end{center}</span></code></pre></div>
 </div>
 </div>
 <div id="bibliography" class="section level3 unnumbered">
@@ -589,11 +590,11 @@ Text [@grolemund:2016, pp. 33-35, 38-39 and *passim*].</code></pre>
 <p>You can only edit this file in LaTeX</p>
 <p>If you want to learn more about , there is another Moodle Skills Module called <a href="https://moodle.warwick.ac.uk/course/view.php?id=42025">Academic Writing in LaTeX</a> available.</p>
 <p>Input</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb355-1"><a href="rmarkdown.html#cb355-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb355-2"><a href="rmarkdown.html#cb355-2"></a></span>
-<span id="cb355-3"><a href="rmarkdown.html#cb355-3"></a>Text [@grolemund:2016, p. 361]</span>
-<span id="cb355-4"><a href="rmarkdown.html#cb355-4"></a></span>
-<span id="cb355-5"><a href="rmarkdown.html#cb355-5"></a><span class="fu"># References</span></span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb363-1"><a href="rmarkdown.html#cb363-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb363-2"><a href="rmarkdown.html#cb363-2"></a></span>
+<span id="cb363-3"><a href="rmarkdown.html#cb363-3"></a>Text [@grolemund:2016, p. 361]</span>
+<span id="cb363-4"><a href="rmarkdown.html#cb363-4"></a></span>
+<span id="cb363-5"><a href="rmarkdown.html#cb363-5"></a><span class="fu"># References</span></span></code></pre></div>
 <p>turns into this output</p>
 <p><img src="files/markdown/bib.png" width="100%" /></p>
 </div>

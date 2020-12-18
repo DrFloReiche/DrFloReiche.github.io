@@ -262,6 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-intuition"><i class="fa fa-check"></i>Logit - The Intuition</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-estimation"><i class="fa fa-check"></i>Logit - The Estimation</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---the-output"><i class="fa fa-check"></i>Logit - The Output</a></li>
+<li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---interpreting-the-coefficients"><i class="fa fa-check"></i>Logit - Interpreting the Coefficients</a></li>
 <li class="chapter" data-level="" data-path="logit.html"><a href="logit.html#logit---model-fit"><i class="fa fa-check"></i>Logit - Model Fit</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="logit.html"><a href="logit.html#summary-8"><i class="fa fa-check"></i><b>10.2</b> Summary</a><ul>
@@ -392,25 +393,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb325-23"><a href="logit.html#cb325-23"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">1415.4</span></span>
 <span id="cb325-24"><a href="logit.html#cb325-24"></a></span>
 <span id="cb325-25"><a href="logit.html#cb325-25"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
-<p>I will take you throught his output but by bit now.</p>
+<p>I will take you throught his output bit by bit now.</p>
 </div>
 <div id="logit---the-output" class="section level3 unnumbered">
 <h3>Logit - The Output</h3>
-<p>The Model</p>
+<p>As always, R first shows you the formula for the model estimated.</p>
 <p><img src="images/10/output_model.png" width="75%" /></p>
-<p>The Coefficients</p>
-<p><img src="images/10/output_coeff.png" width="75%" /></p>
-<p>The p-value</p>
-<p><img src="images/10/output_p.png" width="75%" /></p>
-<p>Interpreting the p-value</p>
+<p>You will find the coefficients further down below. As explained before, you are not able to interpret them as in OLS. What you can say though, is:</p>
 <ul>
-<li>We require <span class="math inline">\(p\le 0.05\)</span></li>
-<li>Our p-value for the  coefficient is 0.0731</li>
-<li>It is therefore larger than the required threshold</li>
-<li>Conclusion: Age had no significant impact on the probability to survive the sinking of the Titanic</li>
+<li>Direction: does the independent variable have a positive or a negative influence on the dependent variable?</li>
+<li>Size: you can compare the size effect of different coefficients as in “this is larger than”, or “this is smaller than”. In effect, the size of coefficients determines how steep our s-shaped CDF is, and so the higher the coefficient, the steeper the curve.</li>
 </ul>
-<p>Missing Data</p>
+<p><img src="images/10/output_coeff.png" width="75%" /></p>
+<p>Before you can interpret the coefficients, however, you need to see whether they are statistically significant. If they are not, then the numbers have just occurred by chance, and we cannot take any message from them. We do this by looking at the p-value:</p>
+<p><img src="images/10/output_p.png" width="75%" /></p>
+<p>In the social sciences we generally require a 95% confidence level, or a p-value <span class="math inline">\(p\le 0.05\)</span>. Our p-value for the <code>age</code> coefficient is 0.0731 and is therefore larger than the required threshold. We can draw the conclusion that age had no significant impact on the probability to survive the sinking of the Titanic!</p>
+<p>R also gives you some information on missing values in the end. It is always worthwhile looking at this, so that you are aware how many observations have actually been used for the estimation.</p>
 <p><img src="images/10/output_miss.png" width="75%" /></p>
+</div>
+<div id="logit---interpreting-the-coefficients" class="section level3 unnumbered">
+<h3>Logit - Interpreting the Coefficients</h3>
+<p>So far, I have only said that in logistic regression we cannot interpret coefficients directly, because they are not linear. There are two alternatives: log-odds and predicted probabilities.</p>
+<p>To do this, let’s look at whether age influenced the probability to travel in first-class. For this, we recode the <code>class</code> variable into a binary dummy and then estimate our model:</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="logit.html#cb326-1"></a>titanic &lt;-<span class="st"> </span>titanic <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb326-2"><a href="logit.html#cb326-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class =</span> </span>
+<span id="cb326-3"><a href="logit.html#cb326-3"></a>           <span class="kw">as.numeric</span>(</span>
+<span id="cb326-4"><a href="logit.html#cb326-4"></a>             <span class="kw">recode</span>(pclass, <span class="st">&#39;1&#39;</span>=<span class="st">&#39;1&#39;</span>, </span>
+<span id="cb326-5"><a href="logit.html#cb326-5"></a>                    <span class="st">&#39;2&#39;</span>=<span class="st">&#39;0&#39;</span>,</span>
+<span id="cb326-6"><a href="logit.html#cb326-6"></a>                    <span class="st">&#39;3&#39;</span>=<span class="st">&#39;0&#39;</span>)))</span>
+<span id="cb326-7"><a href="logit.html#cb326-7"></a></span>
+<span id="cb326-8"><a href="logit.html#cb326-8"></a>class_age &lt;-<span class="st"> </span><span class="kw">glm</span>(class <span class="op">~</span><span class="st"> </span>age, </span>
+<span id="cb326-9"><a href="logit.html#cb326-9"></a>                <span class="dt">data =</span> titanic, </span>
+<span id="cb326-10"><a href="logit.html#cb326-10"></a>                <span class="dt">na.action =</span> na.exclude,</span>
+<span id="cb326-11"><a href="logit.html#cb326-11"></a>                <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb326-12"><a href="logit.html#cb326-12"></a></span>
+<span id="cb326-13"><a href="logit.html#cb326-13"></a><span class="kw">summary</span>(class_age)</span>
+<span id="cb326-14"><a href="logit.html#cb326-14"></a></span>
+<span id="cb326-15"><a href="logit.html#cb326-15"></a>Call<span class="op">:</span></span>
+<span id="cb326-16"><a href="logit.html#cb326-16"></a><span class="kw">glm</span>(<span class="dt">formula =</span> class <span class="op">~</span><span class="st"> </span>age, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> titanic, </span>
+<span id="cb326-17"><a href="logit.html#cb326-17"></a>    <span class="dt">na.action =</span> na.exclude)</span>
+<span id="cb326-18"><a href="logit.html#cb326-18"></a></span>
+<span id="cb326-19"><a href="logit.html#cb326-19"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb326-20"><a href="logit.html#cb326-20"></a><span class="st">    </span>Min       1Q   Median       3Q      Max  </span>
+<span id="cb326-21"><a href="logit.html#cb326-21"></a><span class="fl">-1.9882</span>  <span class="fl">-0.7403</span>  <span class="fl">-0.5623</span>   <span class="fl">0.8336</span>   <span class="fl">2.5173</span>  </span>
+<span id="cb326-22"><a href="logit.html#cb326-22"></a></span>
+<span id="cb326-23"><a href="logit.html#cb326-23"></a>Coefficients<span class="op">:</span></span>
+<span id="cb326-24"><a href="logit.html#cb326-24"></a><span class="st">             </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </span>
+<span id="cb326-25"><a href="logit.html#cb326-25"></a>(Intercept) <span class="fl">-3.187456</span>   <span class="fl">0.213561</span>  <span class="fl">-14.93</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb326-26"><a href="logit.html#cb326-26"></a>age          <span class="fl">0.067767</span>   <span class="fl">0.005825</span>   <span class="fl">11.63</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb326-27"><a href="logit.html#cb326-27"></a><span class="op">---</span></span>
+<span id="cb326-28"><a href="logit.html#cb326-28"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb326-29"><a href="logit.html#cb326-29"></a></span>
+<span id="cb326-30"><a href="logit.html#cb326-30"></a>(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)</span>
+<span id="cb326-31"><a href="logit.html#cb326-31"></a></span>
+<span id="cb326-32"><a href="logit.html#cb326-32"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">1223.3</span>  on <span class="dv">1045</span>  degrees of freedom</span>
+<span id="cb326-33"><a href="logit.html#cb326-33"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">1056.1</span>  on <span class="dv">1044</span>  degrees of freedom</span>
+<span id="cb326-34"><a href="logit.html#cb326-34"></a>  (<span class="dv">263</span> observations deleted due to missingness)</span>
+<span id="cb326-35"><a href="logit.html#cb326-35"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">1060.1</span></span>
+<span id="cb326-36"><a href="logit.html#cb326-36"></a></span>
+<span id="cb326-37"><a href="logit.html#cb326-37"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<p>As you can see our coefficients are highly significant, and we can interpret them. Let’s start with log-odds.</p>
+<p><strong>Log-Odds</strong></p>
+<p><strong>Predicted Probabilities</strong></p>
+<p>Evaluate the probability on the y-axis for different values on the x-axis.
+We only need to set these values on the x-axis.</p>
+<p>Let us first get a basic overview of the variable . We can do this by calling</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="logit.html#cb327-1"></a><span class="kw">summary</span>(titanic<span class="op">$</span>age)</span>
+<span id="cb327-2"><a href="logit.html#cb327-2"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA<span class="st">&#39;s </span></span>
+<span id="cb327-3"><a href="logit.html#cb327-3"></a><span class="st"> 0.1667 21.0000 28.0000 29.8811 39.0000 80.0000     263 </span></span></code></pre></div>
+<ul>
+<li>Average age: 30</li>
+<li>Minimum age: 0.17 (two months)</li>
+<li>Maximum age: 80</li>
+<li>269 missing observations</li>
+</ul>
+<p>We need to exclude missing values when calculating the mean age by setting <code>na.rm=TRUE</code></p>
+<p>Set <code>age</code> to its mean now, by typing:</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="logit.html#cb328-1"></a>meanage =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">mean</span>(titanic<span class="op">$</span>age, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
+<p>Calculate the probability to be in First Class</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="logit.html#cb329-1"></a><span class="kw">predict</span>(logit, meanage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb329-2"><a href="logit.html#cb329-2"></a>        <span class="dv">1</span> </span>
+<span id="cb329-3"><a href="logit.html#cb329-3"></a><span class="fl">0.4079249</span> </span></code></pre></div>
+<p>At mean age, the probability to travel First Class was 24%.</p>
+<p>Now we set <code>age</code> to its maximum</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="logit.html#cb330-1"></a>maxage =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">max</span>(titanic<span class="op">$</span>age, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
+<p>and calculate the predicted probability again. It has changed very drastically:</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="logit.html#cb331-1"></a><span class="kw">predict</span>(logit, maxage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb331-2"><a href="logit.html#cb331-2"></a>        <span class="dv">1</span> </span>
+<span id="cb331-3"><a href="logit.html#cb331-3"></a><span class="fl">0.3168212</span> </span></code></pre></div>
+<p>Now we can make statements such as:</p>
+<ul>
+<li>At average age, the probability to travel First Class on the Titanic was 24%.</li>
+<li>At maximum age of 80 years, this probability increases by 66% to 90%.</li>
+</ul>
+<p>What is the predicted probability for different ages?</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="logit.html#cb332-1"></a><span class="kw">summary</span>(titanic<span class="op">$</span>age)</span>
+<span id="cb332-2"><a href="logit.html#cb332-2"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA<span class="st">&#39;s </span></span>
+<span id="cb332-3"><a href="logit.html#cb332-3"></a><span class="st"> 0.1667 21.0000 28.0000 29.8811 39.0000 80.0000     263 </span></span>
+<span id="cb332-4"><a href="logit.html#cb332-4"></a></span>
+<span id="cb332-5"><a href="logit.html#cb332-5"></a><span class="st">xage &lt;- seq(0, 80, 1)</span></span>
+<span id="cb332-6"><a href="logit.html#cb332-6"></a></span>
+<span id="cb332-7"><a href="logit.html#cb332-7"></a><span class="st">yage &lt;- predict(logit, list(age = xage),type=&quot;response&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="logit.html#cb333-1"></a><span class="kw">plot</span>(xage, yage, <span class="dt">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;First Class&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-445-1.png" width="672" /></p>
+<p>If you want this to look jazzy, use <code>GGPLOT2</code>:</p>
+<p><img src="main_files/figure-html/unnamed-chunk-446-1.png" width="672" /></p>
 </div>
 <div id="logit---model-fit" class="section level3 unnumbered">
 <h3>Logit - Model Fit</h3>
@@ -419,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Simple: The proportion of correctly predicted deaths</li>
 </ul>
 <p>But</p>
-<p><img src="main_files/figure-html/unnamed-chunk-438-1.png" width="80%" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-447-1.png" width="80%" /></p>
 <p>ROC-Curves</p>
 <ul>
 <li>Capture the trade-off between correctly predicting 1s and 0s.</li>
@@ -432,9 +519,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Install </p>
 <p>Package:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="logit.html#cb326-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="logit.html#cb334-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
 <p>Example</p>
-<p><img src="main_files/figure-html/unnamed-chunk-440-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-449-1.png" width="672" /></p>
 <p>Interpretation</p>
 <ul>
 <li>The further away from the diagonal, the better the model predicts 1s and 0s.</li>
@@ -446,22 +533,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Load the package</li>
 </ul>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="logit.html#cb327-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="logit.html#cb335-1"></a><span class="kw">library</span>(pROC)</span></code></pre></div>
 <ul>
 <li>and then calculate the curve:</li>
 </ul>
 
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="logit.html#cb328-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb328-2"><a href="logit.html#cb328-2"></a></span>
-<span id="cb328-3"><a href="logit.html#cb328-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
-<span id="cb328-4"><a href="logit.html#cb328-4"></a></span>
-<span id="cb328-5"><a href="logit.html#cb328-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
-<span id="cb328-6"><a href="logit.html#cb328-6"></a></span>
-<span id="cb328-7"><a href="logit.html#cb328-7"></a><span class="kw">auc</span>(roc)</span>
-<span id="cb328-8"><a href="logit.html#cb328-8"></a>Area under the curve<span class="op">:</span><span class="st"> </span><span class="fl">0.5245</span></span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="logit.html#cb336-1"></a>prob_sur &lt;-<span class="st"> </span><span class="kw">predict</span>(logit, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb336-2"><a href="logit.html#cb336-2"></a></span>
+<span id="cb336-3"><a href="logit.html#cb336-3"></a>titanic<span class="op">$</span>prob_sur &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_sur)</span>
+<span id="cb336-4"><a href="logit.html#cb336-4"></a></span>
+<span id="cb336-5"><a href="logit.html#cb336-5"></a>roc &lt;-<span class="st"> </span><span class="kw">roc</span>(titanic<span class="op">$</span>survived, titanic<span class="op">$</span>prob_sur)</span>
+<span id="cb336-6"><a href="logit.html#cb336-6"></a></span>
+<span id="cb336-7"><a href="logit.html#cb336-7"></a><span class="kw">auc</span>(roc)</span>
+<span id="cb336-8"><a href="logit.html#cb336-8"></a>Area under the curve<span class="op">:</span><span class="st"> </span><span class="fl">0.5245</span></span></code></pre></div>
 <p>We can also look at this graphically again:</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="logit.html#cb329-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-443-1.png" width="70%" /></p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="logit.html#cb337-1"></a><span class="kw">plot</span>(roc, <span class="dt">print.auc=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-452-1.png" width="70%" /></p>
 </div>
 </div>
 <div id="summary-8" class="section level2">
