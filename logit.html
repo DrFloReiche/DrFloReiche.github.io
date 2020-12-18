@@ -321,45 +321,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In the previous Chapter we encountered linear regression analysis which allowed us to quantify the amount and direction of one or more independent variables on a continuous dependent variable. I already mentioned there, that there is also a type of a regression which can deal with a binary dependent variable. This is usually a yes/no scenario, such as democracy / autocracy, war / peace, trade agreement / no trade agreement, … You get the picture. Many problems or questions in political science have binary outcomes, and so you are about to learn a very important and useful method to answer research questions. As in the previous Chapter, I will take you some through some theory first, and then we are applying the theory to an empirical example. This time concerning the survival of passengers on the Titanic.</p>
 <div id="logit---the-intuition" class="section level3 unnumbered">
 <h3>Logit - The Intuition</h3>
-<p>COVID-19 has put a bit of a damper on this, but a question we can all relate to is whether to go out tonight, or not. The “propensity to go out” is not directly observable, and so we call this a <strong>latent variable</strong>. You can imagine this runing from minus infinity to plus infinity, and at some point on this continuum you are making the decision to go out. Let’s call this point tau (<span class="math inline">\(\tau\)</span>). Graphicallt, this would look like this:</p>
-<p><img src="images/10/tau.png" width="75%" /></p>
-<p>Your inclinationt to go out, is likely to be influenced by the amount of money you have in your wallet / bank. If you are broke, you will be less inclined (if you are sensible), and if you are swimming in it, you will be more inclined. So, if the “propensity to go out” (which remember is running from minus to plus infinity) is influenced by your budget, then let’s construct a graph, in which we pop the propensity to go out on the y-axis, and the budget on the x-axis. If we assume that this relationship is linear, we can fit a regression line into this coordinate system, just as we have in the previous Chapter:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-425-1.png" width="95%" /></p>
+<p>COVID-19 has put a bit of a damper on this, but a question we can all relate to is whether to go out tonight, or not. The “propensity to go out” is not directly observable, and so we call this a <strong>latent variable</strong>. You can imagine this runing from minus infinity to plus infinity, and at some point on this continuum you are making the decision to go out. Let’s call this point tau (<span class="math inline">\(\tau\)</span>). Graphically, this would look like this:</p>
+<p><img src="images/10/tau.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Your inclination to go out, is likely to be influenced by the amount of money you have in your wallet / bank. If you are broke, you will be less inclined (if you are sensible), and if you are swimming in it, you will be more inclined. So, if the “propensity to go out” (which remember is running from minus to plus infinity) is influenced by your budget, then let’s construct a graph, in which we pop the propensity to go out on the y-axis, and the budget on the x-axis. If we assume that this relationship is linear, we can fit a regression line into this coordinate system, just as we have in the previous Chapter:</p>
+<p><img src="main_files/figure-html/unnamed-chunk-424-1.png" width="95%" style="display: block; margin: auto;" /></p>
 <p>Whilst this visualises the influence of the budget on the latent variable, what we are aiming for is to make a prediction about the probability of you going out, or not.</p>
 <p>Now imagine, your budget is <span class="math inline">\(x_{1}\)</span>. This is way below the threshold <span class="math inline">\(\tau\)</span> and so the most likely scenario here is that you will stay home. But all of your friends are going out, the sun is shining, and you just scored a 74 in an essay. So there is some chance you will still go out. It is less likely than the budgetary constraint would suggest, but it is there. Where I am going with this is this: over every budgetary point, there is a probability distribution (for logit a bell-shaped curve not unlike the normal distribution, called a logistic distribution<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>). If we draw these probability distributions in, the graph looks like this:</p>
-<p><img src="images/10/tau_prob.png" width="751" height="90%" /></p>
+<p><img src="images/10/tau_prob.png" width="751" height="90%" style="display: block; margin: auto;" /></p>
 <p>The probability of going out is coloured in in grey. You can see that even at <span class="math inline">\(x_{1}\)</span> there is a teeny bit of probability that you will go out. As the budget increases, more and more probability slides over the threshold <span class="math inline">\(\tau\)</span>, until we reach the magical point of <span class="math inline">\(x_{5}\)</span> where the probability is 50%. From there on, the amount of probability sliding over <span class="math inline">\(\tau\)</span> is steadily decreasing, because of the shape of the logistic distribution.</p>
 <p>We can depict the amount of probability (or the size of the grey area) for each <span class="math inline">\(x_{i}\)</span> in a separate graph which is called the Cumulative Probability (Density Function), or short CDF:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-427-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-426-1.png" width="672" /></p>
 <p>This s-shaped curve now gives us the probability (of going out) for each <span class="math inline">\(x_{i}\)</span> (budget). It is important to note that the relationship is not linear, as in linear regression. Because we have an s-shaped curve the increase in probability when going from <span class="math inline">\(x_{2}\)</span> to <span class="math inline">\(x_{3}\)</span> is not the same as going from <span class="math inline">\(x_{3}\)</span> to <span class="math inline">\(x_{4}\)</span>. You can see that visualised here:</p>
-<p><img src="images/10/probability.png" width="1033" height="90%" /></p>
+<p><img src="images/10/probability.png" width="1033" height="90%" style="display: block; margin: auto;" /></p>
 <p>We will therefore not be able to interpret the coefficients R returns to us as in OLS. We will be using log-odds, and predicted probabilities instead. But one step at a time. Let’s first get our hands dirty with some data.</p>
 </div>
 <div id="logit---the-estimation" class="section level3 unnumbered">
 <h3>Logit - The Estimation</h3>
-<p>We are going to use data on the passengers of the Titanic in 1912 and will investigate why or why not passengers survived.</p>
-<p>The Logit Command</p>
+<p>We are going to use data on the passengers of the Titanic in 1912 and will investigate why or why not they survived.</p>
+<p>Schematically, we can write the logit command as follows:</p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="logit.html#cb322-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(depvar <span class="op">~</span><span class="st"> </span>indepvar, </span>
 <span id="cb322-2"><a href="logit.html#cb322-2"></a>             <span class="dt">data =</span> mydata, </span>
 <span id="cb322-3"><a href="logit.html#cb322-3"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
-<p>Data Preparation</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="logit.html#cb323-1"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
-<span id="cb323-2"><a href="logit.html#cb323-2"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
-<p>The First Logit - Hypotheses</p>
-<blockquote>
+<p>Before we can use it, however, we need to set the working directory, load the data, and prepare our dependent variable, turning it into a factor:</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="logit.html#cb323-1"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb323-2"><a href="logit.html#cb323-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb323-3"><a href="logit.html#cb323-3"></a></span>
+<span id="cb323-4"><a href="logit.html#cb323-4"></a>titanic &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/titanic.xlsx&quot;</span>, <span class="dt">sheet=</span><span class="st">&quot;titanic_full&quot;</span>)</span>
+<span id="cb323-5"><a href="logit.html#cb323-5"></a>Warning <span class="cf">in</span> <span class="kw">read_fun</span>(<span class="dt">path =</span> <span class="kw">enc2native</span>(<span class="kw">normalizePath</span>(path)), <span class="dt">sheet_i =</span></span>
+<span id="cb323-6"><a href="logit.html#cb323-6"></a>sheet, <span class="op">:</span><span class="st"> </span>Coercing text to numeric <span class="cf">in</span> N1306 <span class="op">/</span><span class="st"> </span>R1306C14<span class="op">:</span><span class="st"> &#39;328&#39;</span></span>
+<span id="cb323-7"><a href="logit.html#cb323-7"></a></span>
+<span id="cb323-8"><a href="logit.html#cb323-8"></a>titanic<span class="op">$</span>survived &lt;-<span class="st"> </span><span class="kw">factor</span>(titanic<span class="op">$</span>survived, </span>
+<span id="cb323-9"><a href="logit.html#cb323-9"></a>                           <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;no&quot;</span>, <span class="st">&quot;yes&quot;</span>))</span></code></pre></div>
+<p>As our first investigation. let’s see whether a passenger’s age has influenced the probability to survive the sinking. Our hypotheses are as follows:</p>
 <ul>
 <li><span class="math inline">\(H_{0}\)</span>: Age had no impact on the probability to survive</li>
 <li><span class="math inline">\(H_{a}\)</span>: Age had an impact on the probability to survive</li>
 </ul>
-</blockquote>
-<p>The Null-Hypothesis visualised</p>
+<p>The null-hypothesis</p>
+<p>If we visualise the Null-Hypothesis, we would find the same probability of surviving for every <span class="math inline">\(x_{i}\)</span>:</p>
 <p><img src="main_files/figure-html/unnamed-chunk-431-1.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>The First Logit</p>
+<p>Let’s see how much evidence against this hypothesis we have by estimating the logit model:</p>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="logit.html#cb324-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(survived <span class="op">~</span><span class="st"> </span>age, </span>
 <span id="cb324-2"><a href="logit.html#cb324-2"></a>             <span class="dt">data =</span> titanic, </span>
 <span id="cb324-3"><a href="logit.html#cb324-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
 <span id="cb324-4"><a href="logit.html#cb324-4"></a>             <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
-<p>Output</p>
+<p>As in OLS we can obtain the results by using the <code>summary()</code> function:</p>
 
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="logit.html#cb325-1"></a><span class="kw">summary</span>(logit)</span>
 <span id="cb325-2"><a href="logit.html#cb325-2"></a></span>
@@ -386,6 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb325-23"><a href="logit.html#cb325-23"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">1415.4</span></span>
 <span id="cb325-24"><a href="logit.html#cb325-24"></a></span>
 <span id="cb325-25"><a href="logit.html#cb325-25"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<p>I will take you throught his output but by bit now.</p>
 </div>
 <div id="logit---the-output" class="section level3 unnumbered">
 <h3>Logit - The Output</h3>
