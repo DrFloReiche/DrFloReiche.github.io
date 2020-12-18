@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="main_files/figure-html/unnamed-chunk-426-1.png" width="672" /></p>
 <p>This s-shaped curve now gives us the probability (of going out) for each <span class="math inline">\(x_{i}\)</span> (budget). It is important to note that the relationship is not linear, as in linear regression. Because we have an s-shaped curve the increase in probability when going from <span class="math inline">\(x_{2}\)</span> to <span class="math inline">\(x_{3}\)</span> is not the same as going from <span class="math inline">\(x_{3}\)</span> to <span class="math inline">\(x_{4}\)</span>. You can see that visualised here:</p>
 <p><img src="images/10/probability.png" width="1033" height="90%" style="display: block; margin: auto;" /></p>
-<p>We will therefore not be able to interpret the coefficients R returns to us as in OLS. We will be using log-odds, and predicted probabilities instead. But one step at a time. Let’s first get our hands dirty with some data.</p>
+<p>We will therefore not be able to interpret the coefficients R returns to us as in OLS. We will be using predicted probabilities instead. But one step at a time. Let’s first get our hands dirty with some data.</p>
 </div>
 <div id="logit---the-estimation" class="section level3 unnumbered">
 <h3>Logit - The Estimation</h3>
@@ -413,8 +413,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="logit---interpreting-the-coefficients" class="section level3 unnumbered">
 <h3>Logit - Interpreting the Coefficients</h3>
-<p>So far, I have only said that in logistic regression we cannot interpret coefficients directly, because they are not linear. There are two alternatives: log-odds and predicted probabilities.</p>
-<p>To do this, let’s look at whether age influenced the probability to travel in first-class. For this, we recode the <code>class</code> variable into a binary dummy and then estimate our model:</p>
+<p>So far, I have only said that in logistic regression we cannot interpret coefficients directly, because they are not linear.</p>
+<p>Let’s look at whether age influenced the probability to travel in first-class, as age was not significant for survival (and we can only interpret coefficients if they are statistically significant - I know I am labouring the point, but you would be surprised how often this goes wrong in essays). For this, we recode the <code>class</code> variable into a binary dummy and then estimate our model:</p>
 <div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="logit.html#cb326-1"></a>titanic &lt;-<span class="st"> </span>titanic <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb326-2"><a href="logit.html#cb326-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">class =</span> </span>
 <span id="cb326-3"><a href="logit.html#cb326-3"></a>           <span class="kw">as.numeric</span>(</span>
@@ -452,9 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb326-35"><a href="logit.html#cb326-35"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">1060.1</span></span>
 <span id="cb326-36"><a href="logit.html#cb326-36"></a></span>
 <span id="cb326-37"><a href="logit.html#cb326-37"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
-<p>As you can see our coefficients are highly significant, and we can interpret them. Let’s start with log-odds.</p>
-<p><strong>Log-Odds</strong></p>
-<p><strong>Predicted Probabilities</strong></p>
+<p>As you can see our coefficients are highly significant, and we can interpret them.</p>
 <p>Evaluate the probability on the y-axis for different values on the x-axis.
 We only need to set these values on the x-axis.</p>
 <p>Let us first get a basic overview of the variable . We can do this by calling</p>
@@ -471,16 +469,16 @@ We only need to set these values on the x-axis.</p>
 <p>Set <code>age</code> to its mean now, by typing:</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="logit.html#cb328-1"></a>meanage =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">mean</span>(titanic<span class="op">$</span>age, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
 <p>Calculate the probability to be in First Class</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="logit.html#cb329-1"></a><span class="kw">predict</span>(logit, meanage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="logit.html#cb329-1"></a><span class="kw">predict</span>(class_age, meanage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
 <span id="cb329-2"><a href="logit.html#cb329-2"></a>        <span class="dv">1</span> </span>
-<span id="cb329-3"><a href="logit.html#cb329-3"></a><span class="fl">0.4079249</span> </span></code></pre></div>
+<span id="cb329-3"><a href="logit.html#cb329-3"></a><span class="fl">0.2382104</span> </span></code></pre></div>
 <p>At mean age, the probability to travel First Class was 24%.</p>
 <p>Now we set <code>age</code> to its maximum</p>
 <div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="logit.html#cb330-1"></a>maxage =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">max</span>(titanic<span class="op">$</span>age, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span></code></pre></div>
 <p>and calculate the predicted probability again. It has changed very drastically:</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="logit.html#cb331-1"></a><span class="kw">predict</span>(logit, maxage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="logit.html#cb331-1"></a><span class="kw">predict</span>(class_age, maxage, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
 <span id="cb331-2"><a href="logit.html#cb331-2"></a>        <span class="dv">1</span> </span>
-<span id="cb331-3"><a href="logit.html#cb331-3"></a><span class="fl">0.3168212</span> </span></code></pre></div>
+<span id="cb331-3"><a href="logit.html#cb331-3"></a><span class="fl">0.9032496</span> </span></code></pre></div>
 <p>Now we can make statements such as:</p>
 <ul>
 <li>At average age, the probability to travel First Class on the Titanic was 24%.</li>
@@ -493,7 +491,7 @@ We only need to set these values on the x-axis.</p>
 <span id="cb332-4"><a href="logit.html#cb332-4"></a></span>
 <span id="cb332-5"><a href="logit.html#cb332-5"></a><span class="st">xage &lt;- seq(0, 80, 1)</span></span>
 <span id="cb332-6"><a href="logit.html#cb332-6"></a></span>
-<span id="cb332-7"><a href="logit.html#cb332-7"></a><span class="st">yage &lt;- predict(logit, list(age = xage),type=&quot;response&quot;)</span></span></code></pre></div>
+<span id="cb332-7"><a href="logit.html#cb332-7"></a><span class="st">yage &lt;- predict(class_age, list(age = xage),type=&quot;response&quot;)</span></span></code></pre></div>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="logit.html#cb333-1"></a><span class="kw">plot</span>(xage, yage, <span class="dt">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;First Class&quot;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-445-1.png" width="672" /></p>
 <p>If you want this to look jazzy, use <code>GGPLOT2</code>:</p>
@@ -758,7 +756,7 @@ We only need to set these values on the x-axis.</p>
 <div class="footnotes">
 <hr />
 <ol start="4">
-<li id="fn4"><p>For probit, the normal distribution is used. This would lead to very similar results, but we cannot communicate our results in log-odds, and because this is a very useful tool, I am using logit here.<a href="logit.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>For probit, the normal distribution is used. This would lead to very similar results.<a href="logit.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
