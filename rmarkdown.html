@@ -321,52 +321,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="usage" class="section level3 unnumbered">
 <h3>Usage</h3>
-<ul>
-<li><p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.</p></li>
-<li><p>For collaborating with other data scientists (including future you!), who are interested in both your conclusions, and how you reached them ( i.e. the code).</p></li>
-<li><p>As an environment in which to do data science, as a modern day lab notebook where you can capture not only what you did, but also what you were thinking.</p></li>
-</ul>
-
-<p>(<a href="https://r4ds.had.co.nz/r-markdown.html" class="uri">https://r4ds.had.co.nz/r-markdown.html</a>)</p>
+<p>The use of R Markdown is very flexible and allows you to reveal as much of the coding as you wish. You can simply regard it as a text processing programme with the added benefit of being able to include the output of your analysis seamlessly in the document you produce. All modules with coding element in PAIS require you to also submit the RScript, or indeed, the Markdown file (this is an .Rmd file). So it is a good idea to start writing your assessments in Markdown for those modules.</p>
+<p>Looking ahead, you can use Markdown to “collaborate with other data scientists who are interested in both your conclusions, and how you reached them ( i.e. the code).” Or you can see Markdown as “an environment in which to do data science, as a modern day lab notebook where you can capture not only what you did, but also what you were thinking.” (<a href="https://r4ds.had.co.nz/r-markdown.html" class="uri">https://r4ds.had.co.nz/r-markdown.html</a>)</p>
 </div>
 <div id="the-components-of-an-r-markdown-document" class="section level3 unnumbered">
 <h3>The Components of an R Markdown Document</h3>
+<p>To start with a Markdown document, you need to click “File”, “New File”, and “R Markdown”. R will ask you what type of output you wish to create. We will assume that you want to create a document here, either in pdf format, or MS Word. In what follows, I am creating a pdf (which is preferable, because it doesn’t mess up the formatting), but the process is almost identical for a Word file.</p>
+<p>This selection process opens a new window in R with three components:</p>
 <ul>
 <li>YAML</li>
 <li>Text</li>
 <li>Code Chunks</li>
 </ul>
+<p>I will take you through these components in turn now.</p>
 <div id="the-yaml" class="section level4 unnumbered">
 <h4>The YAML</h4>
-<ul>
-<li>Acronym for “Yet Another Markup Language”</li>
-<li>Contains the settings for the entire document</li>
-<li>Primarily parameters and bibliography</li>
-</ul>
+<p>The bit at the top of the window is called YAML which is an acronym for “Yet Another Markup Language”. This part determines the formatting and settings of your document. For now, it is OK to accept the defaults (amending the title and author of the document, of course), but it’s worthwhile investing a little more time into this at a later stage to personalise the document to your preferences.</p>
 </div>
 <div id="text" class="section level4 unnumbered">
 <h4>Text</h4>
-<p>Writing</p>
-<ul>
-<li>Basically, you can just write the text as you always would.</li>
-<li>It’s “only” the formatting that differs.</li>
-</ul>
-<p>Compiling</p>
-<ul>
-<li>Markdown is not WYSIWYG (What You See Is What You Get)</li>
-<li>Compiling is called “Knitting”</li>
-</ul>
+<p>Basically, you can just write the text as you always would. You will have noted that there is no formatting menu appearing as in Word, for example, to make text bold, etc. We will do this with code and I will explain how to do this further below.</p>
+<p>R Markdown is not WYSIWYG (What You See Is What You Get). Much rather, R needs to compile your document once you have finished writing it. In this process - which is called “knitting” - R formats the text, executes all the code chunks (see below), and includes their output in the document. Start by compiling the template R has given you when you created the document. For this, simply press the “knit” button in the task bar:</p>
 <p><img src="files/markdown/spell.png" width="75%" /></p>
+<p>When you knit the document for the first time, R will ask you where to save the document. It is sensible to treat the Markdown document just like an RScript: create a new folder which will serve as the working directory for the document.</p>
+<p>The Markdown template is trying to be helpful in that it introduces you to a number of formatting options, such as headings, links, bold setting, etc. But I will take you through these in a more systematic way now. Let’s start with headings.</p>
 <div id="headings" class="section level5 unnumbered">
 <h5>Headings</h5>
+<p>You create a heading by preceding it with a hashtag. The number of hashtags determines the the depth of the numbering:</p>
 <pre><code># Heading 
 
 ## Sub-Heading
 
 ### Sub-Sub Heading</code></pre>
+<p>As a default, R does not number these. But you can add numbering by changing the YAML slightly:</p>
+<p><img src="images/11/number.png" width="100%" /></p>
+<p>I have set the output type “pdf_document” to a new line, indented it, and finished the line with a colon. This flags to R that there is more formatting coming for this document type. The next line is self-explanatory, I think.</p>
+<p>Note that I have reduced the number of hashtags in the document to one, to make “R Markdown” a level 1 heading.</p>
 </div>
 <div id="emphasis" class="section level5 unnumbered">
 <h5>Emphasis</h5>
+<p>The word “Knit” is set in bold in the sample document, and this is achieved by sandwiching the word in two asterisks on either side. Here is a list of the most commonly used modes of emphasising text:</p>
 <pre><code>*italic*
 
 **bold**
@@ -377,18 +371,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="links" class="section level5 unnumbered">
 <h5>Links</h5>
-<ul>
-<li>Just insert the link</li>
-</ul>
+<p>If you wish to include a hyperlink, you can just copy and paste it into the document, and Markdown will recognise it as such. URLs look ugly, though, and so it sometimes makes sense to hide it with a caption. For this, you set the text you wish to be displayed in the document into squared brackets and the URL in normal brackets directly after:</p>
+<pre><code>[Analysing Quantitative Data with R](https://drfloreiche.github.io/)</code></pre>
 </div>
 <div id="lists-1" class="section level5 unnumbered">
 <h5>Lists</h5>
+<p>To insert a bullet point list, simply start a bullet point with a dash. If you want to create sub-bullet points, you need to indent the line with 4 spaces, or 2 tabs.</p>
 <pre><code>- 
     - 
     - </code></pre>
 </div>
 <div id="numbered-lists" class="section level5 unnumbered">
 <h5>Numbered Lists</h5>
+<p>The same principle applies to numbered lists:</p>
 <pre><code>1. 
     a. 
     b. 
@@ -396,6 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="line-breaks" class="section level5 unnumbered">
 <h5>Line Breaks</h5>
+<p>Once you finish a paragraph and you want to start a new one, you need to have one clear line in between.</p>
 <p>This will not produce a line break:</p>
 <pre><code>line 1
 line 2</code></pre>
@@ -406,44 +402,37 @@ line 2</code></pre>
 </div>
 <div id="block-quotes" class="section level5 unnumbered">
 <h5>Block Quotes</h5>
-<ul>
-<li>Simply precede the quote with “<span class="math inline">\(&gt;\)</span>”</li>
-<li>The block will turn green when you do so</li>
-</ul>
+<p>If you are quoting more than 40 words from a source, the quote needs to be indented as a block. To achieve this in Markdown, simply precede the quote with “<span class="math inline">\(&gt;\)</span>”. The block will turn green (only in R, not in your document) when you do so.</p>
 </div>
 <div id="equations" class="section level5 unnumbered">
 <h5>Equations</h5>
-<ul>
-<li>Two ways to set equations</li>
-<li>Either wrapped in $ signs</li>
-</ul>
-<div class="sourceCode" id="cb346"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb346-1"><a href="rmarkdown.html#cb346-1"></a>$ equation $</span></code></pre></div>
-<ul>
-<li>or</li>
-</ul>
-<div class="sourceCode" id="cb347"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown.html#cb347-1"></a>\begin{equation}</span>
-<span id="cb347-2"><a href="rmarkdown.html#cb347-2"></a>equation</span>
-<span id="cb347-3"><a href="rmarkdown.html#cb347-3"></a>\end{equation}</span></code></pre></div>
-<p>Example</p>
-<p>The command</p>
+<p>If you have ever tried to set an equation in MS Word, you probably wanted to frisbee you computer out of the window – it is cumbersome and painful. In R, it’s a breeze. You have two ways to start an equation. Either you wrap it in $ signs:</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb347-1"><a href="rmarkdown.html#cb347-1"></a>$ equation $</span></code></pre></div>
+<p>or you start an equation environment (if you are doing the LaTeX course you will recognise this):</p>
 <div class="sourceCode" id="cb348"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb348-1"><a href="rmarkdown.html#cb348-1"></a>\begin{equation}</span>
-<span id="cb348-2"><a href="rmarkdown.html#cb348-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
+<span id="cb348-2"><a href="rmarkdown.html#cb348-2"></a>equation</span>
 <span id="cb348-3"><a href="rmarkdown.html#cb348-3"></a>\end{equation}</span></code></pre></div>
-<p>results in:</p>
-<p><span class="math display">\[\begin{equation}
-  Y = \beta_{0} + \beta_{1} x_{i} + \epsilon
-\end{equation}\]</span></p>
-<p>To suppress the numbering you type:</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb349-1"><a href="rmarkdown.html#cb349-1"></a>\begin{equation*}</span>
+<p>To give you an example, the command</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb349-1"><a href="rmarkdown.html#cb349-1"></a>\begin{equation}</span>
 <span id="cb349-2"><a href="rmarkdown.html#cb349-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
-<span id="cb349-3"><a href="rmarkdown.html#cb349-3"></a>\end{equation*}</span></code></pre></div>
+<span id="cb349-3"><a href="rmarkdown.html#cb349-3"></a>\end{equation}</span></code></pre></div>
+<p>results in:</p>
+<p><span class="math display" id="eq:example">\[\begin{equation}
+  Y = \beta_{0} + \beta_{1} x_{i} + \epsilon
+\tag{11.1}
+\end{equation}\]</span></p>
+<p>Note that subscripts are produced by underscores, and superscripts are produced with a hat.</p>
+<p>To suppress the numbering of the equation you need to include an asterisk in the equation environment:</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb350-1"><a href="rmarkdown.html#cb350-1"></a>\begin{equation*}</span>
+<span id="cb350-2"><a href="rmarkdown.html#cb350-2"></a>Y = \beta_{0} + \beta_{1} x_{i} + \epsilon</span>
+<span id="cb350-3"><a href="rmarkdown.html#cb350-3"></a>\end{equation*}</span></code></pre></div>
 <p><span class="math display">\[\begin{equation*}
   Y = \beta_{0} + \beta_{1} x_{i} + \epsilon
 \end{equation*}\]</span></p>
 </div>
 <div id="list-of-symbols" class="section level5 unnumbered">
 <h5>List of Symbols</h5>
-<p>You can find a good compilation of symbols here:</p>
+<p>Especially for equations you will need to use a range of special characters and symbols. You can find a good compilation of symbols here:</p>
 <p><a href="https://latex.wikia.org/wiki/List_of_LaTeX_symbols" class="uri">https://latex.wikia.org/wiki/List_of_LaTeX_symbols</a></p>
 </div>
 </div>
@@ -452,60 +441,60 @@ line 2</code></pre>
 <div id="in-line-r-code" class="section level5 unnumbered">
 <h5>In-Line R Code</h5>
 <p>You can include R Code in Markdown by wrapping it in</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb350-1"><a href="rmarkdown.html#cb350-1"></a><span class="bn">```{r}</span></span>
-<span id="cb350-2"><a href="rmarkdown.html#cb350-2"></a></span>
-<span id="cb350-3"><a href="rmarkdown.html#cb350-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb351-1"><a href="rmarkdown.html#cb351-1"></a><span class="bn">```{r}</span></span>
+<span id="cb351-2"><a href="rmarkdown.html#cb351-2"></a></span>
+<span id="cb351-3"><a href="rmarkdown.html#cb351-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>Shortcut:</p>
 <ul>
 <li>Mac: Option + Command + I</li>
 <li>Windows: Ctrl + Alt + I</li>
 </ul>
 <p>Example</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb351-1"><a href="rmarkdown.html#cb351-1"></a><span class="bn">```{r}</span></span>
-<span id="cb351-2"><a href="rmarkdown.html#cb351-2"></a><span class="bn">5+3</span></span>
-<span id="cb351-3"><a href="rmarkdown.html#cb351-3"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb352-1"><a href="rmarkdown.html#cb352-1"></a><span class="bn">```{r}</span></span>
+<span id="cb352-2"><a href="rmarkdown.html#cb352-2"></a><span class="bn">5+3</span></span>
+<span id="cb352-3"><a href="rmarkdown.html#cb352-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>results in</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rmarkdown.html#cb352-1"></a><span class="dv">5</span><span class="op">+</span><span class="dv">3</span></span>
-<span id="cb352-2"><a href="rmarkdown.html#cb352-2"></a>[<span class="dv">1</span>] <span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="rmarkdown.html#cb353-1"></a><span class="dv">5</span><span class="op">+</span><span class="dv">3</span></span>
+<span id="cb353-2"><a href="rmarkdown.html#cb353-2"></a>[<span class="dv">1</span>] <span class="dv">8</span></span></code></pre></div>
 <p>Chunk Options</p>
 <p>Types of Output Suppressed by:</p>
 <p><img src="files/markdown/table.png" width="75%" /></p>
 <p>Examples</p>
 <p>Display, but not calculate:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb353-1"><a href="rmarkdown.html#cb353-1"></a><span class="bn">```{r eval=F}</span></span>
-<span id="cb353-2"><a href="rmarkdown.html#cb353-2"></a><span class="bn">5+3</span></span>
-<span id="cb353-3"><a href="rmarkdown.html#cb353-3"></a><span class="bn">```</span></span></code></pre></div>
-<p>Suppress Messages from Packages</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb354-1"><a href="rmarkdown.html#cb354-1"></a><span class="bn">```{r message=F}</span></span>
-<span id="cb354-2"><a href="rmarkdown.html#cb354-2"></a><span class="bn">library(tidyverse)</span></span>
+<div class="sourceCode" id="cb354"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb354-1"><a href="rmarkdown.html#cb354-1"></a><span class="bn">```{r eval=F}</span></span>
+<span id="cb354-2"><a href="rmarkdown.html#cb354-2"></a><span class="bn">5+3</span></span>
 <span id="cb354-3"><a href="rmarkdown.html#cb354-3"></a><span class="bn">```</span></span></code></pre></div>
-<p>Suppress Messages from Packages and only display</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb355-1"><a href="rmarkdown.html#cb355-1"></a><span class="bn">```{r message=F, eval=F}</span></span>
+<p>Suppress Messages from Packages</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb355-1"><a href="rmarkdown.html#cb355-1"></a><span class="bn">```{r message=F}</span></span>
 <span id="cb355-2"><a href="rmarkdown.html#cb355-2"></a><span class="bn">library(tidyverse)</span></span>
 <span id="cb355-3"><a href="rmarkdown.html#cb355-3"></a><span class="bn">```</span></span></code></pre></div>
+<p>Suppress Messages from Packages and only display</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb356-1"><a href="rmarkdown.html#cb356-1"></a><span class="bn">```{r message=F, eval=F}</span></span>
+<span id="cb356-2"><a href="rmarkdown.html#cb356-2"></a><span class="bn">library(tidyverse)</span></span>
+<span id="cb356-3"><a href="rmarkdown.html#cb356-3"></a><span class="bn">```</span></span></code></pre></div>
 </div>
 </div>
 </div>
 <div id="figures-and-graphs" class="section level3 unnumbered">
 <h3>Figures and Graphs</h3>
 <p>You can also use this to include figures and graphs:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb356-1"><a href="rmarkdown.html#cb356-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;}</span></span>
-<span id="cb356-2"><a href="rmarkdown.html#cb356-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
-<span id="cb356-3"><a href="rmarkdown.html#cb356-3"></a><span class="bn">```</span></span></code></pre></div>
-<p>Add a Caption!</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb357-1"><a href="rmarkdown.html#cb357-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:test}Test Caption&quot;}</span></span>
+<div class="sourceCode" id="cb357"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb357-1"><a href="rmarkdown.html#cb357-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;}</span></span>
 <span id="cb357-2"><a href="rmarkdown.html#cb357-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
 <span id="cb357-3"><a href="rmarkdown.html#cb357-3"></a><span class="bn">```</span></span></code></pre></div>
+<p>Add a Caption!</p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb358-1"><a href="rmarkdown.html#cb358-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:test}Test Caption&quot;}</span></span>
+<span id="cb358-2"><a href="rmarkdown.html#cb358-2"></a><span class="bn">knitr::include_graphics(&#39;./filename.png&#39;)</span></span>
+<span id="cb358-3"><a href="rmarkdown.html#cb358-3"></a><span class="bn">```</span></span></code></pre></div>
 <p>And then refer to it in the text with</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb358-1"><a href="rmarkdown.html#cb358-1"></a>\ref{fig:test}</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb359-1"><a href="rmarkdown.html#cb359-1"></a>\ref{fig:test}</span></code></pre></div>
 <p>Example</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb359-1"><a href="rmarkdown.html#cb359-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:spell}RStudio Task Bar&quot;}</span></span>
-<span id="cb359-2"><a href="rmarkdown.html#cb359-2"></a><span class="bn">knitr::include_graphics(&#39;./spell.png&#39;)</span></span>
-<span id="cb359-3"><a href="rmarkdown.html#cb359-3"></a><span class="bn">```</span></span>
-<span id="cb359-4"><a href="rmarkdown.html#cb359-4"></a></span>
-<span id="cb359-5"><a href="rmarkdown.html#cb359-5"></a>As we can see in \ref{fig:spell}</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb360-1"><a href="rmarkdown.html#cb360-1"></a><span class="bn">```{r echo=FALSE, out.width=&#39;75%&#39;, fig.cap=&quot;\\label{fig:spell}RStudio Task Bar&quot;}</span></span>
+<span id="cb360-2"><a href="rmarkdown.html#cb360-2"></a><span class="bn">knitr::include_graphics(&#39;./spell.png&#39;)</span></span>
+<span id="cb360-3"><a href="rmarkdown.html#cb360-3"></a><span class="bn">```</span></span>
+<span id="cb360-4"><a href="rmarkdown.html#cb360-4"></a></span>
+<span id="cb360-5"><a href="rmarkdown.html#cb360-5"></a>As we can see in \ref{fig:spell}</span></code></pre></div>
 <p>turns into</p>
-<div class="figure"><span id="fig:unnamed-chunk-458"></span>
+<div class="figure"><span id="fig:unnamed-chunk-459"></span>
 <img src="files/markdown/spell.png" alt="\label{fig:spell}RStudio Task Bar" width="75%" />
 <p class="caption">
 Figure 11.1: RStudio Task Bar
@@ -524,13 +513,13 @@ Figure 11.1: RStudio Task Bar
 <ul>
 <li>New page</li>
 </ul>
-<div class="sourceCode" id="cb360"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb360-1"><a href="rmarkdown.html#cb360-1"></a>\newpage</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb361-1"><a href="rmarkdown.html#cb361-1"></a>\newpage</span></code></pre></div>
 <ul>
 <li>Centering a Line</li>
 </ul>
-<div class="sourceCode" id="cb361"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb361-1"><a href="rmarkdown.html#cb361-1"></a>\begin{center}</span>
-<span id="cb361-2"><a href="rmarkdown.html#cb361-2"></a>Text to be centred.</span>
-<span id="cb361-3"><a href="rmarkdown.html#cb361-3"></a>\end{center}</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb362-1"><a href="rmarkdown.html#cb362-1"></a>\begin{center}</span>
+<span id="cb362-2"><a href="rmarkdown.html#cb362-2"></a>Text to be centred.</span>
+<span id="cb362-3"><a href="rmarkdown.html#cb362-3"></a>\end{center}</span></code></pre></div>
 </div>
 </div>
 <div id="bibliography" class="section level3 unnumbered">
@@ -539,6 +528,7 @@ Figure 11.1: RStudio Task Bar
 <li>It is possible (and most highly recommended) to include an automatic bibliography in Markdown</li>
 <li>This requires more coding language and LaTeX</li>
 </ul>
+<p><img src="images/11/bibliography.png" width="75%" /></p>
 <p>Perks</p>
 <ul>
 <li>It only includes what you cite</li>
@@ -584,11 +574,11 @@ Text [@grolemund:2016, pp. 33-35, 38-39 and *passim*].</code></pre>
 <p>You can only edit this file in LaTeX</p>
 <p>If you want to learn more about , there is another Moodle Skills Module called <a href="https://moodle.warwick.ac.uk/course/view.php?id=42025">Academic Writing in LaTeX</a> available.</p>
 <p>Input</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb365-1"><a href="rmarkdown.html#cb365-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb365-2"><a href="rmarkdown.html#cb365-2"></a></span>
-<span id="cb365-3"><a href="rmarkdown.html#cb365-3"></a>Text [@grolemund:2016, p. 361]</span>
-<span id="cb365-4"><a href="rmarkdown.html#cb365-4"></a></span>
-<span id="cb365-5"><a href="rmarkdown.html#cb365-5"></a><span class="fu"># References</span></span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb366-1"><a href="rmarkdown.html#cb366-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb366-2"><a href="rmarkdown.html#cb366-2"></a></span>
+<span id="cb366-3"><a href="rmarkdown.html#cb366-3"></a>Text [@grolemund:2016, p. 361]</span>
+<span id="cb366-4"><a href="rmarkdown.html#cb366-4"></a></span>
+<span id="cb366-5"><a href="rmarkdown.html#cb366-5"></a><span class="fu"># References</span></span></code></pre></div>
 <p>turns into this output</p>
 <p><img src="files/markdown/bib.png" width="75%" /></p>
 </div>
@@ -627,58 +617,58 @@ and understand the analysis completely from the text. (p.10)</p>
 <li>Its beautiful aesthetics</li>
 </ul>
 <p>Estimating a Model, replicating the work by Fearon and Laitin (2003)</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="rmarkdown.html#cb366-1"></a><span class="kw">library</span>(haven)</span>
-<span id="cb366-2"><a href="rmarkdown.html#cb366-2"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb366-3"><a href="rmarkdown.html#cb366-3"></a><span class="kw">library</span>(pROC)</span>
-<span id="cb366-4"><a href="rmarkdown.html#cb366-4"></a><span class="kw">library</span>(stargazer)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="rmarkdown.html#cb367-1"></a><span class="kw">library</span>(haven)</span>
+<span id="cb367-2"><a href="rmarkdown.html#cb367-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb367-3"><a href="rmarkdown.html#cb367-3"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb367-4"><a href="rmarkdown.html#cb367-4"></a><span class="kw">library</span>(stargazer)</span></code></pre></div>
 <p>Data Prep</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="rmarkdown.html#cb367-1"></a>fearon &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="st">&quot;data/fearon.dta&quot;</span>)</span>
-<span id="cb367-2"><a href="rmarkdown.html#cb367-2"></a></span>
-<span id="cb367-3"><a href="rmarkdown.html#cb367-3"></a>fearon<span class="op">$</span>onset[fearon<span class="op">$</span>onset<span class="op">==</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb367-4"><a href="rmarkdown.html#cb367-4"></a></span>
-<span id="cb367-5"><a href="rmarkdown.html#cb367-5"></a>fearon<span class="op">$</span>onset &lt;-<span class="st"> </span><span class="kw">as.factor</span>(fearon<span class="op">$</span>onset)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="rmarkdown.html#cb368-1"></a>fearon &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="st">&quot;data/fearon.dta&quot;</span>)</span>
+<span id="cb368-2"><a href="rmarkdown.html#cb368-2"></a></span>
+<span id="cb368-3"><a href="rmarkdown.html#cb368-3"></a>fearon<span class="op">$</span>onset[fearon<span class="op">$</span>onset<span class="op">==</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb368-4"><a href="rmarkdown.html#cb368-4"></a></span>
+<span id="cb368-5"><a href="rmarkdown.html#cb368-5"></a>fearon<span class="op">$</span>onset &lt;-<span class="st"> </span><span class="kw">as.factor</span>(fearon<span class="op">$</span>onset)</span></code></pre></div>
 <p>Model 1</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="rmarkdown.html#cb368-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl,</span>
-<span id="cb368-2"><a href="rmarkdown.html#cb368-2"></a>             <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> logit),</span>
-<span id="cb368-3"><a href="rmarkdown.html#cb368-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
-<span id="cb368-4"><a href="rmarkdown.html#cb368-4"></a>             <span class="dt">data =</span> fearon)</span>
-<span id="cb368-5"><a href="rmarkdown.html#cb368-5"></a></span>
-<span id="cb368-6"><a href="rmarkdown.html#cb368-6"></a>prob_model1 &lt;-<span class="st"> </span><span class="kw">predict</span>(model1, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb368-7"><a href="rmarkdown.html#cb368-7"></a>fearon<span class="op">$</span>prob_model1 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model1)</span>
-<span id="cb368-8"><a href="rmarkdown.html#cb368-8"></a></span>
-<span id="cb368-9"><a href="rmarkdown.html#cb368-9"></a>roc_model1 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model1)</span>
-<span id="cb368-10"><a href="rmarkdown.html#cb368-10"></a>Setting levels<span class="op">:</span><span class="st"> </span>control =<span class="st"> </span><span class="dv">0</span>, case =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb368-11"><a href="rmarkdown.html#cb368-11"></a>Setting direction<span class="op">:</span><span class="st"> </span>controls <span class="op">&lt;</span><span class="st"> </span>cases</span></code></pre></div>
-<p>Model 2</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="rmarkdown.html#cb369-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl <span class="op">+</span><span class="st"> </span>lpopl1,</span>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="rmarkdown.html#cb369-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl,</span>
 <span id="cb369-2"><a href="rmarkdown.html#cb369-2"></a>             <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> logit),</span>
 <span id="cb369-3"><a href="rmarkdown.html#cb369-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
 <span id="cb369-4"><a href="rmarkdown.html#cb369-4"></a>             <span class="dt">data =</span> fearon)</span>
 <span id="cb369-5"><a href="rmarkdown.html#cb369-5"></a></span>
-<span id="cb369-6"><a href="rmarkdown.html#cb369-6"></a>prob_model2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model2, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb369-7"><a href="rmarkdown.html#cb369-7"></a>fearon<span class="op">$</span>prob_model2 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model2)</span>
+<span id="cb369-6"><a href="rmarkdown.html#cb369-6"></a>prob_model1 &lt;-<span class="st"> </span><span class="kw">predict</span>(model1, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb369-7"><a href="rmarkdown.html#cb369-7"></a>fearon<span class="op">$</span>prob_model1 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model1)</span>
 <span id="cb369-8"><a href="rmarkdown.html#cb369-8"></a></span>
-<span id="cb369-9"><a href="rmarkdown.html#cb369-9"></a>roc_model2 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model2)</span>
+<span id="cb369-9"><a href="rmarkdown.html#cb369-9"></a>roc_model1 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model1)</span>
 <span id="cb369-10"><a href="rmarkdown.html#cb369-10"></a>Setting levels<span class="op">:</span><span class="st"> </span>control =<span class="st"> </span><span class="dv">0</span>, case =<span class="st"> </span><span class="dv">1</span></span>
 <span id="cb369-11"><a href="rmarkdown.html#cb369-11"></a>Setting direction<span class="op">:</span><span class="st"> </span>controls <span class="op">&lt;</span><span class="st"> </span>cases</span></code></pre></div>
-<p>Model 3</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="rmarkdown.html#cb370-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl <span class="op">+</span><span class="st"> </span>lpopl1 <span class="op">+</span><span class="st"> </span>lmtnest,</span>
+<p>Model 2</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="rmarkdown.html#cb370-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl <span class="op">+</span><span class="st"> </span>lpopl1,</span>
 <span id="cb370-2"><a href="rmarkdown.html#cb370-2"></a>             <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> logit),</span>
 <span id="cb370-3"><a href="rmarkdown.html#cb370-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
 <span id="cb370-4"><a href="rmarkdown.html#cb370-4"></a>             <span class="dt">data =</span> fearon)</span>
 <span id="cb370-5"><a href="rmarkdown.html#cb370-5"></a></span>
-<span id="cb370-6"><a href="rmarkdown.html#cb370-6"></a>prob_model3 &lt;-<span class="st"> </span><span class="kw">predict</span>(model3, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb370-7"><a href="rmarkdown.html#cb370-7"></a>fearon<span class="op">$</span>prob_model3 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model3)</span>
+<span id="cb370-6"><a href="rmarkdown.html#cb370-6"></a>prob_model2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model2, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb370-7"><a href="rmarkdown.html#cb370-7"></a>fearon<span class="op">$</span>prob_model2 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model2)</span>
 <span id="cb370-8"><a href="rmarkdown.html#cb370-8"></a></span>
-<span id="cb370-9"><a href="rmarkdown.html#cb370-9"></a>roc_model3 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model3)</span>
+<span id="cb370-9"><a href="rmarkdown.html#cb370-9"></a>roc_model2 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model2)</span>
 <span id="cb370-10"><a href="rmarkdown.html#cb370-10"></a>Setting levels<span class="op">:</span><span class="st"> </span>control =<span class="st"> </span><span class="dv">0</span>, case =<span class="st"> </span><span class="dv">1</span></span>
 <span id="cb370-11"><a href="rmarkdown.html#cb370-11"></a>Setting direction<span class="op">:</span><span class="st"> </span>controls <span class="op">&lt;</span><span class="st"> </span>cases</span></code></pre></div>
+<p>Model 3</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="rmarkdown.html#cb371-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">glm</span>(onset <span class="op">~</span><span class="st"> </span>gdpenl <span class="op">+</span><span class="st"> </span>lpopl1 <span class="op">+</span><span class="st"> </span>lmtnest,</span>
+<span id="cb371-2"><a href="rmarkdown.html#cb371-2"></a>             <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> logit),</span>
+<span id="cb371-3"><a href="rmarkdown.html#cb371-3"></a>             <span class="dt">na.action =</span> na.exclude,</span>
+<span id="cb371-4"><a href="rmarkdown.html#cb371-4"></a>             <span class="dt">data =</span> fearon)</span>
+<span id="cb371-5"><a href="rmarkdown.html#cb371-5"></a></span>
+<span id="cb371-6"><a href="rmarkdown.html#cb371-6"></a>prob_model3 &lt;-<span class="st"> </span><span class="kw">predict</span>(model3, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb371-7"><a href="rmarkdown.html#cb371-7"></a>fearon<span class="op">$</span>prob_model3 &lt;-<span class="st"> </span><span class="kw">unlist</span>(prob_model3)</span>
+<span id="cb371-8"><a href="rmarkdown.html#cb371-8"></a></span>
+<span id="cb371-9"><a href="rmarkdown.html#cb371-9"></a>roc_model3 &lt;-<span class="st"> </span><span class="kw">roc</span>(fearon<span class="op">$</span>onset, fearon<span class="op">$</span>prob_model3)</span>
+<span id="cb371-10"><a href="rmarkdown.html#cb371-10"></a>Setting levels<span class="op">:</span><span class="st"> </span>control =<span class="st"> </span><span class="dv">0</span>, case =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb371-11"><a href="rmarkdown.html#cb371-11"></a>Setting direction<span class="op">:</span><span class="st"> </span>controls <span class="op">&lt;</span><span class="st"> </span>cases</span></code></pre></div>
 <p>Now we use <code>stargazer</code> to put the results into a table. I am suppressing the annoying header here, and am adjusting the font size, too.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb371-1"><a href="rmarkdown.html#cb371-1"></a><span class="bn">```{r results=&#39;asis&#39;, eval=F, message=F, tab.cap = NULL}</span></span>
-<span id="cb371-2"><a href="rmarkdown.html#cb371-2"></a><span class="bn">stargazer(model1, model2, model3,</span></span>
-<span id="cb371-3"><a href="rmarkdown.html#cb371-3"></a><span class="bn">          header=F, </span></span>
-<span id="cb371-4"><a href="rmarkdown.html#cb371-4"></a><span class="bn">          font.size = &quot;tiny&quot;)</span></span>
-<span id="cb371-5"><a href="rmarkdown.html#cb371-5"></a><span class="bn">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb372-1"><a href="rmarkdown.html#cb372-1"></a><span class="bn">```{r results=&#39;asis&#39;, eval=F, message=F, tab.cap = NULL}</span></span>
+<span id="cb372-2"><a href="rmarkdown.html#cb372-2"></a><span class="bn">stargazer(model1, model2, model3,</span></span>
+<span id="cb372-3"><a href="rmarkdown.html#cb372-3"></a><span class="bn">          header=F, </span></span>
+<span id="cb372-4"><a href="rmarkdown.html#cb372-4"></a><span class="bn">          font.size = &quot;tiny&quot;)</span></span>
+<span id="cb372-5"><a href="rmarkdown.html#cb372-5"></a><span class="bn">```</span></span></code></pre></div>
 <p>Output</p>
 <p><img src="images/11/tab1.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>You will note that <code>stargazer</code> adds the asterisks that Stimson is so strongly (and correctly) opposed to. The rating of lower p-values with increasing numbers of asterisks suggests a certain goal (like wanting to stay in a five-star hotel), but this goal is nonesense. If you want to know more about this, I recommend an excellent module called “Introduction to Quantitative Political Analysis I” where you learn about the p-value and the Type I and Type II errors. <code>stargazer</code>’s practice to include these asterisks is therefore misguided, but since most journals insist on this nonsense, it is worthwhile to get used to it.</p>
@@ -686,16 +676,16 @@ and understand the analysis completely from the text. (p.10)</p>
 <ul>
 <li>In descending Order</li>
 </ul>
-<div class="sourceCode" id="cb372"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb372-1"><a href="rmarkdown.html#cb372-1"></a>\Huge</span>
-<span id="cb372-2"><a href="rmarkdown.html#cb372-2"></a>\huge</span>
-<span id="cb372-3"><a href="rmarkdown.html#cb372-3"></a>\LARGE</span>
-<span id="cb372-4"><a href="rmarkdown.html#cb372-4"></a>\Large</span>
-<span id="cb372-5"><a href="rmarkdown.html#cb372-5"></a>\large</span>
-<span id="cb372-6"><a href="rmarkdown.html#cb372-6"></a>\normalsize</span>
-<span id="cb372-7"><a href="rmarkdown.html#cb372-7"></a>\small</span>
-<span id="cb372-8"><a href="rmarkdown.html#cb372-8"></a>\footnotesize</span>
-<span id="cb372-9"><a href="rmarkdown.html#cb372-9"></a>\scriptsize</span>
-<span id="cb372-10"><a href="rmarkdown.html#cb372-10"></a>\tiny</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb373-1"><a href="rmarkdown.html#cb373-1"></a>\Huge</span>
+<span id="cb373-2"><a href="rmarkdown.html#cb373-2"></a>\huge</span>
+<span id="cb373-3"><a href="rmarkdown.html#cb373-3"></a>\LARGE</span>
+<span id="cb373-4"><a href="rmarkdown.html#cb373-4"></a>\Large</span>
+<span id="cb373-5"><a href="rmarkdown.html#cb373-5"></a>\large</span>
+<span id="cb373-6"><a href="rmarkdown.html#cb373-6"></a>\normalsize</span>
+<span id="cb373-7"><a href="rmarkdown.html#cb373-7"></a>\small</span>
+<span id="cb373-8"><a href="rmarkdown.html#cb373-8"></a>\footnotesize</span>
+<span id="cb373-9"><a href="rmarkdown.html#cb373-9"></a>\scriptsize</span>
+<span id="cb373-10"><a href="rmarkdown.html#cb373-10"></a>\tiny</span></code></pre></div>
 <p>I will ignore the <code>{r results='asis', echo=F, message=F, tab.cap = NULL}</code> environment now, and only show you the actual <code>stargazer</code> script to be used.</p>
 <p>Adding Variable Names, again quoting Stimson:</p>
 <blockquote>
@@ -703,26 +693,15 @@ and understand the analysis completely from the text. (p.10)</p>
 variable names to stand for concepts. These are personal code words that
 convey no meaning to readers. (p.10)</p>
 </blockquote>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="rmarkdown.html#cb373-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
-<span id="cb373-2"><a href="rmarkdown.html#cb373-2"></a>          <span class="dt">header=</span>F, </span>
-<span id="cb373-3"><a href="rmarkdown.html#cb373-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
-<span id="cb373-4"><a href="rmarkdown.html#cb373-4"></a>          <span class="dt">covariate.labels =</span> <span class="kw">c</span>(<span class="st">&quot;GDP per capita (in logged 1985</span><span class="ch">\\</span><span class="st">$ thousands)&quot;</span>,</span>
-<span id="cb373-5"><a href="rmarkdown.html#cb373-5"></a>                               <span class="st">&quot;Population (logged, in thousands)&quot;</span>,</span>
-<span id="cb373-6"><a href="rmarkdown.html#cb373-6"></a>                               <span class="st">&quot;Mountainous Terrain (logged </span><span class="ch">\\</span><span class="st">% of total)&quot;</span>),</span>
-<span id="cb373-7"><a href="rmarkdown.html#cb373-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>)</span></code></pre></div>
-<p><img src="images/11/tab2.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>Suppress Statistics</p>
 <div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="rmarkdown.html#cb374-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
 <span id="cb374-2"><a href="rmarkdown.html#cb374-2"></a>          <span class="dt">header=</span>F, </span>
 <span id="cb374-3"><a href="rmarkdown.html#cb374-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
 <span id="cb374-4"><a href="rmarkdown.html#cb374-4"></a>          <span class="dt">covariate.labels =</span> <span class="kw">c</span>(<span class="st">&quot;GDP per capita (in logged 1985</span><span class="ch">\\</span><span class="st">$ thousands)&quot;</span>,</span>
 <span id="cb374-5"><a href="rmarkdown.html#cb374-5"></a>                               <span class="st">&quot;Population (logged, in thousands)&quot;</span>,</span>
 <span id="cb374-6"><a href="rmarkdown.html#cb374-6"></a>                               <span class="st">&quot;Mountainous Terrain (logged </span><span class="ch">\\</span><span class="st">% of total)&quot;</span>),</span>
-<span id="cb374-7"><a href="rmarkdown.html#cb374-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>,</span>
-<span id="cb374-8"><a href="rmarkdown.html#cb374-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>))</span></code></pre></div>
-<p><img src="images/11/tab3.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>For a full list of abbreviations for statistics, see page 22 of <a href="https://cran.r-project.org/web/packages/stargazer/stargazer.pdf" class="uri">https://cran.r-project.org/web/packages/stargazer/stargazer.pdf</a></p>
-<p>Add ROC Curve</p>
+<span id="cb374-7"><a href="rmarkdown.html#cb374-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>)</span></code></pre></div>
+<p><img src="images/11/tab2.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Suppress Statistics</p>
 <div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="rmarkdown.html#cb375-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
 <span id="cb375-2"><a href="rmarkdown.html#cb375-2"></a>          <span class="dt">header=</span>F, </span>
 <span id="cb375-3"><a href="rmarkdown.html#cb375-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
@@ -730,11 +709,10 @@ convey no meaning to readers. (p.10)</p>
 <span id="cb375-5"><a href="rmarkdown.html#cb375-5"></a>                               <span class="st">&quot;Population (logged, in thousands)&quot;</span>,</span>
 <span id="cb375-6"><a href="rmarkdown.html#cb375-6"></a>                               <span class="st">&quot;Mountainous Terrain (logged </span><span class="ch">\\</span><span class="st">% of total)&quot;</span>),</span>
 <span id="cb375-7"><a href="rmarkdown.html#cb375-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>,</span>
-<span id="cb375-8"><a href="rmarkdown.html#cb375-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>),</span>
-<span id="cb375-9"><a href="rmarkdown.html#cb375-9"></a>          <span class="dt">add.lines =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;ROC Curve&quot;</span>, <span class="kw">auc</span>(roc_model1), </span>
-<span id="cb375-10"><a href="rmarkdown.html#cb375-10"></a>                              <span class="kw">auc</span>(roc_model2), <span class="kw">auc</span>(roc_model3))))</span></code></pre></div>
-<p><img src="images/11/tab4.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>Round ROC Curve</p>
+<span id="cb375-8"><a href="rmarkdown.html#cb375-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>))</span></code></pre></div>
+<p><img src="images/11/tab3.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>For a full list of abbreviations for statistics, see page 22 of <a href="https://cran.r-project.org/web/packages/stargazer/stargazer.pdf" class="uri">https://cran.r-project.org/web/packages/stargazer/stargazer.pdf</a></p>
+<p>Add ROC Curve</p>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="rmarkdown.html#cb376-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
 <span id="cb376-2"><a href="rmarkdown.html#cb376-2"></a>          <span class="dt">header=</span>F, </span>
 <span id="cb376-3"><a href="rmarkdown.html#cb376-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
@@ -743,12 +721,10 @@ convey no meaning to readers. (p.10)</p>
 <span id="cb376-6"><a href="rmarkdown.html#cb376-6"></a>                               <span class="st">&quot;Mountainous Terrain (logged </span><span class="ch">\\</span><span class="st">% of total)&quot;</span>),</span>
 <span id="cb376-7"><a href="rmarkdown.html#cb376-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>,</span>
 <span id="cb376-8"><a href="rmarkdown.html#cb376-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>),</span>
-<span id="cb376-9"><a href="rmarkdown.html#cb376-9"></a>          <span class="dt">add.lines =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;ROC Curve&quot;</span>, <span class="kw">round</span>(<span class="kw">auc</span>(roc_model1),<span class="dv">2</span>), </span>
-<span id="cb376-10"><a href="rmarkdown.html#cb376-10"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model2),<span class="dv">2</span>), </span>
-<span id="cb376-11"><a href="rmarkdown.html#cb376-11"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model3),<span class="dv">2</span>))))</span></code></pre></div>
-<p><img src="images/11/tab5.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>You can also control the number of decimal places with the <code>digits =</code> option more generally. For example, if you want to round everything to two decimal places, you would set <code>digits = 2</code>.</p>
-<p>Lastly, let’s label the Table, so that a reader knows what is being shown.</p>
+<span id="cb376-9"><a href="rmarkdown.html#cb376-9"></a>          <span class="dt">add.lines =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;ROC Curve&quot;</span>, <span class="kw">auc</span>(roc_model1), </span>
+<span id="cb376-10"><a href="rmarkdown.html#cb376-10"></a>                              <span class="kw">auc</span>(roc_model2), <span class="kw">auc</span>(roc_model3))))</span></code></pre></div>
+<p><img src="images/11/tab4.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>Round ROC Curve</p>
 <div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="rmarkdown.html#cb377-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
 <span id="cb377-2"><a href="rmarkdown.html#cb377-2"></a>          <span class="dt">header=</span>F, </span>
 <span id="cb377-3"><a href="rmarkdown.html#cb377-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
@@ -759,8 +735,22 @@ convey no meaning to readers. (p.10)</p>
 <span id="cb377-8"><a href="rmarkdown.html#cb377-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>),</span>
 <span id="cb377-9"><a href="rmarkdown.html#cb377-9"></a>          <span class="dt">add.lines =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;ROC Curve&quot;</span>, <span class="kw">round</span>(<span class="kw">auc</span>(roc_model1),<span class="dv">2</span>), </span>
 <span id="cb377-10"><a href="rmarkdown.html#cb377-10"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model2),<span class="dv">2</span>), </span>
-<span id="cb377-11"><a href="rmarkdown.html#cb377-11"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model3),<span class="dv">2</span>))),</span>
-<span id="cb377-12"><a href="rmarkdown.html#cb377-12"></a>          <span class="dt">title =</span> <span class="st">&quot;Determinants of Civil War (Fearon and Laitin, 2003)&quot;</span>)</span></code></pre></div>
+<span id="cb377-11"><a href="rmarkdown.html#cb377-11"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model3),<span class="dv">2</span>))))</span></code></pre></div>
+<p><img src="images/11/tab5.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>You can also control the number of decimal places with the <code>digits =</code> option more generally. For example, if you want to round everything to two decimal places, you would set <code>digits = 2</code>.</p>
+<p>Lastly, let’s label the Table, so that a reader knows what is being shown.</p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="rmarkdown.html#cb378-1"></a><span class="kw">stargazer</span>(model1, model2, model3,</span>
+<span id="cb378-2"><a href="rmarkdown.html#cb378-2"></a>          <span class="dt">header=</span>F, </span>
+<span id="cb378-3"><a href="rmarkdown.html#cb378-3"></a>          <span class="dt">font.size =</span> <span class="st">&quot;tiny&quot;</span>, </span>
+<span id="cb378-4"><a href="rmarkdown.html#cb378-4"></a>          <span class="dt">covariate.labels =</span> <span class="kw">c</span>(<span class="st">&quot;GDP per capita (in logged 1985</span><span class="ch">\\</span><span class="st">$ thousands)&quot;</span>,</span>
+<span id="cb378-5"><a href="rmarkdown.html#cb378-5"></a>                               <span class="st">&quot;Population (logged, in thousands)&quot;</span>,</span>
+<span id="cb378-6"><a href="rmarkdown.html#cb378-6"></a>                               <span class="st">&quot;Mountainous Terrain (logged </span><span class="ch">\\</span><span class="st">% of total)&quot;</span>),</span>
+<span id="cb378-7"><a href="rmarkdown.html#cb378-7"></a>          <span class="dt">dep.var.labels   =</span> <span class="st">&quot;Onset of Civil War&quot;</span>,</span>
+<span id="cb378-8"><a href="rmarkdown.html#cb378-8"></a>          <span class="dt">omit.stat =</span> <span class="kw">c</span>(<span class="st">&quot;aic&quot;</span>, <span class="st">&quot;ll&quot;</span>),</span>
+<span id="cb378-9"><a href="rmarkdown.html#cb378-9"></a>          <span class="dt">add.lines =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;ROC Curve&quot;</span>, <span class="kw">round</span>(<span class="kw">auc</span>(roc_model1),<span class="dv">2</span>), </span>
+<span id="cb378-10"><a href="rmarkdown.html#cb378-10"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model2),<span class="dv">2</span>), </span>
+<span id="cb378-11"><a href="rmarkdown.html#cb378-11"></a>                              <span class="kw">round</span>(<span class="kw">auc</span>(roc_model3),<span class="dv">2</span>))),</span>
+<span id="cb378-12"><a href="rmarkdown.html#cb378-12"></a>          <span class="dt">title =</span> <span class="st">&quot;Determinants of Civil War (Fearon and Laitin, 2003)&quot;</span>)</span></code></pre></div>
 <p><img src="images/11/tab6.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This is a beautiful and informative Table which should be the standard to which you work.</p>
 </div>
