@@ -337,35 +337,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>The plotting syntax</h3>
 <p>Similarily to the other <code>tidyverse</code> tools explored in the previous chapter, ggplot uses its own, original approach to creating plots, which is quite different from what you have previously encouneterd in the exploratory data analysis lesson. To initialize a ggplot object, you <em>always</em> call the <code>ggplot</code> function, specifying the name of your data frame as the first argument.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="visualization.html#cb222-1"></a><span class="kw">ggplot</span>(Salaries)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-294-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
 <p>As you can see this initiates an empty plot. We then furhter specify the variables we want to associate with the object using the <code>aes()</code> function. The aes abbreviation stands for aesthetic mappings. It defines bindings between variables in the dataframe specified as the first argument of the ggplot object and aesthetic elements of the object - for example, the x and y axes of the plot, line/point colors and shapes or bar fills. For example, <code>aes(x = absences)</code> can be interpreted as <em>“link the variable absences with the x-axis of this plot”</em>.</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="visualization.html#cb223-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
 <p>Now the figure includes an x axis, with some automatically chosen tick locations. The final step is to create an actual plot. This is done by “adding” a so-called <em>geom</em> to the plot skeleton we have created so far. Geoms are simply functions used to create different plot types representing the data associated with a ggplot object through <code>ggplot</code> and <code>aes</code> - for example, <code>geom_histogram</code> is used to create a <a href="exploratory.html#histograms">histogram</a> and <code>geom_boxplot</code> to create a <a href="visualization.html#boxplots">boxplot</a>. Geoms are “added” to the <code>ggplot</code> object using the <code>+</code> operator.</p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="visualization.html#cb224-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb224-2"><a href="visualization.html#cb224-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span>
 <span id="cb224-3"><a href="visualization.html#cb224-3"></a><span class="st">`</span><span class="dt">stat_bin()</span><span class="st">`</span> using <span class="st">`</span><span class="dt">bins = 30</span><span class="st">`</span>. Pick better value with <span class="st">`</span><span class="dt">binwidth</span><span class="st">`</span>.</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-297-1.png" width="672" /></p>
 <p>We can see now that the histogram of the variable appears on the plot. The plot also comes with a message prompting us to manually specify the bin width for the histogram, which can be done through the arguments of the <code>geom</code> function - either by specifying the number of bins through <code>bins</code> or the width of individual bins through <code>binwidth</code>.</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="visualization.html#cb225-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb225-2"><a href="visualization.html#cb225-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">40</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-297-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-298-1.png" width="672" /></p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="visualization.html#cb226-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb226-2"><a href="visualization.html#cb226-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5000</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-298-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
 <p>We can also change to colors of the bins as well as their borders:</p>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="visualization.html#cb227-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb227-2"><a href="visualization.html#cb227-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5000</span>, <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-300-1.png" width="672" /></p>
 <p>As mentioned earlier, the aesthetic characteristics of the plot such as border color or fill can be treated as a representation of the data, not only the visual characteristics of the plot. For example, continuing with the <code>absences</code> example we may see the break ouf of the absences between male and female students, by specifying the <code>fill</code> argument in the aesthetic mapping:</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="visualization.html#cb228-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary, <span class="dt">fill =</span> sex)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb228-2"><a href="visualization.html#cb228-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5000</span>, <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-300-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-301-1.png" width="672" /></p>
 <p>This also automatically adds a legend on the side of the plot. The blue color represents the proportion of each bin represented by male students and the red - by female students.</p>
 <p>An important thing to note is that the aesthetic mapping created by the <code>aes()</code> function can be defined <em>globally</em> i.e. for the entire ggplot figure, as in the case above (<code>ggplot(Salaries, aes(x = salary))</code>), as well as a <em>locally</em>, i.e. only for one specific geom (<code>geom_histogram(aes(x = salary)</code>). In the former case, the entire figure will use the set aesthetic mapping, while in the latter, it will apply only to the specific geom.</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="visualization.html#cb229-1"></a><span class="kw">ggplot</span>(Salaries) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb229-2"><a href="visualization.html#cb229-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> salary, <span class="dt">fill =</span> sex), <span class="dt">binwidth =</span> <span class="dv">5000</span>,<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-301-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-302-1.png" width="672" /></p>
 <p>Note that that in this case, both global and local mappings produce exactly the same output. However, when adding multiple geom structures to one plot, as we will see later, using a global vs local aesthetic mapping can lead to very different results.</p>
 </div>
 <div id="all-about-geoms---plot-types-in-ggplot2" class="section level3 unnumbered">
@@ -376,11 +376,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The density estimate is an alternative way to draw a histogram of the data. It represents the distribution of a continous variable by drawing a line. You can see that the shape of the density plot of <code>absences</code> below directly corresponds with the histogram of this variable from the previous example.</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="visualization.html#cb230-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb230-2"><a href="visualization.html#cb230-2"></a><span class="st">  </span><span class="kw">geom_density</span>() </span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-302-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-303-1.png" width="672" /></p>
 <p>Kernel density estimates are particularly useful to compare the distribution of a variable between different values of a grouping variable. For example, we can examine the difference in the distributions of the salary depending on the position held by the individual:</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="visualization.html#cb231-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary, <span class="dt">fill =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb231-2"><a href="visualization.html#cb231-2"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-303-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
 <p>The differences are clear-cut - it appears that as expected, higher position held generally leads to higher median of earnings. However, each position also has higher variability in income, with the spread of Professors earnings more than twice as large as for Assistant Professors.</p>
 </div>
 <div id="barplots" class="section level4 unnumbered">
@@ -388,23 +388,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Histograms and kernel density estimates are useful in representing continuous variables, such as temperature, GDP or hours of absence. In case of discrete variables, which only take a finite and unordered set of values, it’s often better to use bar plots. With <code>ggplot2</code>, these can be easily obtained using <code>geom_bar</code>. For example, we can use it to represent the of academic ranks within our dataset.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="visualization.html#cb232-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb232-2"><a href="visualization.html#cb232-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&#39;forestgreen&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-305-1.png" width="672" /></p>
 <p>You may also want to make the bar plots horizontal. There are two ways to to this: the old approach is simply to add <code>coord_flip()</code> to your <code>ggplot</code> object. You may still encounter this way of plotting horizontal bar plots in other users code.</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="visualization.html#cb233-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb233-2"><a href="visualization.html#cb233-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&#39;forestgreen&#39;</span>) <span class="op">+</span></span>
 <span id="cb233-3"><a href="visualization.html#cb233-3"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-305-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-306-1.png" width="672" /></p>
 <p>However, since <code>ggplot</code> version 3.3.0, providing the y axis instead of x axis leads to the same result. Furthermore, it doesn’t cause unnecessary confusion caused by flipping the axis (for example, the y-axis label needs to be specified as the x-axis label when <code>coord_flip()</code> is applied). Thus it is recommended to use the second approach, provided that you have the most up-to-date version of <code>tidyverse</code> installed.</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="visualization.html#cb234-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">y =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb234-2"><a href="visualization.html#cb234-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&#39;forestgreen&#39;</span>)</span></code></pre></div>
 <p>Again, we can also fill the bars with another variable, simply by specifying the <code>fill</code> argument in the aesthetic mapping definition:</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="visualization.html#cb235-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">fill =</span> sex)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb235-2"><a href="visualization.html#cb235-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-307-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
 <p>The bars can also be placed side-by-side to improve comparison. To do that, we simply specify a named argument <code>position</code> to the <code>geom_bar</code> function and set it to <code>'dodge'</code>, as seen in the example below. This means, that one bar should ‘dodge’ another, and be placed next to it. The default value of the <code>position</code> argument is <code>'stacked'</code>, which is pretty self-explanatory and can be seen in the previous example.</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="visualization.html#cb236-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">fill =</span> discipline)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb236-2"><a href="visualization.html#cb236-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&#39;dodge&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
 <p>We can also use barplots to present summary statistics visually - for example, the average salary of a professor given his or her rank. To do that, we first construct a summary data frame, using tools covered in the previous chapter, and then plot the result.</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="visualization.html#cb237-1"></a>salary_by_rank &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb237-2"><a href="visualization.html#cb237-2"></a><span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span></span>
@@ -414,54 +414,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb237-6"><a href="visualization.html#cb237-6"></a></span>
 <span id="cb237-7"><a href="visualization.html#cb237-7"></a><span class="kw">ggplot</span>(salary_by_rank, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> avg_salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb237-8"><a href="visualization.html#cb237-8"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>, <span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&#39;firebrick&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-310-1.png" width="672" /></p>
 <p>Note that in this case we need to specify both x and y aesthetics, as x represents the name of the group (in this case the professors’ rank) and y - the associated value, indicated by the height of each bar. Moreover, we need to setthe <code>stat</code> argument of <code>geom_bar</code> to <code>identity</code>. This is because the default setting, <code>stat = count</code> implies that ggplot takes only one, discrete variable as arguments and counts the number of observations in each of the group defined by the levels of the variable - an operation very similar to the output of <code>table(math$health)</code>. We can also use <code>geom_col</code>, which is a short-hand for <code>geom_bar(stat = 'identity')</code> and produces the same output:</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="visualization.html#cb238-1"></a><span class="kw">ggplot</span>(salary_by_rank, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> avg_salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb238-2"><a href="visualization.html#cb238-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">fill =</span> <span class="st">&#39;firebrick&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-310-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
 </div>
 <div id="boxplots" class="section level4 unnumbered">
 <h4>Boxplots</h4>
 <p>Another way to compare a variable across groups is through the use of boxplots. Boxplots were described in the chapter on <a href="exploratory.html#exploratory">exploratory data analysis</a> as a way of evaluating the distribution of a continuous variable. They are also implemented in the <code>ggplot2</code> package and can be used for comparisons of the continuous variables distributions across multiple groups defined by a discrete variable. This can be done by specifying the grouping variable to the x aesthetic and the continuous variable which we want to examine to the y aesthetic.</p>
 <div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="visualization.html#cb239-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb239-2"><a href="visualization.html#cb239-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-312-1.png" width="672" /></p>
 <p>We can see that while the medians of Male and Female professor’s wages in our sample are similar, the interquantile range is much higher for men. At the same time, the distribution of male wages is more spread out, as indicated by larger box, longer tails. It also includes some outliers.</p>
 <p>We can also draw an arbitrary summary statistic - such as the mean - on the plot, by using the <code>stat_summary</code> function - we specify the statistic we want to use with the <code>fun</code> keyword argument and the geom using the <code>geom</code> argument. In this case, we add a cross to indicate the mean salary for both sexes on the plot:</p>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="visualization.html#cb240-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb240-2"><a href="visualization.html#cb240-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb240-3"><a href="visualization.html#cb240-3"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
 <span id="cb240-4"><a href="visualization.html#cb240-4"></a>               <span class="dt">shape =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-312-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-313-1.png" width="672" /></p>
 </div>
 <div id="violin-plots" class="section level4 unnumbered">
 <h4>Violin plots</h4>
 <p>Violin plots are closely related to box plots, however they depict the shape of the variables’ distribution. As such, they overcome the issue related to the use of boxplots decribed in the <a href="exploratory.html#exploratory">exploratory analysis chapter</a> - namely that two distributions can have identical box plots, yet very different underlying shapes. The violin plots avoid it by connecting boxplots with kernel density estimates, giving a better approximation of the shape of a variable’s distribution.</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="visualization.html#cb241-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb241-2"><a href="visualization.html#cb241-2"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">width =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-313-1.png" width="672" /></p>
-<p>We can see the strength of that by coming back to the misleading example from the previous chapter. Suppose we have the</p>
 <p><img src="main_files/figure-html/unnamed-chunk-314-1.png" width="672" /></p>
+<p>We can see the strength of that by coming back to the misleading example from the previous chapter. Suppose we have the</p>
+<p><img src="main_files/figure-html/unnamed-chunk-315-1.png" width="672" /></p>
 <p>The boxplots look very alike:</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="visualization.html#cb242-1"></a><span class="kw">ggplot</span>(dt, <span class="kw">aes</span>(<span class="dt">x =</span> category, <span class="dt">y =</span> value)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb242-2"><a href="visualization.html#cb242-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-315-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-316-1.png" width="672" /></p>
 <p>However, the violin plot give away the entire story - namely the fact that the first category has two peaks (i.e. comes from a bimodal distribution, using the proper statistical terms), and it is unlikely that we observe the median value. A good example of such distributions from the political realm are the self-identification on the left-right ideological scale, with majority of respondents reporting to be either slightly conservative or slightly liberal.</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="visualization.html#cb243-1"></a><span class="kw">ggplot</span>(dt, <span class="kw">aes</span>(<span class="dt">x =</span> category, <span class="dt">y =</span> value)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb243-2"><a href="visualization.html#cb243-2"></a><span class="st">  </span><span class="kw">geom_violin</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-316-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-317-1.png" width="672" /></p>
 </div>
 <div id="scatter-plots-1" class="section level4 unnumbered">
 <h4>Scatter plots</h4>
 <p>So far we have described multiple ways of visually representing a continous variable, as well as the relationship between a continous variable and some discrete grouping variables. Under many circumstances, we are interested in examining the relationship between two continuous variables. One of the most commonly employed data visualization techniques for problems like this are scatter plots, which simply describe each observation as a point marked on a two-dimensional graph, with x axis representing one variable and y axis - the other. This can be seen in the example below, in which we look at the relationship between the professor’s experience approximated by years since attaining PhD and his or her salary.</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="visualization.html#cb244-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb244-2"><a href="visualization.html#cb244-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-317-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-318-1.png" width="672" /></p>
 <p>It is clear that we can see a some sort of relationship between the experience and earnings. In other words, there’s a degree of positive correlation between these two variables (we will examine this term more in depth in in the <a href="association.html#association">next chapter</a>), i.e. professors with more experience tend to earn more on average. However, with experience the relationship becomes more noisy, as there’s more variation in earnings of the more experienced academics. As in the previous cases, we can specify additional aesthetics such as color or shape:</p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="visualization.html#cb245-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, </span>
 <span id="cb245-2"><a href="visualization.html#cb245-2"></a>                     <span class="dt">color =</span> rank, <span class="dt">shape =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb245-3"><a href="visualization.html#cb245-3"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-318-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
 </div>
 <div id="line-of-best-fit" class="section level4 unnumbered">
 <h4>Line of best fit</h4>
@@ -470,19 +470,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb246-2"><a href="visualization.html#cb246-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb246-3"><a href="visualization.html#cb246-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb246-4"><a href="visualization.html#cb246-4"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
 <p>Here, you should be able to fully understand the difference between local and global aesthetic mappings mentioned <a href="visualization.html#the-plotting-syntax">earlier in the chapter</a>. Notice the difference between providing the aesthetic mapping at the global level (i.e. to the <code>ggplot()</code> function call)…:</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="visualization.html#cb247-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, <span class="dt">color =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb247-2"><a href="visualization.html#cb247-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb247-3"><a href="visualization.html#cb247-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb247-4"><a href="visualization.html#cb247-4"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-320-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
 <p>… and just to the <code>geom_point()</code>.</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="visualization.html#cb248-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb248-2"><a href="visualization.html#cb248-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> rank)) <span class="op">+</span></span>
 <span id="cb248-3"><a href="visualization.html#cb248-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb248-4"><a href="visualization.html#cb248-4"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
 <p>In the former case, the <code>color = sex</code> argument is used by both <code>geom_point</code> and <code>geom_line()</code>, which leads to <em>3 lines of different colors being fitted for each of the groups separately</em>. When the <code>color</code> aesthetic mapping is only provided to the <code>geom_point</code> at the local level, one line is fitted to the data, as specified by the global mapping. Both of these approaches may be useful, depending on our research question. The comparison of these two plots further reveals an interesting behaviour in our data: when all the observations are considered toegether, there seems to be a positive relationship between years since PhD and salary. However when we look at the group level, the relationship appears to disappear - this behaviour is known as the <a href="#https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson’s Paradox</a>. In this case, it’s primarily the result of the relationship between the rank and years since PhD - professors with higher ranks have more experience. When the variation in the salaries within those groups is considered, the experience measured in years seems to hardly explain any of the variation in earnings.</p>
 </div>
 <div id="line-connecting-points" class="section level4 unnumbered">
@@ -498,12 +498,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can then plot the averages using <code>geom_point</code>:</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="visualization.html#cb250-1"></a><span class="kw">ggplot</span>(byage, <span class="kw">aes</span>(<span class="dt">x =</span> yrs_range, <span class="dt">y =</span> avg)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb250-2"><a href="visualization.html#cb250-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-323-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
 <p>While there seems to be some sort of trend in the data (even though the further points divert from it, which is likely the result of small sample size in a given group leading to rather unreliable sample estimates), the plot does not emphasize it enough. To make it more meanigful, we can add a line connecting the points with <code>geom_line</code>. Note that we have to set the <code>group</code> aesthetic to 1, which provides <code>ggplot</code> a hint on how to connect the point.</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="visualization.html#cb251-1"></a><span class="kw">ggplot</span>(byage, <span class="kw">aes</span>(<span class="dt">x =</span> yrs_range, <span class="dt">y =</span> avg, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb251-2"><a href="visualization.html#cb251-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb251-3"><a href="visualization.html#cb251-3"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
 <p>We can extend the following example by comparing the same trend depending on the paid classes taken:</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="visualization.html#cb252-1"></a>byage &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span></span>
 <span id="cb252-2"><a href="visualization.html#cb252-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yrs_range =</span> <span class="kw">cut_width</span>(yrs.since.phd, <span class="dv">5</span>, <span class="dt">boundary =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span></span>
@@ -516,7 +516,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb252-9"><a href="visualization.html#cb252-9"></a>                  <span class="dt">lty =</span> discipline, <span class="dt">group =</span> discipline)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb252-10"><a href="visualization.html#cb252-10"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb252-11"><a href="visualization.html#cb252-11"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
 </div>
 </div>
 <div id="multiple-plots" class="section level3 unnumbered">
@@ -530,27 +530,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb253-3"><a href="visualization.html#cb253-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb253-4"><a href="visualization.html#cb253-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb253-5"><a href="visualization.html#cb253-5"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>As a result we can see the scatter plots and lines of best fit in three separate plots, each one with an appropriate heading indicating the group of the observations. However, the output is difficult to read, due to the fact that the x-axis in the plot is fixed to the same length for each of the plots - this improves comparability of the figures, but limits its clarity. This can be changed by specifying an additional argument to the <code>facet_wrap</code> layer:</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="visualization.html#cb254-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(yrs.since.phd, salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb254-2"><a href="visualization.html#cb254-2"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>rank, <span class="dt">scales =</span> <span class="st">&#39;free_x&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb254-3"><a href="visualization.html#cb254-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> sex)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb254-4"><a href="visualization.html#cb254-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb254-5"><a href="visualization.html#cb254-5"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
 <p>Again, we can see that the relationship seen in the overall dataset disappears within each of the groups.</p>
 <p>We can also facet using more than one variable and arrange the figures into a grid via a two dimensional grouping. For example, suppose we want to evaluate the distribution of the experience wihtin each combination of rank and discipline of the individuals. This can be achieved by using the <code>facet_grid</code> layer.</p>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="visualization.html#cb255-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb255-2"><a href="visualization.html#cb255-2"></a><span class="st">  </span><span class="kw">facet_grid</span>(discipline <span class="op">~</span><span class="st"> </span>rank) <span class="op">+</span></span>
 <span id="cb255-3"><a href="visualization.html#cb255-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span>
 <span id="cb255-4"><a href="visualization.html#cb255-4"></a><span class="st">`</span><span class="dt">stat_bin()</span><span class="st">`</span> using <span class="st">`</span><span class="dt">bins = 30</span><span class="st">`</span>. Pick better value with <span class="st">`</span><span class="dt">binwidth</span><span class="st">`</span>.</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
 <p>In here, we can see that professors in theoretical disciplines seem to have worked longer on average, however the range of the values is comparable in both cases. There also appears to be more Assistant Professors and Associate Professors in the applied departments, with no siginificant differences in gender. Similar analysis applied to earnings, however, reveals that the earnings seem to be higher at each level in the applied departments.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="visualization.html#cb256-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> salary)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb256-2"><a href="visualization.html#cb256-2"></a><span class="st">  </span><span class="kw">facet_grid</span>(discipline <span class="op">~</span><span class="st"> </span>rank) <span class="op">+</span></span>
 <span id="cb256-3"><a href="visualization.html#cb256-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span>
 <span id="cb256-4"><a href="visualization.html#cb256-4"></a><span class="st">`</span><span class="dt">stat_bin()</span><span class="st">`</span> using <span class="st">`</span><span class="dt">bins = 30</span><span class="st">`</span>. Pick better value with <span class="st">`</span><span class="dt">binwidth</span><span class="st">`</span>.</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-330-1.png" width="672" /></p>
 </div>
 <div id="plotting-in-a-grid" class="section level4 unnumbered">
 <h4>Plotting in a grid</h4>
@@ -565,7 +565,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb258-6"><a href="visualization.html#cb258-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary), <span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb258-7"><a href="visualization.html#cb258-7"></a><span class="kw">plot_grid</span>(plt_sct, plt_hist_s, plt_hist_y, plt_bar)</span>
 <span id="cb258-8"><a href="visualization.html#cb258-8"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-331-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-332-1.png" width="672" /></p>
 </div>
 </div>
 <div id="customizing-plots" class="section level3 unnumbered">
@@ -576,7 +576,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb259-2"><a href="visualization.html#cb259-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb259-3"><a href="visualization.html#cb259-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb259-4"><a href="visualization.html#cb259-4"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-332-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
 <p>It would be useful to make the variable names more formal on the plot. This can be done using the <code>labs</code> layer, used to specify labels:</p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="visualization.html#cb260-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, <span class="dt">color =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb260-2"><a href="visualization.html#cb260-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
@@ -584,7 +584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb260-4"><a href="visualization.html#cb260-4"></a><span class="st">  </span><span class="co">#add axes labels</span></span>
 <span id="cb260-5"><a href="visualization.html#cb260-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&#39;Years since PhD&#39;</span>, <span class="dt">y =</span> <span class="st">&#39;Salary in USD&#39;</span>)</span>
 <span id="cb260-6"><a href="visualization.html#cb260-6"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
 <p>Title of the plot can also be specified using the <code>ggtitle</code> function:</p>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="visualization.html#cb261-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, <span class="dt">color =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb261-2"><a href="visualization.html#cb261-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
@@ -594,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb261-6"><a href="visualization.html#cb261-6"></a><span class="st">  </span><span class="co">#add title</span></span>
 <span id="cb261-7"><a href="visualization.html#cb261-7"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Salaries of US college professors&#39;</span>)</span>
 <span id="cb261-8"><a href="visualization.html#cb261-8"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-335-1.png" width="672" /></p>
 <p>Furthremore, we can customize the legend labels as well. Ths is done using the <code>scale_color_discrete</code> layer, which applies manual changes to the <code>color</code> aesthetic we specified when initializing the ggplot object.</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="visualization.html#cb262-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, <span class="dt">color =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb262-2"><a href="visualization.html#cb262-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
@@ -609,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb262-11"><a href="visualization.html#cb262-11"></a>                                  <span class="st">&#39;Assoc. Prof.&#39;</span>,</span>
 <span id="cb262-12"><a href="visualization.html#cb262-12"></a>                                  <span class="st">&#39;Prof&#39;</span>))</span>
 <span id="cb262-13"><a href="visualization.html#cb262-13"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-335-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-336-1.png" width="672" /></p>
 <p>We can also customize the legend using the <code>theme</code> layer. This layer is used for customization of majority of plot elements, such as the legend, text and the axes.</p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="visualization.html#cb263-1"></a><span class="kw">ggplot</span>(Salaries, <span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary, <span class="dt">color =</span> rank)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb263-2"><a href="visualization.html#cb263-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
@@ -627,7 +627,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb263-14"><a href="visualization.html#cb263-14"></a>        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">face =</span> <span class="st">&#39;italic&#39;</span>), <span class="co">#legend font</span></span>
 <span id="cb263-15"><a href="visualization.html#cb263-15"></a>        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="co">#remove title</span></span>
 <span id="cb263-16"><a href="visualization.html#cb263-16"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-336-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
 <p>As seen above, the keyword arguments of <code>theme</code> usually take two forms - a string, such as <code>legend.position = 'bottom'</code>, or <code>element_*</code> theme elements. You can read more about them in <code>?element_blank</code>, however the basic logic is as follows - you use <code>element_text()</code> to specify <em>text characteristics</em> - such as the font, size, color or face of the <em>text elements of the plot</em>, such as legend labels or axis ticks, <code>element_rect</code> to specify the characteristics of <em>rectangle elements</em>, such as backgrounds and <code>element_blank</code> to make a given elements disappear from the plot entirely.</p>
 <p>In some cases our axis labels are two long, which can be problematic especially in the x axis, as it results in overlaps and makes impossible to read them. A common solution is to rotate the labels by a certain angle. This can be done using the <code>axis.text.x</code> argument with <code>element_text(rotation = n)</code>, where <code>n</code> are the magnitude of counter-clockwise rotation. The vertical and horizontal justification can he adjusted using the <code>vjust</code> and <code>hjust</code> arguments respectively.</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="visualization.html#cb264-1"></a>byage &lt;-<span class="st"> </span>Salaries <span class="op">%&gt;%</span></span>
@@ -643,7 +643,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb264-11"><a href="visualization.html#cb264-11"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
 <span id="cb264-12"><a href="visualization.html#cb264-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&#39;Years since PhD&#39;</span>, <span class="dt">y =</span> <span class="st">&#39;Average earnings&#39;</span>) <span class="op">+</span></span>
 <span id="cb264-13"><a href="visualization.html#cb264-13"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.9</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-338-1.png" width="672" /></p>
 <p>Finally, we can make changes to the overall plot by applying themes to the entire plot. Some of them are built into the <code>ggplot</code> package; more come with <code>cowplot</code> or <code>ggpubr</code>. You can find couple examples below, but feel free to explore them online.</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="visualization.html#cb265-1"></a>plt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(byage, <span class="kw">aes</span>(<span class="dt">x =</span> yrs_range, <span class="dt">y =</span> avg, <span class="dt">color =</span> discipline, </span>
 <span id="cb265-2"><a href="visualization.html#cb265-2"></a>                  <span class="dt">lty =</span> discipline, <span class="dt">group =</span> discipline)) <span class="op">+</span><span class="st"> </span></span>
@@ -653,28 +653,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="visualization.html#cb266-1"></a>plt <span class="op">+</span></span>
 <span id="cb266-2"><a href="visualization.html#cb266-2"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb266-3"><a href="visualization.html#cb266-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-339-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-340-1.png" width="672" /></p>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="visualization.html#cb267-1"></a>plt <span class="op">+</span></span>
 <span id="cb267-2"><a href="visualization.html#cb267-2"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb267-3"><a href="visualization.html#cb267-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-340-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="visualization.html#cb268-1"></a>plt <span class="op">+</span></span>
 <span id="cb268-2"><a href="visualization.html#cb268-2"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb268-3"><a href="visualization.html#cb268-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-342-1.png" width="672" /></p>
 <div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="visualization.html#cb269-1"></a>plt <span class="op">+</span></span>
 <span id="cb269-2"><a href="visualization.html#cb269-2"></a><span class="st">  </span><span class="kw">theme_cowplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb269-3"><a href="visualization.html#cb269-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-342-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-343-1.png" width="672" /></p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="visualization.html#cb270-1"></a>plt <span class="op">+</span></span>
 <span id="cb270-2"><a href="visualization.html#cb270-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb270-3"><a href="visualization.html#cb270-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-343-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-344-1.png" width="672" /></p>
 <p><strong>Note</strong> that the <code>theme</code> adjustments must be specified after a specific theme is specified, or otherwise if overrides them. You can also specify a theme upfront for your entire script by using <code>theme_set()</code>.</p>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="visualization.html#cb271-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_grey</span>(<span class="dt">base_size =</span> <span class="dv">10</span>))</span>
 <span id="cb271-2"><a href="visualization.html#cb271-2"></a>plt <span class="op">+</span></span>
 <span id="cb271-3"><a href="visualization.html#cb271-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>, <span class="dt">hjust =</span> <span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-344-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-345-1.png" width="672" /></p>
 </div>
 <div id="saving-plots" class="section level3 unnumbered">
 <h3>Saving plots</h3>
@@ -712,12 +712,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">glimpse()</td>
-<td align="left">c(“dplyr”, “package:tibble”)</td>
+<td align="left">c(“tibble”, “package:dplyr”)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">tibble()</td>
-<td align="left">c(“dplyr”, “package:tidyr”, “package:tibble”)</td>
+<td align="left">c(“tibble”, “package:tidyr”, “package:dplyr”)</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
@@ -966,7 +966,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb273-6"><a href="visualization.html#cb273-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> yrs.since.phd, <span class="dt">y =</span> salary), <span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span>
 <span id="cb273-7"><a href="visualization.html#cb273-7"></a><span class="kw">plot_grid</span>(plt_sct, plt_hist_s, plt_hist_y, plt_bar)</span>
 <span id="cb273-8"><a href="visualization.html#cb273-8"></a><span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using formula <span class="st">&#39;y ~ x&#39;</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-347-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-348-1.png" width="672" /></p>
 <p>For the remainder of next exericses, you will need to load the <code>gapminder</code> dataset which is a part of the <code>gapminder</code> package.</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="visualization.html#cb274-1"></a><span class="kw">data</span>(gapminder, <span class="dt">package =</span> <span class="st">&#39;gapminder&#39;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">

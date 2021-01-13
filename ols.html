@@ -390,7 +390,7 @@ Y_{i} = \hat{\beta}_{0} + \hat{\beta}_{1} X_{i} + \hat{\epsilon}_{i}
 <span id="cb305-3"><a href="ols.html#cb305-3"></a><span class="kw">ggplot</span>(anes, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> fttrump1)) <span class="op">+</span></span>
 <span id="cb305-4"><a href="ols.html#cb305-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb305-5"><a href="ols.html#cb305-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-402-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-403-1.png" width="672" /></p>
 <p>There is a positive relationship. We can calculate the exact numerical nature of that relationship as follows:</p>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="ols.html#cb306-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fttrump1 <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> anes)</span></code></pre></div>
 <p>We start by specifying an object into which we store the results. Then we call <code>lm</code> which means linear model. Our dependent variable <code>fttrump1</code> is listed first, and then after a tilde the independent variable, <code>age</code>. Finally, we tell R which data set to use. We can then print the result, by calling <code>model1</code>.</p>
