@@ -401,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb280-3"><a href="association.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> change_mean <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> change_err, </span>
 <span id="cb280-4"><a href="association.html#cb280-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">ymax =</span> change_mean <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> change_err), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
 <span id="cb280-5"><a href="association.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Mean change in wage&#39;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-366-1.png" width="672" /></p>
 </div>
 <div id="are-two-means-different---two-sample-t-test" class="section level4 unnumbered">
 <h4>Are two means different? - two sample t-test</h4>
@@ -429,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb282-8"><a href="association.html#cb282-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> wage_mean <span class="sc">+</span> wage_err), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
 <span id="cb282-9"><a href="association.html#cb282-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&#39;Average salary in 2005&#39;</span>)</span>
 <span id="cb282-10"><a href="association.html#cb282-10" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">summarise()</span><span class="st">`</span> ungrouping <span class="fu">output</span> (override with <span class="st">`</span><span class="at">.groups</span><span class="st">`</span> argument)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-369-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-368-1.png" width="672" /></p>
 </div>
 </div>
 <div id="relationship-between-two-continuous-variables" class="section level3 unnumbered">
@@ -446,7 +446,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb283-7"><a href="association.html#cb283-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can examine pairwise relationships between the variables using the <code>pairs()</code> function, which is a useful tool when analyzing datasets with multiple continuous variables.</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="association.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(scores,<span class="at">upper.panel =</span> <span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-371-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-370-1.png" width="672" /></p>
 <p>Let’s start by interpreting this plot. The rectangles with variable tell as the name of the axis. For example, the plot in the lower left corner shows the relationship between the GPA (x axis) and study time (y axis). We can see that students in our sample who spent more time studying seem to have had higher grades - points higher on one axis tend to also be higher on the other. On the other hand, students who were ill more had, on average, achieved lower grades. There seems to be no relationship between being ill and time spent studying.</p>
 <p>In statistical terms, this relationship can be measured with <em>covariance</em> between these two variables. Recall our discussion of <em>variance</em> in the <a href="exploratory.html#exploratory">exploratory analysis chapter</a>. We calculated it for vector x using <code>sum((x - mean(x))^2)/(length(x) - 1)</code>, or the <code>var(x)</code> function for short. Covariance is essentially the same, but calculated for two variables instead of one, using <code>sum((x - mean(x)) * mean((y - mean(y))))/(length(x) - 1)</code> or the <code>cov</code> function for short. You can see that demonstrated below:</p>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="association.html#cb285-1" aria-hidden="true" tabindex="-1"></a>cov_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">*</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y)))<span class="sc">/</span>(<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span>
@@ -498,7 +498,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To visualize pariswise relationships between two variables using a plot that is a bit more sophisticated that the one produced by <code>pairs()</code> we can use the <code>ggpairs</code> function from the <code>GGally</code> package, which produced a <code>ggplot</code> style plot, presenting correlations, density plots and scatter plots of all the numeric variables in our dataset:</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="association.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb295-2"><a href="association.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(scores)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-382-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-381-1.png" width="672" /></p>
 </div>
 </div>
 <div id="further-details" class="section level3 unnumbered">

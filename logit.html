@@ -354,13 +354,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>COVID-19 has put a bit of a damper on this, but a question we can all relate to is whether to go out tonight, or not. The “propensity to go out” is not directly observable, and so we call this a <strong>latent variable</strong>. You can imagine this running from minus infinity to plus infinity, and at some point on this continuum you are making the decision to go out. Let’s call this point tau (<span class="math inline">\(\tau\)</span>). Graphically, this would look like this:</p>
 <p><img src="images/10/tau.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>Your inclination to go out, is likely to be influenced by the amount of money you have in your wallet / bank. If you are broke, you will be less inclined (if you are sensible), and if you are swimming in it, you will be more inclined. So, if the “propensity to go out” (which remember is running from minus to plus infinity) is influenced by your budget, then let’s construct a graph, in which we pop the propensity to go out on the y-axis, and the budget on the x-axis. If we assume that this relationship is linear, we can fit a regression line into this coordinate system, just as we have in the previous Chapter:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-425-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-424-1.png" width="95%" style="display: block; margin: auto;" /></p>
 <p>Whilst this visualises the influence of the budget on the latent variable, what we are aiming for is to make a prediction about the probability of you going out, or not.</p>
 <p>Now imagine, your budget is <span class="math inline">\(x_{1}\)</span>. This is way below the threshold <span class="math inline">\(\tau\)</span> and so the most likely scenario here is that you will stay home. But all of your friends are going out, the sun is shining, and you just scored a 74 in an essay. So there is some chance you will still go out. It is less likely than the budgetary constraint would suggest, but it is there. Where I am going with this is this: over every budgetary point, there is a probability distribution (for logit a bell-shaped curve not unlike the normal distribution, called a logistic distribution<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>). If we draw these probability distributions in, the graph looks like this:</p>
 <p><img src="images/10/tau_prob.png" width="751" height="90%" style="display: block; margin: auto;" /></p>
 <p>The probability of going out is coloured in in grey. You can see that even at <span class="math inline">\(x_{1}\)</span> there is a teeny bit of probability that you will go out. As the budget increases, more and more probability slides over the threshold <span class="math inline">\(\tau\)</span>, until we reach the magical point of <span class="math inline">\(x_{5}\)</span> where the probability is 50%. From there on, the amount of probability sliding over <span class="math inline">\(\tau\)</span> is steadily decreasing, because of the shape of the logistic distribution.</p>
 <p>We can depict the amount of probability (or the size of the grey area) for each <span class="math inline">\(x_{i}\)</span> in a separate graph which is called the Cumulative Probability (Density Function), or short CDF:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-427-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-426-1.png" width="672" /></p>
 <p>This s-shaped curve now gives us the probability (of going out) for each <span class="math inline">\(x_{i}\)</span> (budget). It is important to note that the relationship is not linear, as in linear regression. Because we have an s-shaped curve the increase in probability when going from <span class="math inline">\(x_{2}\)</span> to <span class="math inline">\(x_{3}\)</span> is not the same as going from <span class="math inline">\(x_{3}\)</span> to <span class="math inline">\(x_{4}\)</span>. You can see that visualised here:</p>
 <p><img src="images/10/probability.png" width="1033" height="90%" style="display: block; margin: auto;" /></p>
 <p>We will therefore not be able to interpret the coefficients in the same way as for OLS. We will be using predicted probabilities instead. But one step at a time. Let’s first get our hands dirty with some data.</p>
@@ -386,7 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(H_{a}\)</span>: Age had an impact on the probability to survive</li>
 </ul>
 <p>If we visualise the Null-Hypothesis, we would find the same probability (the average probability) of surviving for every <span class="math inline">\(x_{i}\)</span>:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-432-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-431-1.png" width="75%" style="display: block; margin: auto;" /></p>
 <p>Let’s see how much evidence against this hypothesis we have by estimating the logit model:</p>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="logit.html#cb324-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> age, </span>
 <span id="cb324-2"><a href="logit.html#cb324-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> titanic, </span>
@@ -521,7 +521,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb332-7"><a href="logit.html#cb332-7" aria-hidden="true" tabindex="-1"></a><span class="st">yage &lt;- predict(class_age, list(age = xage),type=&quot;response&quot;)</span></span></code></pre></div>
 <p>If you are in a rush, you can simply plot this in a base R plot.</p>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="logit.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xage, yage, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Probability to travel in First Class&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-445-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-444-1.png" width="672" /></p>
 <p>If you want this to look jazzy, use <code>GGPLOT2</code> (you need to turn the sequence and the predicted probabilities into a data frame first):</p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="logit.html#cb334-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xage,yage)</span>
 <span id="cb334-2"><a href="logit.html#cb334-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -530,7 +530,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb334-5"><a href="logit.html#cb334-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y=</span><span class="st">&quot;Predicted Probability to Travel in First Class&quot;</span>) <span class="sc">+</span></span>
 <span id="cb334-6"><a href="logit.html#cb334-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
 <span id="cb334-7"><a href="logit.html#cb334-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>,<span class="at">face=</span><span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-446-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-445-1.png" width="672" /></p>
 <p>You can see from this graph that you to be just older than 47 to be likely to travel in First Class:</p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="logit.html#cb335-1" aria-hidden="true" tabindex="-1"></a>firstage <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">47</span>)</span>
 <span id="cb335-2"><a href="logit.html#cb335-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -568,7 +568,7 @@ age = (log(p/(1-p)) - coef(class\_age)[1])/coef(class\_age)[2]
 </ul>
 <p>Usually, there is also a diagonal fitted into the coordinate system to indicate the model fit for a model without independent variables (AKA covariates).</p>
 <p>For our passenger class model, this curve looks like this:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-448-1.png" width="672" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-447-1.png" width="672" /></p>
 <p>How do we interpret this? The further away from the diagonal, the better our model predicts 1s and 0s. The area called ‘auc’ would be 100% if the model correctly predicted everything. This area decreases as the model becomes worse. At 50% we might as well have tossed a coin to make predictions, because we are only correctly predicting 50% of cases. Here we predict 74.5% which isn’t great, but not a bad start. We could now estimate different models and use their area to compare fit between different models.</p>
 <p>But let me show you how I got this curve in the first place. We start by installing the package <code>pROC</code></p>
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="logit.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pROC&quot;</span>)</span></code></pre></div>
@@ -585,7 +585,7 @@ age = (log(p/(1-p)) - coef(class\_age)[1])/coef(class\_age)[2]
 <span id="cb338-8"><a href="logit.html#cb338-8" aria-hidden="true" tabindex="-1"></a>Area under the curve<span class="sc">:</span> <span class="fl">0.745</span></span></code></pre></div>
 <p>What have I done here? I started by predicting the probabilities to travel first class. In a second step, I unlisted these probabilities and saved them as a new variable in our <code>titanic</code> data set. Finally, I fed the information of the values of the dependent variable and the respective predicted probabilities for each observation into the <code>roc()</code> function and saved the results in an object called <code>roc</code>. The <code>auc()</code> function returns to us the area, but we can also get the curve graphically:</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="logit.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc, <span class="at">print.auc=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-452-1.png" width="70%" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-451-1.png" width="70%" /></p>
 <p>For this procedure to work, it is essential to use the option <code>na.exclude</code> when dealing with missing data in estimating the model. Only this way will there be a predicted probability for every observation. If we deleted the missing values with <code>na.omit</code>, then the number of observations would be longer than the vector containing predicted values and we would receive an error message.</p>
 </div>
 </div>
