@@ -2,8 +2,7 @@ eq:prf
 eq:pop
 eq:srf
 eq:srffull
-eq:example
-fig:unnamed-chunk-459
+fig:unnamed-chunk-458
 introduction
 content
 basics
