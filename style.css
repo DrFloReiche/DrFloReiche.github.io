@@ -35,3 +35,5 @@
 .book .book-body .page-wrapper .page-inner section.normal pre {
   border: 1px solid #ccc;
 }
+
+table { caption-side: bottom }
