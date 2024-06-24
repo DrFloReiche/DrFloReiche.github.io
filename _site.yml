@@ -1,5 +1,10 @@
-title: Cayman theme
-description: Cayman is a clean, responsive theme for GitHub Pages.
-show_downloads: true
-google_analytics:
-theme: jekyll-theme-cayman
+name: "Flo's Resources"
+output_dir: 'docs'
+output:
+  html_document:
+    theme: cerulean
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
