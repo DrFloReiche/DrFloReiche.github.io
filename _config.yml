@@ -1,7 +1,0 @@
-name: "Dr Flo's Resources"
-navbar:
-  title: "Dr Flo's Resources"
-left:
-  - text: "Home"
-href: index.html
-  remote_theme: tuur29/pages-themes-cayman
