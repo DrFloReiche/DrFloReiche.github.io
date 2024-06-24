@@ -1,13 +1,1 @@
-header-1
-header-2
-header-3
-header-4
-header-5
-header-6
-theres-a-horizontal-rule-below-this.
-here-is-an-unordered-list
-and-an-ordered-list
-and-a-nested-list
-small-image
-large-image
-definition-lists-can-be-used-with-html-syntax.
+header
