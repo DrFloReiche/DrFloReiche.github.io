@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;1,9..40,300&display=swap');
+
+/*____Change fonts to cmss___*/
+@font-face {
+  font-family: "DM Sans", serif;
+}
+
+h1 {
+  font-family: "DM Sans", serif;
+  font-size:   48px;
+  font-weight: normal;
+}
+
+
+h2,h3,h4 {
+  font-family: "DM Sans", serif;
+  font-size:   24px;
+  font-weight: normal;
+}
+
+.book.font-family-0 {
+  font-family: "DM Sans", serif;
+}
+.book.font-family-1 {
+  font-family: "DM Sans", serif;
+}
+
+.summary{
+font-family: "DM Sans", serif;
+}
+
+
+li.appendix span, li.part span { /* for TOC part names */
+  font-family: "DM Sans", serif;
+  margin-top: 1.5em;
+  opacity: 1 !important;
+  text-transform: uppercase;
+}
